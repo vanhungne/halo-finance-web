@@ -1,16 +1,54 @@
-# React + Vite
+# Vinance website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React web client for the Vinance personal-finance platform. It serves the public
+landing/email-result pages and the administrative console. The primary
+authenticated consumer experience lives in Mobile. Website consumes
+`vinance-backend-api`.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js compatible with Vite 7 (use Node 20 LTS or newer)
+- npm
+- A running backend API
 
-## React Compiler
+## Local development
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The application currently reads its API base URL from `VITE_APP_URL_API`.
+Remember that every `VITE_*` value is embedded in the browser bundle and must
+never contain a secret.
 
-## Expanding the ESLint configuration
+```powershell
+npm ci
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Useful checks:
+
+```powershell
+npm run lint
+npm run build
+npm run preview
+npm audit --omit=dev
+```
+
+## Structure
+
+- `src/pages`: route-level user and admin screens
+- `src/components`: reusable UI and feature components
+- `src/services`: backend API clients
+- `src/contexts`: shared React state
+- `src/routes`: routing and guards
+- `src/layout`: common page layouts
+
+## Current engineering baseline
+
+As revalidated on 2026-07-28, the production build succeeds; ESLint fails with
+25 errors and 16 warnings, no automated tests are configured, 12 production
+dependency advisories remain, and the main JavaScript bundle is about 1,438 kB
+minified/~437 kB gzip. Treat these as tracked production-readiness work, not as
+an accepted quality bar.
+
+For cross-repository architecture, security findings, contracts, and release
+gates, start with the workspace [documentation index](../docs/README.md) and
+[feature health matrix](../docs/FEATURE_HEALTH_ASSESSMENT.md). Agent contributors
+must also read [AGENTS.md](AGENTS.md) and the workspace-level `../AGENTS.md`.
