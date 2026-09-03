@@ -1,0 +1,80 @@
+# ──────────────────────────────────────────────────────────────
+# Halo Finance Website — Deploy to Production (Tham khảo từ Halosport)
+# Trigger: Push to main
+# Flow: Lint → Test → Build → rsync to VPS Nginx
+# ──────────────────────────────────────────────────────────────
+
+name: "Deploy Website"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+      - "src/**"
+      - "public/**"
+      - "index.html"
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.js"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-website
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  build-and-deploy:
+    name: "Build & Deploy"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - run: npm install --no-audit --no-fund
+      # - run: npm run lint # Bỏ comment nếu dự án có cấu hình lint
+      # - run: npm run test # Bỏ comment nếu dự án có cấu hình test
+
+      - name: Build production bundle
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+        run: npm run build
+
+      - name: Deploy via rsync over SSH
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avz --delete --checksum
+          path: dist/
+          remote_path: /var/www/halofinance/ # TODO: Chỉnh sửa thư mục cấu hình Nginx thực tế
+          remote_host: ${{ secrets.VPS_HOST }}
+          remote_user: ${{ secrets.VPS_USERNAME }}
+          remote_key: ${{ secrets.VPS_SSH_KEY }}
+          remote_port: ${{ secrets.VPS_SSH_PORT || 22 }}
+
+      - name: Verify deployment
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          script: |
+            echo "── Checking deployment ──"
+            if [ -f /var/www/halofinance/index.html ]; then
+              echo "✅ index.html exists"
+              chmod -R a+rX /var/www/halofinance/
+              ls -la /var/www/halofinance/
+              echo "✅ Website deployed successfully!"
+            else
+              echo "❌ index.html not found!"
+              exit 1
+            fi
