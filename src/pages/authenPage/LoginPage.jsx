@@ -74,7 +74,7 @@ function LoginPage() {
               Xin chào quản trị viên!
             </h2>
             <p className="text-gray-500 text-center mb-4 text-sm sm:text-base">
-              Quản lý hệ thống ViNance.
+              Quản lý hệ thống Trợ Lý Tài Chính.
             </p>
           </div>
 

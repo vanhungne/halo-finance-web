@@ -90,7 +90,7 @@ export const SidebarHeader = () => {
     <div className="sticky p-4 font-bold text-lg flex justify-center">
       <img
         src={(isOpen && !isMd) ? images.logo : images.icon}
-        alt="Vinance"
+        alt="Trợ Lý Tài Chính"
         className="w-auto" />
     </div>
   );

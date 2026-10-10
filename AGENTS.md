@@ -1,6 +1,6 @@
 # Website agent guide
 
-This file applies to the entire `vinance-frontend-website` repository. Read the
+This file applies to the entire `trolytaichinh-frontend-website` repository. Read the
 workspace-level `../AGENTS.md` and the shared documents under `../docs/` first.
 Before adding a page, component, service or shared helper, read
 `../docs/SOURCE_STRUCTURE_AND_REUSE.md`. Before handoff, apply

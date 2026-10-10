@@ -7,7 +7,7 @@ function Header() {
     <header className="bg-white sticky top-0 z-40 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src={images.logo} alt="Vinance" className="h-7 w-auto" />
+          <img src={images.logo} alt="Trợ Lý Tài Chính" className="h-7 w-auto" />
         </div>
         <nav className="hidden md:block">
           <ul className="flex items-center gap-8 text-sm font-medium text-gray-700">

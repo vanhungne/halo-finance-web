@@ -6,11 +6,11 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <img src={images.logo} alt="ViNance" className="h-7 w-auto" />
+            <img src={images.logo} alt="Trợ Lý Tài Chính" className="h-7 w-auto" />
             <div className="mt-6 space-y-3 text-sm text-gray-700">
               <p className="flex items-center gap-3">
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-100 text-amber-600">✉️</span>{" "}
-                Help@vinance.com
+                hotro.trolytaichinh@gmail.com
               </p>
               <p className="flex items-center gap-3">
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-100 text-amber-600">📞</span>{" "}
@@ -50,7 +50,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-10 border-t border-gray-100 pt-6 text-center text-sm text-gray-600">
-          Bản quyền © 2025 ViNance. Tất cả các quyền được bảo lưu.
+          Bản quyền © 2025 Trợ Lý Tài Chính. Tất cả các quyền được bảo lưu.
         </div>
       </div>
     </footer>

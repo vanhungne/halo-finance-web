@@ -1,9 +1,9 @@
-# Vinance website
+# Trợ Lý Tài Chính website
 
-React web client for the Vinance personal-finance platform. It serves the public
+React web client for the Trợ Lý Tài Chính personal-finance platform. It serves the public
 landing/email-result pages and the administrative console. The primary
 authenticated consumer experience lives in Mobile. Website consumes
-`vinance-backend-api`.
+`backend-api`.
 
 ## Requirements
 

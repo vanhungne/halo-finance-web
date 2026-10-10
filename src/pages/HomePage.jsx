@@ -6,8 +6,8 @@ import Footer from "../components/footer/Footer.jsx";
 function HomePage() {
   const faqItems = [
     {
-      q: "ViNance có miễn phí không?",
-      a: "ViNance có phiên bản miễn phí với tính năng cơ bản. Bạn có thể nâng cấp Premium để trải nghiệm đầy đủ hơn.",
+      q: "Trợ Lý Tài Chính có miễn phí không?",
+      a: "Trợ Lý Tài Chính có phiên bản miễn phí với tính năng cơ bản. Bạn có thể nâng cấp Premium để trải nghiệm đầy đủ hơn.",
     },
     {
       q: "Có dùng được khi không có internet?",
@@ -15,14 +15,14 @@ function HomePage() {
     },
     {
       q: "Làm sao theo dõi chi tiêu theo danh mục?",
-      a: "ViNance tự nhóm giao dịch theo danh mục và hiển thị biểu đồ rõ ràng, dễ hiểu.",
+      a: "Trợ Lý Tài Chính tự nhóm giao dịch theo danh mục và hiển thị biểu đồ rõ ràng, dễ hiểu.",
     },
     {
       q: "Có xuất dữ liệu ra CSV/Google Sheet không?",
       a: "Chỉ vài thao tác trong phần Cài đặt là bạn có thể xuất/nhập dữ liệu tiện lợi.",
     },
     {
-      q: "ViNance có hỗ trợ nhiều loại tiền tệ?",
+      q: "Trợ Lý Tài Chính có hỗ trợ nhiều loại tiền tệ?",
       a: "Có. Bạn có thể chọn loại tiền ưa thích để theo dõi chi tiêu phù hợp.",
     },
   ];
@@ -75,7 +75,7 @@ function HomePage() {
               Tính năng
             </p>
             <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold">
-              ViNance Premium
+              Trợ Lý Tài Chính Premium
             </h2>
             <ul className="mt-6 space-y-6 text-gray-700">
               <li className="flex gap-4">
@@ -130,7 +130,7 @@ function HomePage() {
               Ưu điểm
             </p>
             <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold">
-              Vì sao chọn ViNance?
+              Vì sao chọn Trợ Lý Tài Chính?
             </h2>
             <div className="mt-6 space-y-6">
               <div className="flex gap-4">
@@ -216,7 +216,7 @@ function HomePage() {
               <h3 className="mt-8 text-2xl font-extrabold">Bạn còn thắc mắc?</h3>
               <p className="mt-2 text-gray-600 text-center max-w-sm">Hãy để lại câu hỏi, chúng tôi sẽ phản hồi sớm nhất.</p>
               <div className="mt-6 w-full max-w-md">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Nhắn cho ViNance</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Nhắn cho Trợ Lý Tài Chính</label>
                 <div className="flex items-center gap-2">
                   <input type="text" placeholder="Nhập câu hỏi của bạn" className="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black" />
                   <button className="px-4 py-2 rounded-md bg-black text-white hover:bg-gray-900">Gửi</button>
@@ -242,7 +242,7 @@ function HomePage() {
                 </h2>
                 <p className="mt-3 max-w-xl text-white/80">
                   Khởi tạo thói quen tài chính lành mạnh ngay hôm nay cùng
-                  ViNance.
+                  Trợ Lý Tài Chính.
                 </p>
                 <button className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white text-black hover:bg-gray-100 transition">
                   Tải xuống
