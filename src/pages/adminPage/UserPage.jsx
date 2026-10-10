@@ -77,24 +77,11 @@ function UserPage() {
     fetchData();
   }, [query]);
 
-  const getColorBg = (color) => {
-    const colors = {
-      blue: "bg-blue-100/75 border-blue-200",
-      green: "bg-green-100/75 border-green-200",
-      yellow: "bg-yellow-100/75 border-yellow-200",
-      red: "bg-red-100/75 border-red-200",
-    };
-    return colors[color] || colors.blue;
-  };
-
-  const getColorClasses = (color) => {
-    const colors = {
-      blue: "bg-blue-500 text-white",
-      green: "bg-green-500 text-white",
-      yellow: "bg-yellow-500 text-white",
-      red: "bg-red-500 text-white",
-    };
-    return colors[color] || colors.green;
+  const statTones = {
+    blue: { icon: "bg-sky-50 text-sky-600 ring-sky-100", line: "from-sky-400 to-blue-500" },
+    green: { icon: "bg-emerald-50 text-emerald-600 ring-emerald-100", line: "from-emerald-400 to-teal-500" },
+    yellow: { icon: "bg-amber-50 text-amber-600 ring-amber-100", line: "from-amber-400 to-orange-500" },
+    red: { icon: "bg-rose-50 text-rose-600 ring-rose-100", line: "from-rose-400 to-pink-500" },
   };
 
   const statsArr = [
@@ -149,33 +136,37 @@ function UserPage() {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6 lg:space-y-8 p-3 sm:p-4 lg:p-6 bg-slate-50 min-h-screen">
+    <div className="space-y-6 w-full">
+      <header>
+        <div className="mb-2 flex items-center gap-2 text-[0.68rem] font-extrabold uppercase tracking-[0.18em] text-sky-600">
+          <span className="h-px w-8 bg-sky-400" /> Khách hàng & bảo mật
+        </div>
+        <h1 className="text-3xl font-extrabold tracking-[-0.04em] text-slate-950">Quản lý người dùng</h1>
+        <p className="mt-2 text-sm leading-6 text-slate-500">Theo dõi tài khoản, trạng thái xác thực và mức độ hoạt động của người dùng.</p>
+      </header>
+
       {/* Statistic card */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {statsArr.map((stat, index) => {
           const Icon = stat.icon;
+          const tone = statTones[stat.color];
           return (
             <Card
               key={index}
-              className={`border-0 ${getColorBg(
-                stat.color
-              )} hover:shadow-xl transition-all duration-300 hover:scale-105`}
+              className="group relative overflow-hidden hover:-translate-y-1 hover:shadow-xl"
             >
-              <CardContent className="p-4 sm:p-6">
-                <div className="flex items-center justify-between mb-3 sm:mb-4">
-                  <div
-                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center  ${getColorClasses(
-                      stat.color
-                    )} text-white shadow-lg`}
-                  >
+              <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${tone.line}`} />
+              <CardContent className="p-5 sm:p-6">
+                <div className="flex items-center justify-between mb-5">
+                  <div className={`w-11 h-11 rounded-2xl flex items-center justify-center ring-1 ${tone.icon}`}>
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1">
+                  <h3 className="text-3xl font-extrabold tracking-[-0.04em] text-slate-950 mb-1">
                     <CountUp end={stat.value} duration={1.2} separator="," />
                   </h3>
-                  <p className="text-slate-600 text-xs sm:text-sm font-medium mb-1">
+                  <p className="text-slate-500 text-sm font-semibold">
                     {stat.title}
                   </p>
                 </div>
@@ -186,10 +177,10 @@ function UserPage() {
       </div>
 
       {/* Toolbar */}
-      <Card className="border border-gray-100 bg-white">
+      <Card>
         <CardContent className="p-4 sm:p-6">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:mr-auto">
               {/* Search tool */}
               <div className="relative">
                 <Search className="w-4 h-4 sm:w-5 sm:h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -244,7 +235,7 @@ function UserPage() {
                 </SelectValue>
               </SelectTrigger>
               <SelectContent className="bg-white">
-                <SelectItem value="true">
+                <SelectItem value="">
                   <ArrowDownWideNarrow size={14} className="mr-2" />
                   Giảm dần
                 </SelectItem>
@@ -298,7 +289,7 @@ function UserPage() {
                 </SelectValue>
               </SelectTrigger>
               <SelectContent className="bg-white">
-                <SelectItem value="true">
+                <SelectItem value="">
                   <Ellipsis size={14} className="mr-2" />
                   Tất cả
                 </SelectItem>
@@ -327,7 +318,7 @@ function UserPage() {
                 </SelectValue>
               </SelectTrigger>
               <SelectContent className="bg-white">
-                <SelectItem value="true">
+                <SelectItem value="">
                   <Ellipsis size={14} className="mr-2" />
                   Tất cả
                 </SelectItem>
@@ -346,7 +337,7 @@ function UserPage() {
       </Card>
 
       {/* Users Table */}
-      <Card className="border border-gray-100 bg-white">
+      <Card className="shadow-sm">
         <CardHeader className="pb-3 sm:pb-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <CardTitle className="text-lg sm:text-xl">
@@ -536,45 +527,45 @@ function UserPage() {
               {/* Information Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Phone Number */}
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-1 font-medium">
+                <div className="bg-slate-50 dark:bg-slate-800/60 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1 font-medium">
                     <Phone size={14} />
                     Số điện thoại
                   </div>
-                  <div className="text-base font-semibold text-slate-900">
+                  <div className="text-base font-semibold text-slate-900 dark:text-white">
                     {modalUser.phoneNumber || "Chưa cập nhật"}
                   </div>
                 </div>
 
                 {/* Gender */}
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-1 font-medium">
+                <div className="bg-slate-50 dark:bg-slate-800/60 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1 font-medium">
                     <Calendar size={14} />
                     Giới tính
                   </div>
-                  <div className="text-base font-semibold text-slate-900">
+                  <div className="text-base font-semibold text-slate-900 dark:text-white">
                     {modalUser.gender === "Male" ? "Nam" : "Nữ"}
                   </div>
                 </div>
 
                 {/* Date of Birth */}
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-1 font-medium">
+                <div className="bg-slate-50 dark:bg-slate-800/60 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1 font-medium">
                     <Calendar size={14} />
                     Ngày sinh
                   </div>
-                  <div className="text-base font-semibold text-slate-900">
+                  <div className="text-base font-semibold text-slate-900 dark:text-white">
                     {modalUser.dob || "Chưa cập nhật"}
                   </div>
                 </div>
 
                 {/* Created Time */}
-                <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-1 font-medium">
+                <div className="bg-slate-50 dark:bg-slate-800/60 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1 font-medium">
                     <Clock size={14} />
                     Ngày đăng ký
                   </div>
-                  <div className="text-base font-semibold text-slate-900">
+                  <div className="text-base font-semibold text-slate-900 dark:text-white">
                     {modalUser.createdTime || "N/A"}
                   </div>
                 </div>

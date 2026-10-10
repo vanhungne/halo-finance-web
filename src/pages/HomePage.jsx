@@ -1,260 +1,570 @@
+import { lazy, Suspense } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import CountUp from "react-countup";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+} from "recharts";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUpRight,
+  BellRing,
+  Bot,
+  Check,
+  ChevronRight,
+  CreditCard,
+  Fingerprint,
+  Goal,
+  LineChart,
+  LockKeyhole,
+  PieChart,
+  ScanLine,
+  ShieldCheck,
+  Sparkles,
+  WalletCards,
+  WandSparkles,
+  Zap,
+} from "lucide-react";
 import images from "../assets/image.js";
 import AccordionItem from "../components/faq/AccordionItem.jsx";
 import Header from "../components/header/headerComp.jsx";
 import Footer from "../components/footer/Footer.jsx";
+import StoreButtons from "../components/home/StoreButtons.jsx";
+
+const FinanceScene = lazy(() => import("../components/home/FinanceScene.jsx"));
+const Motion = motion;
+
+const chartData = [
+  { day: "T2", income: 2.4, expense: 1.1 },
+  { day: "T3", income: 3.2, expense: 1.8 },
+  { day: "T4", income: 2.9, expense: 1.4 },
+  { day: "T5", income: 4.5, expense: 2.2 },
+  { day: "T6", income: 4.1, expense: 2.7 },
+  { day: "T7", income: 5.7, expense: 2.3 },
+  { day: "CN", income: 6.4, expense: 3.1 },
+];
+
+const features = [
+  {
+    icon: ScanLine,
+    title: "Ghi chép trong tích tắc",
+    description: "Thêm khoản thu chi nhanh, rõ ràng và đúng ngữ cảnh ngay khi phát sinh.",
+    tone: "bg-sky-50 text-sky-600",
+  },
+  {
+    icon: PieChart,
+    title: "Ngân sách trực quan",
+    description: "Biết tiền đang đi đâu và còn bao nhiêu trước khi tháng kết thúc.",
+    tone: "bg-rose-50 text-rose-500",
+  },
+  {
+    icon: Goal,
+    title: "Mục tiêu có lộ trình",
+    description: "Chia mục tiêu lớn thành các bước nhỏ, dễ theo dõi và dễ duy trì.",
+    tone: "bg-yellow-50 text-yellow-600",
+  },
+  {
+    icon: BellRing,
+    title: "Nhắc nhở đúng lúc",
+    description: "Theo dõi hóa đơn, giao dịch định kỳ và các mốc tài chính quan trọng.",
+    tone: "bg-violet-50 text-violet-600",
+  },
+  {
+    icon: LineChart,
+    title: "Báo cáo dễ hiểu",
+    description: "Biến dữ liệu thu chi thành xu hướng và góc nhìn có thể hành động.",
+    tone: "bg-emerald-50 text-emerald-600",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Riêng tư là ưu tiên",
+    description: "Trải nghiệm được thiết kế với sự minh bạch và quyền kiểm soát của bạn.",
+    tone: "bg-slate-100 text-slate-700",
+  },
+];
+
+const faqItems = [
+  {
+    q: "Trợ Lý Tài Chính có phiên bản miễn phí không?",
+    a: "Có. Bạn có thể bắt đầu với những tính năng quản lý tài chính thiết yếu và nâng cấp khi cần thêm trải nghiệm chuyên sâu.",
+  },
+  {
+    q: "Tôi có thể quản lý những khoản nào?",
+    a: "Bạn có thể tổ chức thu nhập, chi tiêu, ví, ngân sách, mục tiêu tiết kiệm, khoản nợ và các giao dịch định kỳ trong cùng một nơi.",
+  },
+  {
+    q: "Dữ liệu được trình bày như thế nào?",
+    a: "Các khoản thu chi được gom theo nhóm và chuyển thành biểu đồ, xu hướng cùng báo cáo trực quan để bạn dễ theo dõi.",
+  },
+  {
+    q: "Tôi có thể tùy chỉnh danh mục không?",
+    a: "Có. Bạn có thể thiết lập danh mục và cách theo dõi phù hợp với thói quen tài chính của mình.",
+  },
+  {
+    q: "Làm sao để bắt đầu?",
+    a: "Chọn “Bắt đầu miễn phí”, đăng nhập tài khoản và tạo khoản thu chi đầu tiên. Giao diện sẽ hướng dẫn bạn qua từng bước.",
+  },
+];
+
+const reveal = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0 },
+};
 
 function HomePage() {
-  const faqItems = [
-    {
-      q: "Trợ Lý Tài Chính có miễn phí không?",
-      a: "Trợ Lý Tài Chính có phiên bản miễn phí với tính năng cơ bản. Bạn có thể nâng cấp Premium để trải nghiệm đầy đủ hơn.",
-    },
-    {
-      q: "Có dùng được khi không có internet?",
-      a: "Bạn có thể ghi chép khi offline. Dữ liệu sẽ tự đồng bộ khi có mạng trở lại.",
-    },
-    {
-      q: "Làm sao theo dõi chi tiêu theo danh mục?",
-      a: "Trợ Lý Tài Chính tự nhóm giao dịch theo danh mục và hiển thị biểu đồ rõ ràng, dễ hiểu.",
-    },
-    {
-      q: "Có xuất dữ liệu ra CSV/Google Sheet không?",
-      a: "Chỉ vài thao tác trong phần Cài đặt là bạn có thể xuất/nhập dữ liệu tiện lợi.",
-    },
-    {
-      q: "Trợ Lý Tài Chính có hỗ trợ nhiều loại tiền tệ?",
-      a: "Có. Bạn có thể chọn loại tiền ưa thích để theo dõi chi tiêu phù hợp.",
-    },
-  ];
+  const reduceMotion = useReducedMotion();
+  const motionProps = reduceMotion
+    ? {}
+    : {
+        initial: "hidden",
+        whileInView: "visible",
+        viewport: { once: true, amount: 0.18 },
+        variants: reveal,
+        transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+      };
+
   return (
-    <>
+    <Motion.div className="landing-page overflow-hidden bg-[#f8f8f5] text-slate-950">
       <Header />
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-5 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="uppercase tracking-[0.25em] text-gray-500 text-sm">
-              Tối ưu tài chính
-            </p>
-            <h1 className="mt-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-              Đưa Ra Quyết Định Tài Chính Tốt Nhất
-            </h1>
-            <p className="mt-6 text-gray-600 max-w-xl">
-              Công cụ quản lý chi tiêu mạnh mẽ giúp bạn kiểm soát ngân sách,
-              theo dõi thu chi và tiết kiệm thông minh.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button className="px-6 py-3 rounded-md bg-black text-white hover:bg-gray-900 transition">
-                Tải xuống
-              </button>
-              <button className="px-6 py-3 rounded-md border border-gray-300 hover:bg-gray-50 transition">
-                Xem video
-              </button>
+
+      <main>
+        <section id="home" className="relative min-h-[760px] overflow-hidden pt-28 sm:pt-32 lg:min-h-[900px] lg:pt-36">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_30%,rgba(56,189,248,0.22),transparent_30%),radial-gradient(circle_at_22%_78%,rgba(99,102,241,0.1),transparent_25%)]" />
+          <div className="landing-grid absolute inset-0 opacity-50" />
+          {!reduceMotion && (
+            <div className="absolute inset-y-0 right-0 hidden w-[58%] lg:block">
+              <Suspense fallback={null}>
+                <FinanceScene />
+              </Suspense>
             </div>
-          </div>
-          <div className="relative">
-            <img
-              src={images.hero}
-              alt="Xem trước ứng dụng"
-              className="w-full max-w-xl mx-auto drop-shadow-2xl rounded-2xl"
-            />
-          </div>
-        </div>
-      </section>
+          )}
 
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="order-1 lg:order-1">
-            <img
-              src={images.premium}
-              alt="Tính năng Premium"
-              className="w-full max-w-xl mx-auto drop-shadow-2xl rounded-2xl"
-            />
-          </div>
-          <div className="order-2 lg:order-2">
-            <p className="uppercase tracking-[0.25em] text-rose-500 text-sm">
-              Tính năng
-            </p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold">
-              Trợ Lý Tài Chính Premium
-            </h2>
-            <ul className="mt-6 space-y-6 text-gray-700">
-              <li className="flex gap-4">
-                <span className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-600 font-semibold">
-                  1
+          <div className="relative mx-auto grid max-w-[1380px] items-center gap-10 px-5 pb-20 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-12 lg:pb-28">
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 pt-8 lg:pt-0"
+            >
+              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/90 px-3 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-sky-700 shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-500 opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-500" />
                 </span>
-                <div>
-                  <h3 className="font-semibold text-lg">
-                    Khoảng thời gian ngân sách
-                  </h3>
-                  <p className="mt-1 text-gray-600">
-                    Dễ dàng đặt ngân sách theo tuần/tháng/quý và theo dõi mức sử
-                    dụng theo thời gian.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-600 font-semibold">
-                  2
-                </span>
-                <div>
-                  <h3 className="font-semibold text-lg">Phân tích chi tiết</h3>
-                  <p className="mt-1 text-gray-600">
-                    Theo dõi chi tiêu và thu nhập bằng biểu đồ trực quan và các
-                    chỉ số hữu ích.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-600 font-semibold">
-                  3
-                </span>
-                <div>
-                  <h3 className="font-semibold text-lg">
-                    Thông báo thông minh
-                  </h3>
-                  <p className="mt-1 text-gray-600">
-                    Không bỏ lỡ hóa đơn hay gia hạn gói nhờ nhắc nhở chính xác
-                    và kịp thời.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="uppercase tracking-[0.25em] text-rose-500 text-sm">
-              Ưu điểm
-            </p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold">
-              Vì sao chọn Trợ Lý Tài Chính?
-            </h2>
-            <div className="mt-6 space-y-6">
-              <div className="flex gap-4">
-                <span className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-600">
-                  🔔
-                </span>
-                <div>
-                  <h3 className="font-semibold text-lg">
-                    Thông báo thông minh
-                  </h3>
-                  <p className="mt-1 text-gray-600">
-                    Nhắc nhở chi tiêu, hóa đơn và mục tiêu tiết kiệm được cá
-                    nhân hóa cho bạn.
-                  </p>
-                </div>
+                Trợ lý tài chính của riêng bạn
               </div>
-              <div className="flex gap-4">
-                <span className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-600">
-                  ⚙️
+
+              <h1 className="max-w-3xl text-[3rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-slate-950 sm:text-[3.85rem] sm:leading-[1.03] lg:text-[5.2rem]">
+                <span className="block">Tiền rõ ràng.</span>
+                <span className="mt-1 block bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-700 bg-clip-text text-transparent">
+                  <span className="block">Tương lai</span>
+                  <span className="block">vững vàng.</span>
                 </span>
-                <div>
-                  <h3 className="font-semibold text-lg">Tùy biến linh hoạt</h3>
-                  <p className="mt-1 text-gray-600">
-                    Tùy chỉnh danh mục, ngân sách và cảnh báo để phù hợp thói
-                    quen của bạn.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="relative">
-            <img
-              src={images.customize}
-              alt="Vì sao chọn"
-              className="w-full max-w-xl mx-auto drop-shadow-2xl rounded-2xl"
-            />
-          </div>
-        </div>
-      </section>
+              </h1>
+              <p className="mt-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+                Trợ Lý Tài Chính biến những con số phức tạp thành một kế hoạch đơn giản — để bạn hiểu dòng tiền, làm chủ ngân sách và tiến gần hơn tới mục tiêu mỗi ngày.
+              </p>
 
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-            <img
-              src={images.feedback}
-              alt="Hình minh họa đánh giá"
-              className="w-full max-w-xl mx-auto drop-shadow-2xl rounded-2xl"
-            />
-          </div>
-          <div>
-            <p className="uppercase tracking-[0.25em] text-gray-500 text-sm">
-              Đánh giá
-            </p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold">
-              Người dùng nói gì về chúng tôi?
-            </h2>
-            <p className="mt-6 text-gray-600 max-w-xl">
-              “Ứng dụng rất dễ sử dụng, biểu đồ đẹp và nhắc nhở cực kỳ hữu ích.
-              Tôi đã kiểm soát chi tiêu tốt hơn chỉ sau vài tuần.”
-            </p>
-            <div className="mt-6">
-              <p className="font-semibold">Nick Jonas</p>
-            </div>
-          </div>
-          
-        </div>
-      </section>
+              <StoreButtons id="download" className="mt-9" buttonClassName="sm:min-w-[190px]" />
 
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-10">
-            <div>
-              <p className="uppercase tracking-[0.25em] text-rose-500 text-sm">Câu hỏi thường gặp</p>
-              <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold">Những câu hỏi phổ biến</h2>
-              <div className="mt-8 space-y-4">
-                {faqItems.map((item, index) => (
-                  <AccordionItem key={index} index={index} q={item.q} a={item.a} />
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-semibold text-slate-500">
+                {["Thiết lập nhanh", "Theo dõi trực quan", "Chủ động kiểm soát"].map((item) => (
+                  <span key={item} className="inline-flex items-center gap-2">
+                    <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-100 text-emerald-600">
+                      <Check className="h-3 w-3 stroke-[3]" />
+                    </span>
+                    {item}
+                  </span>
                 ))}
               </div>
+            </motion.div>
+
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.9, x: 30 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 mx-auto w-full max-w-[730px]"
+            >
+              <div className="hero-orb absolute left-1/2 top-1/2 h-[74%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-cyan-300/50 via-sky-400/30 to-indigo-300/30 blur-3xl" />
+              <motion.img
+                src={images.hero}
+                alt="Giao diện ứng dụng Trợ Lý Tài Chính trên điện thoại"
+                className="relative mx-auto w-[92%] max-w-[670px] select-none drop-shadow-[0_45px_45px_rgba(15,23,42,0.18)]"
+                animate={reduceMotion ? undefined : { y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              />
+
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, 8, 0], rotate: [-2, 0, -2] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute left-0 top-[17%] hidden rounded-2xl border border-white/80 bg-white/85 p-3.5 shadow-xl backdrop-blur-xl sm:flex sm:items-center sm:gap-3"
+              >
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-100 text-emerald-600">
+                  <ArrowDownRight className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500">Dòng tiền tháng này</p>
+                  <p className="mt-0.5 font-extrabold text-slate-900">Đang trong tầm kiểm soát</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, -10, 0], rotate: [2, 0, 2] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                className="absolute bottom-[13%] right-0 hidden rounded-2xl border border-white/80 bg-slate-950/90 p-4 text-white shadow-2xl backdrop-blur-xl sm:block"
+              >
+                <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-sky-400 text-slate-950">
+                    <Sparkles className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-semibold text-white/60">Gợi ý thông minh</p>
+                    <p className="mt-0.5 text-sm font-bold">Tối ưu khoản chi tiếp theo</p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="border-y border-slate-200/80 bg-white py-5" aria-label="Nhóm tính năng nổi bật">
+          <div className="marquee-mask mx-auto flex max-w-[1380px] overflow-hidden px-5">
+            <div className="marquee-track flex min-w-max items-center gap-8 pr-8 text-sm font-extrabold uppercase tracking-[0.18em] text-slate-400 sm:gap-14 sm:pr-14">
+              {[WalletCards, PieChart, Bot, Goal, CreditCard, ShieldCheck, WalletCards, PieChart, Bot, Goal, CreditCard, ShieldCheck].map((Icon, index) => (
+                <span key={`${Icon.displayName}-${index}`} className="flex items-center gap-2.5 whitespace-nowrap">
+                  <Icon className="h-5 w-5 text-sky-500" />
+                  {[
+                    "Ví & giao dịch",
+                    "Ngân sách",
+                    "Trợ lý thông minh",
+                    "Mục tiêu",
+                    "Khoản định kỳ",
+                    "Bảo mật",
+                  ][index % 6]}
+                </span>
+              ))}
             </div>
-            <div className="flex flex-col items-center justify-center rounded-3xl bg-gradient-to-b from-gray-50 to-white border border-gray-100 p-10">
-              <img src={images.question} alt="Câu hỏi" className="h-40 w-40 object-contain drop-shadow-xl" />
-              <h3 className="mt-8 text-2xl font-extrabold">Bạn còn thắc mắc?</h3>
-              <p className="mt-2 text-gray-600 text-center max-w-sm">Hãy để lại câu hỏi, chúng tôi sẽ phản hồi sớm nhất.</p>
-              <div className="mt-6 w-full max-w-md">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Nhắn cho Trợ Lý Tài Chính</label>
-                <div className="flex items-center gap-2">
-                  <input type="text" placeholder="Nhập câu hỏi của bạn" className="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black" />
-                  <button className="px-4 py-2 rounded-md bg-black text-white hover:bg-gray-900">Gửi</button>
+          </div>
+        </section>
+
+        <section id="product-preview" className="relative overflow-hidden bg-slate-950 py-24 text-white sm:py-32">
+          {!reduceMotion && (
+            <div className="absolute inset-0 hidden opacity-40 lg:block">
+              <Suspense fallback={null}>
+                <FinanceScene variant="insight" />
+              </Suspense>
+            </div>
+          )}
+          <div className="relative z-10 mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
+            <motion.div {...motionProps} className="mx-auto max-w-3xl text-center">
+              <p className="section-kicker text-sky-400">Một góc nhìn. Toàn bộ dòng tiền.</p>
+              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">
+                Hiểu tài chính của bạn chỉ trong một nhịp nhìn.
+              </h2>
+              <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">
+                Tổng quan thu chi, ngân sách và xu hướng được đặt đúng chỗ — gọn gàng, có ngữ cảnh và dễ hành động.
+              </p>
+            </motion.div>
+
+            <motion.div
+              {...motionProps}
+              transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mt-14 overflow-hidden rounded-[2rem] border border-white/10 bg-[#111827] p-3 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] sm:p-6"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(14,165,233,0.16),transparent_32%)]" />
+              <div className="relative grid gap-4 lg:grid-cols-[0.72fr_1.28fr]">
+                <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 sm:p-7">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-semibold text-slate-400">Số dư khả dụng</p>
+                      <p className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+                        <CountUp end={7.54} decimals={2} duration={1.8} suffix=" triệu" enableScrollSpy scrollSpyOnce />
+                      </p>
+                    </div>
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-sky-400 text-slate-950">
+                      <WalletCards className="h-6 w-6" />
+                    </span>
+                  </div>
+                  <div className="mt-8 grid grid-cols-2 gap-3">
+                    <div className="rounded-2xl bg-white/[0.06] p-4">
+                      <p className="text-xs font-semibold text-slate-500">Thu nhập</p>
+                      <p className="mt-2 text-lg font-extrabold text-emerald-400">+5,28 triệu</p>
+                    </div>
+                    <div className="rounded-2xl bg-white/[0.06] p-4">
+                      <p className="text-xs font-semibold text-slate-500">Chi tiêu</p>
+                      <p className="mt-2 text-lg font-extrabold text-rose-400">-2,08 triệu</p>
+                    </div>
+                  </div>
+                  <div className="mt-6 rounded-2xl bg-gradient-to-br from-cyan-300 to-sky-500 p-5 text-slate-950">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wider opacity-60">Ngân sách tháng</p>
+                        <p className="mt-2 text-2xl font-extrabold">68%</p>
+                      </div>
+                      <Goal className="h-6 w-6" />
+                    </div>
+                    <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/40">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "68%" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.1, delay: 0.35 }}
+                        className="h-full rounded-full bg-slate-950"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 sm:p-7">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold text-slate-400">Dòng tiền 7 ngày</p>
+                      <h3 className="mt-1 text-xl font-extrabold">Thu nhập & chi tiêu</h3>
+                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-400">Dữ liệu minh họa</span>
+                  </div>
+                  <div className="mt-8 h-[280px] w-full sm:h-[330px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={chartData} margin={{ top: 10, right: 4, left: -24, bottom: 0 }}>
+                        <defs>
+                          <linearGradient id="income" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#38bdf8" stopOpacity={0.42} />
+                            <stop offset="100%" stopColor="#38bdf8" stopOpacity={0} />
+                          </linearGradient>
+                          <linearGradient id="expense" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#fb7185" stopOpacity={0.3} />
+                            <stop offset="100%" stopColor="#fb7185" stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid stroke="#334155" strokeDasharray="4 8" vertical={false} opacity={0.45} />
+                        <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12 }} dy={10} />
+                        <Tooltip
+                          contentStyle={{ background: "#0f172a", border: "1px solid #334155", borderRadius: 14, color: "white" }}
+                          formatter={(value) => [`${value} triệu`, ""]}
+                        />
+                        <Area type="monotone" dataKey="income" stroke="#38bdf8" strokeWidth={3} fill="url(#income)" />
+                        <Area type="monotone" dataKey="expense" stroke="#fb7185" strokeWidth={2.5} fill="url(#expense)" />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="features" className="py-24 sm:py-32">
+          <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
+            <motion.div {...motionProps} className="grid gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+              <div>
+                <p className="section-kicker text-sky-600">Nhỏ gọn nhưng mạnh mẽ</p>
+                <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">
+                  Mọi công cụ cần thiết. Không một chi tiết thừa.
+                </h2>
+              </div>
+              <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg lg:justify-self-end">
+                Từ giao dịch hằng ngày đến mục tiêu dài hạn, Trợ Lý Tài Chính giúp bạn tổ chức đời sống tài chính theo cách rõ ràng và hợp với chính mình.
+              </p>
+            </motion.div>
+
+            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map((feature, index) => {
+                const Icon = feature.icon;
+                return (
+                  <motion.article
+                    key={feature.title}
+                    {...motionProps}
+                    transition={{ duration: 0.55, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    className="group rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-[0_20px_50px_-35px_rgba(15,23,42,0.25)] transition duration-300 hover:-translate-y-2 hover:border-sky-200 hover:shadow-[0_30px_70px_-30px_rgba(14,165,233,0.3)]"
+                  >
+                    <span className={`grid h-13 w-13 place-items-center rounded-2xl ${feature.tone}`}>
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <h3 className="mt-8 text-xl font-extrabold tracking-tight">{feature.title}</h3>
+                    <p className="mt-3 leading-7 text-slate-600">{feature.description}</p>
+                    <span className="mt-7 inline-flex items-center gap-1 text-sm font-bold text-slate-400 transition group-hover:text-sky-600">
+                      Khám phá <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </motion.article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="pb-24 sm:pb-32">
+          <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
+            <div className="grid overflow-hidden rounded-[2.25rem] bg-gradient-to-br from-cyan-100 via-sky-100 to-indigo-100 lg:grid-cols-2">
+              <motion.div {...motionProps} className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-sky-300">
+                  <WandSparkles className="h-6 w-6" />
+                </span>
+                <h2 className="mt-8 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl">
+                  Một trải nghiệm mang đúng nhịp sống của bạn.
+                </h2>
+                <p className="mt-5 max-w-xl leading-7 text-slate-700">
+                  Cá nhân hay kinh doanh, chi tiêu hằng ngày hay kế hoạch dài hạn — bạn chủ động chọn điều cần theo dõi và cách muốn nhìn thấy nó.
+                </p>
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {["Danh mục linh hoạt", "Cá nhân & kinh doanh", "Mục tiêu riêng", "Báo cáo theo nhu cầu"].map((item) => (
+                    <span key={item} className="flex items-center gap-2.5 font-bold text-slate-800">
+                      <Check className="h-5 w-5 stroke-[3]" /> {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              <div className="relative flex min-h-[580px] items-end justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-sky-950 p-8">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.26),transparent_32%)]" />
+                <motion.div
+                  initial={reduceMotion ? false : { opacity: 0, y: 80, rotate: 4 }}
+                  whileInView={{ opacity: 1, y: 48, rotate: 4 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative w-[300px] rounded-[3rem] border-[9px] border-slate-900 bg-slate-900 p-1 shadow-[0_30px_90px_rgba(0,0,0,0.55)] sm:w-[340px]"
+                >
+                  <div className="absolute left-1/2 top-3 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-slate-950" />
+                  <img src={images.mobileDashboard} alt="Màn hình thực tế của ứng dụng Trợ Lý Tài Chính" className="w-full rounded-[2.35rem]" />
+                </motion.div>
+                <div className="absolute left-5 top-6 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-bold text-white backdrop-blur-lg sm:left-8 sm:top-10">
+                  Ảnh giao diện thật của bạn
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="relative overflow-hidden rounded-2xl border border-blue-400/60">
-            <img
-              src={images.ready}
-              alt="Hình nền CTA"
-              className="w-full h-[360px] sm:h-[420px] lg:h-[440px] object-cover"
-            />
-            <div className="absolute inset-0 flex items-center">
-              <div className="px-8 sm:px-12 lg:px-16 text-white">
-                <h2 className="text-3xl sm:text-4xl font-extrabold">
-                  Sẵn sàng để bắt đầu?
-                </h2>
-                <p className="mt-3 max-w-xl text-white/80">
-                  Khởi tạo thói quen tài chính lành mạnh ngay hôm nay cùng
-                  Trợ Lý Tài Chính.
-                </p>
-                <button className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white text-black hover:bg-gray-100 transition">
-                  Tải xuống
-                </button>
-              </div>
+        <section id="how-it-works" className="bg-white py-24 sm:py-32">
+          <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
+            <motion.div {...motionProps} className="mx-auto max-w-3xl text-center">
+              <p className="section-kicker text-sky-600">Bắt đầu nhẹ nhàng</p>
+              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">
+                Ba bước để tiền bắt đầu “có lời giải”.
+              </h2>
+            </motion.div>
+
+            <div className="relative mt-16 grid gap-5 lg:grid-cols-3">
+              <div className="absolute left-[16.6%] right-[16.6%] top-14 hidden border-t-2 border-dashed border-slate-200 lg:block" />
+              {[
+                { icon: Fingerprint, step: "01", title: "Tạo không gian của bạn", text: "Đăng nhập và chọn cách bạn muốn tổ chức tài chính cá nhân." },
+                { icon: ScanLine, step: "02", title: "Ghi nhận dòng tiền", text: "Thêm giao dịch, ngân sách và mục tiêu theo nhịp sống thực tế." },
+                { icon: Zap, step: "03", title: "Biến hiểu biết thành hành động", text: "Theo dõi xu hướng, nhận gợi ý và điều chỉnh kế hoạch khi cần." },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.article
+                    key={item.step}
+                    {...motionProps}
+                    transition={{ duration: 0.55, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative rounded-[1.75rem] border border-slate-200 bg-[#f8f8f5] p-8 text-center"
+                  >
+                    <span className="relative z-10 mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-slate-950 text-sky-300 shadow-lg">
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.22em] text-sky-600">Bước {item.step}</p>
+                    <h3 className="mt-3 text-xl font-extrabold">{item.title}</h3>
+                    <p className="mt-3 leading-7 text-slate-600">{item.text}</p>
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section id="pricing" className="py-24 sm:py-32">
+          <div className="mx-auto max-w-[1180px] px-5 sm:px-8 lg:px-12">
+            <motion.div {...motionProps} className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+              <div>
+                <p className="section-kicker text-sky-600">Chọn theo nhu cầu</p>
+                <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">Bắt đầu miễn phí. Nâng cấp khi bạn sẵn sàng.</h2>
+              </div>
+              <p className="max-w-xl text-lg leading-8 text-slate-600 lg:justify-self-end">
+                Trải nghiệm các công cụ nền tảng trước, rồi mở khóa thêm chiều sâu khi kế hoạch tài chính của bạn phát triển.
+              </p>
+            </motion.div>
+
+            <div className="mt-14 grid gap-5 lg:grid-cols-2">
+              <motion.article {...motionProps} className="rounded-[2rem] border border-slate-200 bg-white p-8 sm:p-10">
+                <span className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-600">Khởi đầu</span>
+                <h3 className="mt-6 text-3xl font-extrabold">Miễn phí</h3>
+                <p className="mt-3 text-slate-600">Dành cho những bước đầu tiên để hiểu và quản lý dòng tiền.</p>
+                <div className="my-8 h-px bg-slate-200" />
+                <ul className="space-y-4 text-sm font-semibold text-slate-700">
+                  {["Ghi chép thu chi cơ bản", "Theo dõi danh mục", "Tổng quan tài chính", "Trải nghiệm trên ứng dụng"].map((item) => (
+                    <li key={item} className="flex items-center gap-3"><Check className="h-5 w-5 text-emerald-500" /> {item}</li>
+                  ))}
+                </ul>
+                <a href="#download" className="mt-9 inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-300 px-6 py-3.5 font-bold transition hover:border-slate-950 hover:bg-slate-950 hover:text-white">
+                  Bắt đầu ngay <ArrowRight className="h-4 w-4" />
+                </a>
+              </motion.article>
+
+              <motion.article
+                {...motionProps}
+                transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-950 via-blue-950 to-sky-950 p-8 text-white shadow-[0_35px_90px_-35px_rgba(15,23,42,0.75)] sm:p-10"
+              >
+                <div className="absolute right-0 top-0 h-64 w-64 translate-x-1/3 -translate-y-1/3 rounded-full bg-sky-400/30 blur-3xl" />
+                <div className="relative">
+                  <span className="rounded-full bg-sky-400 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-950">Trọn vẹn</span>
+                  <h3 className="mt-6 text-3xl font-extrabold">Premium</h3>
+                  <p className="mt-3 text-slate-400">Dành cho kế hoạch cần thêm chiều sâu, tự động hóa và góc nhìn nâng cao.</p>
+                  <div className="my-8 h-px bg-white/10" />
+                  <ul className="space-y-4 text-sm font-semibold text-slate-200">
+                    {["Toàn bộ trải nghiệm miễn phí", "Phân tích chuyên sâu", "Nhắc nhở và kế hoạch nâng cao", "Thêm không gian tùy chỉnh"].map((item) => (
+                      <li key={item} className="flex items-center gap-3"><Check className="h-5 w-5 text-sky-400" /> {item}</li>
+                    ))}
+                  </ul>
+                  <a href="#download" className="mt-9 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sky-400 px-6 py-3.5 font-extrabold text-slate-950 transition hover:-translate-y-1 hover:bg-cyan-300">
+                    Khám phá Premium <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </motion.article>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="bg-white py-24 sm:py-32">
+          <div className="mx-auto grid max-w-[1180px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:px-12">
+            <motion.div {...motionProps}>
+              <p className="section-kicker text-sky-600">Câu hỏi thường gặp</p>
+              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl">Mọi điều bạn cần biết trước khi bắt đầu.</h2>
+              <div className="relative mt-10 hidden overflow-hidden rounded-[1.75rem] bg-slate-950 p-7 text-white lg:block">
+                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-sky-400/30 blur-3xl" />
+                <LockKeyhole className="h-7 w-7 text-sky-400" />
+                <p className="mt-5 text-lg font-extrabold">Bạn vẫn còn câu hỏi?</p>
+                <p className="mt-2 text-sm leading-6 text-slate-400">Đội ngũ Trợ Lý Tài Chính luôn sẵn sàng đồng hành cùng bạn.</p>
+              </div>
+            </motion.div>
+            <motion.div {...motionProps} className="space-y-3">
+              {faqItems.map((item, index) => (
+                <AccordionItem key={item.q} index={index} q={item.q} a={item.a} defaultOpen={index === 0} />
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="bg-white px-5 pb-6 sm:px-8 sm:pb-8">
+          <div className="relative mx-auto min-h-[540px] max-w-[1380px] overflow-hidden rounded-[2.25rem] bg-slate-950">
+            <img src={images.ready} alt="Các màn hình ứng dụng Trợ Lý Tài Chính" className="absolute inset-0 h-full w-full object-cover object-center opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/5" />
+            <motion.div {...motionProps} className="relative z-10 flex min-h-[540px] max-w-2xl flex-col justify-center px-7 py-16 text-white sm:px-14 lg:px-20">
+              <p className="section-kicker text-sky-400">Sẵn sàng để bắt đầu?</p>
+              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">Một quyết định nhỏ hôm nay. Một tương lai chủ động hơn.</h2>
+              <p className="mt-6 max-w-xl text-base leading-7 text-white/65 sm:text-lg">Bắt đầu xây dựng thói quen tài chính rõ ràng cùng Trợ Lý Tài Chính.</p>
+              <StoreButtons className="mt-9" buttonClassName="border-white/20 bg-white/10 backdrop-blur-xl" />
+            </motion.div>
+          </div>
+        </section>
+      </main>
 
       <Footer />
-    </>
+    </Motion.div>
   );
 }
 

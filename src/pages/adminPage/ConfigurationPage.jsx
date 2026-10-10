@@ -163,9 +163,9 @@ function ConfigurationPage() {
   };
 
   return (
-    <div className="lg:space-y-8 lg:p-6 space-y-4 p-3 sm:space-y-6 sm:p-4 bg-slate-50 min-h-screen">
+    <div className="space-y-6 w-full">
       {/* Toolbar */}
-      <Card className="border border-gray-100 bg-white">
+      <Card className="shadow-sm">
         <CardContent className="p-4 sm:p-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -185,7 +185,7 @@ function ConfigurationPage() {
         </CardContent>
       </Card>
       {/* Config Table */}
-      <Card className="border border-gray-100 bg-white">
+      <Card className="shadow-sm">
         <CardHeader className="pb-3 sm:pb-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <CardTitle className="text-lg sm:text-xl">
@@ -220,7 +220,7 @@ function ConfigurationPage() {
                         <div className="w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl flex items-center justify-center mb-4 shadow-inner">
                           <Inbox className="w-10 h-10 text-slate-400" />
                         </div>
-                        <h3 className="text-lg font-bold text-slate-900 mb-2">
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                           Không có cấu hình nào
                         </h3>
                         <p className="text-slate-500 max-w-sm text-sm leading-relaxed">
@@ -314,7 +314,7 @@ function ConfigurationPage() {
               </div>
 
               {/* Dynamic Input Area */}
-              <div className="space-y-3 p-4 border border-gray-200 rounded-lg bg-gray-50">
+              <div className="space-y-3 p-4 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-850">
 
                 {/* Render theo kiểu dữ liệu */}
                 {modalConfig.valueType === "bool" ? (
@@ -339,10 +339,10 @@ function ConfigurationPage() {
                     <label className="text-sm font-medium text-gray-700">Giá trị cấu hình:</label>
                     <textarea
                       rows={12}
-                      className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 font-mono text-sm ${!value
+                      className={`w-full p-3 border rounded-xl focus:outline-none focus:ring-2 font-mono text-xs ${!value
                         ? "border-red-500 focus:ring-red-400"
-                        : "border-gray-300 focus:ring-blue-400"
-                        } bg-white`}
+                        : "border-slate-200 dark:border-slate-700 focus:ring-indigo-500"
+                        } bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100`}
                       style={{
                         fontFamily: 'Consolas, Monaco, "Courier New", monospace',
                         lineHeight: '1.5',

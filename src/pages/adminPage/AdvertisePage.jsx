@@ -401,7 +401,7 @@ function AdvertisePage() {
 
   const content = MODAL_CONTENT[modalType] || {};
   return (
-    <div className="space-y-4 sm:space-y-6 lg:space-y-8 p-3 sm:p-4 lg:p-6 bg-slate-50 min-h-screen">
+    <div className="space-y-6 w-full">
 
       {/* Statistic card */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">

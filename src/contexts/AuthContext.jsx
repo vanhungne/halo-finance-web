@@ -43,10 +43,13 @@ export function AuthProvider({ children }) {
       setRefreshToken(response.refreshToken);
 
       const decoded = jwtDecode(response.accessToken);
+      const roleClaim = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      const isAdmin = Array.isArray(roleClaim) ? roleClaim.includes("Admin") : roleClaim === "Admin";
+      const primaryRole = isAdmin ? "Admin" : (Array.isArray(roleClaim) ? roleClaim[0] : roleClaim);
       const newAuth = {
         isLoggedIn: true,
         userId: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
-        roleName: decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+        roleName: primaryRole,
         email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
         avatar: decoded["avatar"],
         fullName: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
@@ -109,10 +112,13 @@ export function AuthProvider({ children }) {
 
           if (decoded.exp > currentTime) {
             // access token còn hạn
+            const roleClaim = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            const isAdmin = Array.isArray(roleClaim) ? roleClaim.includes("Admin") : roleClaim === "Admin";
+            const primaryRole = isAdmin ? "Admin" : (Array.isArray(roleClaim) ? roleClaim[0] : roleClaim);
             setAuth({
               isLoggedIn: true,
               userId: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
-              roleName: decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+              roleName: primaryRole,
               email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
               avatar: decoded["avatar"],
               fullName: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],

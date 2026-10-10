@@ -10,6 +10,7 @@ import PackagePage from "../../pages/adminPage/PackagePage";
 import ConfigurationPage from "../../pages/adminPage/ConfigurationPage";
 import CreateBlogPage from "../../pages/adminPage/CreateBlogPage";
 import BlogDetailPage from "../../pages/adminPage/BlogDetailPage";
+import AiManagementPage from "../../pages/adminPage/AiManagementPage";
 
 const adminRoute = [
     { path: ROUTES.HOME_PAGE, element: <DashboardPage /> },
@@ -23,6 +24,7 @@ const adminRoute = [
     { path: ROUTES.ADVERTISE_PAGE, element: <AdvertisePage /> },
     { path: ROUTES.PACKAGE_PAGE, element: <PackagePage /> },
     { path: ROUTES.CONFIGURATION_PAGE, element: <ConfigurationPage /> },
+    { path: ROUTES.AI_MANAGEMENT_PAGE, element: <AiManagementPage /> },
 ]
 
 export default adminRoute

@@ -4,13 +4,13 @@ export function Dialog({ open, onOpenChange, children }) {
   // Lock body scroll when dialog is open
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [open]);
 
@@ -28,7 +28,7 @@ export function Dialog({ open, onOpenChange, children }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 bg-slate-900/45 backdrop-blur-sm"
         onClick={() => onOpenChange(false)}
       />
       {children}
@@ -39,7 +39,7 @@ export function Dialog({ open, onOpenChange, children }) {
 export function DialogContent({ children, className = "" }) {
   return (
     <div
-      className={`relative bg-white rounded-2xl shadow-2xl p-8 z-50 w-full max-w-[60vw] max-h-[85vh] overflow-y-auto animate-in zoom-in-95 duration-200 ${className}`}
+      className={`relative bg-white text-slate-900 rounded-[1.75rem] border border-white shadow-[0_35px_100px_-30px_rgba(15,23,42,0.45)] p-6 sm:p-8 z-50 w-full max-w-[90vw] md:max-w-[70vw] lg:max-w-[60vw] max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200 custom-scrollbar ${className}`}
     >
       {children}
     </div>
@@ -47,13 +47,13 @@ export function DialogContent({ children, className = "" }) {
 }
 
 export function DialogHeader({ children }) {
-  return <div className="mb-6 pb-4 border-b border-slate-200">{children}</div>;
+  return <div className="mb-6 pb-4 border-b border-slate-100">{children}</div>;
 }
 
 export function DialogTitle({ children }) {
-  return <h2 className="text-2xl font-bold text-slate-900 mb-2">{children}</h2>;
+  return <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 mb-1.5">{children}</h2>;
 }
 
 export function DialogDescription({ children }) {
-  return <p className="text-slate-600 text-sm leading-relaxed">{children}</p>;
+  return <p className="text-slate-500 text-sm leading-relaxed">{children}</p>;
 }

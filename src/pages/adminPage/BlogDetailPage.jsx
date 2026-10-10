@@ -284,7 +284,7 @@ const BlogDetailPage = () => {
     }
 
     return (
-        <div className="lg:space-y-8 lg:p-6 space-y-4 p-3 sm:space-y-6 sm:p-4 bg-slate-50 min-h-screen">
+        <div className="space-y-6 w-full">
             <AlertModal
                 isOpen={alert.isOpen}
                 type={alert.type}

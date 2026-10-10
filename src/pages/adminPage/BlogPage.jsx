@@ -156,7 +156,7 @@ function BlogPage() {
 
 
   return (
-    <div className="lg:space-y-8 lg:p-6 space-y-4 p-3 sm:space-y-6 sm:p-4 bg-slate-50 min-h-screen">
+    <div className="space-y-6 w-full">
 
       {/* Card thống kê */}
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
