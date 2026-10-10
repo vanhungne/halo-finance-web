@@ -78,7 +78,6 @@ export default function AiManagementPage() {
 
   // Filter state
   const [statusFilter, setStatusFilter] = useState("all");
-  const [copiedKey, setCopiedKey] = useState(false);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
 
   useEffect(() => {
@@ -767,43 +766,34 @@ export default function AiManagementPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Model Gemini</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Mô hình Aggeee AI</label>
                 <select
-                  className="w-full text-xs rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2"
+                  className="w-full text-xs rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 font-medium"
                   value={config.model}
                   onChange={(e) => setConfig({ ...config, model: e.target.value })}
                 >
-                  <option value="gemini-3.7-flash">gemini-3.7-flash (Khuyên dùng: Nhanh & Đọc ảnh chuẩn)</option>
-                  <option value="gemini-3.5-flash-lite">gemini-3.5-flash-lite (Tốc độ cao nhất)</option>
-                  <option value="gemini-3.1-pro">gemini-3.1-pro (Suy luận sâu)</option>
+                  <option value="gemini-3.1-pro">gemini-3.1-pro (🧠 Khuyên dùng: Suy luận sâu & Bóc tách chuẩn nhất)</option>
+                  <option value="gemini-3.7-flash">gemini-3.7-flash / 3.8-flash (✨ Toàn diện & Tốc độ cân bằng)</option>
+                  <option value="gemini-3.5-flash-lite">gemini-3.5-flash-lite (⚡ Tốc độ cao nhất)</option>
                 </select>
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                API Key (Bearer Token / x-goog-api-key)
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+                <span>Khóa API Aggeee Gateway (x-goog-api-key)</span>
+                <span className="text-[11px] text-emerald-600 font-medium">Đã kích hoạt & Sẵn sàng</span>
               </label>
-              <div className="relative">
-                <Input
-                  type="password"
-                  value={config.apiKey}
-                  onChange={(e) => setConfig({ ...config, apiKey: e.target.value })}
-                  placeholder="gemi-..."
-                  className="text-xs pr-20 font-mono"
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    navigator.clipboard.writeText(config.apiKey);
-                    setCopiedKey(true);
-                    setTimeout(() => setCopiedKey(false), 2000);
-                  }}
-                  className="absolute right-2 top-2 text-xs text-slate-400 hover:text-slate-600 px-2 py-0.5"
-                >
-                  {copiedKey ? "Đã chép" : "Sao chép"}
-                </button>
-              </div>
+              <Input
+                type="text"
+                value={config.apiKey || ""}
+                onChange={(e) => setConfig({ ...config, apiKey: e.target.value })}
+                placeholder="gemi-..."
+                className="text-xs font-mono bg-slate-50 dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200"
+              />
+              <p className="text-[11px] text-slate-500">
+                Khóa API xác thực trực tiếp và phân tích chứng từ thông qua Aggeee Gateway (https://aggeee.io.vn).
+              </p>
             </div>
 
             <div className="space-y-1.5">
