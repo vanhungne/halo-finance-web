@@ -756,13 +756,33 @@ export default function AiManagementPage() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Aggeee Gateway (nhà cung cấp duy nhất)</label>
-                <Input
-                  value={config.gatewayUrl}
-                  readOnly
-                  placeholder="https://aggeee.io.vn"
-                  className="text-xs bg-slate-50 text-slate-600"
-                />
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+                  <span>Địa chỉ Aggeee Gateway</span>
+                  <span className="text-[11px] text-sky-600 font-normal">Hỗ trợ Local & Cloud</span>
+                </label>
+                <div className="flex gap-2">
+                  <Input
+                    value={config.gatewayUrl}
+                    onChange={(e) => setConfig({ ...config, gatewayUrl: e.target.value })}
+                    placeholder="http://127.0.0.1:8001"
+                    className="text-xs font-mono"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="text-[11px] shrink-0 font-medium"
+                    onClick={() => {
+                      const next = config.gatewayUrl?.includes("127.0.0.1") ? "https://aggeee.io.vn" : "http://127.0.0.1:8001";
+                      const updated = { ...config, gatewayUrl: next };
+                      setConfig(updated);
+                      aiManagementService.saveConfig(updated);
+                      runHealthCheck(updated);
+                    }}
+                  >
+                    {config.gatewayUrl?.includes("127.0.0.1") ? "Dùng Cloud (aggeee.io.vn)" : "Dùng Local (port 8001)"}
+                  </Button>
+                </div>
               </div>
 
               <div className="space-y-1.5">

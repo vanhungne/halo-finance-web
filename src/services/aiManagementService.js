@@ -177,17 +177,7 @@ export const aiManagementService = {
     const config = customConfig || this.getConfig();
     const startTime = performance.now();
 
-    // 1. Thử gọi qua backend proxy trước nếu đã triển khai
-    try {
-      const response = await instance.get("api/admin/receipt-ai/health", { timeout: 6000 });
-      if (response?.data?.healthy !== undefined) {
-        return response.data;
-      }
-    } catch {
-      // Backend proxy chưa sẵn sàng (404), tiếp tục kiểm tra trực tiếp tới Gateway Aggeee
-    }
-
-    // 2. Ping trực tiếp Gateway Aggeee (chế độ no-cors để tránh lỗi CORS trên trình duyệt)
+    // Ping trực tiếp Aggeee Gateway (chế độ no-cors để đảm bảo hoạt động trên mọi origin mà không bị lỗi CORS hay spam 404)
     try {
       await fetch(`${config.gatewayUrl || "https://aggeee.io.vn"}/healthz`, {
         method: "GET",
@@ -208,67 +198,27 @@ export const aiManagementService = {
         healthy: false,
         status: 503,
         latencyMs: 0,
-        model: config.model,
-        gateway: config.gatewayUrl,
+        model: config.model || "gemini-3.1-pro",
+        gateway: config.gatewayUrl || "https://aggeee.io.vn",
         message: `Không thể kết nối đến máy chủ Aggeee Gateway: ${gatewayErr.message}`,
       };
     }
   },
 
-  async testAnalyzeReceipt({ imageBase64, mimeType = "image/jpeg", customPrompt = null }) {
+  async testAnalyzeReceipt({ imageBase64, mimeType = "image/jpeg" }) {
     const startTime = performance.now();
     const config = this.getConfig();
+    const isLocalGateway = config.gatewayUrl?.includes("127.0.0.1") || config.gatewayUrl?.includes("localhost:8001");
 
-    // 1. Thử gọi backend proxy
-    try {
-      const binary = atob(imageBase64);
-      const bytes = new Uint8Array(binary.length);
-      for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
-      const form = new FormData();
-      const extension = mimeType === "image/png" ? "png" : mimeType === "image/webp" ? "webp" : "jpg";
-      form.append("invoice", new Blob([bytes], { type: mimeType }), `receipt.${extension}`);
-      const response = await instance.post("api/admin/receipt-ai/analyze", form, {
-        headers: { "Content-Type": "multipart/form-data" },
-        timeout: 60000,
-      });
-      const data = response.data;
-      const fieldConfidence = data.fieldConfidence || {};
-      const analysis = {
-        ...data,
-        confidence: {
-          overall: data.confidence,
-          merchant: fieldConfidence.merchant,
-          transactionDate: fieldConfidence.transactionDate,
-          totalAmount: fieldConfidence.totalAmount,
-          currency: fieldConfidence.currency,
-          lineItems: fieldConfidence.lineItems,
-          category: fieldConfidence.category,
-        },
-      };
-      const parsed = {
-        merchant: data.merchant,
-        totalAmount: data.amount,
-        currency: data.currency,
-        transactionDate: data.dateDefaulted ? null : data.transactionDate,
-        category: data.categoryInfo?.name,
-        confidence: data.confidence,
-        items: data.items,
-      };
-      return {
-        rawText: JSON.stringify(data, null, 2),
-        parsed,
-        analysis,
-        latencyMs: Math.round(performance.now() - startTime),
-        usage: null,
-      };
-    } catch {
-      // 2. Dự phòng: Gọi trực tiếp Aggeee Gateway qua REST API với API Key đã cấu hình
+    // 1. Nếu đang chọn Gateway Local (http://127.0.0.1:8001), gọi trực tiếp local AI server
+    if (isLocalGateway) {
       const apiKey = config.apiKey || "gemi-LObHFRCBsp_qn3gGreboCaXWJUye2iprpPKEqCHFa_Y";
       const model = config.model || "gemini-3.1-pro";
-      const promptText = (customPrompt || config.systemPrompt || buildReceiptSystemPrompt()) +
+      const promptText = (config.systemPrompt || buildReceiptSystemPrompt()) +
         "\n\nPhân tích ảnh hóa đơn này và trả về JSON chuẩn: {\"merchant\": \"Tên cửa hàng\", \"amount\": 120000, \"currency\": \"VND\", \"transactionDate\": \"YYYY-MM-DD\", \"category\": \"Ăn uống\", \"confidence\": 0.95, \"items\": [{\"name\": \"...\", \"quantity\": 1, \"unitPrice\": 10000, \"total\": 10000}]}";
 
-      const aggeeeRes = await fetch(`${config.gatewayUrl || "https://aggeee.io.vn"}/v1beta/models/${model}:generateContent`, {
+      const localEndpoint = `${config.gatewayUrl.replace(/\/+$/, "")}/v1beta/models/${model}:generateContent`;
+      const localRes = await fetch(localEndpoint, {
         method: "POST",
         headers: {
           "x-goog-api-key": apiKey,
@@ -292,15 +242,15 @@ export const aiManagementService = {
         }),
       });
 
-      if (!aggeeeRes.ok) {
-        const errorText = await aggeeeRes.text();
+      if (!localRes.ok) {
+        const errorText = await localRes.text();
         let parsedErr;
         try { parsedErr = JSON.parse(errorText); } catch {}
-        const msg = parsedErr?.error?.message || parsedErr?.detail || `Gateway Aggeee trả về lỗi HTTP ${aggeeeRes.status}`;
+        const msg = parsedErr?.error?.message || parsedErr?.detail || `Local Server trả về lỗi HTTP ${localRes.status}`;
         throw new Error(msg);
       }
 
-      const resData = await aggeeeRes.json();
+      const resData = await localRes.json();
       const rawText = resData.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
       let parsedJson = {};
@@ -312,7 +262,7 @@ export const aiManagementService = {
           parsedJson = JSON.parse(rawText);
         }
       } catch {
-        parsedJson = { merchant: "Chưa xác định", amount: 0, rawText };
+        parsedJson = { merchant: "Hóa đơn thử nghiệm", amount: 0, rawText };
       }
 
       const totalAmount = Number(parsedJson.amount || parsedJson.totalAmount || 0);
@@ -353,6 +303,74 @@ export const aiManagementService = {
         latencyMs: Math.round(performance.now() - startTime),
         usage: resData.usageMetadata || null,
       };
+    }
+
+    // 2. Nếu dùng Cloud Gateway, gọi qua backend proxy OCR /api/transaction/ocr
+    const binary = atob(imageBase64);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
+    const form = new FormData();
+    const extension = mimeType === "image/png" ? "png" : mimeType === "image/webp" ? "webp" : "jpg";
+    
+    // Gửi cả "Invoice" (theo schema backend C#) và "invoice"
+    const blob = new Blob([bytes], { type: mimeType });
+    form.append("Invoice", blob, `receipt.${extension}`);
+    form.append("invoice", blob, `receipt.${extension}`);
+
+    try {
+      // Gọi endpoint OCR chuẩn của hệ thống: /api/transaction/ocr (instance đã có baseURL /api/)
+      const response = await instance.post("transaction/ocr", form, {
+        headers: { "Content-Type": "multipart/form-data" },
+        timeout: 60000,
+      });
+
+      const data = response.data;
+      const fieldConfidence = data.fieldConfidence || {};
+      const analysis = {
+        ...data,
+        confidence: {
+          overall: data.confidence,
+          merchant: fieldConfidence.merchant,
+          transactionDate: fieldConfidence.transactionDate,
+          totalAmount: fieldConfidence.totalAmount,
+          currency: fieldConfidence.currency,
+          lineItems: fieldConfidence.lineItems,
+          category: fieldConfidence.category,
+        },
+      };
+
+      const parsed = {
+        merchant: data.merchant,
+        totalAmount: data.amount,
+        currency: data.currency,
+        transactionDate: data.dateDefaulted ? null : data.transactionDate,
+        category: data.categoryInfo?.name,
+        confidence: data.confidence,
+        items: data.items,
+      };
+
+      return {
+        rawText: JSON.stringify(data, null, 2),
+        parsed,
+        analysis,
+        latencyMs: Math.round(performance.now() - startTime),
+        usage: null,
+      };
+    } catch (err) {
+      const status = err?.response?.status;
+      const data = err?.response?.data;
+      const errorMsg = data?.message || data?.errorMessage || data?.detail || err.message;
+
+      if (status === 401) {
+        throw new Error("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại tài khoản quản trị để sử dụng tính năng thử nghiệm.");
+      }
+      if (status === 403) {
+        throw new Error("Tài khoản chưa được cấp quyền sử dụng tính năng bóc tách hóa đơn AI (RequireFeature: OcrExpense).");
+      }
+      if (status === 404) {
+        throw new Error("Dịch vụ nhận diện hóa đơn trên máy chủ hiện đang bảo trì hoặc chưa sẵn sàng. Bạn có thể chọn Gateway Local: http://127.0.0.1:8001 trong Cấu hình để thử nghiệm.");
+      }
+      throw new Error(errorMsg || "Lỗi khi xử lý bóc tách hóa đơn.");
     }
   },
 
