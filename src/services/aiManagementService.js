@@ -443,59 +443,65 @@ export const aiManagementService = {
     return new Blob(byteArrays, { type: contentType });
   },
 
-  computeMetrics(samples) {
-    const verified = samples.filter((s) => s.status === "verified" && s.groundTruth && s.aiResult);
-    if (!verified.length) {
-      return { total: samples.length, verifiedCount: 0, fieldAccuracy: 0, avgConfidence: 0, ocrMatchRate: 0 };
-    }
-
-    let totalChecks = 0;
-    let correctChecks = 0;
-    let confidenceSum = 0;
-    let amountMatch = 0;
-
-    verified.forEach((s) => {
-      const ai = s.aiResult || {};
-      const gt = s.groundTruth || {};
-
-      confidenceSum += Number(ai.confidence || 0);
-
-      totalChecks += 1;
-      if (comparableText(ai.merchant) === comparableText(gt.merchant)) correctChecks += 1;
-
-      totalChecks += 1;
-      if (Math.abs(Number(ai.totalAmount || 0) - Number(gt.totalAmount || 0)) <= 1) {
-        correctChecks += 1;
-        amountMatch += 1;
+  evaluateDataset(samples = []) {
+    const evaluated = (samples || []).filter((sample) => sample.groundTruth && sample.aiResult);
+    if (!evaluated.length) return { sampleCount: 0, fieldAccuracy: {}, amountMae: null };
+    const fields = ["merchant", "currency", "transactionDate", "category"];
+    const correct = Object.fromEntries(fields.map((field) => [field, 0]));
+    let amountError = 0;
+    let amountCount = 0;
+    evaluated.forEach((sample) => {
+      fields.forEach((field) => {
+        if (comparableText(sample.aiResult[field]) === comparableText(sample.groundTruth[field])) correct[field] += 1;
+      });
+      const predicted = Number(sample.aiResult.totalAmount);
+      const expected = Number(sample.groundTruth.totalAmount);
+      if (Number.isFinite(predicted) && Number.isFinite(expected)) {
+        amountError += Math.abs(predicted - expected);
+        amountCount += 1;
       }
-
-      totalChecks += 1;
-      if (comparableText(ai.transactionDate) === comparableText(gt.transactionDate)) correctChecks += 1;
-
-      totalChecks += 1;
-      if (comparableText(ai.category) === comparableText(gt.category)) correctChecks += 1;
     });
-
     return {
-      total: samples.length,
-      verifiedCount: verified.length,
-      fieldAccuracy: Math.round((correctChecks / Math.max(1, totalChecks)) * 100),
-      ocrMatchRate: Math.round((amountMatch / verified.length) * 100),
-      avgConfidence: Math.round((confidenceSum / verified.length) * 100),
+      sampleCount: evaluated.length,
+      fieldAccuracy: Object.fromEntries(fields.map((field) => [field, correct[field] / evaluated.length])),
+      amountMae: amountCount ? amountError / amountCount : null,
     };
   },
 
-  exportDatasetJson(samples) {
-    const exportable = samples
-      .filter((s) => s.status === "verified" && s.groundTruth)
-      .map((s) => ({
-        id: s.id,
-        imageUrl: s.imageUrl,
-        source: s.source,
-        groundTruth: s.groundTruth,
-        verifiedAt: new Date().toISOString(),
-      }));
+  exportToFineTuningJSONL(samples = []) {
+    const config = this.getConfig();
+    return (samples || [])
+      .filter((sample) => sample.groundTruth && (sample.status === "verified" || sample.status === "corrected"))
+      .map((sample) => JSON.stringify({
+        messages: [
+          { role: "system", content: config.systemPrompt || buildReceiptSystemPrompt() },
+          {
+            role: "user",
+            content: [
+              { type: "text", text: "Phân tích chứng từ và trả về JSON theo Receipt Intelligence schema v2." },
+              { type: "image_url", image_url: { url: sample.imageUrl } },
+            ],
+          },
+          { role: "assistant", content: JSON.stringify(sample.groundTruth) },
+        ],
+        metadata: { sampleId: sample.id, source: sample.source, reviewed: true },
+      }))
+      .join("\n");
+  },
 
-    return JSON.stringify(exportable, null, 2);
+  exportToFewShotPrompt(samples = []) {
+    const verified = (samples || []).filter((sample) => sample.groundTruth && (sample.status === "verified" || sample.status === "corrected"));
+    const examples = verified.map((sample, index) => (
+      `### Ví dụ ${index + 1}\nKết quả Ground Truth:\n${JSON.stringify(sample.groundTruth, null, 2)}`
+    )).join("\n\n");
+    return `CÁC MẪU ĐÃ ĐƯỢC CON NGƯỜI KIỂM DUYỆT:\n\n${examples}`;
+  },
+
+  computeMetrics(samples) {
+    return this.evaluateDataset(samples);
+  },
+
+  exportDatasetJson(samples) {
+    return this.exportToFineTuningJSONL(samples);
   },
 };
