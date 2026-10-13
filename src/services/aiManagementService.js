@@ -4,11 +4,42 @@ import { instance } from "./instance";
 const STORAGE_KEY_CONFIG = "aggeee_ai_config";
 const STORAGE_KEY_SAMPLES = "aggeee_receipt_samples";
 
+export const REASONING_LEVELS = [
+  {
+    id: "low",
+    title: "Thấp",
+    subtitle: "Nhanh chóng và hiệu quả",
+    description: "Tối ưu hóa tốc độ phản hồi (~1-3s), lý tưởng cho quét hóa đơn, biên lai tức thì và bóc tách tự động.",
+    model: "gemini-3.5-flash-lite",
+    badge: "⚡ Siêu Tốc (Khuyên Dùng)",
+    latency: "~2-3s",
+  },
+  {
+    id: "medium",
+    title: "Trung bình",
+    subtitle: "Độ sâu cân bằng",
+    description: "Cân bằng hoàn hảo giữa tốc độ và độ chính xác phân tích, phù hợp phân loại thu chi và tư vấn tài chính.",
+    model: "gemini-3.7-flash",
+    badge: "⚖️ Cân Bằng",
+    latency: "~4-6s",
+  },
+  {
+    id: "high",
+    title: "Cao",
+    subtitle: "Cực kỳ kỹ lưỡng",
+    description: "Suy luận logic nhiều tầng, đối soát chuyên sâu báo cáo tài chính phức tạp và kiểm tra phát hiện sai số.",
+    model: "gemini-3.1-pro",
+    badge: "🧠 Suy Luận Sâu",
+    latency: "~25s",
+  },
+];
+
 export const DEFAULT_AI_CONFIG = {
   provider: "aggeee",
   promptVersion: "receipt-intelligence-v2",
-  gatewayUrl: "https://aggeee.io.vn",
-  model: "gemini-3.1-pro",
+  gatewayUrl: "http://127.0.0.1:8001",
+  model: "gemini-3.5-flash-lite",
+  reasoningLevel: "low",
   apiKey: "gemi-LObHFRCBsp_qn3gGreboCaXWJUye2iprpPKEqCHFa_Y",
   temperature: 0.1,
   systemPrompt: buildReceiptSystemPrompt(),
@@ -198,26 +229,106 @@ export const aiManagementService = {
         healthy: false,
         status: 503,
         latencyMs: 0,
-        model: config.model || "gemini-3.1-pro",
+        model: config.model || "gemini-3.5-flash-lite",
         gateway: config.gatewayUrl || "https://aggeee.io.vn",
         message: `Không thể kết nối đến máy chủ Aggeee Gateway: ${gatewayErr.message}`,
       };
     }
   },
 
-  async testAnalyzeReceipt({ imageBase64, mimeType = "image/jpeg" }) {
-    const startTime = performance.now();
+  async fetchAvailableModels(customGatewayUrl = null, customApiKey = null) {
     const config = this.getConfig();
-    const isLocalGateway = config.gatewayUrl?.includes("127.0.0.1") || config.gatewayUrl?.includes("localhost:8001");
+    const gateway = (customGatewayUrl || config.gatewayUrl || "http://127.0.0.1:8001").replace(/\/+$/, "");
+    const apiKey = customApiKey || config.apiKey || "gemi-LObHFRCBsp_qn3gGreboCaXWJUye2iprpPKEqCHFa_Y";
 
-    // 1. Nếu đang chọn Gateway Local (http://127.0.0.1:8001), gọi trực tiếp local AI server
-    if (isLocalGateway) {
+    try {
+      const res = await fetch(`${gateway}/v1beta/models`, {
+        headers: {
+          "x-goog-api-key": apiKey,
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.models) && data.models.length > 0) {
+          return data.models.map((m) => {
+            const id = m.name ? m.name.replace(/^models\//, "") : (m.baseModelId || m.displayName);
+            return {
+              id,
+              name: m.displayName || id,
+              description: m.description || "",
+              tag: m.tag || (id.includes("lite") ? "⚡ Siêu Nhanh" : id.includes("flash") ? "✨ Toàn Diện" : "🧠 Suy Luận Sâu"),
+              speed: m.speed || (id.includes("lite") ? "ultra-fast" : id.includes("flash") ? "fast" : "deep-thinking"),
+              recommended: Boolean(m.recommended || id === "gemini-3.5-flash-lite"),
+              reasoningLevel: m.reasoningLevel || (id.includes("lite") ? "low" : id.includes("pro") ? "high" : "medium"),
+              reasoningTitle: m.reasoningTitle || (id.includes("lite") ? "Thấp" : id.includes("pro") ? "Cao" : "Trung bình"),
+              reasoningSubtitle: m.reasoningSubtitle || (id.includes("lite") ? "Nhanh chóng và hiệu quả" : id.includes("pro") ? "Cực kỳ kỹ lưỡng" : "Độ sâu cân bằng"),
+              inputTokenLimit: m.inputTokenLimit,
+              outputTokenLimit: m.outputTokenLimit,
+            };
+          });
+        }
+      }
+    } catch (err) {
+      console.warn("fetchAvailableModels failed, fallback to default list:", err.message);
+    }
+
+    return [
+      {
+        id: "gemini-3.5-flash-lite",
+        name: "Gemini 3.5 Flash-Lite",
+        description: "Mô hình siêu tốc (~1-3s), độ trễ thấp nhất, tối ưu bóc tách hóa đơn, biên lai và OCR tài chính.",
+        tag: "⚡ Siêu Nhanh (Khuyên Dùng)",
+        speed: "ultra-fast",
+        recommended: true,
+      },
+      {
+        id: "gemini-3.7-flash",
+        name: "Gemini 3.7 Flash",
+        description: "Mô hình toàn diện cân bằng tốc độ và khả năng đọc hiểu chứng từ phức tạp.",
+        tag: "✨ Toàn Diện",
+        speed: "fast",
+        recommended: false,
+      },
+      {
+        id: "gemini-3.8-flash",
+        name: "Gemini 3.8 Flash (Latest Preview)",
+        description: "Bản cập nhật Flash mới nhất với độ chính xác số liệu đối soát cao hơn.",
+        tag: "🚀 Mới Nhất",
+        speed: "fast",
+        recommended: false,
+      },
+      {
+        id: "gemini-3.1-pro",
+        name: "Gemini 3.1 Pro",
+        description: "Mô hình suy luận sâu, đối soát hóa đơn phức tạp nhiều trang và phân tích gian lận.",
+        tag: "🧠 Suy Luận Sâu",
+        speed: "deep-thinking",
+        recommended: false,
+      },
+      {
+        id: "gemini-2.5-flash",
+        name: "Gemini 2.5 Flash",
+        description: "Phiên bản Flash ổn định phục vụ trích xuất chứng từ tiêu chuẩn.",
+        tag: "Ổn Định",
+        speed: "fast",
+        recommended: false,
+      },
+    ];
+  },
+
+  async testAnalyzeReceipt({ imageBase64, mimeType = "image/jpeg", customPrompt = null, config: inputConfig = null }) {
+    const startTime = performance.now();
+    const config = inputConfig || this.getConfig();
+
+    const callDirectGateway = async (gatewayUrl) => {
       const apiKey = config.apiKey || "gemi-LObHFRCBsp_qn3gGreboCaXWJUye2iprpPKEqCHFa_Y";
       const model = config.model || "gemini-3.1-pro";
-      const promptText = (config.systemPrompt || buildReceiptSystemPrompt()) +
+      const promptText = (customPrompt || config.systemPrompt || buildReceiptSystemPrompt()) +
         "\n\nPhân tích ảnh hóa đơn này và trả về JSON chuẩn: {\"merchant\": \"Tên cửa hàng\", \"amount\": 120000, \"currency\": \"VND\", \"transactionDate\": \"YYYY-MM-DD\", \"category\": \"Ăn uống\", \"confidence\": 0.95, \"items\": [{\"name\": \"...\", \"quantity\": 1, \"unitPrice\": 10000, \"total\": 10000}]}";
 
-      const localEndpoint = `${config.gatewayUrl.replace(/\/+$/, "")}/v1beta/models/${model}:generateContent`;
+      const cleanGateway = (gatewayUrl || "http://127.0.0.1:8001").replace(/\/+$/, "");
+      const localEndpoint = `${cleanGateway}/v1beta/models/${model}:generateContent`;
       const localRes = await fetch(localEndpoint, {
         method: "POST",
         headers: {
@@ -239,6 +350,11 @@ export const aiManagementService = {
               ],
             },
           ],
+          generationConfig: {
+            thinkingConfig: {
+              thinkingLevel: config.reasoningLevel || "low",
+            },
+          },
         }),
       });
 
@@ -246,7 +362,7 @@ export const aiManagementService = {
         const errorText = await localRes.text();
         let parsedErr;
         try { parsedErr = JSON.parse(errorText); } catch {}
-        const msg = parsedErr?.error?.message || parsedErr?.detail || `Local Server trả về lỗi HTTP ${localRes.status}`;
+        const msg = parsedErr?.error?.message || parsedErr?.detail || `AI Gateway trả về lỗi HTTP ${localRes.status}`;
         throw new Error(msg);
       }
 
@@ -303,74 +419,71 @@ export const aiManagementService = {
         latencyMs: Math.round(performance.now() - startTime),
         usage: resData.usageMetadata || null,
       };
-    }
+    };
 
-    // 2. Nếu dùng Cloud Gateway, gọi qua backend proxy OCR /api/transaction/ocr
-    const binary = atob(imageBase64);
-    const bytes = new Uint8Array(binary.length);
-    for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
-    const form = new FormData();
-    const extension = mimeType === "image/png" ? "png" : mimeType === "image/webp" ? "webp" : "jpg";
-    
-    // Gửi cả "Invoice" (theo schema backend C#) và "invoice"
-    const blob = new Blob([bytes], { type: mimeType });
-    form.append("Invoice", blob, `receipt.${extension}`);
-    form.append("invoice", blob, `receipt.${extension}`);
+    // 1. Luôn ưu tiên gọi trực tiếp AI Gateway (ưu tiên local port 8001 để có đầy đủ CORS headers)
+    const targetGateway = (config.gatewayUrl && !config.gatewayUrl.includes("aggeee.io.vn")) 
+      ? config.gatewayUrl 
+      : "http://127.0.0.1:8001";
 
     try {
-      // Gọi endpoint OCR chuẩn của hệ thống: /api/transaction/ocr (instance đã có baseURL /api/)
-      const response = await instance.post("transaction/ocr", form, {
-        headers: { "Content-Type": "multipart/form-data" },
-        timeout: 60000,
-      });
+      return await callDirectGateway(targetGateway);
+    } catch (directErr) {
+      console.warn("Direct AI Gateway failed, attempting backend fallback:", directErr.message);
 
-      const data = response.data;
-      const fieldConfidence = data.fieldConfidence || {};
-      const analysis = {
-        ...data,
-        confidence: {
-          overall: data.confidence,
-          merchant: fieldConfidence.merchant,
-          transactionDate: fieldConfidence.transactionDate,
-          totalAmount: fieldConfidence.totalAmount,
-          currency: fieldConfidence.currency,
-          lineItems: fieldConfidence.lineItems,
-          category: fieldConfidence.category,
-        },
-      };
+      // 2. Nếu direct gateway không khả dụng, thử fallback backend proxy OCR
+      try {
+        const binary = atob(imageBase64);
+        const bytes = new Uint8Array(binary.length);
+        for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
+        const form = new FormData();
+        const extension = mimeType === "image/png" ? "png" : mimeType === "image/webp" ? "webp" : "jpg";
+        const blob = new Blob([bytes], { type: mimeType });
+        form.append("Invoice", blob, `receipt.${extension}`);
+        form.append("invoice", blob, `receipt.${extension}`);
 
-      const parsed = {
-        merchant: data.merchant,
-        totalAmount: data.amount,
-        currency: data.currency,
-        transactionDate: data.dateDefaulted ? null : data.transactionDate,
-        category: data.categoryInfo?.name,
-        confidence: data.confidence,
-        items: data.items,
-      };
+        const response = await instance.post("transaction/ocr", form, {
+          headers: { "Content-Type": "multipart/form-data" },
+          timeout: 60000,
+        });
 
-      return {
-        rawText: JSON.stringify(data, null, 2),
-        parsed,
-        analysis,
-        latencyMs: Math.round(performance.now() - startTime),
-        usage: null,
-      };
-    } catch (err) {
-      const status = err?.response?.status;
-      const data = err?.response?.data;
-      const errorMsg = data?.message || data?.errorMessage || data?.detail || err.message;
+        const data = response.data;
+        const fieldConfidence = data.fieldConfidence || {};
+        const analysis = {
+          ...data,
+          confidence: {
+            overall: data.confidence,
+            merchant: fieldConfidence.merchant,
+            transactionDate: fieldConfidence.transactionDate,
+            totalAmount: fieldConfidence.totalAmount,
+            currency: fieldConfidence.currency,
+            lineItems: fieldConfidence.lineItems,
+            category: fieldConfidence.category,
+          },
+        };
 
-      if (status === 401) {
-        throw new Error("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại tài khoản quản trị để sử dụng tính năng thử nghiệm.");
+        const parsed = {
+          merchant: data.merchant,
+          totalAmount: data.amount,
+          currency: data.currency,
+          transactionDate: data.dateDefaulted ? null : data.transactionDate,
+          category: data.categoryInfo?.name,
+          confidence: data.confidence,
+          items: data.items,
+        };
+
+        return {
+          rawText: JSON.stringify(data, null, 2),
+          parsed,
+          analysis,
+          latencyMs: Math.round(performance.now() - startTime),
+          usage: null,
+        };
+      } catch (backendErr) {
+        throw new Error(
+          `Không thể kết nối AI Gateway (${directErr.message}). Vui lòng đảm bảo server AI local đang chạy tại http://127.0.0.1:8001.`
+        );
       }
-      if (status === 403) {
-        throw new Error("Tài khoản chưa được cấp quyền sử dụng tính năng bóc tách hóa đơn AI (RequireFeature: OcrExpense).");
-      }
-      if (status === 404) {
-        throw new Error("Dịch vụ nhận diện hóa đơn trên máy chủ hiện đang bảo trì hoặc chưa sẵn sàng. Bạn có thể chọn Gateway Local: http://127.0.0.1:8001 trong Cấu hình để thử nghiệm.");
-      }
-      throw new Error(errorMsg || "Lỗi khi xử lý bóc tách hóa đơn.");
     }
   },
 

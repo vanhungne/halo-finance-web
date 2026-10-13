@@ -50,10 +50,13 @@ import {
   Plus,
   Trash2,
   Sliders,
+  Brain,
+  ChevronDown,
 } from "lucide-react";
 import {
   aiManagementService,
   DEFAULT_AI_CONFIG,
+  REASONING_LEVELS,
 } from "../../services/aiManagementService";
 
 export default function AiManagementPage() {
@@ -62,6 +65,18 @@ export default function AiManagementPage() {
   const [samples, setSamples] = useState([]);
   const [healthStatus, setHealthStatus] = useState(null);
   const [checkingHealth, setCheckingHealth] = useState(false);
+
+  const handleSelectReasoning = (levelId) => {
+    const levelObj = REASONING_LEVELS.find((l) => l.id === levelId);
+    const targetModel = levelObj?.model || config.model;
+    const updated = {
+      ...config,
+      reasoningLevel: levelId,
+      model: targetModel,
+    };
+    setConfig(updated);
+    aiManagementService.saveConfig(updated);
+  };
   
   // Selected sample for Review / Annotation Modal
   const [selectedSample, setSelectedSample] = useState(null);
@@ -79,6 +94,23 @@ export default function AiManagementPage() {
   // Filter state
   const [statusFilter, setStatusFilter] = useState("all");
   const [copiedPrompt, setCopiedPrompt] = useState(false);
+  const [availableModels, setAvailableModels] = useState([]);
+  const [loadingModels, setLoadingModels] = useState(false);
+
+  const loadModels = async (gatewayUrl = null, apiKey = null) => {
+    setLoadingModels(true);
+    try {
+      const models = await aiManagementService.fetchAvailableModels(
+        gatewayUrl || config.gatewayUrl,
+        apiKey || config.apiKey
+      );
+      setAvailableModels(models);
+    } catch (err) {
+      console.warn("Lỗi loadModels:", err);
+    } finally {
+      setLoadingModels(false);
+    }
+  };
 
   useEffect(() => {
     const loadedConfig = aiManagementService.getConfig();
@@ -89,6 +121,7 @@ export default function AiManagementPage() {
     aiManagementService.checkGatewayHealth(loadedConfig)
       .then(setHealthStatus)
       .finally(() => setCheckingHealth(false));
+    loadModels(loadedConfig.gatewayUrl, loadedConfig.apiKey);
   }, []);
 
   const runHealthCheck = async (cfgToTest = null) => {
@@ -101,6 +134,7 @@ export default function AiManagementPage() {
   const handleSaveConfig = () => {
     aiManagementService.saveConfig(config);
     runHealthCheck(config);
+    loadModels(config.gatewayUrl, config.apiKey);
     alert("Đã lưu cấu hình Aggeee AI Gateway thành công!");
   };
 
@@ -154,6 +188,7 @@ export default function AiManagementPage() {
         imageBase64: testImageBase64,
         mimeType: testImageFile?.type || "image/jpeg",
         customPrompt: config.systemPrompt,
+        config,
       });
       setTestResult(res);
     } catch (err) {
@@ -583,6 +618,93 @@ export default function AiManagementPage() {
               </p>
             </div>
 
+            {/* Suy Luận Nâng Cao & Model Selector (Chuẩn Google Gemini UI) */}
+            <div className="bg-slate-50 dark:bg-slate-900/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                  <Brain size={15} className="text-indigo-600 dark:text-indigo-400" />
+                  Suy Luận Nâng Cao (Reasoning Effort):
+                </span>
+                <button
+                  type="button"
+                  onClick={() => loadModels(config.gatewayUrl, config.apiKey)}
+                  className="text-[11px] text-sky-600 hover:text-sky-700 font-medium flex items-center gap-1"
+                  title="Cập nhật danh sách từ Gateway"
+                >
+                  <RefreshCw size={11} className={loadingModels ? "animate-spin" : ""} />
+                  {loadingModels ? "Đang quét..." : "Làm mới danh sách"}
+                </button>
+              </div>
+
+              {/* 3 Reasoning Levels: Thấp / Trung bình / Cao */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {REASONING_LEVELS.map((lvl) => {
+                  const isSelected = (config.reasoningLevel || "low") === lvl.id;
+                  return (
+                    <button
+                      key={lvl.id}
+                      type="button"
+                      onClick={() => handleSelectReasoning(lvl.id)}
+                      className={`text-left p-3 rounded-xl border text-xs transition-all relative ${
+                        isSelected
+                          ? "border-indigo-600 bg-indigo-50/90 dark:bg-indigo-950/50 text-indigo-950 dark:text-indigo-200 font-semibold shadow-sm ring-1 ring-indigo-500/20"
+                          : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-semibold">{lvl.title}</span>
+                        {isSelected ? (
+                          <Check size={14} className="text-indigo-600 dark:text-indigo-400 shrink-0 font-bold" />
+                        ) : (
+                          <span className="text-[10px] text-slate-400 font-mono">{lvl.latency}</span>
+                        )}
+                      </div>
+                      <div className="text-[11px] text-slate-500 font-normal mt-0.5 leading-snug">
+                        {lvl.subtitle}
+                      </div>
+                      <div className="mt-2.5 flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-900">
+                        <span className="text-indigo-600 dark:text-indigo-400 font-mono truncate max-w-[130px]">
+                          {lvl.model}
+                        </span>
+                        <span className="text-[10px] font-normal text-slate-400 shrink-0">{lvl.badge}</span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Footer info: linked model & optional override */}
+              <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] pt-1 px-1 text-slate-500 border-t border-slate-200/60 dark:border-slate-800/60">
+                <div className="flex items-center gap-1.5">
+                  <Cpu size={12} className="text-slate-400" />
+                  <span>Model AI đang chọn:</span>
+                  <span className="font-mono font-medium text-slate-800 dark:text-slate-200 bg-slate-200/60 dark:bg-slate-800 px-1.5 py-0.5 rounded">
+                    {config.model}
+                  </span>
+                </div>
+                {availableModels.length > 0 && (
+                  <div className="flex items-center gap-1.5">
+                    <span>Chọn thủ công model khác:</span>
+                    <select
+                      className="text-[11px] bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded px-2 py-0.5 text-slate-700 dark:text-slate-300"
+                      value={config.model}
+                      onChange={(e) => {
+                        const updated = { ...config, model: e.target.value };
+                        setConfig(updated);
+                        aiManagementService.saveConfig(updated);
+                      }}
+                    >
+                      {availableModels.map((m) => (
+                        <option key={m.id} value={m.id}>
+                          {m.name} ({m.tag || m.id})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+            </div>
+
             {/* Upload Dropzone */}
             <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-6 text-center hover:border-indigo-500 transition-colors bg-slate-50/50 dark:bg-slate-900/50">
               {testImagePreview ? (
@@ -615,7 +737,7 @@ export default function AiManagementPage() {
 
             <div className="flex items-center justify-between pt-2">
               <div className="text-xs text-slate-500">
-                Model đang dùng: <span className="font-semibold text-indigo-600">{config.model}</span>
+                Model đang chạy: <span className="font-semibold text-indigo-600">{config.model}</span>
               </div>
               <Button
                 onClick={handleRunPlayground}
@@ -786,16 +908,77 @@ export default function AiManagementPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Mô hình Aggeee AI</label>
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    Mô hình Aggeee AI (Động từ API Server)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => loadModels(config.gatewayUrl, config.apiKey)}
+                    className="text-[11px] text-sky-600 hover:text-sky-800 flex items-center gap-1 font-medium"
+                  >
+                    <RefreshCw size={11} className={loadingModels ? "animate-spin" : ""} />
+                    {loadingModels ? "Đang tải..." : "Làm mới danh sách"}
+                  </button>
+                </div>
                 <select
                   className="w-full text-xs rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 font-medium"
                   value={config.model}
                   onChange={(e) => setConfig({ ...config, model: e.target.value })}
                 >
-                  <option value="gemini-3.1-pro">gemini-3.1-pro (🧠 Khuyên dùng: Suy luận sâu & Bóc tách chuẩn nhất)</option>
-                  <option value="gemini-3.7-flash">gemini-3.7-flash / 3.8-flash (✨ Toàn diện & Tốc độ cân bằng)</option>
-                  <option value="gemini-3.5-flash-lite">gemini-3.5-flash-lite (⚡ Tốc độ cao nhất)</option>
+                  {availableModels.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.name} ({m.tag || m.id})
+                    </option>
+                  ))}
                 </select>
+                {availableModels.find((m) => m.id === config.model)?.description && (
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    {availableModels.find((m) => m.id === config.model)?.description}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Mức Độ Suy Luận Nâng Cao Mặc Định (Chuẩn Google Gemini) */}
+            <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <Brain size={14} className="text-indigo-600 dark:text-indigo-400" />
+                Mức Độ Suy Luận Nâng Cao Mặc Định (Reasoning Effort):
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {REASONING_LEVELS.map((lvl) => {
+                  const isSelected = (config.reasoningLevel || "low") === lvl.id;
+                  return (
+                    <div
+                      key={lvl.id}
+                      onClick={() => handleSelectReasoning(lvl.id)}
+                      className={`cursor-pointer p-3 rounded-xl border text-xs transition-all ${
+                        isSelected
+                          ? "border-indigo-600 bg-indigo-50/80 dark:bg-indigo-950/40 text-indigo-950 dark:text-indigo-200 font-semibold ring-1 ring-indigo-500/20"
+                          : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm">{lvl.title}</span>
+                        {isSelected ? (
+                          <Check size={14} className="text-indigo-600 dark:text-indigo-400 font-bold" />
+                        ) : (
+                          <span className="text-[10px] text-slate-400 font-mono">{lvl.latency}</span>
+                        )}
+                      </div>
+                      <div className="text-[11px] text-slate-500 font-normal mt-0.5">
+                        {lvl.subtitle}
+                      </div>
+                      <div className="text-[10px] text-slate-400 mt-2 leading-relaxed">
+                        {lvl.description}
+                      </div>
+                      <div className="mt-2 text-[10px] font-mono text-indigo-600 dark:text-indigo-400">
+                        Model: {lvl.model}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
