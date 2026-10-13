@@ -1,4 +1,4 @@
-import { buildReceiptSystemPrompt } from "./receiptIntelligence";
+import { buildReceiptSystemPrompt, normalizeAndValidateReceipt, toLegacyReceiptResult } from "./receiptIntelligence";
 import { instance } from "./instance";
 
 const STORAGE_KEY_CONFIG = "ai_gateway_config";
@@ -367,11 +367,24 @@ export const aiManagementService = {
 
     try {
       const gatewayRes = await callDirectGateway(config.gatewayUrl);
-      const parsed = this.safeParseReceiptJson(gatewayRes.rawText);
+      const rawParsed = this.safeParseReceiptJson(gatewayRes.rawText);
+      let analysis = null;
+      let parsed = null;
+
+      try {
+        analysis = normalizeAndValidateReceipt(rawParsed);
+        parsed = toLegacyReceiptResult(analysis);
+      } catch (normErr) {
+        console.warn("Failed to normalize receipt analysis:", normErr);
+        parsed = rawParsed;
+        analysis = rawParsed;
+      }
 
       return {
         success: true,
         data: parsed,
+        parsed,
+        analysis,
         rawJson: gatewayRes.rawText,
         latencyMs: gatewayRes.latencyMs,
         model: gatewayRes.modelUsed,
@@ -389,9 +402,22 @@ export const aiManagementService = {
         });
 
         const latencyMs = Math.round(performance.now() - startTime);
+        const backendData = response.data;
+        let analysis = null;
+        let parsed = null;
+        try {
+          analysis = normalizeAndValidateReceipt(backendData);
+          parsed = toLegacyReceiptResult(analysis);
+        } catch {
+          parsed = backendData?.data || backendData;
+          analysis = backendData;
+        }
+
         return {
           success: true,
           data: response.data,
+          parsed: parsed || backendData,
+          analysis: analysis || backendData,
           rawJson: JSON.stringify(response.data, null, 2),
           latencyMs,
           model: "Backend-OCR-Pipeline",

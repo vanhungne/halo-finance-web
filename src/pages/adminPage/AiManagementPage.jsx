@@ -246,7 +246,11 @@ export default function AiManagementPage() {
         customPrompt: config.systemPrompt,
         config,
       });
-      setTestResult(res);
+      if (res && res.success === false) {
+        setTestError(res.error || "Lỗi khi phân tích hóa đơn.");
+      } else {
+        setTestResult(res);
+      }
     } catch (err) {
       const msg =
         err?.response?.data?.error?.message ||
@@ -834,30 +838,30 @@ export default function AiManagementPage() {
                 </div>
               ) : testResult ? (
                 <div className="mt-4 space-y-4">
-                  {testResult.parsed && (
+                  {(testResult.parsed || testResult.data) && (
                     <div className="grid grid-cols-2 gap-3 p-3.5 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
                       <div>
                         <span className="text-slate-400 block text-[11px]">Tên cửa hàng:</span>
                         <span className="font-bold text-slate-800 dark:text-slate-100 text-sm">
-                          {testResult.parsed.merchant || "Không xác định"}
+                          {(testResult.parsed || testResult.data)?.merchant || "Không xác định"}
                         </span>
                       </div>
                       <div>
                         <span className="text-slate-400 block text-[11px]">Tổng số tiền:</span>
                         <span className="font-bold text-emerald-600 dark:text-emerald-400 text-base">
-                          {testResult.parsed.totalAmount?.toLocaleString("vi-VN") || 0} đ
+                          {Number((testResult.parsed || testResult.data)?.totalAmount ?? (testResult.parsed || testResult.data)?.amount ?? 0).toLocaleString("vi-VN")} đ
                         </span>
                       </div>
                       <div>
                         <span className="text-slate-400 block text-[11px]">Ngày giao dịch:</span>
                         <span className="font-medium text-slate-700 dark:text-slate-300">
-                          {testResult.parsed.transactionDate || "—"}
+                          {(testResult.parsed || testResult.data)?.transactionDate || "—"}
                         </span>
                       </div>
                       <div>
                         <span className="text-slate-400 block text-[11px]">Danh mục gán:</span>
                         <span className="font-medium text-indigo-600 dark:text-indigo-400">
-                          {testResult.parsed.category || "—"}
+                          {(testResult.parsed || testResult.data)?.category || (testResult.parsed || testResult.data)?.categoryInfo?.name || "—"}
                         </span>
                       </div>
                     </div>
@@ -905,7 +909,7 @@ export default function AiManagementPage() {
                   )}
 
                   <pre className="p-3 bg-slate-950 text-indigo-300 rounded-xl text-xs font-mono overflow-auto max-h-72 border border-slate-800">
-                    {JSON.stringify(testResult.analysis || testResult.parsed, null, 2)}
+                    {testResult.rawJson || JSON.stringify(testResult.analysis || testResult.parsed || testResult.data || testResult, null, 2)}
                   </pre>
                 </div>
               ) : (
