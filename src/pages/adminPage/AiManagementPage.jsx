@@ -62,6 +62,9 @@ import {
 export default function AiManagementPage() {
   const [activeTab, setActiveTab] = useState("annotation"); // annotation | dataset | playground | config
   const [config, setConfig] = useState(DEFAULT_AI_CONFIG);
+  const [serverSettings, setServerSettings] = useState(null);
+  const [isSavingServer, setIsSavingServer] = useState(false);
+  const [isTestingServer, setIsTestingServer] = useState(false);
   const [samples, setSamples] = useState([]);
   const [healthStatus, setHealthStatus] = useState(null);
   const [checkingHealth, setCheckingHealth] = useState(false);
@@ -117,6 +120,20 @@ export default function AiManagementPage() {
     setConfig(loadedConfig);
     const loadedSamples = aiManagementService.getSamples();
     setSamples(loadedSamples);
+
+    // Fetch active settings stored on backend server database
+    aiManagementService.fetchServerSettings().then((srv) => {
+      if (srv) {
+        setServerSettings(srv);
+        setConfig((prev) => ({
+          ...prev,
+          gatewayUrl: srv.gatewayUrl || prev.gatewayUrl,
+          model: srv.receiptModel || prev.model,
+          reasoningLevel: srv.reasoningLevel || prev.reasoningLevel,
+        }));
+      }
+    });
+
     setCheckingHealth(true);
     aiManagementService.checkGatewayHealth(loadedConfig)
       .then(setHealthStatus)
@@ -131,11 +148,50 @@ export default function AiManagementPage() {
     setCheckingHealth(false);
   };
 
-  const handleSaveConfig = () => {
-    aiManagementService.saveConfig(config);
-    runHealthCheck(config);
-    loadModels(config.gatewayUrl, config.apiKey);
-    alert("Đã lưu cấu hình Aggeee AI Gateway thành công!");
+  const handleSaveConfig = async () => {
+    setIsSavingServer(true);
+    try {
+      // 1. Lưu trực tiếp lên CSDL máy chủ Backend (SystemConfigurations)
+      // Khi lưu xong, TẤT CẢ các app mobile và người dùng đều sẽ dùng cấu hình này
+      const saved = await aiManagementService.saveServerSettings({
+        gatewayUrl: config.gatewayUrl,
+        apiKey: config.apiKey,
+        receiptModel: config.model,
+        reasoningLevel: config.reasoningLevel,
+      });
+      if (saved) setServerSettings(saved);
+
+      // 2. Đồng bộ bộ nhớ đệm client
+      aiManagementService.saveConfig(config);
+      await runHealthCheck(config);
+      await loadModels(config.gatewayUrl, config.apiKey);
+      alert("Đã lưu cấu hình AI Gateway lên máy chủ thành công! Toàn bộ người dùng mobile sẽ áp dụng cấu hình này.");
+    } catch (err) {
+      console.error("Lỗi khi lưu cấu hình lên máy chủ:", err);
+      aiManagementService.saveConfig(config);
+      alert("Không thể lưu cấu hình lên máy chủ: " + (err?.response?.data?.message || err.message) + ". Đã lưu cục bộ trình duyệt.");
+    } finally {
+      setIsSavingServer(false);
+    }
+  };
+
+  const handleTestServerConnection = async () => {
+    setIsTestingServer(true);
+    try {
+      const result = await aiManagementService.testServerConnection({
+        gatewayUrl: config.gatewayUrl,
+        apiKey: config.apiKey,
+      });
+      if (result?.healthy) {
+        alert("Kết nối máy chủ tới AI Gateway thành công! " + (result.message || ""));
+      } else {
+        alert("Kết nối thất bại: " + (result?.message || "Không xác định"));
+      }
+    } catch (err) {
+      alert("Lỗi khi kiểm tra kết nối từ máy chủ: " + (err?.response?.data?.message || err.message));
+    } finally {
+      setIsTestingServer(false);
+    }
   };
 
   const handleOpenReview = (sample) => {
@@ -196,7 +252,7 @@ export default function AiManagementPage() {
         err?.response?.data?.error?.message ||
         err?.response?.data?.detail ||
         (err?.response?.status === 503
-          ? "Lỗi 503: Tài khoản Gemini trên Gateway tạm thời hết cookie hoạt động. Hãy đồng bộ cookie tài khoản trên trang Aggeee Admin."
+          ? "Lỗi 503: Dịch vụ AI Gateway tạm thời quá tải hoặc chưa sẵn sàng. Vui lòng kiểm tra lại gateway."
           : err.message || "Lỗi khi gọi Gateway.");
       setTestError(msg);
     } finally {
@@ -245,11 +301,11 @@ export default function AiManagementPage() {
             </span>
             <h1 className="text-2xl font-bold tracking-tight">Trung Tâm Quản Trị & Huấn Luyện AI</h1>
             <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              Aggeee SaaS Engine
+              AI Gateway Engine
             </span>
           </div>
           <p className="text-slate-500 text-sm">
-            Tích hợp nền tảng <strong>https://aggeee.io.vn/</strong> — Trích xuất hóa đơn Multimodal AI, gán nhãn Ground Truth và xuất tập dữ liệu Train AI.
+            Trích xuất hóa đơn Multimodal AI qua AI Gateway, gán nhãn Ground Truth và xuất tập dữ liệu Train AI.
           </p>
         </div>
 
@@ -291,9 +347,9 @@ export default function AiManagementPage() {
         <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-start gap-3 text-amber-700 dark:text-amber-300">
           <AlertTriangle className="shrink-0 mt-0.5 text-amber-500" size={20} />
           <div className="text-sm space-y-1">
-            <p className="font-semibold">Cảnh báo trạng thái Aggeee Gateway: {healthStatus.message}</p>
+            <p className="font-semibold">Cảnh báo trạng thái AI Gateway: {healthStatus.message}</p>
             <p className="text-xs opacity-90">
-              * Gợi ý: Hãy đăng nhập trang quản trị tài khoản tại <a href="https://aggeee.io.vn" target="_blank" rel="noreferrer" className="underline font-bold inline-flex items-center gap-0.5">aggeee.io.vn <ExternalLink size={12} /></a> để đồng bộ lại Session Cookie của tài khoản Google Gemini.
+              * Gợi ý: Vui lòng kiểm tra lại kết nối AI Gateway tại tab Cấu hình Gateway.
             </p>
           </div>
         </div>
@@ -352,7 +408,7 @@ export default function AiManagementPage() {
           }`}
         >
           <Sliders size={16} />
-          Cấu Hình Aggeee Gateway
+          Cấu Hình AI Gateway
         </button>
       </div>
 
@@ -614,7 +670,7 @@ export default function AiManagementPage() {
                 Thử nghiệm phân tích hóa đơn trực tiếp
               </h2>
               <p className="text-xs text-slate-500 mt-1">
-                Tải lên bất kỳ ảnh hóa đơn nào từ máy tính để kiểm tra khả năng bóc tách thực tế của Gateway Aggeee.
+                Tải lên bất kỳ ảnh hóa đơn nào từ máy tính để kiểm tra khả năng bóc tách thực tế của AI Gateway.
               </p>
             </div>
 
@@ -869,7 +925,7 @@ export default function AiManagementPage() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Sliders size={20} className="text-indigo-600" />
-              Thiết lập Aggeee AI Gateway (https://aggeee.io.vn)
+              Thiết lập AI Gateway (Gemini API)
             </CardTitle>
             <CardDescription className="text-xs">
               Cấu hình endpoint, API Key và System Instruction chuẩn cho toàn bộ luồng bóc tách hóa đơn trong hệ thống.
@@ -879,30 +935,26 @@ export default function AiManagementPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
-                  <span>Địa chỉ Aggeee Gateway</span>
+                  <span>Địa chỉ AI Gateway (Gateway URL)</span>
                   <span className="text-[11px] text-sky-600 font-normal">Hỗ trợ Local & Cloud</span>
                 </label>
                 <div className="flex gap-2">
                   <Input
                     value={config.gatewayUrl}
                     onChange={(e) => setConfig({ ...config, gatewayUrl: e.target.value })}
-                    placeholder="http://127.0.0.1:8001"
+                    placeholder="https://gemini.amz.io.vn"
                     className="text-xs font-mono"
                   />
                   <Button
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="text-[11px] shrink-0 font-medium"
-                    onClick={() => {
-                      const next = config.gatewayUrl?.includes("127.0.0.1") ? "https://aggeee.io.vn" : "http://127.0.0.1:8001";
-                      const updated = { ...config, gatewayUrl: next };
-                      setConfig(updated);
-                      aiManagementService.saveConfig(updated);
-                      runHealthCheck(updated);
-                    }}
+                    disabled={isTestingServer}
+                    className="text-[11px] shrink-0 font-medium gap-1"
+                    onClick={handleTestServerConnection}
                   >
-                    {config.gatewayUrl?.includes("127.0.0.1") ? "Dùng Cloud (aggeee.io.vn)" : "Dùng Local (port 8001)"}
+                    <RefreshCw size={11} className={isTestingServer ? "animate-spin" : ""} />
+                    {isTestingServer ? "Đang test..." : "Test kết nối máy chủ"}
                   </Button>
                 </div>
               </div>
@@ -910,7 +962,7 @@ export default function AiManagementPage() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                    Mô hình Aggeee AI (Động từ API Server)
+                    Mô hình AI (Tự động lấy từ Gateway)
                   </label>
                   <button
                     type="button"
@@ -984,7 +1036,7 @@ export default function AiManagementPage() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
-                <span>Khóa API Aggeee Gateway (x-goog-api-key)</span>
+                <span>Khóa API Gateway (x-goog-api-key / Bearer)</span>
                 <span className="text-[11px] text-emerald-600 font-medium">Đã kích hoạt & Sẵn sàng</span>
               </label>
               <Input
@@ -995,7 +1047,7 @@ export default function AiManagementPage() {
                 className="text-xs font-mono bg-slate-50 dark:bg-slate-900 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200"
               />
               <p className="text-[11px] text-slate-500">
-                Khóa API xác thực trực tiếp và phân tích chứng từ thông qua Aggeee Gateway (https://aggeee.io.vn).
+                Khóa API xác thực và phân tích chứng từ qua AI Gateway được lưu mã hóa an toàn trên máy chủ.
               </p>
             </div>
 
@@ -1022,10 +1074,19 @@ export default function AiManagementPage() {
               </Button>
               <Button
                 size="sm"
+                disabled={isSavingServer}
                 className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs gap-1.5"
                 onClick={handleSaveConfig}
               >
-                <Check size={14} /> Lưu cấu hình Gateway
+                {isSavingServer ? (
+                  <>
+                    <RefreshCw size={14} className="animate-spin" /> Đang lưu máy chủ...
+                  </>
+                ) : (
+                  <>
+                    <Check size={14} /> Lưu cấu hình Gateway lên máy chủ
+                  </>
+                )}
               </Button>
             </div>
           </CardContent>

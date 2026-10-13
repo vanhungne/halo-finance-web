@@ -1,8 +1,8 @@
 import { buildReceiptSystemPrompt } from "./receiptIntelligence";
 import { instance } from "./instance";
 
-const STORAGE_KEY_CONFIG = "aggeee_ai_config";
-const STORAGE_KEY_SAMPLES = "aggeee_receipt_samples";
+const STORAGE_KEY_CONFIG = "ai_gateway_config";
+const STORAGE_KEY_SAMPLES = "ai_receipt_samples";
 
 export const REASONING_LEVELS = [
   {
@@ -35,12 +35,12 @@ export const REASONING_LEVELS = [
 ];
 
 export const DEFAULT_AI_CONFIG = {
-  provider: "aggeee",
+  provider: "gateway",
   promptVersion: "receipt-intelligence-v2",
-  gatewayUrl: "http://127.0.0.1:8001",
+  gatewayUrl: "https://gemini.amz.io.vn",
   model: "gemini-3.5-flash-lite",
   reasoningLevel: "low",
-  apiKey: "gemi-LObHFRCBsp_qn3gGreboCaXWJUye2iprpPKEqCHFa_Y",
+  apiKey: "",
   temperature: 0.1,
   systemPrompt: buildReceiptSystemPrompt(),
 };
@@ -48,131 +48,118 @@ export const DEFAULT_AI_CONFIG = {
 export const INITIAL_RECEIPT_SAMPLES = [
   {
     id: "rcpt-001",
-    imageUrl: "https://images.unsplash.com/photo-1554415707-9e44667ff618?w=800&auto=format&fit=crop&q=80",
-    uploadedAt: "2026-10-10 14:32:00",
-    userEmail: "hoangnam@gmail.com",
+    imageUrl: "https://images.unsplash.com/photo-1554415707-9e4466bfe0b0?w=600&auto=format&fit=crop&q=80",
+    createdAt: "2026-10-10T08:30:00Z",
+    userEmail: "hungse17003@gmail.com",
     status: "verified",
     source: "CAMERA",
     aiResult: {
-      merchant: "Highlands Coffee - Landmark 81",
-      totalAmount: 118000,
+      merchant: "Highlands Coffee - Vincom Da Nang",
+      totalAmount: 115000,
       currency: "VND",
       transactionDate: "2026-10-10",
       category: "Ăn uống",
       confidence: 0.98,
-      paymentMethod: "Ví điện tử",
+      paymentMethod: "Momo",
       items: [
-        { name: "Phindi Hạnh Nhân (L)", quantity: 1, unitPrice: 59000, total: 59000 },
-        { name: "Trà Sen Vàng (L)", quantity: 1, unitPrice: 59000, total: 59000 },
+        { name: "Phin Sữa Đá Cỡ Lớn", quantity: 2, unitPrice: 45000, total: 90000 },
+        { name: "Bánh Mì Que Gà Phô Mai", quantity: 1, unitPrice: 25000, total: 25000 },
       ],
     },
     groundTruth: {
-      merchant: "Highlands Coffee - Landmark 81",
-      totalAmount: 118000,
+      merchant: "Highlands Coffee - Vincom Da Nang",
+      totalAmount: 115000,
       currency: "VND",
       transactionDate: "2026-10-10",
       category: "Ăn uống",
+      confidence: 1.0,
+      paymentMethod: "Momo",
       items: [
-        { name: "Phindi Hạnh Nhân (L)", quantity: 1, unitPrice: 59000, total: 59000 },
-        { name: "Trà Sen Vàng (L)", quantity: 1, unitPrice: 59000, total: 59000 },
+        { name: "Phin Sữa Đá Cỡ Lớn", quantity: 2, unitPrice: 45000, total: 90000 },
+        { name: "Bánh Mì Que Gà Phô Mai", quantity: 1, unitPrice: 25000, total: 25000 },
       ],
     },
-    notes: "Mẫu rõ, tổng dòng hàng khớp tổng thanh toán.",
+    notes: "Độ chính xác cao, bóc tách đầy đủ danh sách món.",
   },
   {
     id: "rcpt-002",
-    imageUrl: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&auto=format&fit=crop&q=80",
-    uploadedAt: "2026-10-10 13:15:10",
-    userEmail: "thuha.tran@company.vn",
-    status: "corrected",
-    source: "GALLERY",
-    aiResult: {
-      merchant: "Siêu thị WinMart+",
-      totalAmount: 245000,
-      currency: "VND",
-      transactionDate: "2026-10-09",
-      category: "Mua sắm",
-      confidence: 0.85,
-      paymentMethod: "Tiền mặt",
-      items: [
-        { name: "Sữa tươi TH True Milk 1L", quantity: 2, unitPrice: 38000, total: 76000 },
-        { name: "Bánh mì sandwich", quantity: 1, unitPrice: 25000, total: 25000 },
-        { name: "Táo Envy New Zealand", quantity: 1, unitPrice: 144000, total: 144000 },
-      ],
-    },
-    groundTruth: {
-      merchant: "WinMart+ Hoàng Cầu",
-      totalAmount: 245000,
-      currency: "VND",
-      transactionDate: "2026-10-09",
-      category: "Ăn uống",
-      items: [
-        { name: "Sữa tươi TH True Milk 1L", quantity: 2, unitPrice: 38000, total: 76000 },
-        { name: "Bánh mì sandwich bơ tỏi", quantity: 1, unitPrice: 25000, total: 25000 },
-        { name: "Táo Envy New Zealand (0.8kg)", quantity: 1, unitPrice: 144000, total: 144000 },
-      ],
-    },
-    notes: "Đã sửa tên cửa hàng, mặt hàng và danh mục bằng Ground Truth.",
-  },
-  {
-    id: "rcpt-003",
-    imageUrl: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80",
-    uploadedAt: "2026-10-10 11:05:40",
-    userEmail: "dung.nguyen@gmail.com",
+    imageUrl: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&auto=format&fit=crop&q=80",
+    createdAt: "2026-10-09T19:15:00Z",
+    userEmail: "vietdung.dev@gmail.com",
     status: "pending",
     source: "CAMERA",
     aiResult: {
-      merchant: "Petrolimex Cửa Hàng Xăng Dầu Số 12",
-      totalAmount: 70000,
+      merchant: "Cây xăng Petrolimex Số 15",
+      totalAmount: 500000,
       currency: "VND",
-      transactionDate: "2026-10-10",
-      category: "Đi lại",
+      transactionDate: "2026-10-09",
+      category: "Di chuyển",
       confidence: 0.92,
-      paymentMethod: "Chuyển khoản",
-      items: [{ name: "Xăng RON 95-III", quantity: 3.2, unitPrice: 21875, total: 70000 }],
+      paymentMethod: "Thẻ ATM",
+      items: [
+        { name: "Xăng RON 95-III", quantity: 21.8, unitPrice: 22930, total: 500000 },
+      ],
     },
     groundTruth: null,
-    notes: "Chờ quản trị viên kiểm duyệt và gán nhãn.",
+    notes: "Chờ Admin gắn nhãn và duyệt vào tập Train Dataset.",
   },
 ];
 
-const comparableText = (value) => String(value || "")
-  .normalize("NFD")
-  .replace(/[\u0300-\u036f]/g, "")
-  .toLowerCase()
-  .replace(/[^a-z0-9]/g, "");
+const comparableText = (value) => String(value || "").trim().toLowerCase();
 
 export const aiManagementService = {
+  // --- Backend Persistence Endpoints ---
+  async fetchServerSettings() {
+    try {
+      const response = await instance.get("admin/receipt-ai/settings");
+      return response.data;
+    } catch (err) {
+      console.warn("fetchServerSettings:", err?.message || err);
+      return null;
+    }
+  },
+
+  async saveServerSettings({ gatewayUrl, apiKey, receiptModel, reasoningLevel }) {
+    const payload = {};
+    if (gatewayUrl !== undefined) payload.gatewayUrl = gatewayUrl;
+    if (apiKey !== undefined && apiKey !== "") payload.apiKey = apiKey;
+    if (receiptModel !== undefined) payload.receiptModel = receiptModel;
+    if (reasoningLevel !== undefined) payload.reasoningLevel = reasoningLevel;
+    const response = await instance.put("admin/receipt-ai/settings", payload);
+    return response.data;
+  },
+
+  async testServerConnection({ gatewayUrl, apiKey }) {
+    const response = await instance.post("admin/receipt-ai/settings/test", {
+      gatewayUrl: gatewayUrl || undefined,
+      apiKey: apiKey || undefined,
+    });
+    return response.data;
+  },
+
+  // --- Local Settings Cache ---
   getConfig() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY_CONFIG);
-      if (raw) {
-        const stored = JSON.parse(raw);
-        return {
-          ...DEFAULT_AI_CONFIG,
-          ...stored,
-          provider: "aggeee",
-          gatewayUrl: DEFAULT_AI_CONFIG.gatewayUrl,
-          model: stored.model || DEFAULT_AI_CONFIG.model,
-          apiKey: stored.apiKey || DEFAULT_AI_CONFIG.apiKey,
-          promptVersion: DEFAULT_AI_CONFIG.promptVersion,
-          systemPrompt: stored.promptVersion === DEFAULT_AI_CONFIG.promptVersion
-            ? stored.systemPrompt
-            : DEFAULT_AI_CONFIG.systemPrompt,
-        };
-      }
+      if (!raw) return DEFAULT_AI_CONFIG;
+      const stored = JSON.parse(raw);
+      return {
+        ...DEFAULT_AI_CONFIG,
+        ...stored,
+        gatewayUrl: stored.gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl,
+        provider: "gateway",
+      };
     } catch {
-      // Ignore malformed local configuration and fall back to safe defaults.
+      return DEFAULT_AI_CONFIG;
     }
-    return { ...DEFAULT_AI_CONFIG };
   },
 
-  saveConfig(config) {
+  saveConfig(nextConfig) {
+    const current = this.getConfig();
     const toSave = {
-      ...config,
-      provider: "aggeee",
-      gatewayUrl: DEFAULT_AI_CONFIG.gatewayUrl,
-      promptVersion: DEFAULT_AI_CONFIG.promptVersion,
+      ...current,
+      ...nextConfig,
+      provider: "gateway",
     };
     localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(toSave));
     return toSave;
@@ -181,21 +168,24 @@ export const aiManagementService = {
   getSamples() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY_SAMPLES);
-      if (raw) return JSON.parse(raw);
+      if (!raw) {
+        localStorage.setItem(STORAGE_KEY_SAMPLES, JSON.stringify(INITIAL_RECEIPT_SAMPLES));
+        return INITIAL_RECEIPT_SAMPLES;
+      }
+      return JSON.parse(raw);
     } catch {
-      // Rebuild the demo dataset if local storage is corrupted.
+      return INITIAL_RECEIPT_SAMPLES;
     }
-    localStorage.setItem(STORAGE_KEY_SAMPLES, JSON.stringify(INITIAL_RECEIPT_SAMPLES));
-    return INITIAL_RECEIPT_SAMPLES;
   },
 
   saveSample(updated) {
     const samples = this.getSamples();
     const index = samples.findIndex((sample) => sample.id === updated.id);
-    if (index >= 0) samples[index] = updated;
-    else samples.unshift(updated);
-    localStorage.setItem(STORAGE_KEY_SAMPLES, JSON.stringify(samples));
-    return samples;
+    const nextSamples = index >= 0
+      ? samples.map((sample, i) => (i === index ? updated : sample))
+      : [updated, ...samples];
+    localStorage.setItem(STORAGE_KEY_SAMPLES, JSON.stringify(nextSamples));
+    return nextSamples;
   },
 
   deleteSample(id) {
@@ -205,116 +195,115 @@ export const aiManagementService = {
   },
 
   async checkGatewayHealth(customConfig = null) {
+    // 1. Try server-side health check first (same path mobile uses)
+    try {
+      const res = await instance.get("admin/receipt-ai/health");
+      if (res.data) {
+        return {
+          healthy: res.data.healthy,
+          latencyMs: res.data.latencyMs,
+          gateway: res.data.gateway,
+          model: res.data.model || "gemini-3.5-flash-lite",
+          message: res.data.message,
+          checkedAt: new Date().toISOString(),
+        };
+      }
+    } catch (serverErr) {
+      // Backend not yet reachable or not logged in; fallback to direct gateway check
+    }
+
+    // 2. Direct browser check
     const config = customConfig || this.getConfig();
     const startTime = performance.now();
+    const cleanUrl = (config.gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl).replace(/\/+$/, "");
 
-    // Ping trực tiếp Aggeee Gateway (chế độ no-cors để đảm bảo hoạt động trên mọi origin mà không bị lỗi CORS hay spam 404)
     try {
-      await fetch(`${config.gatewayUrl || "https://aggeee.io.vn"}/healthz`, {
+      await fetch(`${cleanUrl}/healthz`, {
         method: "GET",
         mode: "no-cors",
-        cache: "no-store",
+        cache: "no-cache",
       });
+
       const latencyMs = Math.max(1, Math.round(performance.now() - startTime));
       return {
         healthy: true,
-        status: 200,
         latencyMs,
-        model: config.model || "gemini-3.1-pro",
-        gateway: config.gatewayUrl || "https://aggeee.io.vn",
-        message: `Aggeee Gateway trực tuyến (${latencyMs}ms) — Sẵn sàng phân tích với ${config.model || "gemini-3.1-pro"}`,
+        gateway: cleanUrl,
+        model: config.model || "gemini-3.5-flash-lite",
+        message: `AI Gateway trực tuyến (${latencyMs}ms) — Sẵn sàng phân tích`,
+        checkedAt: new Date().toISOString(),
       };
     } catch (gatewayErr) {
       return {
         healthy: false,
-        status: 503,
-        latencyMs: 0,
+        latencyMs: null,
+        gateway: cleanUrl,
         model: config.model || "gemini-3.5-flash-lite",
-        gateway: config.gatewayUrl || "https://aggeee.io.vn",
-        message: `Không thể kết nối đến máy chủ Aggeee Gateway: ${gatewayErr.message}`,
+        message: `Không thể kết nối đến máy chủ AI Gateway: ${gatewayErr.message}`,
+        checkedAt: new Date().toISOString(),
       };
     }
   },
 
   async fetchAvailableModels(customGatewayUrl = null, customApiKey = null) {
-    const config = this.getConfig();
-    const gateway = (customGatewayUrl || config.gatewayUrl || "http://127.0.0.1:8001").replace(/\/+$/, "");
-    const apiKey = customApiKey || config.apiKey || "gemi-LObHFRCBsp_qn3gGreboCaXWJUye2iprpPKEqCHFa_Y";
-
+    // 1. Try fetching models through backend admin endpoint
     try {
-      const res = await fetch(`${gateway}/v1beta/models`, {
-        headers: {
-          "x-goog-api-key": apiKey,
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (Array.isArray(data.models) && data.models.length > 0) {
-          return data.models.map((m) => {
-            const id = m.name ? m.name.replace(/^models\//, "") : (m.baseModelId || m.displayName);
-            return {
-              id,
-              name: m.displayName || id,
-              description: m.description || "",
-              tag: m.tag || (id.includes("lite") ? "⚡ Siêu Nhanh" : id.includes("flash") ? "✨ Toàn Diện" : "🧠 Suy Luận Sâu"),
-              speed: m.speed || (id.includes("lite") ? "ultra-fast" : id.includes("flash") ? "fast" : "deep-thinking"),
-              recommended: Boolean(m.recommended || id === "gemini-3.5-flash-lite"),
-              reasoningLevel: m.reasoningLevel || (id.includes("lite") ? "low" : id.includes("pro") ? "high" : "medium"),
-              reasoningTitle: m.reasoningTitle || (id.includes("lite") ? "Thấp" : id.includes("pro") ? "Cao" : "Trung bình"),
-              reasoningSubtitle: m.reasoningSubtitle || (id.includes("lite") ? "Nhanh chóng và hiệu quả" : id.includes("pro") ? "Cực kỳ kỹ lưỡng" : "Độ sâu cân bằng"),
-              inputTokenLimit: m.inputTokenLimit,
-              outputTokenLimit: m.outputTokenLimit,
-            };
-          });
-        }
+      const res = await instance.get("admin/receipt-ai/models");
+      if (res.data?.models && Array.isArray(res.data.models) && res.data.models.length > 0) {
+        return res.data.models.map((m) => {
+          const id = m.name ? m.name.replace(/^models\//, "") : (m.id || m.baseModelId || m.displayName);
+          return {
+            id: id,
+            name: m.displayName || id,
+            description: m.description || "",
+            supportedGenerationMethods: m.supportedGenerationMethods || [],
+          };
+        });
       }
-    } catch (err) {
-      console.warn("fetchAvailableModels failed, fallback to default list:", err.message);
+    } catch (e) {
+      // Fallback to direct gateway call
     }
 
-    return [
-      {
-        id: "gemini-3.5-flash-lite",
-        name: "Gemini 3.5 Flash-Lite",
-        description: "Mô hình siêu tốc (~1-3s), độ trễ thấp nhất, tối ưu bóc tách hóa đơn, biên lai và OCR tài chính.",
-        tag: "⚡ Siêu Nhanh (Khuyên Dùng)",
-        speed: "ultra-fast",
-        recommended: true,
-      },
-      {
-        id: "gemini-3.7-flash",
-        name: "Gemini 3.7 Flash",
-        description: "Mô hình toàn diện cân bằng tốc độ và khả năng đọc hiểu chứng từ phức tạp.",
-        tag: "✨ Toàn Diện",
-        speed: "fast",
-        recommended: false,
-      },
-      {
-        id: "gemini-3.8-flash",
-        name: "Gemini 3.8 Flash (Latest Preview)",
-        description: "Bản cập nhật Flash mới nhất với độ chính xác số liệu đối soát cao hơn.",
-        tag: "🚀 Mới Nhất",
-        speed: "fast",
-        recommended: false,
-      },
-      {
-        id: "gemini-3.1-pro",
-        name: "Gemini 3.1 Pro",
-        description: "Mô hình suy luận sâu, đối soát hóa đơn phức tạp nhiều trang và phân tích gian lận.",
-        tag: "🧠 Suy Luận Sâu",
-        speed: "deep-thinking",
-        recommended: false,
-      },
-      {
-        id: "gemini-2.5-flash",
-        name: "Gemini 2.5 Flash",
-        description: "Phiên bản Flash ổn định phục vụ trích xuất chứng từ tiêu chuẩn.",
-        tag: "Ổn Định",
-        speed: "fast",
-        recommended: false,
-      },
-    ];
+    // 2. Direct gateway call from browser
+    const config = this.getConfig();
+    const gateway = (customGatewayUrl || config.gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl).replace(/\/+$/, "");
+    const apiKey = customApiKey || config.apiKey || "";
+
+    try {
+      const headers = { Accept: "application/json" };
+      if (apiKey) {
+        headers["x-goog-api-key"] = apiKey;
+        headers["Authorization"] = `Bearer ${apiKey}`;
+      }
+
+      const res = await fetch(`${gateway}/v1beta/models`, {
+        method: "GET",
+        headers,
+      });
+
+      if (!res.ok) {
+        throw new Error(`Gateway returned HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      const list = data.models || data.data || [];
+      return list.map((m) => {
+        const id = m.name ? m.name.replace(/^models\//, "") : (m.baseModelId || m.displayName);
+        return {
+          id: id,
+          name: m.displayName || id,
+          description: m.description || "",
+          supportedGenerationMethods: m.supportedGenerationMethods || [],
+        };
+      });
+    } catch (err) {
+      return [
+        { id: "gemini-3.5-flash-lite", name: "Gemini 3.5 Flash Lite (Siêu Tốc)", description: "Tối ưu hóa phản hồi bóc tách biên lai tức thì" },
+        { id: "gemini-3.7-flash", name: "Gemini 3.7 Flash (Trợ Giúp Toàn Diện)", description: "Cân bằng tốc độ và độ chuẩn xác" },
+        { id: "gemini-3.1-pro", name: "Gemini 3.1 Pro (Suy Luận Đa Tầng)", description: "Chuyên sâu đối soát báo cáo tài chính phức tạp" },
+        { id: "gemini-2.5-flash", name: "Gemini 2.5 Flash", description: "Bản sao lưu ổn định cao" },
+      ];
+    }
   },
 
   async testAnalyzeReceipt({ imageBase64, mimeType = "image/jpeg", customPrompt = null, config: inputConfig = null }) {
@@ -322,222 +311,191 @@ export const aiManagementService = {
     const config = inputConfig || this.getConfig();
 
     const callDirectGateway = async (gatewayUrl) => {
-      const apiKey = config.apiKey || "gemi-LObHFRCBsp_qn3gGreboCaXWJUye2iprpPKEqCHFa_Y";
-      const model = config.model || "gemini-3.1-pro";
+      const apiKey = config.apiKey || "";
+      const model = config.model || "gemini-3.5-flash-lite";
       const promptText = (customPrompt || config.systemPrompt || buildReceiptSystemPrompt()) +
-        "\n\nPhân tích ảnh hóa đơn này và trả về JSON chuẩn: {\"merchant\": \"Tên cửa hàng\", \"amount\": 120000, \"currency\": \"VND\", \"transactionDate\": \"YYYY-MM-DD\", \"category\": \"Ăn uống\", \"confidence\": 0.95, \"items\": [{\"name\": \"...\", \"quantity\": 1, \"unitPrice\": 10000, \"total\": 10000}]}";
+        "\n\nHãy trích xuất thông tin hóa đơn sau và trả về DUY NHẤT một chuỗi JSON chuẩn RFC 8259.";
 
-      const cleanGateway = (gatewayUrl || "http://127.0.0.1:8001").replace(/\/+$/, "");
-      const localEndpoint = `${cleanGateway}/v1beta/models/${model}:generateContent`;
-      const localRes = await fetch(localEndpoint, {
+      const cleanGateway = (gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl).replace(/\/+$/, "");
+      const endpoint = `${cleanGateway}/v1beta/models/${model}:generateContent`;
+
+      const headers = { "Content-Type": "application/json" };
+      if (apiKey) {
+        headers["x-goog-api-key"] = apiKey;
+        headers["Authorization"] = `Bearer ${apiKey}`;
+      }
+
+      const res = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          "x-goog-api-key": apiKey,
-          "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify({
           contents: [
             {
               role: "user",
               parts: [
+                { text: promptText },
                 {
-                  inline_data: {
-                    mime_type: mimeType,
+                  inlineData: {
+                    mimeType: mimeType,
                     data: imageBase64,
                   },
                 },
-                { text: promptText },
               ],
             },
           ],
           generationConfig: {
-            thinkingConfig: {
-              thinkingLevel: config.reasoningLevel || "low",
-            },
+            temperature: typeof config.temperature === "number" ? config.temperature : 0.1,
+            responseMimeType: "application/json",
           },
         }),
       });
 
-      if (!localRes.ok) {
-        const errorText = await localRes.text();
-        let parsedErr;
-        try { parsedErr = JSON.parse(errorText); } catch {}
-        const msg = parsedErr?.error?.message || parsedErr?.detail || `AI Gateway trả về lỗi HTTP ${localRes.status}`;
-        throw new Error(msg);
+      if (!res.ok) {
+        const errorText = await res.text();
+        const errObj = new Error(`AI Gateway trả về mã HTTP ${res.status}: ${errorText.substring(0, 300)}`);
+        errObj.status = res.status;
+        throw errObj;
       }
 
-      const resData = await localRes.json();
-      const rawText = resData.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      const data = await res.json();
+      const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawText) throw new Error("Gateway không trả về nội dung text trong parts[0]");
 
-      let parsedJson = {};
-      try {
-        const match = rawText.match(/```json\s*([\s\S]*?)\s*```/) || rawText.match(/\{[\s\S]*\}/);
-        if (match) {
-          parsedJson = JSON.parse(match[1] || match[0]);
-        } else {
-          parsedJson = JSON.parse(rawText);
-        }
-      } catch {
-        parsedJson = { merchant: "Hóa đơn thử nghiệm", amount: 0, rawText };
-      }
-
-      const totalAmount = Number(parsedJson.amount || parsedJson.totalAmount || 0);
-      const parsed = {
-        merchant: parsedJson.merchant || "Hóa đơn mua sắm",
-        totalAmount,
-        currency: parsedJson.currency || "VND",
-        transactionDate: parsedJson.transactionDate || parsedJson.date || null,
-        category: parsedJson.category || "Ăn uống",
-        confidence: Number(parsedJson.confidence || 0.95),
-        items: parsedJson.items || [],
-      };
-
-      const analysis = {
-        status: "COMPLETED",
-        merchant: parsed.merchant,
-        amount: parsed.totalAmount,
-        currency: parsed.currency,
-        transactionDate: parsed.transactionDate,
-        confidence: {
-          overall: parsed.confidence,
-          merchant: 0.96,
-          totalAmount: 0.98,
-          transactionDate: 0.93,
-          currency: 1.0,
-          category: 0.92,
-          lineItems: 0.89,
-        },
-        fraudRisk: { riskLevel: "LOW", score: 5 },
-        reconciliation: { totalMatches: true },
-        warnings: [],
-      };
-
-      return {
-        rawText,
-        parsed,
-        analysis,
-        latencyMs: Math.round(performance.now() - startTime),
-        usage: resData.usageMetadata || null,
-      };
+      const latencyMs = Math.round(performance.now() - startTime);
+      return { rawText, latencyMs, modelUsed: model, endpointUsed: endpoint };
     };
 
-    // 1. Luôn ưu tiên gọi trực tiếp AI Gateway (ưu tiên local port 8001 để có đầy đủ CORS headers)
-    const targetGateway = (config.gatewayUrl && !config.gatewayUrl.includes("aggeee.io.vn")) 
-      ? config.gatewayUrl 
-      : "http://127.0.0.1:8001";
-
     try {
-      return await callDirectGateway(targetGateway);
-    } catch (directErr) {
-      console.warn("Direct AI Gateway failed, attempting backend fallback:", directErr.message);
+      const gatewayRes = await callDirectGateway(config.gatewayUrl);
+      const parsed = this.safeParseReceiptJson(gatewayRes.rawText);
 
-      // 2. Nếu direct gateway không khả dụng, thử fallback backend proxy OCR
+      return {
+        success: true,
+        data: parsed,
+        rawJson: gatewayRes.rawText,
+        latencyMs: gatewayRes.latencyMs,
+        model: gatewayRes.modelUsed,
+        endpoint: gatewayRes.endpointUsed,
+      };
+    } catch (err) {
+      // Fallback through backend OCR endpoint if direct fails
       try {
-        const binary = atob(imageBase64);
-        const bytes = new Uint8Array(binary.length);
-        for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
         const form = new FormData();
-        const extension = mimeType === "image/png" ? "png" : mimeType === "image/webp" ? "webp" : "jpg";
-        const blob = new Blob([bytes], { type: mimeType });
-        form.append("Invoice", blob, `receipt.${extension}`);
-        form.append("invoice", blob, `receipt.${extension}`);
+        const blob = this.base64ToBlob(imageBase64, mimeType);
+        form.append("invoice", blob, "receipt.jpg");
 
         const response = await instance.post("transaction/ocr", form, {
           headers: { "Content-Type": "multipart/form-data" },
-          timeout: 60000,
         });
 
-        const data = response.data;
-        const fieldConfidence = data.fieldConfidence || {};
-        const analysis = {
-          ...data,
-          confidence: {
-            overall: data.confidence,
-            merchant: fieldConfidence.merchant,
-            transactionDate: fieldConfidence.transactionDate,
-            totalAmount: fieldConfidence.totalAmount,
-            currency: fieldConfidence.currency,
-            lineItems: fieldConfidence.lineItems,
-            category: fieldConfidence.category,
-          },
-        };
-
-        const parsed = {
-          merchant: data.merchant,
-          totalAmount: data.amount,
-          currency: data.currency,
-          transactionDate: data.dateDefaulted ? null : data.transactionDate,
-          category: data.categoryInfo?.name,
-          confidence: data.confidence,
-          items: data.items,
-        };
-
+        const latencyMs = Math.round(performance.now() - startTime);
         return {
-          rawText: JSON.stringify(data, null, 2),
-          parsed,
-          analysis,
-          latencyMs: Math.round(performance.now() - startTime),
-          usage: null,
+          success: true,
+          data: response.data,
+          rawJson: JSON.stringify(response.data, null, 2),
+          latencyMs,
+          model: "Backend-OCR-Pipeline",
+          endpoint: "/api/transaction/ocr",
         };
       } catch (backendErr) {
-        throw new Error(
-          `Không thể kết nối AI Gateway (${directErr.message}). Vui lòng đảm bảo server AI local đang chạy tại http://127.0.0.1:8001.`
-        );
+        return {
+          success: false,
+          error: err?.message || backendErr?.response?.data?.message || "Lỗi khi gọi AI Gateway",
+          latencyMs: Math.round(performance.now() - startTime),
+        };
       }
     }
   },
 
-  evaluateDataset(samples) {
-    const evaluated = samples.filter((sample) => sample.groundTruth && sample.aiResult);
-    if (!evaluated.length) return { sampleCount: 0, fieldAccuracy: {}, amountMae: null };
-    const fields = ["merchant", "currency", "transactionDate", "category"];
-    const correct = Object.fromEntries(fields.map((field) => [field, 0]));
-    let amountError = 0;
-    let amountCount = 0;
-    evaluated.forEach((sample) => {
-      fields.forEach((field) => {
-        if (comparableText(sample.aiResult[field]) === comparableText(sample.groundTruth[field])) correct[field] += 1;
-      });
-      const predicted = Number(sample.aiResult.totalAmount);
-      const expected = Number(sample.groundTruth.totalAmount);
-      if (Number.isFinite(predicted) && Number.isFinite(expected)) {
-        amountError += Math.abs(predicted - expected);
-        amountCount += 1;
+  safeParseReceiptJson(text) {
+    if (!text) throw new Error("Không có phản hồi từ mô hình AI");
+    let cleaned = text.trim();
+    if (cleaned.startsWith("```json")) cleaned = cleaned.replace(/^```json\s*/i, "").replace(/\s*```$/, "");
+    else if (cleaned.startsWith("```")) cleaned = cleaned.replace(/^```\s*/, "").replace(/\s*```$/, "");
+
+    try {
+      return JSON.parse(cleaned);
+    } catch (err) {
+      const firstBrace = cleaned.indexOf("{");
+      const lastBrace = cleaned.lastIndexOf("}");
+      if (firstBrace >= 0 && lastBrace > firstBrace) {
+        return JSON.parse(cleaned.substring(firstBrace, lastBrace + 1));
       }
+      throw new Error("Không thể phân tích phản hồi JSON từ AI: " + err.message);
+    }
+  },
+
+  base64ToBlob(base64Data, contentType = "image/jpeg") {
+    const sliceSize = 512;
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays, { type: contentType });
+  },
+
+  computeMetrics(samples) {
+    const verified = samples.filter((s) => s.status === "verified" && s.groundTruth && s.aiResult);
+    if (!verified.length) {
+      return { total: samples.length, verifiedCount: 0, fieldAccuracy: 0, avgConfidence: 0, ocrMatchRate: 0 };
+    }
+
+    let totalChecks = 0;
+    let correctChecks = 0;
+    let confidenceSum = 0;
+    let amountMatch = 0;
+
+    verified.forEach((s) => {
+      const ai = s.aiResult || {};
+      const gt = s.groundTruth || {};
+
+      confidenceSum += Number(ai.confidence || 0);
+
+      totalChecks += 1;
+      if (comparableText(ai.merchant) === comparableText(gt.merchant)) correctChecks += 1;
+
+      totalChecks += 1;
+      if (Math.abs(Number(ai.totalAmount || 0) - Number(gt.totalAmount || 0)) <= 1) {
+        correctChecks += 1;
+        amountMatch += 1;
+      }
+
+      totalChecks += 1;
+      if (comparableText(ai.transactionDate) === comparableText(gt.transactionDate)) correctChecks += 1;
+
+      totalChecks += 1;
+      if (comparableText(ai.category) === comparableText(gt.category)) correctChecks += 1;
     });
+
     return {
-      sampleCount: evaluated.length,
-      fieldAccuracy: Object.fromEntries(fields.map((field) => [field, correct[field] / evaluated.length])),
-      amountMae: amountCount ? amountError / amountCount : null,
+      total: samples.length,
+      verifiedCount: verified.length,
+      fieldAccuracy: Math.round((correctChecks / Math.max(1, totalChecks)) * 100),
+      ocrMatchRate: Math.round((amountMatch / verified.length) * 100),
+      avgConfidence: Math.round((confidenceSum / verified.length) * 100),
     };
   },
 
-  exportToFineTuningJSONL(samples) {
-    const config = this.getConfig();
-    return samples
-      .filter((sample) => sample.groundTruth && (sample.status === "verified" || sample.status === "corrected"))
-      .map((sample) => JSON.stringify({
-        messages: [
-          { role: "system", content: config.systemPrompt || buildReceiptSystemPrompt() },
-          {
-            role: "user",
-            content: [
-              { type: "text", text: "Phân tích chứng từ và trả về JSON theo Receipt Intelligence schema v2." },
-              { type: "image_url", image_url: { url: sample.imageUrl } },
-            ],
-          },
-          { role: "assistant", content: JSON.stringify(sample.groundTruth) },
-        ],
-        metadata: { sampleId: sample.id, source: sample.source, reviewed: true },
-      }))
-      .join("\n");
-  },
+  exportDatasetJson(samples) {
+    const exportable = samples
+      .filter((s) => s.status === "verified" && s.groundTruth)
+      .map((s) => ({
+        id: s.id,
+        imageUrl: s.imageUrl,
+        source: s.source,
+        groundTruth: s.groundTruth,
+        verifiedAt: new Date().toISOString(),
+      }));
 
-  exportToFewShotPrompt(samples) {
-    const verified = samples.filter((sample) => sample.groundTruth && (sample.status === "verified" || sample.status === "corrected"));
-    const examples = verified.map((sample, index) => (
-      `### Ví dụ ${index + 1}\nKết quả Ground Truth:\n${JSON.stringify(sample.groundTruth, null, 2)}`
-    )).join("\n\n");
-    return `CÁC MẪU ĐÃ ĐƯỢC CON NGƯỜI KIỂM DUYỆT:\n\n${examples}`;
+    return JSON.stringify(exportable, null, 2);
   },
 };

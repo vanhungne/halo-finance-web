@@ -45,7 +45,7 @@ export default function AdminHeader() {
   const notifRef = useRef(null);
   const profileRef = useRef(null);
 
-  // Check Aggeee Gateway Status
+  // Check AI Gateway Status
   const checkHealth = async () => {
     setGatewayStatus((prev) => ({ ...prev, checking: true }));
     try {
@@ -150,9 +150,9 @@ export default function AdminHeader() {
             </nav>
           </div>
 
-          {/* Right section: Aggeee Status Pill, Notifications, Theme Switcher, Profile */}
+          {/* Right section: AI Gateway Status Pill, Notifications, Theme Switcher, Profile */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Aggeee Gateway Live Pill */}
+            {/* AI Gateway Live Pill */}
             <div className="relative" ref={gatewayRef}>
               <button
                 onClick={() => setShowGatewayPopover(!showGatewayPopover)}
@@ -186,8 +186,8 @@ export default function AdminHeader() {
                   {gatewayStatus.checking
                     ? "Kiểm tra Gateway..."
                     : gatewayStatus.healthy
-                    ? `Aggeee: ${gatewayStatus.latencyMs}ms`
-                    : "Lỗi Aggeee Cookie"}
+                    ? `AI Gateway: ${gatewayStatus.latencyMs}ms`
+                    : "Lỗi Gateway"}
                 </span>
                 <span className="md:hidden">AI</span>
               </button>
@@ -202,16 +202,9 @@ export default function AdminHeader() {
                       </div>
                       <div>
                         <h4 className="text-xs font-bold text-slate-900 dark:text-white">
-                          Aggeee AI SaaS Gateway
+                          AI Gateway (Gemini API)
                         </h4>
-                        <a
-                          href="https://aggeee.io.vn"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[11px] text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
-                        >
-                          aggeee.io.vn <ExternalLink size={10} />
-                        </a>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">Trích xuất hóa đơn Multimodal AI</span>
                       </div>
                     </div>
                     <button
@@ -238,7 +231,7 @@ export default function AdminHeader() {
                           </>
                         ) : (
                           <>
-                            <AlertTriangle size={13} /> Cần nạp Cookie
+                            <AlertTriangle size={13} /> Mất kết nối
                           </>
                         )}
                       </span>
