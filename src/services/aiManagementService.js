@@ -40,7 +40,7 @@ export const DEFAULT_AI_CONFIG = {
   gatewayUrl: "https://gemini.amz.io.vn",
   model: "gemini-3.5-flash-lite",
   reasoningLevel: "low",
-  apiKey: "",
+  apiKey: "gemi-z4YSxyrXsPZGA7FAwVkjohuRgetLjG73-cFYsGvL5o0",
   temperature: 0.1,
   systemPrompt: buildReceiptSystemPrompt(),
 };
