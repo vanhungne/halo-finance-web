@@ -23,6 +23,7 @@ import { Badge } from "../../components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 import CountUp from "react-countup"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog"
+import { formatCleanDateTime } from "../../utils/dateFormat"
 import Pagination from "../../components/common/Pagination";
 import AdvertiseModal from "../../components/modal/AdvertiseModal"
 import AlertModal from "../../components/modal/AlertModal"
@@ -620,7 +621,7 @@ function AdvertisePage() {
                         </TableCell>
                         <TableCell>{advertise.title}</TableCell>
                         <TableCell className="text-center">{advertise.clickCount}</TableCell>
-                        <TableCell className="hidden md:table-cell text-center">{advertise.createdTime}</TableCell>
+                        <TableCell className="hidden md:table-cell text-center">{formatCleanDateTime(advertise.createdTime)}</TableCell>
                         <TableCell className="text-center">
                           <Badge className={`${getStatusColor(advertise.status)} text-xs text-center`}>
                             {ADVERTISE_STATUS[advertise.status] || "Không xác định"}
@@ -711,7 +712,7 @@ function AdvertisePage() {
                 {/* Created Time */}
                 <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
                   <div className="text-xs text-slate-500 mb-1 font-medium">Ngày tạo</div>
-                  <div className="text-base font-semibold text-slate-900">{modalAdvertise.createdTime}</div>
+                  <div className="text-base font-semibold text-slate-900">{formatCleanDateTime(modalAdvertise.createdTime)}</div>
                 </div>
               </div>
 

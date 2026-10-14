@@ -23,6 +23,7 @@ import DateRangePickerCustom from "../../components/common/DateRangePicker";
 import FullPageLoader from "../../components/common/FullPageLoader";
 import { getMembershipStatisticApi } from "../../services/statistic"
 import { getSubscriptionApi } from "../../services/subscription"
+import { formatCleanDateTime } from "../../utils/dateFormat"
 
 function TransactionPage() {
   // Format tiền Việt
@@ -32,9 +33,7 @@ function TransactionPage() {
   };
 
   const formatDateTime = (dateTimeString) => {
-    if (!dateTimeString) return "";
-    // Remove timezone offset pattern (e.g., +00:00, +07:00, -05:00, etc.)
-    return dateTimeString.replace(/\s*[+-]\d{2}:\d{2}$/, "").trim();
+    return formatCleanDateTime(dateTimeString);
   };
 
   // Query/filter state

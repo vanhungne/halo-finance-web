@@ -33,6 +33,7 @@ import Pagination from "../../components/common/Pagination";
 import { getUserStatisticApi } from "../../services/statistic"
 import { getListUserApi } from "../../services/user"
 import FullPageLoader from "../../components/common/FullPageLoader";
+import { formatCleanDateTime } from "../../utils/dateFormat";
 
 function UserPage() {
   // Query/filter state
@@ -566,7 +567,7 @@ function UserPage() {
                     Ngày đăng ký
                   </div>
                   <div className="text-base font-semibold text-slate-900 dark:text-white">
-                    {modalUser.createdTime || "N/A"}
+                    {formatCleanDateTime(modalUser.createdTime)}
                   </div>
                 </div>
               </div>
