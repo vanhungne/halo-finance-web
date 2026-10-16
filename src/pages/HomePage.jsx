@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import CountUp from "react-countup";
 import {
@@ -29,12 +29,24 @@ import {
   WalletCards,
   WandSparkles,
   Zap,
+  QrCode,
 } from "lucide-react";
 import images from "../assets/image.js";
 import AccordionItem from "../components/faq/AccordionItem.jsx";
 import Header from "../components/header/headerComp.jsx";
 import Footer from "../components/footer/Footer.jsx";
 import StoreButtons from "../components/home/StoreButtons.jsx";
+import TrustBadges from "../components/home/TrustBadges.jsx";
+import InteractiveShowcase from "../components/home/InteractiveShowcase.jsx";
+import SolutionsSegment from "../components/home/SolutionsSegment.jsx";
+import AiScannerDeepDive from "../components/home/AiScannerDeepDive.jsx";
+import FinancialCalculators from "../components/home/FinancialCalculators.jsx";
+import LiveMarketRates from "../components/home/LiveMarketRates.jsx";
+import FinancialHealthCheck from "../components/home/FinancialHealthCheck.jsx";
+import SecurityCompliance from "../components/home/SecurityCompliance.jsx";
+import WallOfLove from "../components/home/WallOfLove.jsx";
+import QrDownloadModal from "../components/home/QrDownloadModal.jsx";
+import EpicHero from "../components/home/EpicHero.jsx";
 
 const FinanceScene = lazy(() => import("../components/home/FinanceScene.jsx"));
 const Motion = motion;
@@ -118,6 +130,7 @@ const reveal = {
 
 function HomePage() {
   const reduceMotion = useReducedMotion();
+  const [qrModalOpen, setQrModalOpen] = useState(false);
   const motionProps = reduceMotion
     ? {}
     : {
@@ -133,104 +146,11 @@ function HomePage() {
       <Header />
 
       <main>
-        <section id="home" className="relative min-h-[760px] overflow-hidden pt-28 sm:pt-32 lg:min-h-[900px] lg:pt-36">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_30%,rgba(56,189,248,0.22),transparent_30%),radial-gradient(circle_at_22%_78%,rgba(99,102,241,0.1),transparent_25%)]" />
-          <div className="landing-grid absolute inset-0 opacity-50" />
-          {!reduceMotion && (
-            <div className="absolute inset-y-0 right-0 hidden w-[58%] lg:block">
-              <Suspense fallback={null}>
-                <FinanceScene />
-              </Suspense>
-            </div>
-          )}
+        {/* Epic High-Converting Hero Section */}
+        <EpicHero onOpenQr={() => setQrModalOpen(true)} />
 
-          <div className="relative mx-auto grid max-w-[1380px] items-center gap-10 px-5 pb-20 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-12 lg:pb-28">
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 pt-8 lg:pt-0"
-            >
-              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/90 px-3 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-sky-700 shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-500 opacity-70" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-500" />
-                </span>
-                Trợ lý tài chính của riêng bạn
-              </div>
-
-              <h1 className="max-w-3xl text-[3rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-slate-950 sm:text-[3.85rem] sm:leading-[1.03] lg:text-[5.2rem]">
-                <span className="block">Tiền rõ ràng.</span>
-                <span className="mt-1 block bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-700 bg-clip-text text-transparent">
-                  <span className="block">Tương lai</span>
-                  <span className="block">vững vàng.</span>
-                </span>
-              </h1>
-              <p className="mt-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                Trợ Lý Tài Chính biến những con số phức tạp thành một kế hoạch đơn giản — để bạn hiểu dòng tiền, làm chủ ngân sách và tiến gần hơn tới mục tiêu mỗi ngày.
-              </p>
-
-              <StoreButtons id="download" className="mt-9" buttonClassName="sm:min-w-[190px]" />
-
-              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-semibold text-slate-500">
-                {["Thiết lập nhanh", "Theo dõi trực quan", "Chủ động kiểm soát"].map((item) => (
-                  <span key={item} className="inline-flex items-center gap-2">
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-100 text-emerald-600">
-                      <Check className="h-3 w-3 stroke-[3]" />
-                    </span>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, scale: 0.9, x: 30 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 mx-auto w-full max-w-[730px]"
-            >
-              <div className="hero-orb absolute left-1/2 top-1/2 h-[74%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-cyan-300/50 via-sky-400/30 to-indigo-300/30 blur-3xl" />
-              <motion.img
-                src={images.hero}
-                alt="Giao diện ứng dụng Trợ Lý Tài Chính trên điện thoại"
-                className="relative mx-auto w-[92%] max-w-[670px] select-none drop-shadow-[0_45px_45px_rgba(15,23,42,0.18)]"
-                animate={reduceMotion ? undefined : { y: [0, -12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              />
-
-              <motion.div
-                animate={reduceMotion ? undefined : { y: [0, 8, 0], rotate: [-2, 0, -2] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute left-0 top-[17%] hidden rounded-2xl border border-white/80 bg-white/85 p-3.5 shadow-xl backdrop-blur-xl sm:flex sm:items-center sm:gap-3"
-              >
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-100 text-emerald-600">
-                  <ArrowDownRight className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold text-slate-500">Dòng tiền tháng này</p>
-                  <p className="mt-0.5 font-extrabold text-slate-900">Đang trong tầm kiểm soát</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={reduceMotion ? undefined : { y: [0, -10, 0], rotate: [2, 0, 2] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-                className="absolute bottom-[13%] right-0 hidden rounded-2xl border border-white/80 bg-slate-950/90 p-4 text-white shadow-2xl backdrop-blur-xl sm:block"
-              >
-                <div className="flex items-center gap-3">
-                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-sky-400 text-slate-950">
-                    <Sparkles className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-semibold text-white/60">Gợi ý thông minh</p>
-                    <p className="mt-0.5 text-sm font-bold">Tối ưu khoản chi tiếp theo</p>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+        {/* MISA & Banking Style Trust Badges */}
+        <TrustBadges />
 
         <section className="border-y border-slate-200/80 bg-white py-5" aria-label="Nhóm tính năng nổi bật">
           <div className="marquee-mask mx-auto flex max-w-[1380px] overflow-hidden px-5">
@@ -358,44 +278,26 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="features" className="py-24 sm:py-32">
-          <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
-            <motion.div {...motionProps} className="grid gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
-              <div>
-                <p className="section-kicker text-sky-600">Nhỏ gọn nhưng mạnh mẽ</p>
-                <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">
-                  Mọi công cụ cần thiết. Không một chi tiết thừa.
-                </h2>
-              </div>
-              <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg lg:justify-self-end">
-                Từ giao dịch hằng ngày đến mục tiêu dài hạn, Trợ Lý Tài Chính giúp bạn tổ chức đời sống tài chính theo cách rõ ràng và hợp với chính mình.
-              </p>
-            </motion.div>
+        {/* Interactive Feature Showcase with Central Phone Mockup (MISA & FinTech style) */}
+        <InteractiveShowcase />
 
-            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <motion.article
-                    key={feature.title}
-                    {...motionProps}
-                    transition={{ duration: 0.55, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                    className="group rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-[0_20px_50px_-35px_rgba(15,23,42,0.25)] transition duration-300 hover:-translate-y-2 hover:border-sky-200 hover:shadow-[0_30px_70px_-30px_rgba(14,165,233,0.3)]"
-                  >
-                    <span className={`grid h-13 w-13 place-items-center rounded-2xl ${feature.tone}`}>
-                      <Icon className="h-6 w-6" />
-                    </span>
-                    <h3 className="mt-8 text-xl font-extrabold tracking-tight">{feature.title}</h3>
-                    <p className="mt-3 leading-7 text-slate-600">{feature.description}</p>
-                    <span className="mt-7 inline-flex items-center gap-1 text-sm font-bold text-slate-400 transition group-hover:text-sky-600">
-                      Khám phá <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </motion.article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        {/* Tailored Solutions (Personal & Family, Small Business & Online Shop, Investors) */}
+        <SolutionsSegment />
+
+        {/* AI Receipt Intelligence v2 Deep Dive */}
+        <AiScannerDeepDive />
+
+        {/* Bank-Grade Financial Calculators */}
+        <FinancialCalculators />
+
+        {/* Live Market Rates (Currencies, SJC Gold, Deposit Rates) */}
+        <LiveMarketRates />
+
+        {/* Financial Health Check Interactive Quiz */}
+        <FinancialHealthCheck />
+
+        {/* Bank-grade Security & Compliance */}
+        <SecurityCompliance />
 
         <section className="pb-24 sm:pb-32">
           <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
@@ -529,6 +431,9 @@ function HomePage() {
           </div>
         </section>
 
+        {/* Wall of Love: App Store Reviews & Community Banner */}
+        <WallOfLove />
+
         <section id="faq" className="bg-white py-24 sm:py-32">
           <div className="mx-auto grid max-w-[1180px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:px-12">
             <motion.div {...motionProps}>
@@ -564,6 +469,9 @@ function HomePage() {
       </main>
 
       <Footer />
+
+      {/* QR Code Modal for Instant Download */}
+      <QrDownloadModal isOpen={qrModalOpen} onClose={() => setQrModalOpen(false)} />
     </Motion.div>
   );
 }

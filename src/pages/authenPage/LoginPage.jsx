@@ -88,8 +88,17 @@ function LoginPage() {
       const decoded = jwtDecode(data.accessToken);
 
       if (!isAdminToken(decoded)) {
-        clearSession();
-        setError("Tài khoản này không có quyền truy cập khu vực quản trị.");
+        localStorage.setItem("access_token", data.accessToken);
+        if (data.refreshToken) localStorage.setItem("refresh_token", data.refreshToken);
+        setAuth({
+          isLoggedIn: true,
+          userId: decoded[idClaimKey],
+          roleName: "User",
+          email: decoded[emailClaimKey],
+          avatar: decoded.avatar,
+          fullName: decoded[nameClaimKey],
+        });
+        navigate("/app", { replace: true });
         return;
       }
 
@@ -105,7 +114,7 @@ function LoginPage() {
 
   const handleGoogleLogin = () => {
     setError("");
-    const apiUrl = (import.meta.env.VITE_APP_URL_API || "https://trolytaichinh.amz.io.vn/api/").replace(/\/+$/, "");
+    const apiUrl = (import.meta.env.VITE_APP_URL_API || "https://trolytaichinh.vn/api/").replace(/\/+$/, "");
     const returnUrl = encodeURIComponent(`${window.location.origin}/login`);
     window.location.href = `${apiUrl}/auth/oauth-login?provider=Google&returnUrl=${returnUrl}`;
   };
@@ -127,8 +136,17 @@ function LoginPage() {
         const decoded = jwtDecode(accessToken);
 
         if (!isAdminToken(decoded)) {
-          clearSession();
-          setError(`Tài khoản ${decoded[emailClaimKey] || "Google"} không có quyền Quản trị viên.`);
+          localStorage.setItem("access_token", accessToken);
+          if (refreshToken) localStorage.setItem("refresh_token", refreshToken);
+          setAuth({
+            isLoggedIn: true,
+            userId: decoded[idClaimKey],
+            roleName: "User",
+            email: decoded[emailClaimKey],
+            avatar: decoded.avatar,
+            fullName: decoded[nameClaimKey],
+          });
+          navigate("/app", { replace: true });
         } else {
           saveAdminSession(accessToken, refreshToken, decoded);
           navigate("/admin", { replace: true });
@@ -329,10 +347,22 @@ function LoginPage() {
               <GoogleIcon /> Đăng nhập bằng Google
             </button>
 
+            {/* Quick Demo Access */}
+            <div className="mt-4 pt-4 border-t border-white/10 text-center">
+              <button
+                type="button"
+                onClick={() => navigate("/app")}
+                className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 text-emerald-300 font-extrabold text-xs transition hover:bg-emerald-500/30 flex items-center justify-center gap-2 shadow-inner"
+              >
+                <span>🚀 Trải Nghiệm Bản Demo Internet Banking (Khách Hàng)</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
             <button
               type="button"
               onClick={() => navigate("/")}
-              className="group mx-auto mt-7 flex items-center gap-2 text-sm font-bold text-slate-500 transition hover:text-sky-300"
+              className="group mx-auto mt-6 flex items-center gap-2 text-sm font-bold text-slate-500 transition hover:text-sky-300"
             >
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               Về trang giới thiệu
