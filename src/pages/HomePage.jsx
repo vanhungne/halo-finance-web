@@ -47,6 +47,9 @@ import SecurityCompliance from "../components/home/SecurityCompliance.jsx";
 import WallOfLove from "../components/home/WallOfLove.jsx";
 import QrDownloadModal from "../components/home/QrDownloadModal.jsx";
 import EpicHero from "../components/home/EpicHero.jsx";
+import BankingQuickActionBar from "../components/home/BankingQuickActionBar.jsx";
+import BankingEcosystemMarquee from "../components/home/BankingEcosystemMarquee.jsx";
+import WebPortalShowcase from "../components/home/WebPortalShowcase.jsx";
 import AppInteractiveSimulator from "../components/home/AppInteractiveSimulator.jsx";
 import CompetitorComparison from "../components/home/CompetitorComparison.jsx";
 import MarketingLeadMagnet from "../components/home/MarketingLeadMagnet.jsx";
@@ -154,28 +157,14 @@ function HomePage() {
         {/* Epic High-Converting Hero Section */}
         <EpicHero onOpenQr={() => setQrModalOpen(true)} />
 
-        {/* MISA & Banking Style Trust Badges */}
-        <TrustBadges />
+        {/* Commercial Banking Quick Action Bar */}
+        <BankingQuickActionBar onOpenQr={() => setQrModalOpen(true)} />
 
-        <section className="border-y border-slate-200/80 bg-white py-5" aria-label="Nhóm tính năng nổi bật">
-          <div className="marquee-mask mx-auto flex max-w-[1380px] overflow-hidden px-5">
-            <div className="marquee-track flex min-w-max items-center gap-8 pr-8 text-sm font-extrabold uppercase tracking-[0.18em] text-slate-400 sm:gap-14 sm:pr-14">
-              {[WalletCards, PieChart, Bot, Goal, CreditCard, ShieldCheck, WalletCards, PieChart, Bot, Goal, CreditCard, ShieldCheck].map((Icon, index) => (
-                <span key={`${Icon.displayName}-${index}`} className="flex items-center gap-2.5 whitespace-nowrap">
-                  <Icon className="h-5 w-5 text-sky-500" />
-                  {[
-                    "Ví & giao dịch",
-                    "Ngân sách",
-                    "Trợ lý thông minh",
-                    "Mục tiêu",
-                    "Khoản định kỳ",
-                    "Bảo mật",
-                  ][index % 6]}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Institutional Scale Metrics & 54+ Bank Partner Ecosystem */}
+        <BankingEcosystemMarquee />
+
+        {/* Omnichannel Internet Banking Web Portal Showcase */}
+        <WebPortalShowcase />
 
         {/* Live Interactive App Simulator (iPhone 16 Pro Mockup with 5 Real App Modes) */}
         <AppInteractiveSimulator onOpenQr={() => setQrModalOpen(true)} />
@@ -455,6 +444,11 @@ function HomePage() {
 
         {/* High-Converting Marketing Lead Magnet: Free 2026 Ebook & 30-Day Premium Gift */}
         <MarketingLeadMagnet />
+
+        {/* App Ratings & Trust Badges */}
+        <div className="bg-slate-50/70 border-t border-slate-200/80 py-12">
+          <TrustBadges />
+        </div>
 
         {/* Wall of Love: App Store Reviews & Community Banner */}
         <WallOfLove />

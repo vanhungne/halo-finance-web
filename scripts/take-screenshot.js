@@ -16,8 +16,10 @@ async function capture() {
 
   const scrollOffsets = [
     { name: 'scroll-1-hero.png', y: 0 },
+    { name: 'scroll-1b-quickbar.png', y: 650 },
     { name: 'scroll-2-simulator.png', y: 1200 },
-    { name: 'scroll-3-comparison.png', y: 2400 },
+    { name: 'scroll-2b-webportal.png', y: 1700 },
+    { name: 'scroll-3-comparison.png', y: 2500 },
     { name: 'scroll-4-solutions.png', y: 3600 },
     { name: 'scroll-5-aiscanner.png', y: 4600 },
     { name: 'scroll-6-calculators.png', y: 5800 },
@@ -34,6 +36,12 @@ async function capture() {
     await page.screenshot({ path: out, fullPage: false });
     console.log('SAVED: ' + s.name);
   }
+
+  // Bottom Footer
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await new Promise(r => setTimeout(r, 600));
+  await page.screenshot({ path: path.resolve('scroll-11-footer.png'), fullPage: false });
+  console.log('SAVED: scroll-11-footer.png');
 
   await browser.close();
 }

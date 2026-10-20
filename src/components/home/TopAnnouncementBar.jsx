@@ -1,57 +1,109 @@
 import { useState, useEffect } from "react";
-import { Sparkles, ArrowRight, X } from "lucide-react";
+import { Sparkles, ArrowRight, X, PhoneCall, MapPin, Globe, ShieldCheck, TrendingUp, Laptop } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function TopAnnouncementBar({ onOpenQr }) {
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const dismissed = sessionStorage.getItem("halo_announcement_dismissed");
-    if (dismissed === "true") {
-      setVisible(false);
-    }
-  }, []);
-
-  const handleDismiss = () => {
-    setVisible(false);
-    sessionStorage.setItem("halo_announcement_dismissed", "true");
-  };
-
-  if (!visible) return null;
+  const [activeSegment, setActiveSegment] = useState("personal"); // "personal" | "business" | "priority"
+  const navigate = useNavigate();
 
   return (
     <aside
-      aria-label="Thông báo cập nhật ứng dụng"
-      className="relative z-50 overflow-hidden bg-slate-950 text-slate-200 border-b border-white/10 px-4 py-2 text-xs"
+      aria-label="Thanh tiện ích ngân hàng số"
+      className="relative z-50 bg-slate-900 text-slate-300 border-b border-slate-800 text-[11px] font-medium"
     >
-      <div className="mx-auto flex max-w-[1380px] items-center justify-between">
-        <div className="flex flex-1 items-center justify-center gap-2.5 sm:gap-3 text-center">
-          <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/20 border border-blue-400/30 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-sky-300">
-            <Sparkles className="h-3 w-3 text-amber-300" /> Bản Mới 2.0
-          </span>
-          <p className="font-medium text-slate-300 hidden sm:inline">
-            <strong className="font-bold text-white">Halo Finance 2.0:</strong> Bóc tách hóa đơn tự động bằng AI Gemini & Chia tiền nhóm VietQR 1 chạm.
-          </p>
-          <p className="font-medium text-slate-300 sm:hidden">
-            <strong className="font-bold text-white">Bản 2.0:</strong> AI Bóc tách hóa đơn & VietQR.
-          </p>
+      <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-10">
+        {/* Left: Customer Segment Switcher (Standard on all Tier-1 Bank Portals) */}
+        <div className="flex items-center gap-1">
           <button
             type="button"
-            onClick={onOpenQr}
-            className="inline-flex items-center gap-1 font-bold text-sky-400 hover:text-sky-300 underline underline-offset-4 transition"
+            onClick={() => setActiveSegment("personal")}
+            className={`px-3 py-1 rounded-md transition-all font-semibold ${
+              activeSegment === "personal"
+                ? "bg-blue-600 text-white font-bold shadow-xs"
+                : "text-slate-400 hover:text-white"
+            }`}
           >
-            <span>Trải nghiệm ngay</span>
-            <ArrowRight className="h-3 w-3" />
+            Khách hàng Cá nhân
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveSegment("business")}
+            className={`px-3 py-1 rounded-md transition-all font-semibold ${
+              activeSegment === "business"
+                ? "bg-blue-600 text-white font-bold shadow-xs"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            Doanh nghiệp & Hộ KD
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveSegment("priority")}
+            className={`hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-md transition-all font-semibold ${
+              activeSegment === "priority"
+                ? "bg-amber-500 text-slate-950 font-black shadow-xs"
+                : "text-amber-400/90 hover:text-amber-300"
+            }`}
+          >
+            <Sparkles className="w-3 h-3 text-amber-400" />
+            Khách hàng Ưu tiên (Priority)
           </button>
         </div>
 
-        <button
-          type="button"
-          onClick={handleDismiss}
-          className="ml-2 rounded-full p-1 text-slate-400 hover:bg-white/10 hover:text-white transition"
-          aria-label="Đóng thông báo"
-        >
-          <X className="h-3.5 w-3.5" />
-        </button>
+        {/* Center: Live Financial Market Indicator (Institutional Credibility) */}
+        <div className="hidden xl:flex items-center gap-4 text-slate-400 font-mono text-[10.5px]">
+          <span className="flex items-center gap-1 text-slate-300">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-slate-400">USD/VND:</span>
+            <strong className="text-white">25.480</strong>
+            <span className="text-emerald-400 font-bold">+0.12%</span>
+          </span>
+          <span className="text-slate-600">|</span>
+          <span className="flex items-center gap-1 text-slate-300">
+            <span className="text-slate-400">Vàng SJC:</span>
+            <strong className="text-amber-400">86.50 Tr/Lượng</strong>
+            <span className="text-emerald-400 font-bold">+0.35%</span>
+          </span>
+          <span className="text-slate-600">|</span>
+          <span className="flex items-center gap-1 text-slate-300">
+            <span className="text-slate-400">Lãi suất gửi:</span>
+            <strong className="text-sky-400">đến 6.2%/năm</strong>
+          </span>
+        </div>
+
+        {/* Right: Hotline 24/7, Network, Web Portal */}
+        <div className="flex items-center gap-3 sm:gap-4 text-slate-400">
+          <a
+            href="tel:19006868"
+            className="hidden sm:inline-flex items-center gap-1.5 hover:text-white transition"
+          >
+            <PhoneCall className="w-3 h-3 text-sky-400" />
+            <span>Hotline 24/7: <strong className="text-white">1900 6868</strong></span>
+          </a>
+
+          <a
+            href="#rates"
+            className="hidden lg:inline-flex items-center gap-1 hover:text-white transition"
+          >
+            <MapPin className="w-3 h-3 text-slate-400" />
+            <span>Điểm giao dịch</span>
+          </a>
+
+          <button
+            type="button"
+            onClick={() => navigate("/app")}
+            className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-sky-300 hover:text-white hover:bg-blue-600 transition font-bold"
+          >
+            <Laptop className="w-3 h-3" />
+            <span>Web Internet Banking</span>
+          </button>
+
+          <span className="hidden sm:inline text-slate-600">|</span>
+          <span className="hidden sm:inline-flex items-center gap-1 text-slate-300 font-bold">
+            <Globe className="w-3 h-3 text-slate-400" />
+            VN
+          </span>
+        </div>
       </div>
     </aside>
   );

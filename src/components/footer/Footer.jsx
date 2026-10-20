@@ -9,57 +9,120 @@ import {
   Lock,
   Smartphone,
   ExternalLink,
+  PhoneCall,
+  Building2,
+  FileText,
+  Award,
 } from "lucide-react";
 import images from "../../assets/image.js";
 
 const productLinks = [
-  { label: "Sổ Thu Chi Cá Nhân", href: "#features" },
-  { label: "Mô Phỏng Trải Nghiệm App", href: "#app-simulator" },
-  { label: "Quét Hóa Đơn AI Gemini", href: "#ai-scanner" },
-  { label: "Chia Tiền Nhóm VietQR", href: "#group-expense" },
-  { label: "Quản Lý Sổ Nợ & Tính Lãi", href: "#app-simulator" },
-  { label: "Báo Cáo & Dòng Tiền 360°", href: "#product-preview" },
-  { label: "Danh Mục Vàng & Tài Sản", href: "#rates" },
+  { label: "Tài Khoản Thanh Toán Số Đẹp (0đ Phí)", href: "#features" },
+  { label: "Mô Phỏng Trải Nghiệm App Mobile", href: "#app-simulator" },
+  { label: "Bóc Tách Hóa Đơn AI Gemini 2.0", href: "#ai-scanner" },
+  { label: "Chia Tiền Nhóm Du Lịch VietQR 1 Chạm", href: "#app-simulator" },
+  { label: "Quản Lý Sổ Nợ & Tính Lãi Dư Nợ", href: "#calculators" },
+  { label: "Báo Cáo Phân Tích Dòng Tiền 360°", href: "#product-preview" },
+  { label: "Định Giá Danh Mục Vàng SJC & Tài Sản", href: "#rates" },
 ];
 
 const toolLinks = [
-  { label: "Tính Lãi Tiền Gửi Tiết Kiệm", href: "#calculators" },
-  { label: "Tính Bảng Trả Nợ Vay Ngân Hàng", href: "#calculators" },
-  { label: "So Sánh Tính Năng Vượt Trội", href: "#comparison" },
-  { label: "Chấm Điểm Sức Khỏe Tài Chính", href: "#health-check" },
-  { label: "Tỷ Giá Ngoại Tệ & Giá Vàng SJC", href: "#rates" },
+  { label: "Tính Lãi Tiết Kiệm Tích Lũy Bậc Thang", href: "#calculators" },
+  { label: "Bảng Khấu Hao Lịch Trả Nợ Vay Ngân Hàng", href: "#calculators" },
+  { label: "Tính Sức Mạnh Lãi Kép Đầu Tư 10 - 30 Năm", href: "#calculators" },
+  { label: "Trắc Nghiệm Chấm Điểm Sức Khỏe Tài Chính", href: "#health-check" },
+  { label: "Bảng Tỷ Giá Ngoại Tệ & Giá Vàng SJC", href: "#rates" },
+  { label: "Ma Trận So Sánh Tính Năng Vượt Trội", href: "#comparison" },
   { label: "Tải Miễn Phí Ebook Tài Chính 2026", href: "#ebook" },
 ];
 
 const companyLinks = [
-  { label: "Giới thiệu Halo Finance", href: "#home" },
-  { label: "Bảng giá & Gói Premium", href: "#pricing" },
-  { label: "Đánh giá từ cộng đồng", href: "#reviews" },
-  { label: "Bảo mật & Cam kết riêng tư", href: "#security" },
-  { label: "Câu hỏi thường gặp (FAQ)", href: "#faq" },
-  { label: "Cổng Khách Hàng Web (/app)", href: "/app" },
+  { label: "Về Halo Finance (Trợ Lý Tài Chính)", href: "#home" },
+  { label: "Bảng Giá Gói Dịch Vụ & Premium", href: "#pricing" },
+  { label: "Đánh Giá Từ 3.2M+ Người Dùng", href: "#reviews" },
+  { label: "Tiêu Chuẩn Bảo Mật PCI-DSS & ISO 27001", href: "#security" },
+  { label: "Tuân Thủ Nghị Định 13/2023/NĐ-CP", href: "#security" },
+  { label: "Câu Hỏi Thường Gặp (FAQ)", href: "#faq" },
+  { label: "Cổng Khách Hàng Web Internet Banking", href: "/app" },
 ];
 
 function Footer() {
   return (
     <footer className="bg-slate-950 text-slate-400 pt-16 sm:pt-20 pb-12 border-t border-slate-800">
-      <div className="mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10">
         
-        {/* Top 4-Column Grid */}
-        <div className="grid gap-12 pb-14 border-b border-slate-800/80 lg:grid-cols-12">
-          
-          {/* Brand Info & Support */}
-          <div className="lg:col-span-4 space-y-5">
+        {/* Top Institutional Header: Hotline & Support Network */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-12 border-b border-slate-800/80">
+          <div className="flex items-center gap-3">
+            <img src={images.logo} alt="Halo Finance" className="h-10 w-auto brightness-0 invert" />
+            <span className="hidden sm:inline text-slate-700">|</span>
+            <span className="hidden sm:inline text-xs font-bold text-slate-300">
+              Định Chế Quản Trị Dòng Tiền & Ngân Hàng Số Thế Hệ Mới
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs">
             <div className="flex items-center gap-2">
-              <img src={images.logo} alt="Trợ Lý Tài Chính" className="h-10 w-auto brightness-0 invert" />
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-blue-500/10 text-sky-400">
+                <PhoneCall className="w-4 h-4" />
+              </span>
+              <div>
+                <span className="text-[10px] text-slate-500 uppercase block font-bold">Tổng đài CSKH 24/7</span>
+                <strong className="text-white text-sm font-black">1900 6868</strong>
+              </div>
             </div>
 
-            <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
-              Trợ Lý Tài Chính (Halo Finance) — Nền tảng quản lý tài chính cá nhân & chi tiêu nhóm thông minh, giúp bạn làm chủ dòng tiền, xây dựng kế hoạch tiết kiệm và vững vàng tương lai.
+            <div className="flex items-center gap-2">
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-emerald-500/10 text-emerald-400">
+                <Mail className="w-4 h-4" />
+              </span>
+              <div>
+                <span className="text-[10px] text-slate-500 uppercase block font-bold">Email tiếp nhận</span>
+                <strong className="text-slate-200 text-xs font-semibold">contact@halofinance.vn</strong>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-amber-500/10 text-amber-400">
+                <ShieldCheck className="w-4 h-4" />
+              </span>
+              <div>
+                <span className="text-[10px] text-slate-500 uppercase block font-bold">Bảo chứng an toàn</span>
+                <strong className="text-amber-300 text-xs font-bold">PCI-DSS & ISO 27001</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Top 4-Column Links Grid */}
+        <div className="grid gap-10 py-14 border-b border-slate-800/80 lg:grid-cols-12">
+          
+          {/* Brand Info & Legal Entity Details */}
+          <div className="lg:col-span-4 space-y-4">
+            <h4 className="text-sm font-black uppercase text-white tracking-wider">
+              Công Ty Cổ Phần Công Nghệ Tài Chính Halo
+            </h4>
+            <p className="text-xs leading-relaxed text-slate-400 max-w-sm">
+              Nền tảng tài chính số đa phương thức phục vụ hơn 3.2 triệu cá nhân, gia đình và hộ kinh doanh tại Việt Nam. Kết nối 54+ ngân hàng chuẩn NAPAS 24/7, bóc tách hóa đơn AI Gemini trong 3 giây và quản trị dòng tiền chuẩn mực quốc tế.
             </p>
 
-            {/* Social links */}
-            <div className="flex items-center gap-2 pt-1">
+            <div className="space-y-2 text-xs text-slate-400 pt-1">
+              <div className="flex items-start gap-2">
+                <Building2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                <span><strong>Trụ sở chính:</strong> Tầng 48, Tòa nhà Landmark 81, 720A Điện Biên Phủ, Phường 22, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <Building2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                <span><strong>Chi nhánh Hà Nội:</strong> Tầng 32, Keangnam Hanoi Landmark 72, Đường Phạm Hùng, Q. Nam Từ Liêm, Hà Nội</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] text-slate-500 pt-1">
+                <FileText className="w-3.5 h-3.5 text-slate-500" />
+                <span>Giấy chứng nhận ĐKDN số: 0317892345 do Sở KH&ĐT cấp</span>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-2 pt-2">
               {[
                 { icon: Facebook, label: "Facebook", href: "https://facebook.com" },
                 { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
@@ -73,31 +136,19 @@ function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="grid h-9 w-9 place-items-center rounded-xl border border-slate-800 bg-slate-900 text-slate-400 hover:border-blue-500 hover:bg-blue-600 hover:text-white transition"
+                    className="grid h-8 w-8 place-items-center rounded-lg border border-slate-800 bg-slate-900 text-slate-400 hover:border-blue-500 hover:bg-blue-600 hover:text-white transition"
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-3.5 w-3.5" />
                   </a>
                 );
               })}
             </div>
-
-            {/* Security Compliance Seal */}
-            <div className="pt-2 flex items-center gap-3 text-xs text-slate-500 font-semibold">
-              <span className="flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-slate-300">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                Mã hóa AES-256
-              </span>
-              <span className="flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-slate-300">
-                <Lock className="h-4 w-4 text-sky-400" />
-                TLS 1.3 Chuẩn Ngân Hàng
-              </span>
-            </div>
           </div>
 
-          {/* Links Column 1: Sản phẩm */}
+          {/* Column 1: Sản phẩm ngân hàng số */}
           <div className="lg:col-span-3 space-y-4">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-white">Sản phẩm & Tính năng</p>
-            <ul className="space-y-2.5 text-sm font-medium">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Sản Phẩm & Dịch Vụ</p>
+            <ul className="space-y-2 text-xs font-medium">
               {productLinks.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="hover:text-white transition hover:underline underline-offset-4">
@@ -108,10 +159,10 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Links Column 2: Công cụ tiện ích */}
+          {/* Column 2: Công cụ tài chính */}
           <div className="lg:col-span-3 space-y-4">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-white">Công cụ tài chính</p>
-            <ul className="space-y-2.5 text-sm font-medium">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Công Cụ Trực Tuyến</p>
+            <ul className="space-y-2 text-xs font-medium">
               {toolLinks.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="hover:text-white transition hover:underline underline-offset-4">
@@ -122,10 +173,10 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Links Column 3: Về chúng tôi & Tải App */}
+          {/* Column 3: Pháp lý & Cổng Web */}
           <div className="lg:col-span-2 space-y-4">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-white">Nền tảng & Hỗ trợ</p>
-            <ul className="space-y-2.5 text-sm font-medium">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Pháp Lý & Hỗ Trợ</p>
+            <ul className="space-y-2 text-xs font-medium">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="hover:text-white transition hover:underline underline-offset-4">
@@ -135,32 +186,32 @@ function Footer() {
               ))}
             </ul>
 
-            <div className="pt-3">
+            <div className="pt-2">
               <a
-                href="#download"
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-blue-500/20 transition"
+                href="/app"
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 px-3 py-2.5 text-xs font-black text-white shadow-md shadow-blue-500/20 transition"
               >
-                <Smartphone className="h-3.5 w-3.5" />
-                <span>Tải App Ngay</span>
+                <span>Cổng Web Internet Banking</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
 
         </div>
 
-        {/* Bottom Bar: Copyright & Legal */}
+        {/* Bottom Bar: Copyright & Compliance */}
         <div className="flex flex-col gap-4 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Trợ Lý Tài Chính (Halo Finance) — Bản quyền đã được bảo hộ toàn cầu.</p>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-slate-400">
-            <a href="#security" className="hover:text-white transition">Chính sách bảo mật</a>
+          <p>© {new Date().getFullYear()} Halo Finance Corporation. Mọi quyền được bảo lưu.</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-slate-400 text-[11px]">
+            <a href="#security" className="hover:text-white transition">Chính sách an toàn thông tin</a>
             <span>•</span>
-            <a href="#home" className="hover:text-white transition">Điều khoản sử dụng</a>
+            <a href="#home" className="hover:text-white transition">Điều khoản dịch vụ ngân hàng</a>
             <span>•</span>
             <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-1">
               Sitemap XML <ExternalLink className="h-3 w-3" />
             </a>
             <span>•</span>
-            <a href="mailto:hotro@trolytaichinh.vn" className="hover:text-white transition">hotro@trolytaichinh.vn</a>
+            <span className="text-emerald-400 font-semibold">Đã thông báo Bộ Công Thương</span>
           </div>
         </div>
 
