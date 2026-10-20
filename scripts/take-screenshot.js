@@ -9,39 +9,32 @@ async function capture() {
   });
 
   const page = await browser.newPage();
+  page.on('pageerror', err => console.log('PAGE ERROR:', err.stack || err.message));
+  page.on('console', msg => {
+    if (msg.type() === 'error') console.log('PAGE CONSOLE ERROR:', msg.text());
+  });
   await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1.5 });
   
   await page.goto('http://localhost:5173/', { waitUntil: 'networkidle0', timeout: 30000 });
   await new Promise(r => setTimeout(r, 1000));
 
-  const scrollOffsets = [
-    { name: 'scroll-1-hero.png', y: 0 },
-    { name: 'scroll-1b-quickbar.png', y: 650 },
-    { name: 'scroll-2-simulator.png', y: 1200 },
-    { name: 'scroll-2b-webportal.png', y: 1700 },
-    { name: 'scroll-3-comparison.png', y: 2500 },
-    { name: 'scroll-4-solutions.png', y: 3600 },
-    { name: 'scroll-5-aiscanner.png', y: 4600 },
-    { name: 'scroll-6-calculators.png', y: 5800 },
-    { name: 'scroll-7-rates-health.png', y: 7000 },
-    { name: 'scroll-8-security.png', y: 8200 },
-    { name: 'scroll-9-pricing.png', y: 9400 },
-    { name: 'scroll-10-walloflove.png', y: 10600 },
+  // Capture by element ID
+  const elementIds = [
+    { name: 'scroll-comparison-table.png', selector: '#comparison' },
   ];
 
-  for (const s of scrollOffsets) {
-    await page.evaluate((top) => window.scrollTo(0, top), s.y);
-    await new Promise(r => setTimeout(r, 600));
-    const out = path.resolve(s.name);
-    await page.screenshot({ path: out, fullPage: false });
-    console.log('SAVED: ' + s.name);
+  for (const item of elementIds) {
+    const top = await page.evaluate((sel) => {
+      const el = document.querySelector(sel);
+      return el ? el.offsetTop - 80 : null;
+    }, item.selector);
+    if (top !== null) {
+      await page.evaluate((y) => window.scrollTo(0, y), top);
+      await new Promise(r => setTimeout(r, 600));
+      await page.screenshot({ path: path.resolve(item.name), fullPage: false });
+      console.log('SAVED: ' + item.name);
+    }
   }
-
-  // Bottom Footer
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await new Promise(r => setTimeout(r, 600));
-  await page.screenshot({ path: path.resolve('scroll-11-footer.png'), fullPage: false });
-  console.log('SAVED: scroll-11-footer.png');
 
   await browser.close();
 }

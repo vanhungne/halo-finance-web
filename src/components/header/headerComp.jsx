@@ -24,6 +24,7 @@ import {
   BookOpen,
   HelpCircle,
   Scale,
+  Lock,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import images from "../../assets/image.js";
@@ -213,12 +214,20 @@ export default function Header() {
           {/* LEFT: PROMINENT BRAND LOGO                                     */}
           {/* ============================================================== */}
           <div className="flex items-center gap-3 shrink-0">
-            <a href="#home" className="group flex items-center shrink-0" aria-label="Halo Finance - Trang chủ">
+            <a href="#home" className="group flex items-center shrink-0 gap-2.5" aria-label="Halo Finance - Trang chủ">
               <img
                 src={images.logo}
                 alt="Halo Finance - Trợ Lý Tài Chính"
                 className="h-12 sm:h-13 lg:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
+              <div className="hidden sm:flex flex-col border-l border-slate-300/80 pl-2.5 leading-tight">
+                <span className="text-[11px] font-black tracking-wider uppercase text-slate-900">
+                  HALO FINANCE
+                </span>
+                <span className="text-[9.5px] font-bold text-blue-600">
+                  Định Chế Tài Chính Số
+                </span>
+              </div>
             </a>
           </div>
 
@@ -515,36 +524,38 @@ export default function Header() {
           {/* ============================================================== */}
           {/* RIGHT: ACTIONS & CALL-TO-ACTIONS                               */}
           {/* ============================================================== */}
-          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
-            {/* Login button */}
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
+            {/* Internet Banking Portal Login */}
             <button
               type="button"
               onClick={() => navigate("/login")}
-              className="rounded-full px-3.5 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100/70 transition whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100 transition whitespace-nowrap"
             >
-              Đăng nhập
+              <Lock className="h-3.5 w-3.5 text-slate-400" />
+              <span>Web Banking</span>
             </button>
 
             {/* QR Download Trigger */}
             <button
               type="button"
               onClick={() => setQrModalOpen(true)}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-blue-50/50 hover:border-blue-300 hover:text-blue-600 shadow-2xs transition whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-blue-50/50 hover:border-blue-300 hover:text-blue-600 shadow-2xs transition whitespace-nowrap"
               title="Quét mã QR tải app bằng camera điện thoại"
             >
-              <QrCode className="h-4 w-4 text-blue-600" />
-              <span>Quét mã QR</span>
+              <QrCode className="h-3.5 w-3.5 text-blue-600" />
+              <span>Mã QR App</span>
             </button>
 
-            {/* Primary Action Button */}
-            <a
-              href="#app-simulator"
+            {/* Primary Action Button - eKYC Account */}
+            <button
+              type="button"
+              onClick={() => setQrModalOpen(true)}
               className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-4.5 py-2.5 text-xs font-extrabold text-white shadow-md shadow-blue-500/25 transition hover:-translate-y-0.5 whitespace-nowrap"
             >
               <Sparkles className="h-3.5 w-3.5 text-amber-300 fill-amber-300" />
-              <span>Dùng Thử Miễn Phí</span>
+              <span>Mở Tài Khoản eKYC</span>
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Hamburger */}

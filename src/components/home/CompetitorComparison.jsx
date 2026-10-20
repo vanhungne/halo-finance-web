@@ -1,69 +1,61 @@
-import { Check, X, Minus, Sparkles, Shield, Zap } from "lucide-react";
+import { Check, X, Minus, Sparkles, Shield, Zap, Building2, Landmark, Smartphone, FileSpreadsheet } from "lucide-react";
 
 const COMPARISON_ROWS = [
   {
-    feature: "Bóc tách hóa đơn bằng AI tiếng Việt",
-    subtitle: "Quét bill ăn uống, siêu thị đọc rõ từng dòng món và VAT",
-    halo: { status: "full", text: "Tự động 100% trong 3s (Gemini 2.0)" },
-    notebook: { status: "none", text: "Thủ công hoàn toàn" },
-    excel: { status: "none", text: "Tự gõ từng dòng" },
-    others: { status: "partial", text: "Chỉ đọc tổng tiền, hay lỗi font" },
+    feature: "Mở tài khoản & Định danh eKYC số đẹp",
+    subtitle: "Xác thực CCCD gắn chip & FaceID online 100% không cần ra quầy",
+    halo: { status: "full", text: "Online 60s, chọn số đẹp 0đ" },
+    tradBank: { status: "partial", text: "Phải ra quầy xếp hàng, thủ tục giấy tờ" },
+    otherApps: { status: "none", text: "Chỉ ghi chép ảo, không có tài khoản" },
+    manual: { status: "none", text: "Không hỗ trợ" },
   },
   {
-    feature: "Chia tiền nhóm & Tạo mã VietQR 1 chạm",
-    subtitle: "Tự tính ai nợ ai số lần chuyển ít nhất, quét mã trả tiền ngay",
-    halo: { status: "full", text: "Có sẵn thuật toán & VietQR động" },
-    notebook: { status: "none", text: "Tính tay dễ nhầm lẫn" },
-    excel: { status: "partial", text: "Phải tự tạo công thức phức tạp" },
-    others: { status: "partial", text: "Không có mã VietQR chuyển khoản" },
+    feature: "Gom dòng tiền 54+ Ngân hàng liên kết (NAPAS)",
+    subtitle: "Quản lý tập trung Vietcombank, Techcombank, MB, VPB trên 1 màn hình",
+    halo: { status: "full", text: "Hub gom tự động 54+ ngân hàng" },
+    tradBank: { status: "none", text: "Chỉ xem được tài khoản nội bộ ngân hàng đó" },
+    otherApps: { status: "none", text: "Phải tự nhập tay từng giao dịch" },
+    manual: { status: "none", text: "Tự tải sao kê về gõ lại" },
   },
   {
-    feature: "Đồng bộ biến động số dư ngân hàng",
-    subtitle: "Tự động nhận thông báo biến động SePay & quét email giao dịch",
-    halo: { status: "full", text: "Tự động hóa an toàn qua webhook" },
-    notebook: { status: "none", text: "Không hỗ trợ" },
-    excel: { status: "none", text: "Phải tải file sao kê về nhập" },
-    others: { status: "partial", text: "Yêu cầu trả phí rất đắt" },
+    feature: "Bóc tách hóa đơn ăn uống/siêu thị bằng AI Gemini",
+    subtitle: "Chụp ảnh bill trong 3s, tự bóc tách từng món ăn, chiết khấu và thuế VAT",
+    halo: { status: "full", text: "AI Gemini 2.0 nhận diện chính xác 100%" },
+    tradBank: { status: "none", text: "Không có tính năng bóc tách hóa đơn" },
+    otherApps: { status: "partial", text: "Chỉ đọc tổng tiền, hay lỗi font chữ" },
+    manual: { status: "none", text: "Tự gõ từng dòng rất tốn thời gian" },
   },
   {
-    feature: "Trợ lý giọng nói ghi chép (AI Whisper)",
-    subtitle: "Nói 'Vừa ăn trưa 45 nghìn' -> Tự động thêm vào sổ thu chi",
-    halo: { status: "full", text: "Nhận diện giọng nói chuẩn xác" },
-    notebook: { status: "none", text: "Không hỗ trợ" },
-    excel: { status: "none", text: "Không hỗ trợ" },
-    others: { status: "none", text: "Không có" },
+    feature: "Chia tiền nhóm & Tạo mã VietQR thanh toán 1 chạm",
+    subtitle: "Tự tính ai nợ ai số lần chuyển ít nhất, quét mã QR trả tiền ngay",
+    halo: { status: "full", text: "Thuật toán tối ưu + VietQR động 1 chạm" },
+    tradBank: { status: "partial", text: "Phải hỏi số tài khoản từng người, chuyển tay" },
+    otherApps: { status: "partial", text: "Chỉ tính số tiền, không có mã VietQR" },
+    manual: { status: "none", text: "Tính tay dễ nhầm lẫn, mất tình cảm" },
   },
   {
-    feature: "Sổ nợ & Công cụ tính lãi suất vay",
-    subtitle: "Theo dõi nợ nhiều đợt, tính lãi theo ngày/tháng, gửi lời nhắc",
-    halo: { status: "full", text: "Tính lãi chính xác & nhắc nợ lịch sự" },
-    notebook: { status: "partial", text: "Dễ quên hoặc mất sổ" },
-    excel: { status: "partial", text: "Công thức tính ngày phức tạp" },
-    others: { status: "partial", text: "Chỉ ghi số tiền cơ bản" },
+    feature: "Biểu phí quản lý & Dịch vụ số",
+    subtitle: "Phí mở tài khoản, phí chuyển tiền NAPAS 24/7 và phí thường niên",
+    halo: { status: "full", text: "0đ Phí trọn đời, 0đ SMS, 0đ chuyển tiền" },
+    tradBank: { status: "partial", text: "Thu phí SMS 11k-55k/tháng, phí duy trì" },
+    otherApps: { status: "none", text: "Bắt trả phí đắt đỏ hoặc chèn quảng cáo rác" },
+    manual: { status: "full", text: "Miễn phí nhưng tốn nhiều thời gian" },
   },
   {
-    feature: "Trải nghiệm sạch — Không quảng cáo rác",
-    subtitle: "Giao diện tinh tế, không popup che màn hình ép mua hàng",
-    halo: { status: "full", text: "100% Không quảng cáo khó chịu" },
-    notebook: { status: "full", text: "Không quảng cáo" },
-    excel: { status: "full", text: "Không quảng cáo" },
-    others: { status: "none", text: "Quảng cáo tràn lan che hết số liệu" },
+    feature: "Cổng Web Internet Banking đa thiết bị (PC + Mobile)",
+    subtitle: "Làm việc linh hoạt trên máy tính văn phòng và điện thoại cá nhân",
+    halo: { status: "full", text: "Web Portal chuyên nghiệp + App Mobile" },
+    tradBank: { status: "partial", text: "Web thường nặng, giao diện cũ kỹ" },
+    otherApps: { status: "none", text: "Đa số chỉ có app điện thoại" },
+    manual: { status: "partial", text: "Excel xem trên điện thoại rất khó thao tác" },
   },
   {
-    feature: "Đồng bộ đa nền tảng (Mobile App + Web Portal)",
-    subtitle: "Xem trên điện thoại iPhone/Android và máy tính công ty",
-    halo: { status: "full", text: "Đồng bộ đám mây tức thời" },
-    notebook: { status: "none", text: "Chỉ có cuốn sổ vật lý" },
-    excel: { status: "partial", text: "Xem trên điện thoại rất khó thao tác" },
-    others: { status: "partial", text: "Thường chỉ có app mobile" },
-  },
-  {
-    feature: "Bảo mật mã hóa chuẩn ngân hàng (Bank-Grade)",
-    subtitle: "Mã hóa AES-256, TLS 1.3, không bán dữ liệu cho bên thứ ba",
-    halo: { status: "full", text: "Mã hóa cao cấp & Cam kết bảo mật" },
-    notebook: { status: "none", text: "Ai cũng có thể mở ra xem" },
-    excel: { status: "partial", text: "Dễ bị lộ file hoặc virus" },
-    others: { status: "partial", text: "Chính sách dữ liệu chưa rõ ràng" },
+    feature: "Bảo mật & Tuân thủ an ninh số quốc tế",
+    subtitle: "Mã hóa AES-256, TLS 1.3, chuẩn PCI-DSS Level 1 & ISO 27001",
+    halo: { status: "full", text: "PCI-DSS Level 1 & Tuân thủ NĐ 13" },
+    tradBank: { status: "full", text: "Chuẩn an ninh ngân hàng" },
+    otherApps: { status: "partial", text: "Chính sách dữ liệu không rõ ràng" },
+    manual: { status: "none", text: "Dễ thất lạc sổ sách hoặc mất file" },
   },
 ];
 
@@ -75,41 +67,50 @@ export default function CompetitorComparison() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[750px] rounded-full bg-blue-100/40 blur-[130px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-bold text-blue-700 shadow-2xs">
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-blue-700 shadow-2xs">
             <Zap className="h-4 w-4 text-blue-600" />
-            <span>So sánh sự khác biệt</span>
+            <span>Ma Trận Năng Lực So Sánh Trực Tiếp</span>
           </div>
           <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl text-slate-900">
-            Tại sao người dùng thông thái chọn{" "}
+            Halo Finance Khác Gì So Với{" "}
             <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Trợ Lý Tài Chính
+              Ngân Hàng Truyền Thống
             </span>
             ?
           </h2>
           <p className="mt-4 text-base text-slate-600 sm:text-lg">
-            Khác biệt vượt bậc so với việc ghi chép sổ tay, bảng tính Excel hay những ứng dụng tài chính cũ kỹ.
+            Sự kết hợp hoàn hảo giữa công nghệ AI thế hệ mới và tính toàn diện của một định chế ngân hàng số hiện đại.
           </p>
         </div>
 
         {/* Responsive Comparison Table Container */}
         <div className="mt-14 overflow-x-auto rounded-[2rem] border border-slate-200/90 bg-white p-3 shadow-xl sm:p-6">
-          <table className="w-full min-w-[760px] border-collapse text-left">
+          <table className="w-full min-w-[820px] border-collapse text-left">
             <thead>
               <tr className="border-b border-slate-200 text-xs sm:text-sm uppercase tracking-wider">
-                <th className="py-4 px-4 font-bold text-slate-500 w-[34%]">Tiêu chí so sánh</th>
-                <th className="py-4 px-4 font-black text-blue-700 bg-blue-50/90 rounded-t-2xl text-center w-[25%] border-x-2 border-t-2 border-blue-500/40">
+                <th className="py-4 px-4 font-bold text-slate-500 w-[30%]">Tiêu chí năng lực</th>
+                <th className="py-4 px-4 font-black text-blue-700 bg-blue-50/90 rounded-t-2xl text-center w-[28%] border-x-2 border-t-2 border-blue-500/40">
                   <div className="flex items-center justify-center gap-1.5">
                     <Sparkles className="h-4 w-4 text-blue-600" />
-                    <span>Halo Finance</span>
+                    <span className="text-sm sm:text-base">Halo Digital Finance</span>
                   </div>
-                  <span className="text-[10px] lowercase font-semibold text-blue-600 block mt-0.5">Thế hệ mới 2.0</span>
+                  <span className="text-[10px] lowercase font-extrabold text-blue-600 block mt-0.5">Thế hệ Ngân hàng số 2.0</span>
                 </th>
-                <th className="py-4 px-3 font-semibold text-slate-500 text-center w-[13%]">Sổ tay giấy</th>
-                <th className="py-4 px-3 font-semibold text-slate-500 text-center w-[14%]">Excel / Sheets</th>
-                <th className="py-4 px-3 font-semibold text-slate-500 text-center w-[14%]">App cũ khác</th>
+                <th className="py-4 px-3 font-semibold text-slate-600 text-center w-[16%]">
+                  <span className="block font-bold">Ngân Hàng Truyền Thống</span>
+                  <span className="text-[10px] text-slate-400 lowercase font-normal">App đơn lẻ</span>
+                </th>
+                <th className="py-4 px-3 font-semibold text-slate-600 text-center w-[13%]">
+                  <span className="block font-bold">App Ghi Chép Cũ</span>
+                  <span className="text-[10px] text-slate-400 lowercase font-normal">Sổ thu chi</span>
+                </th>
+                <th className="py-4 px-3 font-semibold text-slate-600 text-center w-[13%]">
+                  <span className="block font-bold">Excel / Sổ Tay</span>
+                  <span className="text-[10px] text-slate-400 lowercase font-normal">Thủ công</span>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
@@ -120,67 +121,101 @@ export default function CompetitorComparison() {
                     <div className="text-xs text-slate-500 font-normal mt-0.5 leading-relaxed">{row.subtitle}</div>
                   </td>
 
-                  {/* Halo Finance Highlight Column */}
+                  {/* Halo Digital Finance Highlight Column */}
                   <td className="py-4 px-4 bg-blue-50/40 border-x-2 border-blue-500/30 text-center">
                     <div className="flex flex-col items-center justify-center gap-1">
                       <span className="grid h-7 w-7 place-items-center rounded-full bg-blue-600 text-white font-black shadow-md shadow-blue-500/25">
                         <Check className="h-4 w-4 stroke-[3]" />
                       </span>
-                      <span className="text-xs font-extrabold text-blue-900">{row.halo.text}</span>
+                      <span className="text-xs font-black text-blue-900">{row.halo.text}</span>
                     </div>
                   </td>
 
-                  {/* Sổ tay giấy */}
+                  {/* Ngân hàng truyền thống */}
                   <td className="py-4 px-3 text-center text-slate-600">
                     <div className="flex flex-col items-center justify-center gap-1">
-                      {row.notebook.status === "none" ? (
+                      {row.tradBank.status === "full" ? (
+                        <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald-50 text-emerald-600 font-bold">
+                          <Check className="h-3.5 w-3.5 stroke-[2.5]" />
+                        </span>
+                      ) : row.tradBank.status === "partial" ? (
+                        <span className="grid h-6 w-6 place-items-center rounded-full bg-amber-50 text-amber-600 font-bold">
+                          <Minus className="h-3.5 w-3.5 stroke-[3]" />
+                        </span>
+                      ) : (
                         <span className="grid h-6 w-6 place-items-center rounded-full bg-rose-50 text-rose-500">
                           <X className="h-4 w-4" />
                         </span>
-                      ) : (
-                        <span className="grid h-6 w-6 place-items-center rounded-full bg-amber-50 text-amber-600">
-                          <Minus className="h-4 w-4" />
-                        </span>
                       )}
-                      <span className="text-[11px] text-slate-500 font-medium">{row.notebook.text}</span>
+                      <span className="text-[11px] font-medium text-slate-600">{row.tradBank.text}</span>
                     </div>
                   </td>
 
-                  {/* Excel */}
+                  {/* App ghi chép cũ */}
                   <td className="py-4 px-3 text-center text-slate-600">
                     <div className="flex flex-col items-center justify-center gap-1">
-                      {row.excel.status === "none" ? (
+                      {row.otherApps.status === "full" ? (
+                        <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald-50 text-emerald-600 font-bold">
+                          <Check className="h-3.5 w-3.5 stroke-[2.5]" />
+                        </span>
+                      ) : row.otherApps.status === "partial" ? (
+                        <span className="grid h-6 w-6 place-items-center rounded-full bg-amber-50 text-amber-600 font-bold">
+                          <Minus className="h-3.5 w-3.5 stroke-[3]" />
+                        </span>
+                      ) : (
                         <span className="grid h-6 w-6 place-items-center rounded-full bg-rose-50 text-rose-500">
                           <X className="h-4 w-4" />
                         </span>
-                      ) : (
-                        <span className="grid h-6 w-6 place-items-center rounded-full bg-amber-50 text-amber-600">
-                          <Minus className="h-4 w-4" />
-                        </span>
                       )}
-                      <span className="text-[11px] text-slate-500 font-medium">{row.excel.text}</span>
+                      <span className="text-[11px] font-medium text-slate-600">{row.otherApps.text}</span>
                     </div>
                   </td>
 
-                  {/* App cũ khác */}
+                  {/* Excel / Sổ tay */}
                   <td className="py-4 px-3 text-center text-slate-600">
                     <div className="flex flex-col items-center justify-center gap-1">
-                      {row.others.status === "none" ? (
+                      {row.manual.status === "full" ? (
+                        <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald-50 text-emerald-600 font-bold">
+                          <Check className="h-3.5 w-3.5 stroke-[2.5]" />
+                        </span>
+                      ) : row.manual.status === "partial" ? (
+                        <span className="grid h-6 w-6 place-items-center rounded-full bg-amber-50 text-amber-600 font-bold">
+                          <Minus className="h-3.5 w-3.5 stroke-[3]" />
+                        </span>
+                      ) : (
                         <span className="grid h-6 w-6 place-items-center rounded-full bg-rose-50 text-rose-500">
                           <X className="h-4 w-4" />
                         </span>
-                      ) : (
-                        <span className="grid h-6 w-6 place-items-center rounded-full bg-amber-50 text-amber-600">
-                          <Minus className="h-4 w-4" />
-                        </span>
                       )}
-                      <span className="text-[11px] text-slate-500 font-medium">{row.others.text}</span>
+                      <span className="text-[11px] font-medium text-slate-600">{row.manual.text}</span>
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Bottom Banner Note */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-slate-900 text-white p-5 sm:p-6 shadow-md">
+          <div className="flex items-center gap-3">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-600 text-white">
+              <Shield className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-extrabold text-sm sm:text-base">Trải nghiệm vượt trội không rủi ro</p>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Đăng ký tài khoản trong 60 giây. Toàn bộ tính năng nền tảng hoàn toàn miễn phí trọn đời.
+              </p>
+            </div>
+          </div>
+          <a
+            href="#home"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-black text-white hover:bg-blue-500 transition shrink-0"
+          >
+            <span>Mở Tài Khoản Ngay</span>
+            <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+          </a>
         </div>
       </div>
     </section>

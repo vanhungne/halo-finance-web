@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
   QrCode,
@@ -23,6 +23,11 @@ import {
   Building2,
   Lock,
   CheckCircle2,
+  CreditCard,
+  Wifi,
+  ExternalLink,
+  Shield,
+  FileSpreadsheet,
 } from "lucide-react";
 import images from "../../assets/image";
 import StoreButtons from "./StoreButtons";
@@ -30,20 +35,22 @@ import StoreButtons from "./StoreButtons";
 export default function EpicHero({ onOpenQr }) {
   const reduceMotion = useReducedMotion();
   const [showBalance, setShowBalance] = useState(true);
+  const [heroMode, setHeroMode] = useState("mobile"); // "mobile" | "card" | "web"
+  const [cardLocked, setCardLocked] = useState(false);
 
   return (
     <section
       id="home"
-      className="relative min-h-[820px] lg:min-h-[920px] overflow-hidden bg-gradient-to-b from-[#f0f6ff] via-[#f8fbff] to-white text-slate-900 pt-28 sm:pt-32 lg:pt-36 pb-20 sm:pb-24"
+      className="relative min-h-[840px] lg:min-h-[940px] overflow-hidden bg-gradient-to-b from-[#f0f6ff] via-[#f8fbff] to-white text-slate-900 pt-28 sm:pt-32 lg:pt-36 pb-20 sm:pb-24"
     >
-      {/* 1. Ambient Glow Elements */}
+      {/* 1. Ambient Lighting Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[600px] w-[1100px] rounded-full bg-gradient-to-b from-blue-200/40 via-sky-100/30 to-transparent blur-[140px]" />
         <div className="absolute top-10 right-0 h-[450px] w-[450px] rounded-full bg-amber-100/35 blur-[120px]" />
         <div className="absolute inset-0 bg-[radial-gradient(#0068ff0d_1px,transparent_1px)] [background-size:28px_28px] opacity-75" />
       </div>
 
-      {/* 2. Main Hero Content Container */}
+      {/* 2. Main Content Container */}
       <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
         {/* ======================================================================= */}
@@ -62,7 +69,7 @@ export default function EpicHero({ onOpenQr }) {
           </div>
 
           {/* Headline - Institutional Scale */}
-          <h1 className="text-3xl sm:text-5xl lg:text-[4rem] font-black leading-[1.1] tracking-[-0.035em] text-slate-900">
+          <h1 className="text-3xl sm:text-5xl lg:text-[4.1rem] font-black leading-[1.08] tracking-[-0.035em] text-slate-900">
             <span className="block text-slate-900">Làm Chủ Dòng Tiền.</span>
             <span className="block mt-1 bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600 bg-clip-text text-transparent">
               Ngân Hàng Số Cùng AI.
@@ -80,7 +87,7 @@ export default function EpicHero({ onOpenQr }) {
             <button
               type="button"
               onClick={onOpenQr}
-              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-blue-500/25 transition hover:opacity-95 hover:-translate-y-0.5"
+              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-blue-500/25 transition hover:opacity-95 hover:-translate-y-0.5"
             >
               <Building2 className="h-5 w-5 text-blue-200" />
               <span>Mở Tài Khoản eKYC (0đ Phí)</span>
@@ -150,10 +157,10 @@ export default function EpicHero({ onOpenQr }) {
         </motion.div>
 
         {/* ======================================================================= */}
-        {/* RIGHT COLUMN: GRAND DUAL-PLATFORM ENTERPRISE SHOWCASE                   */}
+        {/* RIGHT COLUMN: 3-MODE INTERACTIVE DIGITAL BANKING SHOWCASE                */}
         {/* ======================================================================= */}
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.95, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="lg:col-span-5 relative flex flex-col items-center justify-center py-4"
@@ -161,154 +168,360 @@ export default function EpicHero({ onOpenQr }) {
           {/* Ambient Lighting Behind Devices */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[95%] w-[95%] rounded-full bg-gradient-to-tr from-blue-300/35 via-sky-200/30 to-amber-100/30 blur-3xl pointer-events-none" />
 
-          {/* Desktop Web Portal Background Canvas (Layer 1) */}
-          <div className="hidden sm:block absolute -left-8 -top-6 w-[420px] lg:w-[480px] rounded-2xl border border-slate-200/90 bg-white p-3.5 shadow-2xl shadow-slate-900/10 opacity-90 backdrop-blur-md pointer-events-none">
-            <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-100 text-[10px]">
-              <div className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-rose-400" />
-                <span className="h-2 w-2 rounded-full bg-amber-400" />
-                <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                <span className="ml-2 font-mono text-slate-400">portal.halofinance.vn</span>
-              </div>
-              <span className="font-bold text-blue-600">Internet Banking Web</span>
-            </div>
-            <div className="grid grid-cols-3 gap-2 text-[10px]">
-              <div className="p-2 rounded-lg bg-blue-50 border border-blue-100">
-                <span className="text-slate-500 block text-[8px] font-bold uppercase">Tổng tài sản ròng</span>
-                <span className="font-black text-blue-700 text-xs">1.845.200.000 đ</span>
-              </div>
-              <div className="p-2 rounded-lg bg-emerald-50 border border-emerald-100">
-                <span className="text-slate-500 block text-[8px] font-bold uppercase">Thu tháng 10</span>
-                <span className="font-black text-emerald-700 text-xs">+92.500.000 đ</span>
-              </div>
-              <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                <span className="text-slate-500 block text-[8px] font-bold uppercase">54+ Ngân hàng</span>
-                <span className="font-black text-slate-800 text-xs">NAPAS 24/7 OK</span>
-              </div>
-            </div>
+          {/* Interactive Mode Switcher Pills */}
+          <div className="relative z-30 mb-5 flex items-center gap-1.5 p-1 rounded-2xl bg-slate-900/90 text-white shadow-xl backdrop-blur-xl border border-slate-700/80">
+            <button
+              type="button"
+              onClick={() => setHeroMode("mobile")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                heroMode === "mobile"
+                  ? "bg-blue-600 text-white shadow-sm font-black"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>App Mobile 24/7</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setHeroMode("card")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                heroMode === "card"
+                  ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black shadow-sm"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
+              <CreditCard className="w-3.5 h-3.5" />
+              <span>Thẻ Titanium VIP</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setHeroMode("web")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                heroMode === "web"
+                  ? "bg-blue-600 text-white shadow-sm font-black"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
+              <Laptop className="w-3.5 h-3.5" />
+              <span>Cổng Web Portal</span>
+            </button>
           </div>
 
-          {/* Mobile iPhone 16 Pro Foreground Screen (Layer 2) */}
-          <div className="relative z-10 w-[310px] sm:w-[340px] aspect-[9/18.6] rounded-[3.25rem] border-[9px] border-slate-900 bg-slate-950 p-2.5 shadow-[0_30px_70px_-15px_rgba(0,55,160,0.22),0_15px_30px_rgba(0,0,0,0.15)] sm:ml-16">
-            {/* Dynamic Island */}
-            <div className="absolute left-1/2 top-3 -translate-x-1/2 h-5 w-24 rounded-full bg-slate-950 z-30 flex items-center justify-center">
-              <div className="h-1.5 w-1.5 rounded-full bg-slate-800 mr-2" />
-              <div className="h-1 w-6 rounded-full bg-slate-800" />
-            </div>
-
-            {/* Screen Inner Container */}
-            <div className="relative h-full w-full rounded-[2.5rem] bg-[#f8faff] overflow-hidden text-slate-900 flex flex-col pt-7 pb-3 px-3.5 space-y-3 font-sans text-xs">
-              
-              {/* App Topbar */}
-              <div className="flex justify-between items-center pb-2 border-b border-slate-200/80">
-                <div className="flex items-center gap-2">
-                  <div className="grid h-7 w-7 place-items-center rounded-lg bg-blue-600 text-white font-bold text-xs shadow-xs">
-                    H
-                  </div>
-                  <div>
-                    <span className="text-[0.6rem] text-slate-500 block leading-tight font-medium">Tài Khoản Thanh Toán Số Đẹp</span>
-                    <span className="font-extrabold text-slate-900 text-[0.72rem]">Halo Private Banking</span>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setShowBalance(!showBalance)}
-                  className="p-1.5 rounded-lg bg-slate-100 text-slate-600 hover:text-blue-600 transition"
-                  title="Ẩn/Hiện số dư"
-                >
-                  {showBalance ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                </button>
-              </div>
-
-              {/* Master Balance Card */}
-              <div className="p-3.5 rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 text-white shadow-md shadow-blue-500/20 space-y-2">
-                <div className="flex justify-between items-center text-[0.62rem] text-blue-100 font-bold uppercase tracking-wider">
-                  <span>Số Dư Khả Dụng Tổng Hợp</span>
-                  <Wallet className="w-4 h-4 text-blue-200" />
-                </div>
-                <p className="text-xl font-black tracking-tight font-sans">
-                  {showBalance ? "268.450.000 đ" : "•••••••• đ"}
-                </p>
-                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/20 text-[0.62rem]">
-                  <div>
-                    <span className="text-blue-200 block text-[0.55rem]">Thu nhập tháng:</span>
-                    <span className="font-bold text-emerald-300">+38.500.000 đ</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-blue-200 block text-[0.55rem]">Chi tiêu:</span>
-                    <span className="font-bold text-rose-200">-14.280.000 đ</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* 4 Feature Shortcuts */}
-              <div className="grid grid-cols-4 gap-1.5 text-center">
-                <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
-                  <div className="grid h-6 w-6 place-items-center rounded-lg bg-blue-50 text-blue-600 mx-auto">
-                    <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-                  </div>
-                  <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Chuyển tiền</span>
-                </div>
-                <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
-                  <div className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-50 text-emerald-600 mx-auto">
-                    <PieChart className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Báo cáo</span>
-                </div>
-                <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
-                  <div className="grid h-6 w-6 place-items-center rounded-lg bg-amber-50 text-amber-600 mx-auto">
-                    <HandCoins className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Vay & Nợ</span>
-                </div>
-                <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
-                  <div className="grid h-6 w-6 place-items-center rounded-lg bg-violet-50 text-violet-600 mx-auto">
-                    <Users className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Quỹ nhóm</span>
-                </div>
-              </div>
-
-              {/* Transactions List */}
-              <div className="space-y-1.5 flex-1 overflow-hidden">
-                <div className="flex justify-between items-center">
-                  <span className="text-[0.62rem] font-extrabold text-slate-600 uppercase tracking-wider">
-                    Giao dịch liên ngân hàng NAPAS
-                  </span>
-                  <span className="text-[0.58rem] font-bold text-blue-600">Xem tất cả</span>
+          <AnimatePresence mode="wait">
+            
+            {/* ------------------------------------------------------------------- */}
+            {/* MODE 1: IPHONE 16 PRO MOBILE BANKING APP                            */}
+            {/* ------------------------------------------------------------------- */}
+            {heroMode === "mobile" && (
+              <motion.div
+                key="mobile-hero"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.28 }}
+                className="relative z-10 w-[310px] sm:w-[340px] aspect-[9/18.6] rounded-[3.25rem] border-[9px] border-slate-900 bg-slate-950 p-2.5 shadow-[0_30px_70px_-15px_rgba(0,55,160,0.22),0_15px_30px_rgba(0,0,0,0.15)]"
+              >
+                {/* Dynamic Island */}
+                <div className="absolute left-1/2 top-3 -translate-x-1/2 h-5 w-24 rounded-full bg-slate-950 z-30 flex items-center justify-center">
+                  <div className="h-1.5 w-1.5 rounded-full bg-slate-800 mr-2" />
+                  <div className="h-1 w-6 rounded-full bg-slate-800" />
                 </div>
 
-                <div className="space-y-1.5">
-                  <div className="p-2 rounded-xl bg-white border border-slate-200/70 flex justify-between items-center shadow-2xs">
+                {/* Screen Inner */}
+                <div className="relative h-full w-full rounded-[2.5rem] bg-[#f8faff] overflow-hidden text-slate-900 flex flex-col pt-7 pb-3 px-3.5 space-y-3 font-sans text-xs">
+                  {/* App Topbar */}
+                  <div className="flex justify-between items-center pb-2 border-b border-slate-200/80">
                     <div className="flex items-center gap-2">
-                      <span className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
-                        <ArrowDownLeft className="w-3.5 h-3.5" />
-                      </span>
+                      <div className="grid h-7 w-7 place-items-center rounded-lg bg-blue-600 text-white font-bold text-xs shadow-xs">
+                        H
+                      </div>
                       <div>
-                        <p className="font-bold text-slate-800 text-[0.65rem]">Lương chuyển khoản VCB</p>
-                        <p className="text-[0.55rem] text-slate-500">16/10 • Thu nhập chính</p>
+                        <span className="text-[0.6rem] text-slate-500 block leading-tight font-medium">Tài Khoản Thanh Toán Số Đẹp</span>
+                        <span className="font-extrabold text-slate-900 text-[0.72rem]">Halo Private Banking</span>
                       </div>
                     </div>
-                    <span className="font-black text-emerald-600 text-[0.7rem]">+38.500.000 đ</span>
+                    <button
+                      type="button"
+                      onClick={() => setShowBalance(!showBalance)}
+                      className="p-1.5 rounded-lg bg-slate-100 text-slate-600 hover:text-blue-600 transition"
+                      title="Ẩn/Hiện số dư"
+                    >
+                      {showBalance ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                    </button>
                   </div>
 
-                  <div className="p-2 rounded-xl bg-white border border-slate-200/70 flex justify-between items-center shadow-2xs">
-                    <div className="flex items-center gap-2">
-                      <span className="grid h-6 w-6 place-items-center rounded-lg bg-rose-50 text-rose-600">
-                        <Receipt className="w-3.5 h-3.5" />
-                      </span>
+                  {/* Master Balance Card */}
+                  <div className="p-3.5 rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 text-white shadow-md shadow-blue-500/20 space-y-2">
+                    <div className="flex justify-between items-center text-[0.62rem] text-blue-100 font-bold uppercase tracking-wider">
+                      <span>Số Dư Khả Dụng Tổng Hợp</span>
+                      <Wallet className="w-4 h-4 text-blue-200" />
+                    </div>
+                    <p className="text-xl font-black tracking-tight font-sans">
+                      {showBalance ? "268.450.000 đ" : "•••••••• đ"}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/20 text-[0.62rem]">
                       <div>
-                        <p className="font-bold text-slate-800 text-[0.65rem]">Siêu thị WinMart+ (AI Scan)</p>
-                        <p className="text-[0.55rem] text-slate-500">16/10 • Bóc tách tự động</p>
+                        <span className="text-blue-200 block text-[0.55rem]">Thu nhập tháng:</span>
+                        <span className="font-bold text-emerald-300">+38.500.000 đ</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-blue-200 block text-[0.55rem]">Chi tiêu:</span>
+                        <span className="font-bold text-rose-200">-14.280.000 đ</span>
                       </div>
                     </div>
-                    <span className="font-black text-rose-600 text-[0.7rem]">-348.000 đ</span>
+                  </div>
+
+                  {/* 4 Feature Shortcuts */}
+                  <div className="grid grid-cols-4 gap-1.5 text-center">
+                    <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
+                      <div className="grid h-6 w-6 place-items-center rounded-lg bg-blue-50 text-blue-600 mx-auto">
+                        <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+                      </div>
+                      <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Chuyển tiền</span>
+                    </div>
+                    <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
+                      <div className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-50 text-emerald-600 mx-auto">
+                        <PieChart className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Báo cáo</span>
+                    </div>
+                    <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
+                      <div className="grid h-6 w-6 place-items-center rounded-lg bg-amber-50 text-amber-600 mx-auto">
+                        <HandCoins className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Vay & Nợ</span>
+                    </div>
+                    <div className="p-1.5 rounded-xl bg-white border border-slate-200/70 shadow-2xs space-y-1">
+                      <div className="grid h-6 w-6 place-items-center rounded-lg bg-violet-50 text-violet-600 mx-auto">
+                        <Users className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-[0.58rem] font-bold text-slate-700 block leading-tight">Quỹ nhóm</span>
+                    </div>
+                  </div>
+
+                  {/* Transactions List */}
+                  <div className="space-y-1.5 flex-1 overflow-hidden">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[0.62rem] font-extrabold text-slate-600 uppercase tracking-wider">
+                        Giao dịch liên ngân hàng NAPAS
+                      </span>
+                      <span className="text-[0.58rem] font-bold text-blue-600">Xem tất cả</span>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <div className="p-2 rounded-xl bg-white border border-slate-200/70 flex justify-between items-center shadow-2xs">
+                        <div className="flex items-center gap-2">
+                          <span className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
+                            <ArrowDownLeft className="w-3.5 h-3.5" />
+                          </span>
+                          <div>
+                            <p className="font-bold text-slate-800 text-[0.65rem]">Lương chuyển khoản VCB</p>
+                            <p className="text-[0.55rem] text-slate-500">16/10 • Thu nhập chính</p>
+                          </div>
+                        </div>
+                        <span className="font-black text-emerald-600 text-[0.7rem]">+38.500.000 đ</span>
+                      </div>
+
+                      <div className="p-2 rounded-xl bg-white border border-slate-200/70 flex justify-between items-center shadow-2xs">
+                        <div className="flex items-center gap-2">
+                          <span className="grid h-6 w-6 place-items-center rounded-lg bg-rose-50 text-rose-600">
+                            <Receipt className="w-3.5 h-3.5" />
+                          </span>
+                          <div>
+                            <p className="font-bold text-slate-800 text-[0.65rem]">Siêu thị WinMart+ (AI Scan)</p>
+                            <p className="text-[0.55rem] text-slate-500">16/10 • Bóc tách tự động</p>
+                          </div>
+                        </div>
+                        <span className="font-black text-rose-600 text-[0.7rem]">-348.000 đ</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
+            )}
 
-            </div>
-          </div>
+            {/* ------------------------------------------------------------------- */}
+            {/* MODE 2: 3D LUXURY TITANIUM BLACK METAL CARD                         */}
+            {/* ------------------------------------------------------------------- */}
+            {heroMode === "card" && (
+              <motion.div
+                key="card-hero"
+                initial={{ opacity: 0, rotateY: -15, scale: 0.95 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35 }}
+                className="relative z-10 w-full max-w-[380px] space-y-4"
+              >
+                {/* 3D Titanium Metal Card */}
+                <div className="relative aspect-[1.586/1] w-full rounded-3xl p-6 text-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] border border-amber-400/30 overflow-hidden bg-gradient-to-br from-slate-950 via-neutral-900 to-stone-900 flex flex-col justify-between">
+                  {/* Subtle Metallic Brushed Texture & Specular Glare */}
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,191,36,0.18),transparent_60%)] pointer-events-none" />
+                  <div className="absolute -left-10 -bottom-10 h-40 w-40 rounded-full bg-blue-500/10 blur-2xl pointer-events-none" />
+
+                  {/* Card Header: Brand & Contactless */}
+                  <div className="relative z-10 flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-black tracking-[0.2em] uppercase text-amber-400">
+                        HALO TITANIUM
+                      </span>
+                      <span className="px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 text-[9px] font-black">
+                        VIP
+                      </span>
+                    </div>
+                    <Wifi className="w-5 h-5 text-amber-200/80 rotate-90" />
+                  </div>
+
+                  {/* Gold EMV Chip */}
+                  <div className="relative z-10 flex items-center gap-3">
+                    <div className="w-11 h-8 rounded-lg bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 border border-yellow-200/80 shadow-inner flex items-center justify-center p-1">
+                      <div className="w-full h-full border border-amber-900/30 rounded flex divide-x divide-amber-900/30">
+                        <div className="flex-1" />
+                        <div className="flex-1" />
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-mono text-slate-400 tracking-widest">
+                      {cardLocked ? "CARD TEMPORARILY LOCKED" : "ACTIVE • CONTACTLESS"}
+                    </span>
+                  </div>
+
+                  {/* Card Number & Holder */}
+                  <div className="relative z-10 space-y-1">
+                    <div className="font-mono text-lg sm:text-xl font-bold tracking-[0.25em] text-slate-100 drop-shadow">
+                      •••• •••• •••• 8888
+                    </div>
+                    <div className="flex justify-between items-end text-[10px] uppercase font-mono tracking-wider text-slate-400 pt-1">
+                      <div>
+                        <span className="block text-[8px] text-slate-500 font-sans">Chủ thẻ</span>
+                        <strong className="text-slate-200 text-xs">NGUYEN VAN HALO</strong>
+                      </div>
+                      <div>
+                        <span className="block text-[8px] text-slate-500 font-sans">Hiệu lực</span>
+                        <strong className="text-slate-200">12/29</strong>
+                      </div>
+                      <span className="font-black italic text-base tracking-tighter text-amber-400">
+                        VISA Infinite
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Controls & VIP Privileges */}
+                <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-lg space-y-3">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="font-bold text-slate-700">Trạng thái thẻ:</span>
+                    <button
+                      type="button"
+                      onClick={() => setCardLocked(!cardLocked)}
+                      className={`px-3 py-1 rounded-full font-black text-[11px] transition ${
+                        cardLocked
+                          ? "bg-rose-100 text-rose-700"
+                          : "bg-emerald-100 text-emerald-800"
+                      }`}
+                    >
+                      {cardLocked ? "🔒 Đang khóa thẻ" : "🟢 Đang hoạt động (Khóa 24/7)"}
+                    </button>
+                  </div>
+                  <div className="space-y-1.5 text-xs text-slate-600">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
+                      <span>Hoàn tiền 1.5% không giới hạn mọi chi tiêu</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
+                      <span>Phòng chờ thương gia tại 1.200+ sân bay quốc tế</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
+                      <span>Bảo hiểm du lịch toàn cầu 10.5 tỷ VNĐ</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ------------------------------------------------------------------- */}
+            {/* MODE 3: HIGH-FIDELITY WEB INTERNET BANKING PORTAL                   */}
+            {/* ------------------------------------------------------------------- */}
+            {heroMode === "web" && (
+              <motion.div
+                key="web-hero"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.28 }}
+                className="relative z-10 w-full max-w-[420px] rounded-3xl border border-slate-300/90 bg-white shadow-2xl overflow-hidden"
+              >
+                {/* Browser Top Bar */}
+                <div className="flex items-center justify-between px-4 py-2.5 bg-slate-100 border-b border-slate-200 text-xs">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                  </div>
+                  <div className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-[10.5px] font-mono text-slate-600 flex items-center gap-1.5">
+                    <Lock className="w-3 h-3 text-emerald-600" />
+                    <span>portal.halofinance.vn/dashboard</span>
+                  </div>
+                  <span className="text-[10px] font-bold text-blue-600">Web Portal</span>
+                </div>
+
+                {/* Web Dashboard Content */}
+                <div className="p-4 space-y-3 text-xs">
+                  <div className="p-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white space-y-1">
+                    <span className="text-[10px] font-bold text-blue-200 uppercase tracking-wider block">
+                      Tổng tài sản ròng (Net Worth)
+                    </span>
+                    <div className="flex justify-between items-baseline">
+                      <span className="text-xl font-black">1.845.200.000 đ</span>
+                      <span className="text-[10.5px] font-bold text-emerald-300">+12.4% quý này</span>
+                    </div>
+                  </div>
+
+                  {/* Multi-bank row */}
+                  <div className="space-y-1.5">
+                    <span className="text-[10px] font-extrabold uppercase text-slate-500 tracking-wider block">
+                      Tài khoản ngân hàng liên kết trực tiếp (NAPAS 24/7)
+                    </span>
+                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold text-[9px]">VCB</span>
+                        <span className="font-bold text-slate-800 text-[11px]">Vietcombank • 9823</span>
+                      </div>
+                      <span className="font-black text-slate-900 text-xs">142.500.000 đ</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 rounded bg-rose-100 text-rose-800 font-extrabold text-[9px]">TCB</span>
+                        <span className="font-bold text-slate-800 text-[11px]">Techcombank • 1029</span>
+                      </div>
+                      <span className="font-black text-slate-900 text-xs">85.000.000 đ</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 rounded bg-amber-200 text-amber-900 font-extrabold text-[9px]">SJC</span>
+                        <span className="font-bold text-amber-900 text-[11px]">Vàng SJC • 12 Lượng</span>
+                      </div>
+                      <span className="font-black text-amber-700 text-xs">1.038.000.000 đ</span>
+                    </div>
+                  </div>
+
+                  {/* One-click Export Action */}
+                  <a
+                    href="/app"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition"
+                  >
+                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Xuất Báo Cáo Kế Toán Excel / PDF</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
+                  </a>
+                </div>
+              </motion.div>
+            )}
+
+          </AnimatePresence>
 
           {/* Floating Trust Cards */}
           <motion.div

@@ -13,13 +13,13 @@ export default function TopAnnouncementBar({ onOpenQr }) {
     >
       <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-10">
         {/* Left: Customer Segment Switcher (Standard on all Tier-1 Bank Portals) */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5 p-0.5 rounded-lg bg-slate-950/60 border border-slate-800">
           <button
             type="button"
             onClick={() => setActiveSegment("personal")}
             className={`px-3 py-1 rounded-md transition-all font-semibold ${
               activeSegment === "personal"
-                ? "bg-blue-600 text-white font-bold shadow-xs"
+                ? "bg-slate-800 text-sky-300 font-bold border border-slate-700 shadow-xs ring-1 ring-sky-400/20"
                 : "text-slate-400 hover:text-white"
             }`}
           >
@@ -30,7 +30,7 @@ export default function TopAnnouncementBar({ onOpenQr }) {
             onClick={() => setActiveSegment("business")}
             className={`px-3 py-1 rounded-md transition-all font-semibold ${
               activeSegment === "business"
-                ? "bg-blue-600 text-white font-bold shadow-xs"
+                ? "bg-slate-800 text-emerald-300 font-bold border border-slate-700 shadow-xs ring-1 ring-emerald-400/20"
                 : "text-slate-400 hover:text-white"
             }`}
           >
@@ -41,7 +41,7 @@ export default function TopAnnouncementBar({ onOpenQr }) {
             onClick={() => setActiveSegment("priority")}
             className={`hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-md transition-all font-semibold ${
               activeSegment === "priority"
-                ? "bg-amber-500 text-slate-950 font-black shadow-xs"
+                ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black shadow-xs"
                 : "text-amber-400/90 hover:text-amber-300"
             }`}
           >

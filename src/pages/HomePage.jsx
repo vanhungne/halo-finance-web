@@ -50,6 +50,7 @@ import EpicHero from "../components/home/EpicHero.jsx";
 import BankingQuickActionBar from "../components/home/BankingQuickActionBar.jsx";
 import BankingEcosystemMarquee from "../components/home/BankingEcosystemMarquee.jsx";
 import WebPortalShowcase from "../components/home/WebPortalShowcase.jsx";
+import VipCardShowcase from "../components/home/VipCardShowcase.jsx";
 import AppInteractiveSimulator from "../components/home/AppInteractiveSimulator.jsx";
 import CompetitorComparison from "../components/home/CompetitorComparison.jsx";
 import MarketingLeadMagnet from "../components/home/MarketingLeadMagnet.jsx";
@@ -165,6 +166,9 @@ function HomePage() {
 
         {/* Omnichannel Internet Banking Web Portal Showcase */}
         <WebPortalShowcase />
+
+        {/* International Payment Cards & VIP Priority Privileges */}
+        <VipCardShowcase onOpenQr={() => setQrModalOpen(true)} />
 
         {/* Live Interactive App Simulator (iPhone 16 Pro Mockup with 5 Real App Modes) */}
         <AppInteractiveSimulator onOpenQr={() => setQrModalOpen(true)} />
