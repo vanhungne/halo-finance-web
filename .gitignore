@@ -26,3 +26,6 @@ dist-ssr
 screenshot*.png
 shot.png
 scroll-*.png
+desktop-*.png
+mobile-*.png
+
