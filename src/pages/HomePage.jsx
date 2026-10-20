@@ -62,6 +62,7 @@ import EbookDownloadModal from "../components/home/EbookDownloadModal.jsx";
 import GlobalInfrastructure from "../components/home/GlobalInfrastructure.jsx";
 import InstitutionalOnboarding from "../components/home/InstitutionalOnboarding.jsx";
 import InstitutionalPricing from "../components/home/InstitutionalPricing.jsx";
+import RealAppFeatureGrid from "../components/home/RealAppFeatureGrid.jsx";
 
 
 const FinanceScene = lazy(() => import("../components/home/FinanceScene.jsx"));
@@ -190,8 +191,11 @@ function HomePage() {
         {/* International Payment Cards & VIP Priority Privileges */}
         <VipCardShowcase onOpenQr={() => setQrModalOpen(true)} />
 
-        {/* Live Interactive App Simulator (iPhone 16 Pro Mockup with 5 Real App Modes) */}
+        {/* Live Interactive App Simulator (iPhone 16 Pro Mockup with 7 Real App Modes) */}
         <AppInteractiveSimulator onOpenQr={() => setQrModalOpen(true)} />
+
+        {/* Complete Audited 16+ Real App Features Directory */}
+        <RealAppFeatureGrid onOpenQr={() => setQrModalOpen(true)} />
 
         {/* Live Interactive Cashflow & Analytics Dashboard */}
         <section id="product-preview" className="relative overflow-hidden bg-slate-50/50 py-24 text-slate-900 sm:py-32 border-t border-slate-200/80">

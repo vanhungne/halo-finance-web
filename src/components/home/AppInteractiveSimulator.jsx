@@ -17,6 +17,10 @@ import {
   Smartphone,
   Check,
   Zap,
+  Mic,
+  HeartHandshake,
+  Mail,
+  FileSpreadsheet,
 } from "lucide-react";
 
 const SIMULATOR_SCREENS = [
@@ -99,6 +103,38 @@ const SIMULATOR_SCREENS = [
       "Tính toán tổng giá trị tài sản ròng (Net Worth)",
     ],
     screenType: "asset",
+  },
+  {
+    id: "voice-ai",
+    tabTitle: "AI Giọng Nói",
+    tabSubtitle: "Emotion AI Tiếng Việt",
+    icon: Mic,
+    badge: "Độc Quyền AI",
+    tagline: "Chỉ cần nhấn và nói — AI tự bóc tách nhiều khoản thu chi cùng lúc",
+    description:
+      "Không cần mở từng danh mục để gõ. Trợ lý AI nhận diện giọng nói tự nhiên của người Việt, phân tách các món ăn uống, mua sắm và ghi nhận chính xác 100% kèm lời khuyên tài chính cá nhân hóa.",
+    highlights: [
+      "Nhận diện giọng nói chuẩn Bắc - Trung - Nam",
+      "Tự động phân tách đa khoản chi tiêu cùng lúc",
+      "Trợ lý Emotion AI cố vấn tài chính thấu cảm",
+    ],
+    screenType: "voice",
+  },
+  {
+    id: "group-fund",
+    tabTitle: "Quỹ Nhóm Chung",
+    tabSubtitle: "Duyệt chi 2 lớp minh bạch",
+    icon: HeartHandshake,
+    badge: "Chống Thất Thoát",
+    tagline: "Quản lý quỹ lớp, quỹ công ty, du lịch — Thủ quỹ ghi, Người giám sát duyệt",
+    description:
+      "Giải quyết triệt để vấn đề mất lòng vì tiền bạc trong tập thể. Thành viên đóng quỹ qua VietQR tự động gạch nợ. Mọi khoản chi từ quỹ đều cần Người Giám Sát (Supervisor) phê duyệt trước khi giải ngân.",
+    highlights: [
+      "Đóng quỹ bằng mã VietQR tự động gạch nợ",
+      "Phân quyền Thủ quỹ & Người giám sát duyệt chi",
+      "Xuất sao kê PDF / Excel công khai minh bạch",
+    ],
+    screenType: "fund",
   },
 ];
 
@@ -539,6 +575,106 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                               <p className="text-[10px] text-emerald-600 font-medium">Tỷ suất sinh lời: +24.6%</p>
                             </div>
                             <span className="font-extrabold text-purple-600">415.000.000 đ</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Screen 6: Voice AI & Emotion AI */}
+                    {activeFeature.screenType === "voice" && (
+                      <motion.div
+                        key="voice"
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -15 }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-3"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-slate-500">Trợ Lý Giọng Nói AI</span>
+                          <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-bold text-indigo-700 flex items-center gap-1">
+                            <span className="h-1.5 w-1.5 rounded-full bg-indigo-600 animate-pulse" /> Đang lắng nghe
+                          </span>
+                        </div>
+
+                        {/* Speech Waveform Simulation */}
+                        <div className="rounded-2xl bg-gradient-to-br from-indigo-900 to-slate-900 p-3.5 text-white shadow-sm space-y-2">
+                          <div className="flex items-center justify-center gap-1 py-1">
+                            {[12, 28, 18, 36, 24, 40, 16, 32, 20, 10].map((h, i) => (
+                              <motion.div
+                                key={i}
+                                animate={{ height: [h * 0.4, h, h * 0.4] }}
+                                transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.08 }}
+                                className="w-1 rounded-full bg-indigo-400"
+                              />
+                            ))}
+                          </div>
+                          <p className="text-center text-[11px] font-medium text-indigo-200 italic">
+                            “Hôm nay ăn phở Thìn 65k và cà phê Highlands 35k”
+                          </p>
+                        </div>
+
+                        {/* Emotion AI Response Card */}
+                        <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-3 space-y-2 text-xs">
+                          <div className="flex items-center gap-1.5 text-indigo-900 font-bold">
+                            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+                            <span>AI đã tự động bóc tách (2 khoản):</span>
+                          </div>
+                          <div className="space-y-1 text-[11px] border-t border-indigo-100 pt-1.5">
+                            <div className="flex justify-between font-semibold text-slate-800">
+                              <span>1. Phở Thìn (Ăn sáng)</span>
+                              <span className="text-rose-600 font-bold">-65.000 đ</span>
+                            </div>
+                            <div className="flex justify-between font-semibold text-slate-800">
+                              <span>2. Cà phê Highlands (Ăn uống)</span>
+                              <span className="text-rose-600 font-bold">-35.000 đ</span>
+                            </div>
+                          </div>
+                          <p className="text-[10px] text-indigo-800 bg-white/80 p-2 rounded-lg border border-indigo-100 mt-1 leading-relaxed">
+                            💡 <em>Cố vấn AI:</em> Bạn đang kiểm soát ngân sách tuần rất tốt (còn 62% ngân sách ăn uống an toàn).
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Screen 7: Group Fund & Supervisor Approval */}
+                    {activeFeature.screenType === "fund" && (
+                      <motion.div
+                        key="fund"
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -15 }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-3"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-slate-500">Quỹ Nhóm Chung</span>
+                          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                            12 thành viên
+                          </span>
+                        </div>
+
+                        <div className="rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 p-3.5 text-white shadow-sm">
+                          <p className="text-[11px] text-emerald-100 font-medium">Quỹ Lớp 12A1 / Du Lịch</p>
+                          <p className="text-2xl font-black mt-1">14.850.000 đ</p>
+                          <p className="text-[10px] text-emerald-200 mt-0.5">100% đã đóng quỹ qua VietQR</p>
+                        </div>
+
+                        {/* Supervisor Approval Required Card */}
+                        <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-3 space-y-2 text-xs">
+                          <div className="flex items-center justify-between text-[11px]">
+                            <span className="font-bold text-amber-900 flex items-center gap-1">
+                              <ShieldCheck className="w-3.5 h-3.5 text-amber-600" /> Chờ Giám Sát Duyệt
+                            </span>
+                            <span className="text-amber-700 font-extrabold">-2.400.000 đ</span>
+                          </div>
+                          <p className="text-[11px] text-slate-700 font-medium">
+                            Thủ quỹ (Lan): Đặt cọc tiệc BBQ bãi biển
+                          </p>
+                          <div className="flex items-center gap-2 pt-1">
+                            <span className="rounded-lg bg-emerald-600 text-white font-bold text-[10px] px-3 py-1 text-center w-full shadow-xs">
+                              ✓ Người Giám Sát Phê Duyệt
+                            </span>
                           </div>
                         </div>
                       </motion.div>

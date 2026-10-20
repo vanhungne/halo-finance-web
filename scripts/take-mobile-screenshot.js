@@ -71,11 +71,15 @@ async function captureMobile() {
     { name: 'mobile-6-simulator.png', y: 4100 },
     { name: 'mobile-7-comparison.png', y: 5200 },
     { name: 'mobile-8-calculators.png', y: 6400 },
+    { name: 'mobile-10-onboarding.png', y: 8800 },
+    { name: 'mobile-11-infrastructure.png', y: 9900 },
+    { name: 'mobile-12-pricing.png', y: 11200 },
+    { name: 'mobile-13-faq-cta.png', y: 13000 },
   ];
 
   for (const s of mobileOffsets) {
     await page.evaluate((top) => window.scrollTo(0, top), s.y);
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 600));
     const out = path.resolve(s.name);
     await page.screenshot({ path: out, fullPage: false });
     console.log('SAVED: ' + s.name);
