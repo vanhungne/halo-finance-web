@@ -1,0 +1,25 @@
+{
+  "name": "Trợ Lý Tài Chính (Halo Finance)",
+  "short_name": "Halo Finance",
+  "description": "Ứng dụng quản lý thu chi cá nhân, bóc tách hóa đơn AI và chia tiền nhóm thông minh.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284c7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/src/assets/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/src/assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity", "utilities"]
+}

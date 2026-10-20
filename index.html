@@ -1,17 +1,185 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>Trợ Lý Tài Chính (Halo Finance) — Sổ Thu Chi & Chia Tiền Nhóm Thông Minh AI</title>
+    <meta name="title" content="Trợ Lý Tài Chính (Halo Finance) — Sổ Thu Chi & Chia Tiền Nhóm Thông Minh AI" />
+    <meta
+      name="description"
+      content="Trợ Lý Tài Chính (Halo Finance) giúp bạn quản lý thu chi cá nhân, bóc tách hóa đơn tự động bằng AI Gemini, chia tiền nhóm du lịch ăn uống với mã VietQR 1 chạm, và kiểm soát sổ nợ thông minh."
+    />
+    <meta
+      name="keywords"
+      content="trợ lý tài chính, sổ thu chi, chia tiền nhóm, quét hóa đơn ai, sổ nợ, quản lý chi tiêu, quản lý tài chính cá nhân, vietqr, sepay, halo finance, trolytaichinh.vn, tiền ra tiền vào, ngân sách 50 30 20"
+    />
+    <meta name="author" content="Halo Finance Technology Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://trolytaichinh.vn/" />
+
+    <!-- Mobile & PWA Configuration -->
+    <meta name="theme-color" content="#0284c7" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Halo Finance" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/png" href="/src/assets/icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0ea5e9" />
-    <meta name="description" content="Trợ Lý Tài Chính giúp bạn quản lý thu chi, ngân sách và mục tiêu tài chính rõ ràng hơn mỗi ngày." />
-    <title>Trợ Lý Tài Chính — Làm chủ dòng tiền</title>
+    <link rel="apple-touch-icon" href="/src/assets/icon.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://trolytaichinh.vn/" />
+    <meta property="og:title" content="Trợ Lý Tài Chính (Halo Finance) — Sổ Thu Chi & Chia Tiền Nhóm Thông Minh AI" />
+    <meta
+      property="og:description"
+      content="Làm chủ dòng tiền cá nhân và chi tiêu nhóm với trợ lý AI: Bóc tách hóa đơn siêu tốc, chia tiền nhóm VietQR 1 chạm, theo dõi sổ nợ & tài sản đầu tư minh bạch."
+    />
+    <meta property="og:image" content="https://trolytaichinh.vn/og-preview.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Giao diện ứng dụng Trợ Lý Tài Chính - Sổ Thu Chi Thông Minh" />
+    <meta property="og:site_name" content="Trợ Lý Tài Chính" />
+    <meta property="og:locale" content="vi_VN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://trolytaichinh.vn/" />
+    <meta name="twitter:title" content="Trợ Lý Tài Chính (Halo Finance) — Sổ Thu Chi & Chia Tiền Nhóm Thông Minh AI" />
+    <meta
+      name="twitter:description"
+      content="Làm chủ dòng tiền cá nhân và chi tiêu nhóm với trợ lý AI: Bóc tách hóa đơn siêu tốc, chia tiền nhóm VietQR 1 chạm, theo dõi sổ nợ & tài sản đầu tư."
+    />
+    <meta name="twitter:image" content="https://trolytaichinh.vn/og-preview.jpg" />
+    <meta name="twitter:image:alt" content="Trợ Lý Tài Chính - Halo Finance" />
+
+    <!-- Preconnect Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://trolytaichinh.vn/#software",
+            "name": "Trợ Lý Tài Chính",
+            "alternateName": "Halo Finance",
+            "operatingSystem": "Android, iOS, Web",
+            "applicationCategory": "FinanceApplication",
+            "applicationSubCategory": "PersonalFinanceApplication",
+            "description": "Ứng dụng quản lý thu chi cá nhân, bóc tách hóa đơn bằng AI Gemini, chia tiền nhóm VietQR và quản lý sổ nợ thông minh.",
+            "url": "https://trolytaichinh.vn/",
+            "screenshot": "https://trolytaichinh.vn/og-preview.jpg",
+            "softwareVersion": "2.0.0",
+            "inLanguage": "vi-VN",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "VND",
+              "category": "FreeTier"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "bestRating": "5",
+              "worstRating": "1",
+              "ratingCount": "25480"
+            },
+            "author": {
+              "@type": "Organization",
+              "@id": "https://trolytaichinh.vn/#organization"
+            }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://trolytaichinh.vn/#organization",
+            "name": "Trợ Lý Tài Chính (Halo Finance)",
+            "url": "https://trolytaichinh.vn/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://trolytaichinh.vn/src/assets/icon.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://www.facebook.com/trolytaichinh.vn",
+              "https://github.com/vanhungne/halo-finance-backend"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "email": "hotro@trolytaichinh.vn",
+              "availableLanguage": "Vietnamese"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://trolytaichinh.vn/#website",
+            "url": "https://trolytaichinh.vn/",
+            "name": "Trợ Lý Tài Chính",
+            "publisher": {
+              "@id": "https://trolytaichinh.vn/#organization"
+            },
+            "inLanguage": "vi-VN",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://trolytaichinh.vn/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://trolytaichinh.vn/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Trợ Lý Tài Chính (Halo Finance) có miễn phí không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Có. Bạn hoàn toàn có thể sử dụng miễn phí trọn đời các tính năng cốt lõi: ghi chép thu chi cá nhân, quản lý ví tiền, chia tiền nhóm và các báo cáo phân tích dòng tiền cơ bản."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Tính năng quét hóa đơn AI hoạt động như thế nào?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bạn chỉ cần chụp ảnh bill ăn uống, mua sắm hoặc hóa đơn điện tử. AI Gemini sẽ tự động nhận diện tên món ăn, số lượng, đơn giá, thuế VAT và tự động điền vào sổ chi tiêu trong chưa đầy 3 giây."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Tính năng chia tiền nhóm và VietQR hoạt động ra sao?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Khi đi du lịch hoặc ăn uống theo nhóm, bạn tạo nhóm và nhập các hóa đơn đã chi. Ứng dụng tự động tối ưu ai phải trả cho ai với số lần chuyển tiền ít nhất và tạo ngay mã VietQR chuyển khoản chính xác tới từng đồng."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Dữ liệu tài chính của tôi có được bảo mật không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Toàn bộ dữ liệu được mã hóa đầu cuối với tiêu chuẩn mã hóa AES-256 và truyền tải qua giao thức TLS 1.3 chuẩn ngân hàng. Halo Finance cam kết tuyệt đối không bán dữ liệu tài chính cho bất kỳ bên thứ ba nào."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
-  <body class="font-sans bg-slate-50 text-slate-900 antialiased">
+  <body class="font-sans bg-slate-50 text-slate-900 antialiased selection:bg-sky-500 selection:text-white">
     <div id="root"></div>
     <div id="modal-root"></div>
     <script type="module" src="/src/main.jsx"></script>

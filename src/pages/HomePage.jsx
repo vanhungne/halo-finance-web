@@ -47,6 +47,11 @@ import SecurityCompliance from "../components/home/SecurityCompliance.jsx";
 import WallOfLove from "../components/home/WallOfLove.jsx";
 import QrDownloadModal from "../components/home/QrDownloadModal.jsx";
 import EpicHero from "../components/home/EpicHero.jsx";
+import AppInteractiveSimulator from "../components/home/AppInteractiveSimulator.jsx";
+import CompetitorComparison from "../components/home/CompetitorComparison.jsx";
+import MarketingLeadMagnet from "../components/home/MarketingLeadMagnet.jsx";
+import StickyDownloadBar from "../components/home/StickyDownloadBar.jsx";
+
 
 const FinanceScene = lazy(() => import("../components/home/FinanceScene.jsx"));
 const Motion = motion;
@@ -172,6 +177,9 @@ function HomePage() {
           </div>
         </section>
 
+        {/* Live Interactive App Simulator (iPhone 16 Pro Mockup with 5 Real App Modes) */}
+        <AppInteractiveSimulator onOpenQr={() => setQrModalOpen(true)} />
+
         <section id="product-preview" className="relative overflow-hidden bg-slate-950 py-24 text-white sm:py-32">
           {!reduceMotion && (
             <div className="absolute inset-0 hidden opacity-40 lg:block">
@@ -280,6 +288,9 @@ function HomePage() {
 
         {/* Interactive Feature Showcase with Central Phone Mockup (MISA & FinTech style) */}
         <InteractiveShowcase />
+
+        {/* Bank-Grade Head-to-Head Comparison Matrix */}
+        <CompetitorComparison />
 
         {/* Tailored Solutions (Personal & Family, Small Business & Online Shop, Investors) */}
         <SolutionsSegment />
@@ -431,6 +442,9 @@ function HomePage() {
           </div>
         </section>
 
+        {/* High-Converting Marketing Lead Magnet: Free 2026 Ebook & 30-Day Premium Gift */}
+        <MarketingLeadMagnet />
+
         {/* Wall of Love: App Store Reviews & Community Banner */}
         <WallOfLove />
 
@@ -469,6 +483,9 @@ function HomePage() {
       </main>
 
       <Footer />
+
+      {/* Floating Action Utility Bar with Quick QR & Scroll-to-Top */}
+      <StickyDownloadBar onOpenQr={() => setQrModalOpen(true)} />
 
       {/* QR Code Modal for Instant Download */}
       <QrDownloadModal isOpen={qrModalOpen} onClose={() => setQrModalOpen(false)} />
