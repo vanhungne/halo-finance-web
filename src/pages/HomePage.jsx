@@ -57,6 +57,9 @@ import MarketingLeadMagnet from "../components/home/MarketingLeadMagnet.jsx";
 import StickyDownloadBar from "../components/home/StickyDownloadBar.jsx";
 import LiveSocialProofTicker from "../components/home/LiveSocialProofTicker.jsx";
 import EbookDownloadModal from "../components/home/EbookDownloadModal.jsx";
+import GlobalInfrastructure from "../components/home/GlobalInfrastructure.jsx";
+import InstitutionalOnboarding from "../components/home/InstitutionalOnboarding.jsx";
+import InstitutionalPricing from "../components/home/InstitutionalPricing.jsx";
 
 
 const FinanceScene = lazy(() => import("../components/home/FinanceScene.jsx"));
@@ -113,24 +116,36 @@ const features = [
 
 const faqItems = [
   {
-    q: "Trợ Lý Tài Chính có phiên bản miễn phí không?",
-    a: "Có. Bạn có thể bắt đầu với những tính năng quản lý tài chính thiết yếu và nâng cấp khi cần thêm trải nghiệm chuyên sâu.",
+    q: "Halo Finance được cấp phép và bảo chứng pháp lý như thế nào?",
+    a: "Halo Finance là nền tảng công nghệ tài chính số liên kết trực tiếp với mạng lưới chuyển mạch quốc gia NAPAS 24/7 và 54+ ngân hàng thương mại cổ phần tại Việt Nam. Toàn bộ tiền gửi và giao dịch thanh toán được bảo vệ theo quy định của Ngân hàng Nhà nước Việt Nam (NHNN) và Luật Các Tổ Chức Tín Dụng.",
   },
   {
-    q: "Tôi có thể quản lý những khoản nào?",
-    a: "Bạn có thể tổ chức thu nhập, chi tiêu, ví, ngân sách, mục tiêu tiết kiệm, khoản nợ và các giao dịch định kỳ trong cùng một nơi.",
+    q: "Tiền gửi và số dư tài khoản của tôi được bảo vệ và mã hóa ra sao?",
+    a: "Tài sản của bạn được lưu ký an toàn tại các ngân hàng đối tác chuẩn Tier-1 (Vietcombank, MB, Techcombank). Hạ tầng Halo áp dụng tiêu chuẩn bảo mật dữ liệu thẻ quốc tế cao nhất PCI-DSS Level 1, mã hóa toàn trình AES-256 GCM và đối chiếu sinh trắc học khuôn mặt theo Quyết định 2345/QĐ-NHNN.",
   },
   {
-    q: "Dữ liệu được trình bày như thế nào?",
-    a: "Các khoản thu chi được gom theo nhóm và chuyển thành biểu đồ, xu hướng cùng báo cáo trực quan để bạn dễ theo dõi.",
+    q: "Mở tài khoản số đẹp có phát sinh phí duy trì hoặc phí ẩn không?",
+    a: "Cam kết minh bạch tuyệt đối: 0đ phí mở tài khoản, 0đ phí duy trì số dư tối thiểu trọn đời và 0đ phí chuyển khoản liên ngân hàng 24/7. Bạn được tự do chọn các đuôi số phong thủy (Tứ quý, Thần tài, Lộc phát, Ngày sinh) hoàn toàn miễn phí ngay trong luồng eKYC 60 giây.",
   },
   {
-    q: "Tôi có thể tùy chỉnh danh mục không?",
-    a: "Có. Bạn có thể thiết lập danh mục và cách theo dõi phù hợp với thói quen tài chính của mình.",
+    q: "Công nghệ bóc tách hóa đơn AI Gemini 2.0 hoạt động như thế nào?",
+    a: "Trợ lý AI Gemini 2.0 tích hợp mô hình thị giác máy tính OCR đa ngôn ngữ, tự động nhận diện hóa đơn viết tay, bill rách mờ, hóa đơn điện tử VAT hay biên lai quán cafe. Chỉ trong 3 giây, tiền hàng, thuế suất VAT và danh mục chi tiêu được phân loại chính xác tới 99.4% mà không cần nhập thủ công.",
   },
   {
-    q: "Làm sao để bắt đầu?",
-    a: "Chọn “Bắt đầu miễn phí”, đăng nhập tài khoản và tạo khoản thu chi đầu tiên. Giao diện sẽ hướng dẫn bạn qua từng bước.",
+    q: "Đặc quyền và hạn mức chi tiêu của Thẻ Halo Titanium VIP?",
+    a: "Thẻ Halo Titanium VIP được chế tác từ kim loại nguyên khối mạ khắc laser, tích hợp chip kép Dual EMV Contactless. Khách hàng VIP được hoàn tiền 3.5% không giới hạn cho ẩm thực, mua sắm, du lịch; miễn phí phòng chờ sân bay DragonPass tại 1.300+ sân bay quốc tế và hạn mức thấu chi tín dụng lên đến 500 triệu đồng.",
+  },
+  {
+    q: "Doanh nghiệp SME và Hộ kinh doanh tích hợp VietQR và SePay như thế nào?",
+    a: "Doanh nghiệp có thể tạo cổng thanh toán mã VietQR động theo từng đơn hàng chỉ trong 2 phút qua API Webhooks SePay. Khi khách hàng chuyển khoản, hệ thống tự động đối soát và gạch nợ trong mili-giây, đồng thời kết nối trực tiếp với phần mềm kế toán MISA, Fast và Tổng cục Thuế.",
+  },
+  {
+    q: "Tôi có thể sử dụng Thẻ Halo khi đi du lịch hoặc công tác nước ngoài không?",
+    a: "Có. Thẻ Halo Titanium Contactless được chấp nhận tại hơn 200 quốc gia và vùng lãnh thổ, tại hàng triệu điểm thanh toán POS và cây ATM có biểu tượng Visa/Mastercard toàn cầu với tỷ giá ngoại tệ quy đổi cạnh tranh nhất thị trường.",
+  },
+  {
+    q: "Tôi cần hỗ trợ kỹ thuật hoặc khiếu nại giao dịch thì liên hệ ai?",
+    a: "Đội ngũ CSKH và Chuyên viên Priority Banker trực tiếp hỗ trợ 24/7/365 qua Hotline khẩn cấp 1900 6868, Live Chat trong ứng dụng hoặc email contact@halofinance.vn với cam kết phản hồi trong vòng 60 giây.",
   },
 ];
 
@@ -317,137 +332,14 @@ function HomePage() {
         {/* Bank-grade Security & Compliance */}
         <SecurityCompliance />
 
-        <section className="pb-24 sm:pb-32">
-          <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
-            <div className="grid overflow-hidden rounded-[2.25rem] bg-gradient-to-br from-cyan-100 via-sky-100 to-indigo-100 lg:grid-cols-2">
-              <motion.div {...motionProps} className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-sky-300">
-                  <WandSparkles className="h-6 w-6" />
-                </span>
-                <h2 className="mt-8 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl">
-                  Một trải nghiệm mang đúng nhịp sống của bạn.
-                </h2>
-                <p className="mt-5 max-w-xl leading-7 text-slate-700">
-                  Cá nhân hay kinh doanh, chi tiêu hằng ngày hay kế hoạch dài hạn — bạn chủ động chọn điều cần theo dõi và cách muốn nhìn thấy nó.
-                </p>
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                  {["Danh mục linh hoạt", "Cá nhân & kinh doanh", "Mục tiêu riêng", "Báo cáo theo nhu cầu"].map((item) => (
-                    <span key={item} className="flex items-center gap-2.5 font-bold text-slate-800">
-                      <Check className="h-5 w-5 stroke-[3]" /> {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+        {/* 3-Step World-Class Banking Onboarding Flow */}
+        <InstitutionalOnboarding onOpenQr={() => setQrModalOpen(true)} />
 
-              <div className="relative flex min-h-[580px] items-end justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-sky-950 p-8">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.26),transparent_32%)]" />
-                <motion.div
-                  initial={reduceMotion ? false : { opacity: 0, y: 80, rotate: 4 }}
-                  whileInView={{ opacity: 1, y: 48, rotate: 4 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative w-[300px] rounded-[3rem] border-[9px] border-slate-900 bg-slate-900 p-1 shadow-[0_30px_90px_rgba(0,0,0,0.55)] sm:w-[340px]"
-                >
-                  <div className="absolute left-1/2 top-3 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-slate-950" />
-                  <img src={images.mobileDashboard} alt="Màn hình thực tế của ứng dụng Trợ Lý Tài Chính" className="w-full rounded-[2.35rem]" />
-                </motion.div>
-                <div className="absolute left-5 top-6 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-bold text-white backdrop-blur-lg sm:left-8 sm:top-10">
-                  Ảnh giao diện thật của bạn
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Global Banking Infrastructure & Multi-Region Cloud Network */}
+        <GlobalInfrastructure />
 
-        <section id="how-it-works" className="bg-white py-24 sm:py-32">
-          <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
-            <motion.div {...motionProps} className="mx-auto max-w-3xl text-center">
-              <p className="section-kicker text-sky-600">Bắt đầu nhẹ nhàng</p>
-              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">
-                Ba bước để tiền bắt đầu “có lời giải”.
-              </h2>
-            </motion.div>
-
-            <div className="relative mt-16 grid gap-5 lg:grid-cols-3">
-              <div className="absolute left-[16.6%] right-[16.6%] top-14 hidden border-t-2 border-dashed border-slate-200 lg:block" />
-              {[
-                { icon: Fingerprint, step: "01", title: "Tạo không gian của bạn", text: "Đăng nhập và chọn cách bạn muốn tổ chức tài chính cá nhân." },
-                { icon: ScanLine, step: "02", title: "Ghi nhận dòng tiền", text: "Thêm giao dịch, ngân sách và mục tiêu theo nhịp sống thực tế." },
-                { icon: Zap, step: "03", title: "Biến hiểu biết thành hành động", text: "Theo dõi xu hướng, nhận gợi ý và điều chỉnh kế hoạch khi cần." },
-              ].map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.article
-                    key={item.step}
-                    {...motionProps}
-                    transition={{ duration: 0.55, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative rounded-[1.75rem] border border-slate-200/80 bg-slate-50/70 p-8 text-center hover:bg-white hover:shadow-md transition-all"
-                  >
-                    <span className="relative z-10 mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-slate-900 to-sky-950 text-sky-300 shadow-md">
-                      <Icon className="h-6 w-6" />
-                    </span>
-                    <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.22em] text-sky-600">Bước {item.step}</p>
-                    <h3 className="mt-3 text-xl font-extrabold">{item.title}</h3>
-                    <p className="mt-3 leading-7 text-slate-600">{item.text}</p>
-                  </motion.article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section id="pricing" className="py-24 sm:py-32">
-          <div className="mx-auto max-w-[1180px] px-5 sm:px-8 lg:px-12">
-            <motion.div {...motionProps} className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-              <div>
-                <p className="section-kicker text-sky-600">Chọn theo nhu cầu</p>
-                <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">Bắt đầu miễn phí. Nâng cấp khi bạn sẵn sàng.</h2>
-              </div>
-              <p className="max-w-xl text-lg leading-8 text-slate-600 lg:justify-self-end">
-                Trải nghiệm các công cụ nền tảng trước, rồi mở khóa thêm chiều sâu khi kế hoạch tài chính của bạn phát triển.
-              </p>
-            </motion.div>
-
-            <div className="mt-14 grid gap-5 lg:grid-cols-2">
-              <motion.article {...motionProps} className="rounded-[2rem] border border-slate-200 bg-white p-8 sm:p-10">
-                <span className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-600">Khởi đầu</span>
-                <h3 className="mt-6 text-3xl font-extrabold">Miễn phí</h3>
-                <p className="mt-3 text-slate-600">Dành cho những bước đầu tiên để hiểu và quản lý dòng tiền.</p>
-                <div className="my-8 h-px bg-slate-200" />
-                <ul className="space-y-4 text-sm font-semibold text-slate-700">
-                  {["Ghi chép thu chi cơ bản", "Theo dõi danh mục", "Tổng quan tài chính", "Trải nghiệm trên ứng dụng"].map((item) => (
-                    <li key={item} className="flex items-center gap-3"><Check className="h-5 w-5 text-emerald-500" /> {item}</li>
-                  ))}
-                </ul>
-                <a href="#download" className="mt-9 inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-300 px-6 py-3.5 font-bold transition hover:border-slate-950 hover:bg-slate-950 hover:text-white">
-                  Bắt đầu ngay <ArrowRight className="h-4 w-4" />
-                </a>
-              </motion.article>
-
-              <motion.article
-                {...motionProps}
-                transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-950 via-blue-950 to-sky-950 p-8 text-white shadow-[0_35px_90px_-35px_rgba(15,23,42,0.75)] sm:p-10"
-              >
-                <div className="absolute right-0 top-0 h-64 w-64 translate-x-1/3 -translate-y-1/3 rounded-full bg-sky-400/30 blur-3xl" />
-                <div className="relative">
-                  <span className="rounded-full bg-sky-400 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-950">Trọn vẹn</span>
-                  <h3 className="mt-6 text-3xl font-extrabold">Premium</h3>
-                  <p className="mt-3 text-slate-400">Dành cho kế hoạch cần thêm chiều sâu, tự động hóa và góc nhìn nâng cao.</p>
-                  <div className="my-8 h-px bg-white/10" />
-                  <ul className="space-y-4 text-sm font-semibold text-slate-200">
-                    {["Toàn bộ trải nghiệm miễn phí", "Phân tích chuyên sâu", "Nhắc nhở và kế hoạch nâng cao", "Thêm không gian tùy chỉnh"].map((item) => (
-                      <li key={item} className="flex items-center gap-3"><Check className="h-5 w-5 text-sky-400" /> {item}</li>
-                    ))}
-                  </ul>
-                  <a href="#download" className="mt-9 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sky-400 px-6 py-3.5 font-extrabold text-slate-950 transition hover:-translate-y-1 hover:bg-cyan-300">
-                    Khám phá Premium <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                </div>
-              </motion.article>
-            </div>
-          </div>
-        </section>
+        {/* Institutional 3-Tier Pricing & Enterprise Membership */}
+        <InstitutionalPricing onOpenQr={() => setQrModalOpen(true)} />
 
         {/* High-Converting Marketing Lead Magnet: Free 2026 Ebook & 30-Day Premium Gift */}
         <MarketingLeadMagnet />
@@ -463,13 +355,41 @@ function HomePage() {
         <section id="faq" className="bg-white py-24 sm:py-32">
           <div className="mx-auto grid max-w-[1180px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:px-12">
             <motion.div {...motionProps}>
-              <p className="section-kicker text-sky-600">Câu hỏi thường gặp</p>
-              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl">Mọi điều bạn cần biết trước khi bắt đầu.</h2>
-              <div className="relative mt-10 hidden overflow-hidden rounded-[1.75rem] bg-slate-950 p-7 text-white lg:block">
-                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-sky-400/30 blur-3xl" />
-                <LockKeyhole className="h-7 w-7 text-sky-400" />
-                <p className="mt-5 text-lg font-extrabold">Bạn vẫn còn câu hỏi?</p>
-                <p className="mt-2 text-sm leading-6 text-slate-400">Đội ngũ Trợ Lý Tài Chính luôn sẵn sàng đồng hành cùng bạn.</p>
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-bold text-blue-700 shadow-2xs">
+                <LockKeyhole className="h-3.5 w-3.5 text-blue-600" />
+                <span>Giải Đáp Trực Tuyến 24/7</span>
+              </div>
+              <h2 className="mt-4 text-3xl sm:text-5xl font-black leading-tight tracking-tight text-slate-900">
+                Câu hỏi thường gặp từ{" "}
+                <span className="bg-gradient-to-r from-blue-600 via-sky-600 to-indigo-600 bg-clip-text text-transparent">
+                  khách hàng định chế.
+                </span>
+              </h2>
+              <p className="mt-4 text-base text-slate-600 leading-relaxed">
+                Minh bạch pháp lý, tiêu chuẩn an toàn vốn và cam kết dịch vụ chuẩn quốc tế của hệ sinh thái Halo Finance.
+              </p>
+
+              <div className="relative mt-10 hidden overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 p-8 text-white shadow-xl lg:block">
+                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-sky-400/30 blur-3xl pointer-events-none" />
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 backdrop-blur-md text-sky-300">
+                  <LockKeyhole className="h-6 w-6" />
+                </span>
+                <p className="mt-6 text-xl font-black">Cần Tư Vấn Chuyên Sâu?</p>
+                <p className="mt-2 text-xs leading-relaxed text-slate-300">
+                  Đội ngũ Chuyên viên Priority Banker & Kỹ sư Giải pháp FinTech luôn trực tuyến hỗ trợ 24/7 qua Hotline khẩn cấp hoặc Cổng trợ giúp riêng.
+                </p>
+                <div className="mt-6 pt-6 border-t border-white/15 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Hotline Ưu Tiên</span>
+                    <strong className="text-amber-400 text-lg font-black">1900 6868</strong>
+                  </div>
+                  <a
+                    href="tel:19006868"
+                    className="rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2 text-xs font-bold transition"
+                  >
+                    Gọi Ngay
+                  </a>
+                </div>
               </div>
             </motion.div>
             <motion.div {...motionProps} className="space-y-3">
@@ -480,16 +400,58 @@ function HomePage() {
           </div>
         </section>
 
-        <section className="bg-white px-5 pb-6 sm:px-8 sm:pb-8">
-          <div className="relative mx-auto min-h-[540px] max-w-[1380px] overflow-hidden rounded-[2.25rem] bg-slate-950">
-            <img src={images.ready} alt="Các màn hình ứng dụng Trợ Lý Tài Chính" className="absolute inset-0 h-full w-full object-cover object-center opacity-80" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/5" />
-            <motion.div {...motionProps} className="relative z-10 flex min-h-[540px] max-w-2xl flex-col justify-center px-7 py-16 text-white sm:px-14 lg:px-20">
-              <p className="section-kicker text-sky-400">Sẵn sàng để bắt đầu?</p>
-              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">Một quyết định nhỏ hôm nay. Một tương lai chủ động hơn.</h2>
-              <p className="mt-6 max-w-xl text-base leading-7 text-white/65 sm:text-lg">Bắt đầu xây dựng thói quen tài chính rõ ràng cùng Trợ Lý Tài Chính.</p>
-              <StoreButtons className="mt-9" buttonClassName="border-white/20 bg-white/10 backdrop-blur-xl" onOpenQr={() => setQrModalOpen(true)} />
+        {/* Grand Institutional Final CTA Section */}
+        <section className="bg-white px-4 pb-8 sm:px-8 sm:pb-12">
+          <div className="relative mx-auto min-h-[560px] max-w-[1440px] overflow-hidden rounded-[2.75rem] bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white shadow-2xl">
+            <img
+              src={images.ready}
+              alt="Hệ sinh thái định chế tài chính số Halo Finance"
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-30 mix-blend-luminosity"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-transparent" />
+            <div className="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl pointer-events-none" />
 
+            <motion.div {...motionProps} className="relative z-10 flex min-h-[560px] max-w-3xl flex-col justify-center px-7 py-16 sm:px-14 lg:px-20">
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-sky-300 w-fit">
+                <ShieldCheck className="h-4 w-4 text-sky-400" />
+                <span>Tiêu Chuẩn Định Chế Tài Chính Quốc Tế</span>
+              </div>
+
+              <h2 className="mt-6 text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
+                Gia nhập kỷ nguyên{" "}
+                <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-300 bg-clip-text text-transparent">
+                  ngân hàng số đỉnh cao.
+                </span>
+              </h2>
+
+              <p className="mt-5 max-w-xl text-sm sm:text-base leading-relaxed text-slate-300">
+                Hơn 3.2 triệu khách hàng cá nhân, chủ hộ kinh doanh và doanh nghiệp đã tin tưởng làm chủ dòng tiền cùng Halo Finance. Khởi tạo tài khoản số đẹp 0đ phí ngay hôm nay.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setQrModalOpen(true)}
+                  className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-blue-500 to-sky-400 px-7 py-3.5 text-sm font-black text-slate-950 shadow-xl transition hover:opacity-95 hover:-translate-y-0.5"
+                >
+                  <Building2 className="h-5 w-5" />
+                  <span>Mở Tài Khoản eKYC (0đ Phí)</span>
+                </button>
+                <a
+                  href="/app"
+                  className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-white hover:bg-white/20 transition hover:-translate-y-0.5 backdrop-blur-md"
+                >
+                  <span>Cổng Web Banking</span>
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+
+              {/* Trust Badges Footer in CTA */}
+              <div className="mt-10 pt-8 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-slate-400 font-semibold">
+                <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-emerald-400" /> PCI-DSS Level 1</span>
+                <span className="flex items-center gap-1.5"><LockKeyhole className="w-4 h-4 text-sky-400" /> ISO 27001 Certified</span>
+                <span className="flex items-center gap-1.5"><Building2 className="w-4 h-4 text-amber-400" /> Liên minh NAPAS 24/7</span>
+              </div>
             </motion.div>
           </div>
         </section>
