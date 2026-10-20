@@ -77,21 +77,24 @@ export default function BankingEcosystemMarquee() {
             </span>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
-            {BANK_PARTNERS.map((bank, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-2 rounded-xl border bg-white px-3 py-2 shadow-2xs hover:shadow-xs hover:border-blue-400 transition cursor-default"
-              >
-                <span className={`text-[11px] font-black px-1.5 py-0.5 rounded-md border ${bank.color}`}>
-                  {bank.code}
-                </span>
-                <div>
-                  <p className="text-xs font-black text-slate-900 leading-tight">{bank.name}</p>
-                  <p className="text-[9.5px] text-slate-500 font-medium">{bank.sub}</p>
+          {/* Continuous Infinite Marquee Strip */}
+          <div className="mt-4 relative overflow-hidden marquee-mask">
+            <div className="flex w-max marquee-track hover:[animation-play-state:paused] py-1 gap-3">
+              {[...BANK_PARTNERS, ...BANK_PARTNERS].map((bank, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 rounded-xl border border-slate-200/90 bg-white px-3.5 py-2 shadow-2xs hover:shadow-xs hover:border-blue-400 transition cursor-default shrink-0"
+                >
+                  <span className={`text-[11px] font-black px-1.5 py-0.5 rounded-md border ${bank.color}`}>
+                    {bank.code}
+                  </span>
+                  <div>
+                    <p className="text-xs font-black text-slate-900 leading-tight whitespace-nowrap">{bank.name}</p>
+                    <p className="text-[9.5px] text-slate-500 font-medium whitespace-nowrap">{bank.sub}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

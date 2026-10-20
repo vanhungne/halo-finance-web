@@ -1,4 +1,4 @@
-import { Check, X, Minus, Sparkles, Shield, Zap, Building2, Landmark, Smartphone, FileSpreadsheet } from "lucide-react";
+import { Check, X, Minus, Sparkles, Shield, Zap, Building2, Landmark, Smartphone, FileSpreadsheet, ArrowRight } from "lucide-react";
 
 const COMPARISON_ROWS = [
   {
@@ -86,8 +86,14 @@ export default function CompetitorComparison() {
           </p>
         </div>
 
+        {/* Mobile Swipe Hint */}
+        <div className="mt-8 flex items-center justify-center gap-1.5 text-xs font-bold text-blue-700 sm:hidden bg-blue-50/90 py-2.5 px-4 rounded-xl border border-blue-200">
+          <ArrowRight className="w-3.5 h-3.5 animate-pulse text-blue-600" />
+          <span>Vuốt ngang bảng để so sánh chi tiết các tiêu chí</span>
+        </div>
+
         {/* Responsive Comparison Table Container */}
-        <div className="mt-14 overflow-x-auto rounded-[2rem] border border-slate-200/90 bg-white p-3 shadow-xl sm:p-6">
+        <div className="mt-6 sm:mt-14 overflow-x-auto rounded-[2rem] border border-slate-200/90 bg-white p-3 shadow-xl sm:p-6">
           <table className="w-full min-w-[820px] border-collapse text-left">
             <thead>
               <tr className="border-b border-slate-200 text-xs sm:text-sm uppercase tracking-wider">

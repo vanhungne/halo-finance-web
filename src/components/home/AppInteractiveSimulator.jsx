@@ -132,8 +132,8 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
           </p>
         </div>
 
-        {/* Feature Selector Tabs (Balanced Flex Layout) */}
-        <div className="mt-10 flex flex-wrap items-stretch justify-center gap-2.5 sm:gap-3.5 max-w-5xl mx-auto">
+        {/* Feature Selector Tabs (Balanced Flex Layout on Desktop, Horizontal Snap Carousel on Mobile) */}
+        <div className="mt-10 flex overflow-x-auto sm:flex-wrap items-stretch justify-start sm:justify-center gap-2.5 sm:gap-3.5 max-w-5xl mx-auto pb-2 sm:pb-0 no-scrollbar snap-x px-1">
           {SIMULATOR_SCREENS.map((screen, idx) => {
             const Icon = screen.icon;
             const isActive = activeTab === idx;
@@ -142,9 +142,9 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                 key={screen.id}
                 type="button"
                 onClick={() => setActiveTab(idx)}
-                className={`relative flex flex-1 min-w-[140px] max-w-[190px] flex-col items-center justify-center rounded-2xl p-3.5 sm:p-4 text-center transition-all duration-200 border cursor-pointer ${
+                className={`relative flex flex-1 min-w-[125px] sm:min-w-[140px] max-w-[190px] shrink-0 sm:shrink snap-center flex-col items-center justify-center rounded-2xl p-3 sm:p-4 text-center transition-all duration-200 border cursor-pointer ${
                   isActive
-                    ? "border-blue-600 bg-white text-blue-700 shadow-lg shadow-blue-500/15 -translate-y-1 ring-2 ring-blue-600/10"
+                    ? "border-blue-600 bg-white text-blue-700 shadow-lg shadow-blue-500/15 -translate-y-0.5 sm:-translate-y-1 ring-2 ring-blue-600/10"
                     : "border-slate-200/90 bg-white/80 text-slate-700 hover:bg-white hover:border-slate-300 hover:shadow-xs"
                 }`}
               >

@@ -25,6 +25,9 @@ import {
   HelpCircle,
   Scale,
   Lock,
+  PhoneCall,
+  CreditCard,
+  Smartphone,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import images from "../../assets/image.js";
@@ -570,7 +573,7 @@ export default function Header() {
         </div>
 
         {/* ============================================================== */}
-        {/* MOBILE FULL-SCREEN ACCORDION DRAWER                            */}
+        {/* MOBILE FULL-SCREEN BANKING MENU DRAWER                         */}
         {/* ============================================================== */}
         <AnimatePresence>
           {mobileMenuOpen && (
@@ -578,62 +581,199 @@ export default function Header() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="overflow-hidden border-t border-slate-200 bg-white px-5 py-6 shadow-2xl lg:hidden max-h-[85vh] overflow-y-auto"
+              transition={{ duration: 0.28, ease: "easeInOut" }}
+              className="overflow-hidden border-t border-slate-200 bg-white shadow-2xl lg:hidden max-h-[88vh] overflow-y-auto"
             >
-              <div className="space-y-4">
-                {/* Mobile Section 1: Tính năng */}
-                <div>
+              {/* Institutional Welcome Card */}
+              <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 p-5 text-white">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-white font-black text-sm shadow-md shadow-blue-500/30">
+                      H
+                    </div>
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-wider text-sky-400">Halo Digital Finance</p>
+                      <p className="text-sm font-extrabold text-white">Định Chế Tài Chính Số</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[10px] font-bold text-emerald-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>NAPAS 24/7</span>
+                  </div>
+                </div>
+
+                {/* 4 Quick Banking Action Tiles */}
+                <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setQrModalOpen(true);
+                    }}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 font-bold text-white shadow-xs text-left"
+                  >
+                    <Sparkles className="h-4 w-4 text-amber-300 shrink-0" />
+                    <div>
+                      <span className="block font-black text-[11px] leading-tight">Mở eKYC 0đ</span>
+                      <span className="text-[9.5px] text-blue-200">Cấp số đẹp tức thì</span>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate("/app");
+                    }}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-800/90 border border-slate-700/80 font-bold text-slate-200 hover:text-white text-left"
+                  >
+                    <Lock className="h-4 w-4 text-sky-400 shrink-0" />
+                    <div>
+                      <span className="block font-black text-[11px] leading-tight">Web Banking</span>
+                      <span className="text-[9.5px] text-slate-400">Cổng khách hàng</span>
+                    </div>
+                  </button>
+
+                  <a
+                    href="#cards"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-800/90 border border-slate-700/80 font-bold text-slate-200 hover:text-white text-left"
+                  >
+                    <CreditCard className="h-4 w-4 text-amber-400 shrink-0" />
+                    <div>
+                      <span className="block font-black text-[11px] leading-tight">Thẻ VIP & Virtual</span>
+                      <span className="text-[9.5px] text-slate-400">Đặc quyền Priority</span>
+                    </div>
+                  </a>
+
+                  <a
+                    href="tel:19006868"
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-800/90 border border-slate-700/80 font-bold text-slate-200 hover:text-white text-left"
+                  >
+                    <PhoneCall className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <div>
+                      <span className="block font-black text-[11px] leading-tight">Hotline 24/7</span>
+                      <span className="text-[9.5px] text-slate-400">1900 6868 (Free)</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              {/* Accordion Categories */}
+              <div className="p-5 space-y-3">
+                {/* Accordion 1: Dịch vụ ngân hàng số */}
+                <div className="border-b border-slate-100 pb-3">
                   <button
                     type="button"
                     onClick={() => setMobileSection(mobileSection === "features" ? null : "features")}
-                    className="flex w-full items-center justify-between py-2 text-base font-bold text-slate-900 border-b border-slate-100"
+                    className="flex w-full items-center justify-between py-2 text-sm font-black text-slate-900"
                   >
-                    <span>Tính năng nổi bật</span>
-                    <ChevronDown className={`h-4 w-4 transition-transform ${mobileSection === "features" ? "rotate-180 text-blue-600" : ""}`} />
+                    <div className="flex items-center gap-2">
+                      <Smartphone className="h-4 w-4 text-blue-600" />
+                      <span>Dịch Vụ Ngân Hàng Số</span>
+                    </div>
+                    <ChevronDown className={`h-4 w-4 transition-transform text-slate-400 ${mobileSection === "features" ? "rotate-180 text-blue-600" : ""}`} />
                   </button>
                   {mobileSection === "features" && (
-                    <div className="grid gap-2 pt-3 pl-2">
+                    <div className="grid gap-2 pt-2 pl-2">
                       {FEATURE_ITEMS.map((item) => (
                         <a
                           key={item.title}
                           href={item.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center gap-2.5 py-1.5 text-sm font-semibold text-slate-700 hover:text-blue-600"
+                          className="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition"
                         >
-                          <span className={`grid h-7 w-7 place-items-center rounded-lg ${item.color}`}>
-                            <item.icon className="h-3.5 w-3.5" />
-                          </span>
-                          <span>{item.title}</span>
+                          <div className="flex items-center gap-2.5">
+                            <span className={`grid h-7 w-7 place-items-center rounded-lg ${item.color}`}>
+                              <item.icon className="h-3.5 w-3.5" />
+                            </span>
+                            <div>
+                              <span className="text-xs font-bold text-slate-800 block">{item.title}</span>
+                              <span className="text-[10px] text-slate-500 line-clamp-1">{item.desc}</span>
+                            </div>
+                          </div>
+                          {item.badge && (
+                            <span className="rounded-full bg-blue-100 px-1.5 py-0.2 text-[9px] font-extrabold text-blue-800">
+                              {item.badge}
+                            </span>
+                          )}
                         </a>
                       ))}
                     </div>
                   )}
                 </div>
 
-                {/* Mobile Section 2: Công cụ */}
-                <div>
+                {/* Accordion 2: Công cụ tài chính */}
+                <div className="border-b border-slate-100 pb-3">
                   <button
                     type="button"
                     onClick={() => setMobileSection(mobileSection === "tools" ? null : "tools")}
-                    className="flex w-full items-center justify-between py-2 text-base font-bold text-slate-900 border-b border-slate-100"
+                    className="flex w-full items-center justify-between py-2 text-sm font-black text-slate-900"
                   >
-                    <span>Công cụ tài chính</span>
-                    <ChevronDown className={`h-4 w-4 transition-transform ${mobileSection === "tools" ? "rotate-180 text-blue-600" : ""}`} />
+                    <div className="flex items-center gap-2">
+                      <Calculator className="h-4 w-4 text-amber-600" />
+                      <span>Công Cụ Tài Chính Trực Tuyến</span>
+                    </div>
+                    <ChevronDown className={`h-4 w-4 transition-transform text-slate-400 ${mobileSection === "tools" ? "rotate-180 text-blue-600" : ""}`} />
                   </button>
                   {mobileSection === "tools" && (
-                    <div className="grid gap-2 pt-3 pl-2">
+                    <div className="grid gap-2 pt-2 pl-2">
                       {TOOL_ITEMS.map((item) => (
                         <a
                           key={item.title}
                           href={item.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center gap-2.5 py-1.5 text-sm font-semibold text-slate-700 hover:text-blue-600"
+                          className="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className={`grid h-7 w-7 place-items-center rounded-lg ${item.color}`}>
+                              <item.icon className="h-3.5 w-3.5" />
+                            </span>
+                            <div>
+                              <span className="text-xs font-bold text-slate-800 block">{item.title}</span>
+                              <span className="text-[10px] text-slate-500 line-clamp-1">{item.desc}</span>
+                            </div>
+                          </div>
+                          {item.badge && (
+                            <span className="rounded-full bg-amber-100 px-1.5 py-0.2 text-[9px] font-extrabold text-amber-800">
+                              {item.badge}
+                            </span>
+                          )}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Accordion 3: Giải pháp đối tượng */}
+                <div className="border-b border-slate-100 pb-3">
+                  <button
+                    type="button"
+                    onClick={() => setMobileSection(mobileSection === "solutions" ? null : "solutions")}
+                    className="flex w-full items-center justify-between py-2 text-sm font-black text-slate-900"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4 text-emerald-600" />
+                      <span>Giải Pháp Theo Nhu Cầu</span>
+                    </div>
+                    <ChevronDown className={`h-4 w-4 transition-transform text-slate-400 ${mobileSection === "solutions" ? "rotate-180 text-blue-600" : ""}`} />
+                  </button>
+                  {mobileSection === "solutions" && (
+                    <div className="grid gap-2 pt-2 pl-2">
+                      {SOLUTION_ITEMS.map((item) => (
+                        <a
+                          key={item.title}
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 transition"
                         >
                           <span className={`grid h-7 w-7 place-items-center rounded-lg ${item.color}`}>
                             <item.icon className="h-3.5 w-3.5" />
                           </span>
-                          <span>{item.title}</span>
+                          <div>
+                            <span className="text-xs font-bold text-slate-800 block">{item.title}</span>
+                            <span className="text-[10px] text-slate-500 line-clamp-1">{item.desc}</span>
+                          </div>
                         </a>
                       ))}
                     </div>
@@ -641,35 +781,37 @@ export default function Header() {
                 </div>
 
                 {/* Direct Links */}
-                <div className="flex flex-col gap-3 pt-2 text-base font-bold text-slate-900">
-                  <a href="#comparison" onClick={() => setMobileMenuOpen(false)} className="py-1">
-                    So sánh đối đầu
+                <div className="flex flex-col gap-2 pt-1 text-xs font-bold text-slate-800">
+                  <a href="#comparison" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between">
+                    <span>So sánh Halo vs Ngân hàng truyền thống</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
                   </a>
-                  <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="py-1">
-                    Bảng giá & Gói Premium
+                  <a href="#cards" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between">
+                    <span>Hệ sinh thái Thẻ Titanium VIP</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
                   </a>
-                  <a href="#ebook" onClick={() => setMobileMenuOpen(false)} className="py-1 flex items-center justify-between text-blue-600">
-                    <span>Tải Ebook Miễn Phí</span>
-                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs">Hot</span>
+                  <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between">
+                    <span>Bảng giá & Gói dịch vụ</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
                   </a>
-                  <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="py-1 text-slate-600 font-semibold">
-                    Hỏi đáp thường gặp
+                  <a href="#ebook" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between text-blue-600">
+                    <span>Tải Miễn Phí Ebook Tài Chính 2026</span>
+                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-black">Free Ebook</span>
                   </a>
                 </div>
 
-                {/* Mobile CTAs */}
-                <div className="pt-4 border-t border-slate-100 space-y-2.5">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      setQrModalOpen(true);
-                    }}
-                    className="w-full py-3 rounded-2xl border border-blue-200 bg-blue-50 text-blue-700 font-extrabold text-sm flex items-center justify-center gap-2"
-                  >
-                    <QrCode className="h-4 w-4" />
-                    <span>Quét mã QR tải app điện thoại</span>
-                  </button>
+                {/* Security and Trust Guarantee Footer */}
+                <div className="pt-4 border-t border-slate-100 space-y-3">
+                  <div className="flex items-center justify-between text-[10px] text-slate-500 font-bold">
+                    <span className="flex items-center gap-1">
+                      <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+                      PCI-DSS Level 1
+                    </span>
+                    <span>•</span>
+                    <span>ISO 27001:2022</span>
+                    <span>•</span>
+                    <span>NĐ 13/2023/NĐ-CP</span>
+                  </div>
 
                   <div className="grid grid-cols-2 gap-2">
                     <button
@@ -678,17 +820,20 @@ export default function Header() {
                         setMobileMenuOpen(false);
                         navigate("/login");
                       }}
-                      className="w-full py-3 rounded-2xl border border-slate-200 text-slate-800 font-bold text-xs"
+                      className="w-full py-2.5 rounded-xl border border-slate-200 text-slate-800 font-bold text-xs hover:bg-slate-50"
                     >
-                      Đăng nhập
+                      Đăng nhập Portal
                     </button>
-                    <a
-                      href="/app"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="w-full py-3 rounded-2xl bg-blue-600 text-white font-bold text-xs text-center shadow-md shadow-blue-500/20"
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setQrModalOpen(true);
+                      }}
+                      className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-extrabold text-xs text-center shadow-md shadow-blue-500/20"
                     >
-                      Cổng Khách Hàng
-                    </a>
+                      Mở eKYC 0đ Phí
+                    </button>
                   </div>
                 </div>
               </div>

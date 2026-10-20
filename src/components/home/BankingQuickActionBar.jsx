@@ -138,8 +138,19 @@ export default function BankingQuickActionBar({ onOpenQr }) {
     <section className="relative z-30 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10 -mt-10 sm:-mt-16">
       <div className="rounded-3xl border border-slate-200/90 bg-white p-4 sm:p-7 shadow-2xl shadow-slate-300/50">
         
+        {/* Mobile Header with 5-Tool Swipe Indicator */}
+        <div className="flex sm:hidden items-center justify-between pb-2.5 text-xs">
+          <span className="font-extrabold uppercase tracking-wider text-slate-800 text-[11px]">
+            Tiện Ích Ngân Hàng Trực Tuyến
+          </span>
+          <span className="text-[10px] font-bold text-blue-600 flex items-center gap-1">
+            <span>5 Tiện ích</span>
+            <ArrowRight className="w-3 h-3 animate-pulse" />
+          </span>
+        </div>
+
         {/* Navigation Tabs Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 sm:pb-4 border-b border-slate-100 no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 sm:pb-4 border-b border-slate-100 no-scrollbar snap-x">
           {[
             { id: "ekyc", label: "Mở Tài Khoản eKYC", icon: CreditCard, badge: "0đ Phí" },
             { id: "rates", label: "Tỷ Giá & Vàng SJC", icon: Coins, badge: "Quy đổi trực tiếp" },

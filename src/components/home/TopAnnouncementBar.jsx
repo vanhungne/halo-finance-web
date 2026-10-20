@@ -11,24 +11,24 @@ export default function TopAnnouncementBar({ onOpenQr }) {
       aria-label="Thanh tiện ích ngân hàng số"
       className="relative z-50 bg-slate-900 text-slate-300 border-b border-slate-800 text-[11px] font-medium"
     >
-      <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-10">
+      <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-between px-2.5 sm:px-8 lg:px-10 overflow-x-auto no-scrollbar">
         {/* Left: Customer Segment Switcher (Standard on all Tier-1 Bank Portals) */}
-        <div className="flex items-center gap-1.5 p-0.5 rounded-lg bg-slate-950/60 border border-slate-800">
+        <div className="flex items-center gap-1 p-0.5 rounded-lg bg-slate-950/60 border border-slate-800 shrink-0">
           <button
             type="button"
             onClick={() => setActiveSegment("personal")}
-            className={`px-3 py-1 rounded-md transition-all font-semibold ${
+            className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-md transition-all font-semibold text-[10px] sm:text-[11px] whitespace-nowrap ${
               activeSegment === "personal"
                 ? "bg-slate-800 text-sky-300 font-bold border border-slate-700 shadow-xs ring-1 ring-sky-400/20"
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            Khách hàng Cá nhân
+            Cá nhân
           </button>
           <button
             type="button"
             onClick={() => setActiveSegment("business")}
-            className={`px-3 py-1 rounded-md transition-all font-semibold ${
+            className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-md transition-all font-semibold text-[10px] sm:text-[11px] whitespace-nowrap ${
               activeSegment === "business"
                 ? "bg-slate-800 text-emerald-300 font-bold border border-slate-700 shadow-xs ring-1 ring-emerald-400/20"
                 : "text-slate-400 hover:text-white"
@@ -72,7 +72,7 @@ export default function TopAnnouncementBar({ onOpenQr }) {
         </div>
 
         {/* Right: Hotline 24/7, Network, Web Portal */}
-        <div className="flex items-center gap-3 sm:gap-4 text-slate-400">
+        <div className="flex items-center gap-2 sm:gap-4 text-slate-400 shrink-0 ml-2">
           <a
             href="tel:19006868"
             className="hidden sm:inline-flex items-center gap-1.5 hover:text-white transition"
@@ -92,10 +92,11 @@ export default function TopAnnouncementBar({ onOpenQr }) {
           <button
             type="button"
             onClick={() => navigate("/app")}
-            className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-sky-300 hover:text-white hover:bg-blue-600 transition font-bold"
+            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-sky-300 hover:text-white hover:bg-blue-600 transition font-bold text-[10px] sm:text-[11px] whitespace-nowrap"
           >
             <Laptop className="w-3 h-3" />
-            <span>Web Internet Banking</span>
+            <span className="hidden sm:inline">Web Internet Banking</span>
+            <span className="sm:hidden">Web Banking</span>
           </button>
 
           <span className="hidden sm:inline text-slate-600">|</span>

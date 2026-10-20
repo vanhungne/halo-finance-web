@@ -48,7 +48,7 @@ const companyLinks = [
 
 function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-400 pt-16 sm:pt-20 pb-12 border-t border-slate-800">
+    <footer className="bg-slate-950 text-slate-400 pt-16 sm:pt-20 pb-28 sm:pb-16 border-t border-slate-800">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10">
         
         {/* Top Institutional Header: Hotline & Support Network */}
