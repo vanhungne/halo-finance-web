@@ -165,7 +165,7 @@ const RESOURCE_ITEMS = [
   },
 ];
 
-export default function Header() {
+export default function Header({ onOpenEbook }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -493,8 +493,14 @@ export default function Header() {
                           <a
                             key={item.title}
                             href={item.href}
-                            onClick={() => setActiveDropdown(null)}
-                            className="group flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-slate-50"
+                            onClick={(e) => {
+                              setActiveDropdown(null);
+                              if (item.href === "#ebook" && onOpenEbook) {
+                                e.preventDefault();
+                                onOpenEbook();
+                              }
+                            }}
+                            className="group flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-slate-50 cursor-pointer"
                           >
                             <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs`}>
                               <Icon className="h-4 w-4" />
@@ -794,10 +800,17 @@ export default function Header() {
                     <span>Bảng giá & Gói dịch vụ</span>
                     <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
                   </a>
-                  <a href="#ebook" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between text-blue-600">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      if (onOpenEbook) onOpenEbook();
+                    }}
+                    className="w-full py-1.5 flex items-center justify-between text-blue-600 font-bold text-xs cursor-pointer text-left"
+                  >
                     <span>Tải Miễn Phí Ebook Tài Chính 2026</span>
                     <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-black">Free Ebook</span>
-                  </a>
+                  </button>
                 </div>
 
                 {/* Security and Trust Guarantee Footer */}

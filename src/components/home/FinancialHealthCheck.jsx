@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Activity, CheckCircle, RotateCcw, ArrowRight, ShieldCheck, AlertCircle } from "lucide-react";
+import confetti from "canvas-confetti";
 
 const QUESTIONS = [
   {
@@ -58,6 +59,14 @@ export default function FinancialHealthCheck() {
       setCurrentStep((prev) => prev + 1);
     } else {
       setIsCompleted(true);
+      try {
+        confetti({
+          particleCount: 90,
+          spread: 70,
+          origin: { y: 0.55 },
+          colors: ["#10b981", "#3b82f6", "#f59e0b", "#6366f1"],
+        });
+      } catch (err) {}
     }
   };
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BookOpen, Check, Send, Sparkles, CheckCircle2 } from "lucide-react";
+import confetti from "canvas-confetti";
 
 export default function MarketingLeadMagnet() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,15 @@ export default function MarketingLeadMagnet() {
 
     setError("");
     setSubmitted(true);
+
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ["#38bdf8", "#fbbf24", "#34d399", "#818cf8"],
+      });
+    } catch (err) {}
   };
 
   return (

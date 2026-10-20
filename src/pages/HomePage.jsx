@@ -55,6 +55,8 @@ import AppInteractiveSimulator from "../components/home/AppInteractiveSimulator.
 import CompetitorComparison from "../components/home/CompetitorComparison.jsx";
 import MarketingLeadMagnet from "../components/home/MarketingLeadMagnet.jsx";
 import StickyDownloadBar from "../components/home/StickyDownloadBar.jsx";
+import LiveSocialProofTicker from "../components/home/LiveSocialProofTicker.jsx";
+import EbookDownloadModal from "../components/home/EbookDownloadModal.jsx";
 
 
 const FinanceScene = lazy(() => import("../components/home/FinanceScene.jsx"));
@@ -140,6 +142,7 @@ const reveal = {
 function HomePage() {
   const reduceMotion = useReducedMotion();
   const [qrModalOpen, setQrModalOpen] = useState(false);
+  const [ebookModalOpen, setEbookModalOpen] = useState(false);
   const motionProps = reduceMotion
     ? {}
     : {
@@ -152,7 +155,7 @@ function HomePage() {
 
   return (
     <div className="landing-page overflow-x-clip bg-white text-slate-900">
-      <Header />
+      <Header onOpenEbook={() => setEbookModalOpen(true)} />
 
       <main>
         {/* Epic High-Converting Hero Section */}
@@ -497,8 +500,14 @@ function HomePage() {
       {/* Floating Action Utility Bar with Quick QR & Scroll-to-Top */}
       <StickyDownloadBar onOpenQr={() => setQrModalOpen(true)} />
 
+      {/* Real-Time CRO Social Proof Activity Toasts */}
+      <LiveSocialProofTicker onOpenQr={() => setQrModalOpen(true)} />
+
       {/* QR Code Modal for Instant Download */}
       <QrDownloadModal isOpen={qrModalOpen} onClose={() => setQrModalOpen(false)} />
+
+      {/* Interactive Free 2026 Ebook & VIP Toolkit Download Modal */}
+      <EbookDownloadModal isOpen={ebookModalOpen} onClose={() => setEbookModalOpen(false)} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
 import {
   CreditCard,
   TrendingUp,
@@ -257,7 +258,17 @@ export default function BankingQuickActionBar({ onOpenQr }) {
                 <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
                   <button
                     type="button"
-                    onClick={onOpenQr}
+                    onClick={() => {
+                      try {
+                        confetti({
+                          particleCount: 75,
+                          spread: 65,
+                          origin: { y: 0.65 },
+                          colors: ["#2563eb", "#38bdf8", "#fbbf24", "#10b981"],
+                        });
+                      } catch (err) {}
+                      onOpenQr();
+                    }}
                     className="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white font-black text-sm shadow-xl shadow-blue-500/25 hover:opacity-95 transition"
                   >
                     <QrCode className="w-5 h-5 text-amber-300" />

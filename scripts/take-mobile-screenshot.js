@@ -24,7 +24,7 @@ async function captureMobile() {
   await page.screenshot({ path: path.resolve('mobile-1-hero.png') });
   console.log('SAVED: mobile-1-hero.png');
 
-  // 2. Open Mobile Menu Drawer
+  // 2. Open Mobile Menu Drawer and trigger Ebook modal
   try {
     const hamburger = await page.$('button[aria-label="Mở menu"]');
     if (hamburger) {
@@ -32,14 +32,36 @@ async function captureMobile() {
       await new Promise(r => setTimeout(r, 600));
       await page.screenshot({ path: path.resolve('mobile-menu-drawer.png') });
       console.log('SAVED: mobile-menu-drawer.png');
-      // Close drawer
-      const closeBtn = await page.$('button[aria-label="Đóng menu"]');
-      if (closeBtn) await closeBtn.click();
-      await new Promise(r => setTimeout(r, 400));
+
+      // Click "Tải Miễn Phí Ebook Tài Chính 2026"
+      const ebookBtn = await page.evaluateHandle(() => {
+        const btns = Array.from(document.querySelectorAll('button'));
+        return btns.find(b => b.textContent && b.textContent.includes('Ebook Tài Chính 2026'));
+      });
+      if (ebookBtn) {
+        await ebookBtn.click();
+        await new Promise(r => setTimeout(r, 600));
+        await page.screenshot({ path: path.resolve('mobile-ebook-modal.png') });
+        console.log('SAVED: mobile-ebook-modal.png');
+
+        // Close modal
+        const closeBtn = await page.$('button[aria-label="Đóng"]');
+        if (closeBtn) await closeBtn.click();
+        await new Promise(r => setTimeout(r, 400));
+      } else {
+        const closeBtn = await page.$('button[aria-label="Đóng menu"]');
+        if (closeBtn) await closeBtn.click();
+      }
     }
   } catch (e) {
     console.log('Menu drawer error:', e.message);
   }
+
+  // 3. Scroll to quickbar and wait for Social Proof Toast
+  await page.evaluate(() => window.scrollTo(0, 650));
+  await new Promise(r => setTimeout(r, 5500)); // wait for social proof toast to pop up
+  await page.screenshot({ path: path.resolve('mobile-social-proof.png') });
+  console.log('SAVED: mobile-social-proof.png');
 
   const mobileOffsets = [
     { name: 'mobile-2-quickbar.png', y: 650 },
