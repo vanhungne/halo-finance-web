@@ -30,6 +30,8 @@ import {
   WandSparkles,
   Zap,
   QrCode,
+  Building2,
+  Lock,
 } from "lucide-react";
 import images from "../assets/image.js";
 import AccordionItem from "../components/faq/AccordionItem.jsx";

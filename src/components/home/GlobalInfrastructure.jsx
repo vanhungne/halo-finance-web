@@ -72,7 +72,7 @@ export default function GlobalInfrastructure() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-slate-950 py-24 sm:py-32 text-white border-t border-slate-800">
+    <section id="infrastructure" className="relative overflow-hidden bg-slate-950 py-24 sm:py-32 text-white border-t border-slate-800">
       {/* Background Grid & Glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[550px] w-[1000px] rounded-full bg-blue-600/15 blur-[140px]" />

@@ -20,7 +20,10 @@ async function capture() {
 
   // Capture by element ID
   const elementIds = [
-    { name: 'scroll-comparison-table.png', selector: '#comparison' },
+    { name: 'desktop-infrastructure-nodes.png', selector: '#infrastructure' },
+    { name: 'desktop-onboarding.png', selector: '#how-it-works' },
+    { name: 'desktop-pricing.png', selector: '#pricing' },
+    { name: 'desktop-faq.png', selector: '#faq' },
   ];
 
   for (const item of elementIds) {
