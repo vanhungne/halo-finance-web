@@ -20,6 +20,7 @@ async function capture() {
 
   // Capture by element ID
   const elementIds = [
+    { name: 'desktop-features-grid.png', selector: '#features' },
     { name: 'desktop-infrastructure-nodes.png', selector: '#infrastructure' },
     { name: 'desktop-onboarding.png', selector: '#how-it-works' },
     { name: 'desktop-pricing.png', selector: '#pricing' },
