@@ -207,323 +207,320 @@ export default function Header() {
             : "border-b border-slate-200/60 bg-white/90 backdrop-blur-md"
         }`}
       >
-        <div className="mx-auto flex h-20 max-w-[1380px] items-center justify-between px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto flex h-20 lg:h-[84px] max-w-[1420px] items-center justify-between px-4 sm:px-8 lg:px-10">
           
           {/* ============================================================== */}
-          {/* LEFT: LOGO BRAND                                               */}
+          {/* LEFT: PROMINENT BRAND LOGO                                     */}
           {/* ============================================================== */}
-          <div className="flex items-center gap-8">
-            <a href="#home" className="group flex items-center gap-3 shrink-0" aria-label="Halo Finance - Trang chủ">
+          <div className="flex items-center gap-3 shrink-0">
+            <a href="#home" className="group flex items-center shrink-0" aria-label="Halo Finance - Trang chủ">
               <img
                 src={images.logo}
                 alt="Halo Finance - Trợ Lý Tài Chính"
-                className="h-9 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                className="h-12 sm:h-13 lg:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
-              <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50/80 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-blue-700">
-                v2.0
-              </span>
             </a>
+          </div>
 
-            {/* ============================================================ */}
-            {/* CENTER: DESKTOP MEGA DROPDOWN MENU (NO TEXT WRAPPING!)       */}
-            {/* ============================================================ */}
-            <nav
-              ref={navRef}
-              className="hidden lg:flex items-center gap-1 xl:gap-2"
-              onMouseLeave={handleMouseLeave}
-              aria-label="Thanh điều hướng chính"
+          {/* ============================================================== */}
+          {/* CENTER: DESKTOP FLOATING PILL NAVIGATION (ZERO TEXT WRAPPING)  */}
+          {/* ============================================================== */}
+          <nav
+            ref={navRef}
+            className="hidden lg:flex items-center gap-1 rounded-full border border-slate-200/90 bg-slate-50/80 p-1.5 shadow-2xs backdrop-blur-md"
+            onMouseLeave={handleMouseLeave}
+            aria-label="Thanh điều hướng chính"
+          >
+            {/* Dropdown 1: Tính năng */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("features")}
             >
-              {/* Dropdown 1: Tính năng */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnter("features")}
+              <button
+                type="button"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold whitespace-nowrap transition-all ${
+                  activeDropdown === "features"
+                    ? "bg-white text-blue-600 shadow-xs font-bold"
+                    : "text-slate-700 hover:text-blue-600 hover:bg-white/60"
+                }`}
+                aria-expanded={activeDropdown === "features"}
               >
-                <button
-                  type="button"
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
-                    activeDropdown === "features"
-                      ? "bg-slate-100 text-blue-600"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                  }`}
-                  aria-expanded={activeDropdown === "features"}
-                >
-                  <span>Tính năng</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === "features" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
-                </button>
+                <span className="whitespace-nowrap">Tính năng</span>
+                <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "features" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
+              </button>
 
-                {/* Dropdown Card */}
-                <AnimatePresence>
-                  {activeDropdown === "features" && (
-                    <Motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                      transition={{ duration: 0.18, ease: "easeOut" }}
-                      className="absolute left-0 top-full mt-2 w-[640px] rounded-3xl border border-slate-200/90 bg-white p-5 shadow-2xl shadow-slate-900/10 backdrop-blur-xl"
-                    >
-                      <div className="grid grid-cols-2 gap-3">
-                        {FEATURE_ITEMS.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <a
-                              key={item.title}
-                              href={item.href}
-                              onClick={() => setActiveDropdown(null)}
-                              className="group flex items-start gap-3.5 rounded-2xl p-3 transition-colors hover:bg-slate-50"
-                            >
-                              <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs transition-transform group-hover:scale-110`}>
-                                <Icon className="h-5 w-5" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
-                                    {item.title}
-                                  </span>
-                                  {item.badge && (
-                                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-extrabold text-blue-700">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-xs text-slate-500 mt-0.5 line-clamp-2 leading-relaxed">
-                                  {item.desc}
-                                </p>
-                              </div>
-                            </a>
-                          );
-                        })}
-                      </div>
-
-                      {/* Dropdown Footer CTA */}
-                      <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs bg-slate-50/70 -mx-5 -mb-5 px-5 py-3 rounded-b-3xl">
-                        <span className="text-slate-600 font-medium">
-                          Trải nghiệm trực tiếp trên điện thoại của bạn
-                        </span>
-                        <a
-                          href="#app-simulator"
-                          onClick={() => setActiveDropdown(null)}
-                          className="font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
-                        >
-                          Mở màn hình mô phỏng <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                        </a>
-                      </div>
-                    </Motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Dropdown 2: Giải pháp */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnter("solutions")}
-              >
-                <button
-                  type="button"
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
-                    activeDropdown === "solutions"
-                      ? "bg-slate-100 text-blue-600"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                  }`}
-                  aria-expanded={activeDropdown === "solutions"}
-                >
-                  <span>Giải pháp</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === "solutions" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
-                </button>
-
-                <AnimatePresence>
-                  {activeDropdown === "solutions" && (
-                    <Motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                      transition={{ duration: 0.18, ease: "easeOut" }}
-                      className="absolute left-0 top-full mt-2 w-[420px] rounded-3xl border border-slate-200/90 bg-white p-4 shadow-2xl shadow-slate-900/10 backdrop-blur-xl"
-                    >
-                      <div className="space-y-2">
-                        {SOLUTION_ITEMS.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <a
-                              key={item.title}
-                              href={item.href}
-                              onClick={() => setActiveDropdown(null)}
-                              className="group flex items-start gap-3.5 rounded-2xl p-3 transition-colors hover:bg-slate-50"
-                            >
-                              <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs transition-transform group-hover:scale-110`}>
-                                <Icon className="h-5 w-5" />
-                              </div>
-                              <div>
+              {/* Dropdown Card */}
+              <AnimatePresence>
+                {activeDropdown === "features" && (
+                  <Motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                    className="absolute left-0 top-full mt-2.5 w-[640px] rounded-3xl border border-slate-200/90 bg-white p-5 shadow-2xl shadow-slate-900/10 backdrop-blur-xl z-50"
+                  >
+                    <div className="grid grid-cols-2 gap-3">
+                      {FEATURE_ITEMS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <a
+                            key={item.title}
+                            href={item.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className="group flex items-start gap-3.5 rounded-2xl p-3 transition-colors hover:bg-slate-50"
+                          >
+                            <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs transition-transform group-hover:scale-110`}>
+                              <Icon className="h-5 w-5" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
                                 <span className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
                                   {item.title}
                                 </span>
-                                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
-                                  {item.desc}
-                                </p>
-                              </div>
-                            </a>
-                          );
-                        })}
-                      </div>
-                    </Motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Dropdown 3: Công cụ tài chính */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnter("tools")}
-              >
-                <button
-                  type="button"
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
-                    activeDropdown === "tools"
-                      ? "bg-slate-100 text-blue-600"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                  }`}
-                  aria-expanded={activeDropdown === "tools"}
-                >
-                  <span>Công cụ tính</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === "tools" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
-                </button>
-
-                <AnimatePresence>
-                  {activeDropdown === "tools" && (
-                    <Motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                      transition={{ duration: 0.18, ease: "easeOut" }}
-                      className="absolute left-0 top-full mt-2 w-[520px] rounded-3xl border border-slate-200/90 bg-white p-4 shadow-2xl shadow-slate-900/10 backdrop-blur-xl"
-                    >
-                      <div className="grid grid-cols-2 gap-3">
-                        {TOOL_ITEMS.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <a
-                              key={item.title}
-                              href={item.href}
-                              onClick={() => setActiveDropdown(null)}
-                              className="group flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-slate-50"
-                            >
-                              <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs`}>
-                                <Icon className="h-4 w-4" />
-                              </div>
-                              <div className="min-w-0">
-                                <div className="flex items-center gap-1.5">
-                                  <span className="font-bold text-xs text-slate-900 group-hover:text-blue-600 truncate">
-                                    {item.title}
+                                {item.badge && (
+                                  <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-extrabold text-blue-700">
+                                    {item.badge}
                                   </span>
-                                  {item.badge && (
-                                    <span className="rounded-full bg-emerald-100 px-1.5 py-0.2 text-[9px] font-extrabold text-emerald-800">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">
-                                  {item.desc}
-                                </p>
+                                )}
                               </div>
-                            </a>
-                          );
-                        })}
-                      </div>
-                    </Motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                              <p className="text-xs text-slate-500 mt-0.5 line-clamp-2 leading-relaxed">
+                                {item.desc}
+                              </p>
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
 
-              {/* Direct Link: So sánh */}
-              <a
-                href="#comparison"
-                className="rounded-full px-3.5 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition"
+                    {/* Dropdown Footer CTA */}
+                    <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs bg-slate-50/70 -mx-5 -mb-5 px-5 py-3 rounded-b-3xl">
+                      <span className="text-slate-600 font-medium">
+                        Trải nghiệm trực tiếp trên điện thoại của bạn
+                      </span>
+                      <a
+                        href="#app-simulator"
+                        onClick={() => setActiveDropdown(null)}
+                        className="font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
+                      >
+                        Mở màn hình mô phỏng <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </a>
+                    </div>
+                  </Motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Dropdown 2: Giải pháp */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("solutions")}
+            >
+              <button
+                type="button"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold whitespace-nowrap transition-all ${
+                  activeDropdown === "solutions"
+                    ? "bg-white text-blue-600 shadow-xs font-bold"
+                    : "text-slate-700 hover:text-blue-600 hover:bg-white/60"
+                }`}
+                aria-expanded={activeDropdown === "solutions"}
               >
-                So sánh
-              </a>
+                <span className="whitespace-nowrap">Giải pháp</span>
+                <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "solutions" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
+              </button>
 
-              {/* Direct Link: Bảng giá */}
-              <a
-                href="#pricing"
-                className="rounded-full px-3.5 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition"
+              <AnimatePresence>
+                {activeDropdown === "solutions" && (
+                  <Motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                    className="absolute left-0 top-full mt-2.5 w-[420px] rounded-3xl border border-slate-200/90 bg-white p-4 shadow-2xl shadow-slate-900/10 backdrop-blur-xl z-50"
+                  >
+                    <div className="space-y-2">
+                      {SOLUTION_ITEMS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <a
+                            key={item.title}
+                            href={item.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className="group flex items-start gap-3.5 rounded-2xl p-3 transition-colors hover:bg-slate-50"
+                          >
+                            <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs transition-transform group-hover:scale-110`}>
+                              <Icon className="h-5 w-5" />
+                            </div>
+                            <div>
+                              <span className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
+                                {item.title}
+                              </span>
+                              <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                {item.desc}
+                              </p>
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </Motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Dropdown 3: Công cụ tài chính */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("tools")}
+            >
+              <button
+                type="button"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold whitespace-nowrap transition-all ${
+                  activeDropdown === "tools"
+                    ? "bg-white text-blue-600 shadow-xs font-bold"
+                    : "text-slate-700 hover:text-blue-600 hover:bg-white/60"
+                }`}
+                aria-expanded={activeDropdown === "tools"}
               >
-                Bảng giá
-              </a>
+                <span className="whitespace-nowrap">Công cụ tính</span>
+                <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "tools" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
+              </button>
 
-              {/* Dropdown 4: Tài nguyên */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnter("resources")}
-              >
-                <button
-                  type="button"
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all ${
-                    activeDropdown === "resources"
-                      ? "bg-slate-100 text-blue-600"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                  }`}
-                  aria-expanded={activeDropdown === "resources"}
-                >
-                  <span>Tài nguyên</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === "resources" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
-                </button>
-
-                <AnimatePresence>
-                  {activeDropdown === "resources" && (
-                    <Motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                      transition={{ duration: 0.18, ease: "easeOut" }}
-                      className="absolute right-0 top-full mt-2 w-[400px] rounded-3xl border border-slate-200/90 bg-white p-4 shadow-2xl shadow-slate-900/10 backdrop-blur-xl"
-                    >
-                      <div className="space-y-2">
-                        {RESOURCE_ITEMS.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <a
-                              key={item.title}
-                              href={item.href}
-                              onClick={() => setActiveDropdown(null)}
-                              className="group flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-slate-50"
-                            >
-                              <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs`}>
-                                <Icon className="h-4 w-4" />
-                              </div>
-                              <div>
-                                <div className="flex items-center gap-1.5">
-                                  <span className="font-bold text-xs text-slate-900 group-hover:text-blue-600">
-                                    {item.title}
+              <AnimatePresence>
+                {activeDropdown === "tools" && (
+                  <Motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                    className="absolute left-0 top-full mt-2.5 w-[520px] rounded-3xl border border-slate-200/90 bg-white p-4 shadow-2xl shadow-slate-900/10 backdrop-blur-xl z-50"
+                  >
+                    <div className="grid grid-cols-2 gap-3">
+                      {TOOL_ITEMS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <a
+                            key={item.title}
+                            href={item.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className="group flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-slate-50"
+                          >
+                            <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs`}>
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-bold text-xs text-slate-900 group-hover:text-blue-600 truncate">
+                                  {item.title}
+                                </span>
+                                {item.badge && (
+                                  <span className="rounded-full bg-emerald-100 px-1.5 py-0.2 text-[9px] font-extrabold text-emerald-800">
+                                    {item.badge}
                                   </span>
-                                  {item.badge && (
-                                    <span className="rounded-full bg-indigo-100 px-1.5 py-0.2 text-[9px] font-extrabold text-indigo-800">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-[11px] text-slate-500 mt-0.5">
-                                  {item.desc}
-                                </p>
+                                )}
                               </div>
-                            </a>
-                          );
-                        })}
-                      </div>
-                    </Motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </nav>
-          </div>
+                              <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">
+                                {item.desc}
+                              </p>
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </Motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Direct Link: So sánh */}
+            <a
+              href="#comparison"
+              className="rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold text-slate-700 hover:text-blue-600 hover:bg-white/60 transition whitespace-nowrap"
+            >
+              So sánh
+            </a>
+
+            {/* Direct Link: Bảng giá */}
+            <a
+              href="#pricing"
+              className="rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold text-slate-700 hover:text-blue-600 hover:bg-white/60 transition whitespace-nowrap"
+            >
+              Bảng giá
+            </a>
+
+            {/* Dropdown 4: Tài nguyên */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("resources")}
+            >
+              <button
+                type="button"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold whitespace-nowrap transition-all ${
+                  activeDropdown === "resources"
+                    ? "bg-white text-blue-600 shadow-xs font-bold"
+                    : "text-slate-700 hover:text-blue-600 hover:bg-white/60"
+                }`}
+                aria-expanded={activeDropdown === "resources"}
+              >
+                <span className="whitespace-nowrap">Tài nguyên</span>
+                <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "resources" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
+              </button>
+
+              <AnimatePresence>
+                {activeDropdown === "resources" && (
+                  <Motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                    className="absolute right-0 top-full mt-2.5 w-[400px] rounded-3xl border border-slate-200/90 bg-white p-4 shadow-2xl shadow-slate-900/10 backdrop-blur-xl z-50"
+                  >
+                    <div className="space-y-2">
+                      {RESOURCE_ITEMS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <a
+                            key={item.title}
+                            href={item.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className="group flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-slate-50"
+                          >
+                            <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${item.color} shadow-xs`}>
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-bold text-xs text-slate-900 group-hover:text-blue-600">
+                                  {item.title}
+                                </span>
+                                {item.badge && (
+                                  <span className="rounded-full bg-indigo-100 px-1.5 py-0.2 text-[9px] font-extrabold text-indigo-800">
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-[11px] text-slate-500 mt-0.5">
+                                {item.desc}
+                              </p>
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </Motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </nav>
 
           {/* ============================================================== */}
           {/* RIGHT: ACTIONS & CALL-TO-ACTIONS                               */}
           {/* ============================================================== */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             {/* Login button */}
             <button
               type="button"
               onClick={() => navigate("/login")}
-              className="rounded-full px-4 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition"
+              className="rounded-full px-3.5 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100/70 transition whitespace-nowrap"
             >
               Đăng nhập
             </button>
@@ -532,19 +529,19 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setQrModalOpen(true)}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 hover:border-blue-400 hover:text-blue-600 shadow-xs transition"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-blue-50/50 hover:border-blue-300 hover:text-blue-600 shadow-2xs transition whitespace-nowrap"
               title="Quét mã QR tải app bằng camera điện thoại"
             >
               <QrCode className="h-4 w-4 text-blue-600" />
-              <span>Mã QR</span>
+              <span>Quét mã QR</span>
             </button>
 
             {/* Primary Action Button */}
             <a
               href="#app-simulator"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-5 py-2.5 text-xs font-extrabold text-white shadow-md shadow-blue-500/25 transition hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-4.5 py-2.5 text-xs font-extrabold text-white shadow-md shadow-blue-500/25 transition hover:-translate-y-0.5 whitespace-nowrap"
             >
-              <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+              <Sparkles className="h-3.5 w-3.5 text-amber-300 fill-amber-300" />
               <span>Dùng Thử Miễn Phí</span>
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </a>

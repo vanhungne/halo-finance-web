@@ -4,7 +4,7 @@ import customize from "./customize.png";
 import feedback from "./feedback.png";
 import premium from "./premium.png";
 import whychoose from "./whychoose.png";
-import logo from "./logo.png";
+import logo from "./logo-trimmed.png";
 import ready from "./ready.png";
 import question from "./question.png";
 import icon from "./icon.png";
