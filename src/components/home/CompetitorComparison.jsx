@@ -38,7 +38,7 @@ const COMPARISON_ROWS = [
     subtitle: "Phí mở tài khoản, phí chuyển tiền NAPAS 24/7 và phí thường niên",
     halo: { status: "full", text: "0đ Phí trọn đời, 0đ SMS, 0đ chuyển tiền" },
     tradBank: { status: "partial", text: "Thu phí SMS 11k-55k/tháng, phí duy trì" },
-    otherApps: { status: "none", text: "Bắt trả phí đắt đỏ hoặc chèn quảng cáo rác" },
+    otherApps: { status: "none", text: "Thu phí theo tháng hoặc chèn quảng cáo phiền toái" },
     manual: { status: "full", text: "Miễn phí nhưng tốn nhiều thời gian" },
   },
   {
