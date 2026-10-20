@@ -28,11 +28,11 @@ const RECENT_ACTIVITIES = [
     id: 2,
     name: "Chị Thùy Trang",
     location: "Quận 1, TP. Hồ Chí Minh",
-    action: "vừa bóc tách hóa đơn Highlands 185k bằng AI Gemini",
+    action: "vừa bóc tách hóa đơn Highlands 185k bằng Trí Tuệ Nhân Tạo AI",
     icon: ScanLine,
     iconBg: "bg-cyan-600 text-white",
     time: "4 phút trước",
-    verified: "AI Gemini 2.0 OCR",
+    verified: "AI OCR Siêu Tốc",
   },
   {
     id: 3,

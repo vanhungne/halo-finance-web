@@ -41,15 +41,15 @@ export default function StickyDownloadBar({ onOpenQr }) {
             <PhoneCall className="h-4 w-4 text-sky-600" />
           </a>
 
-          {/* Web Banking Portal button */}
+          {/* QR Code trigger */}
           <button
             type="button"
-            onClick={() => navigate("/app")}
-            className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition shrink-0 shadow-2xs"
-            title="Cổng Web Internet Banking"
-            aria-label="Cổng Web Internet Banking"
+            onClick={onOpenQr}
+            className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition shrink-0 shadow-2xs cursor-pointer"
+            title="Quét mã tải app 0đ"
+            aria-label="Quét mã tải app"
           >
-            <Laptop className="h-4 w-4 text-blue-600" />
+            <QrCode className="h-4 w-4 text-emerald-600" />
           </button>
 
           {/* Primary eKYC / App Download Action Button */}

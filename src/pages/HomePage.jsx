@@ -119,10 +119,10 @@ const features = [
 const faqItems = [
   {
     q: "Halo Finance có thực sự miễn phí 100% trọn đời không? Có phát sinh chi phí ẩn không?",
-    a: "Cam kết 100% miễn phí trọn đời: 0đ phí tải app, 0đ phí mở tài khoản eKYC, 0đ phí bóc tách hóa đơn AI Gemini 2.0, 0đ phí chuyển khoản VietQR và 0đ phí duy trì số dư tối thiểu. Toàn bộ tính năng cao cấp đều được mở khóa sẵn mà không có bất kỳ chi phí ẩn nào.",
+    a: "Cam kết 100% miễn phí trọn đời: 0đ phí tải app, 0đ phí mở tài khoản eKYC, 0đ phí bóc tách hóa đơn Trí Tuệ Nhân Tạo AI, 0đ phí chuyển khoản VietQR và 0đ phí duy trì số dư tối thiểu. Toàn bộ tính năng cao cấp đều được mở khóa sẵn mà không có bất kỳ chi phí ẩn nào.",
   },
   {
-    q: "Tại sao Halo Finance lại cung cấp AI Gemini và mọi tính năng cao cấp miễn phí 0 đồng?",
+    q: "Tại sao Halo Finance lại cung cấp Trí Tuệ Nhân Tạo AI và mọi tính năng cao cấp miễn phí 0 đồng?",
     a: "Trong giai đoạn đầu phát triển, Halo Finance ưu tiên tối đa sứ mệnh bình dân hóa công nghệ tài chính, giúp người Việt làm chủ dòng tiền thông minh. Chúng tôi tập trung tạo giá trị thực sự cho cộng đồng thay vì bán các gói đăng ký thu phí rườm rà.",
   },
   {
@@ -131,11 +131,11 @@ const faqItems = [
   },
   {
     q: "Tôi có bị giới hạn số lượng giao dịch hoặc số lượt quét hóa đơn mỗi tháng không?",
-    a: "Hoàn toàn không giới hạn! Bạn có thể thêm hàng nghìn khoản thu chi, quét hóa đơn siêu thị, xăng xe, nhà hàng mỗi ngày bằng camera AI Gemini 2.0 mà không bao giờ bị giới hạn số lượt hay bắt nâng cấp tài khoản.",
+    a: "Hoàn toàn không giới hạn! Bạn có thể thêm hàng nghìn khoản thu chi, quét hóa đơn siêu thị, xăng xe, nhà hàng mỗi ngày bằng camera AI thông minh mà không bao giờ bị giới hạn số lượt hay bắt nâng cấp tài khoản.",
   },
   {
-    q: "Công nghệ bóc tách hóa đơn AI Gemini 2.0 hoạt động như thế nào?",
-    a: "Trợ lý AI Gemini 2.0 tích hợp mô hình thị giác máy tính OCR đa ngôn ngữ, tự động nhận diện hóa đơn viết tay, bill in nhiệt mờ, hóa đơn VAT điện tử hay biên lai chuyển khoản. Chỉ trong 3 giây, tiền hàng, thuế suất VAT và danh mục chi tiêu được phân loại chính xác tới 99.4%.",
+    q: "Công nghệ bóc tách hóa đơn Trí Tuệ Nhân Tạo AI hoạt động như thế nào?",
+    a: "Trợ lý Trí Tuệ Nhân Tạo AI tích hợp mô hình thị giác máy tính OCR đa tầng, tự động nhận diện hóa đơn viết tay, bill in nhiệt mờ, hóa đơn VAT điện tử hay biên lai chuyển khoản. Chỉ trong 3 giây, tiền hàng, thuế suất VAT và danh mục chi tiêu được phân loại chính xác tới 99.4%.",
   },
   {
     q: "Tính năng Quỹ nhóm và Chia tiền VietQR 1 chạm hoạt động như thế nào?",
@@ -317,13 +317,15 @@ function HomePage() {
                   <Building2 className="h-5 w-5" />
                   <span>Mở Tài Khoản eKYC (0đ Phí)</span>
                 </button>
-                <a
-                  href="/app"
-                  className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-white hover:bg-white/20 transition hover:-translate-y-0.5 backdrop-blur-md"
+                <button
+                  type="button"
+                  onClick={() => setQrModalOpen(true)}
+                  className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-white hover:bg-white/20 transition hover:-translate-y-0.5 backdrop-blur-md cursor-pointer"
                 >
-                  <span>Cổng Web Banking</span>
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+                  <QrCode className="h-4 w-4" />
+                  <span>Quét Mã Tải App 0đ</span>
+                </button>
+
               </div>
 
               {/* Trust Badges Footer in CTA */}

@@ -32,7 +32,7 @@ const ONBOARDING_STEPS = [
     step: "02",
     tag: "Đồng bộ đa kênh",
     title: "Kết nối Open Banking 54+ Ngân Hàng",
-    desc: "Liên kết tức thì với tài khoản ngân hàng sẵn có qua mạng lưới chuyển mạch NAPAS 24/7. Trợ lý AI Gemini 2.0 tự động nhận diện hóa đơn và đồng bộ dòng tiền mà không cần nhập thủ công.",
+    desc: "Liên kết tức thì với tài khoản ngân hàng sẵn có qua mạng lưới chuyển mạch NAPAS 24/7. Trợ lý Trí Tuệ Nhân Tạo AI tự động nhận diện hóa đơn và đồng bộ dòng tiền mà không cần nhập thủ công.",
     features: [
       "Kết nối VCB, Techcombank, MB, ACB, BIDV...",
       "Bóc tách hóa đơn đa định dạng qua ảnh chụp",
@@ -159,12 +159,6 @@ export default function InstitutionalOnboarding({ onOpenQr }) {
               <span>Mở Tài Khoản eKYC (0đ)</span>
               <ArrowRight className="h-4 w-4" />
             </button>
-            <a
-              href="/app"
-              className="hidden sm:inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-xs font-bold text-white hover:bg-white/20 transition"
-            >
-              <span>Web Banking</span>
-            </a>
           </div>
         </div>
 

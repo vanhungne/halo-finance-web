@@ -18,9 +18,9 @@ const COMPARISON_ROWS = [
     manual: { status: "none", text: "Tự tải sao kê về gõ lại" },
   },
   {
-    feature: "Bóc tách hóa đơn ăn uống/siêu thị bằng AI Gemini",
+    feature: "Bóc tách hóa đơn ăn uống/siêu thị bằng Trí Tuệ Nhân Tạo AI",
     subtitle: "Chụp ảnh bill trong 3s, tự bóc tách từng món ăn, chiết khấu và thuế VAT",
-    halo: { status: "full", text: "AI Gemini 2.0 nhận diện chính xác 100%" },
+    halo: { status: "full", text: "AI OCR Đa Tầng nhận diện chính xác 100%" },
     tradBank: { status: "none", text: "Không có tính năng bóc tách hóa đơn" },
     otherApps: { status: "partial", text: "Chỉ đọc tổng tiền, hay lỗi font chữ" },
     manual: { status: "none", text: "Tự gõ từng dòng rất tốn thời gian" },

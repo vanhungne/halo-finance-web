@@ -96,14 +96,14 @@ export default function WebPortalShowcase() {
               <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-black uppercase">
                 Bảo Mật TLS 1.3 Chuẩn Ngân Hàng
               </span>
-              <button
-                type="button"
-                onClick={() => navigate("/app")}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-blue-600 text-white text-xs font-bold shadow-xs hover:bg-blue-700 transition"
+              <a
+                href="#free-commitment"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-600 text-white text-xs font-bold shadow-xs hover:bg-emerald-700 transition"
               >
-                <span>Mở Cổng Khách Hàng Web</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </button>
+                <span>Trải Nghiệm Miễn Phí 100%</span>
+                <Sparkles className="w-3.5 h-3.5" />
+              </a>
+
             </div>
           </div>
 
@@ -131,7 +131,7 @@ export default function WebPortalShowcase() {
                   <span>Sổ quỹ đa tài khoản</span>
                 </div>
                 <div className="p-2.5 rounded-xl text-slate-600 hover:bg-white transition flex items-center justify-between">
-                  <span>Kho hóa đơn AI Gemini</span>
+                  <span>Kho hóa đơn AI Vision</span>
                 </div>
                 <div className="p-2.5 rounded-xl text-slate-600 hover:bg-white transition flex items-center justify-between">
                   <span>Sổ nợ & Lịch thanh toán</span>

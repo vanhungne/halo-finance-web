@@ -157,7 +157,7 @@ export default function BankingQuickActionBar({ onOpenQr }) {
             { id: "rates", label: "Tỷ Giá & Vàng SJC", icon: Coins, badge: "Quy đổi trực tiếp" },
             { id: "savings", label: "Tính Lãi Tiền Gửi", icon: PiggyBank, badge: "đến 6.2%/năm" },
             { id: "loan", label: "Ước Tính Vay Vốn", icon: Landmark, badge: "Dư nợ giảm dần" },
-            { id: "scanner", label: "Quét Hóa Đơn AI", icon: Scan, badge: "Gemini 2.0" },
+            { id: "scanner", label: "Quét Hóa Đơn AI", icon: Scan, badge: "AI Siêu Tốc" },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -276,10 +276,10 @@ export default function BankingQuickActionBar({ onOpenQr }) {
                   </button>
                   <button
                     type="button"
-                    onClick={() => navigate("/app")}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 font-bold text-sm hover:bg-slate-100 transition"
+                    onClick={onOpenQr}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 font-bold text-sm hover:bg-slate-100 transition cursor-pointer"
                   >
-                    <span>Cổng Khách Hàng Web Internet Banking</span>
+                    <span>Tải App Trải Nghiệm 0đ (iOS & Android)</span>
                     <ArrowRight className="w-4 h-4 text-slate-500" />
                   </button>
                 </div>
@@ -560,7 +560,7 @@ export default function BankingQuickActionBar({ onOpenQr }) {
                 <div className="lg:col-span-6 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800 text-[11px] font-black uppercase">
-                      Độc quyền Gemini 2.0 AI
+                      Công Nghệ AI OCR Độc Quyền
                     </span>
                     <span className="text-xs text-slate-500 font-medium">Bóc tách hóa đơn trong 3 giây</span>
                   </div>

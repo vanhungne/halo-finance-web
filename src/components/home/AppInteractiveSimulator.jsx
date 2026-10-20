@@ -27,12 +27,12 @@ const SIMULATOR_SCREENS = [
   {
     id: "ai-scanner",
     tabTitle: "Quét Hóa Đơn AI",
-    tabSubtitle: "Gemini 2.0 OCR Tiếng Việt",
+    tabSubtitle: "Thị Giác Máy Tính AI OCR",
     icon: ScanLine,
     badge: "Độc quyền AI",
     tagline: "Chụp ảnh bill — AI bóc tách từng món và tự động ghi sổ trong 3 giây",
     description:
-      "Không còn phải ngồi gõ từng dòng chi tiêu thủ công. Công nghệ AI Gemini phân tích chi tiết hóa đơn nhà hàng, siêu thị, hóa đơn tiền điện: đọc rõ tên món, số lượng, thuế VAT 8% và tự động phân loại đúng danh mục.",
+      "Không còn phải ngồi gõ từng dòng chi tiêu thủ công. Công nghệ Trí Tuệ Nhân Tạo AI phân tích chi tiết hóa đơn nhà hàng, siêu thị, hóa đơn tiền điện: đọc rõ tên món, số lượng, thuế VAT 8% và tự động phân loại đúng danh mục.",
     highlights: [
       "Bóc tách chính xác 99.8% tiếng Việt có dấu",
       "Tự động tính thuế VAT và giảm giá voucher",

@@ -32,12 +32,12 @@ export const APP_FEATURES = [
     category: "ai",
     categoryName: "Trí Tuệ Nhân Tạo AI",
     title: "AI Bóc Tách Hóa Đơn 3 Giây",
-    subtitle: "Camera OCR Gemini 2.0",
+    subtitle: "Camera OCR Đa Tầng AI",
     badge: "Độc Quyền AI",
     badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
     icon: ScanLine,
     iconBg: "from-cyan-500 to-blue-600",
-    desc: "Chụp ảnh hóa đơn nhà hàng, siêu thị, bill tiền điện hay hóa đơn điện tử VAT. AI Gemini tự động bóc tách từng món, thuế VAT 8-10% và phân loại danh mục chính xác 99.4%.",
+    desc: "Chụp ảnh hóa đơn nhà hàng, siêu thị, bill tiền điện hay hóa đơn điện tử VAT. Trí Tuệ Nhân Tạo AI tự động bóc tách từng món, thuế VAT 8-10% và phân loại danh mục chính xác 99.4%.",
     appScreenRef: "src/screens/camera/CameraScreen.jsx",
     metric: "3 giây bóc tách",
   },
@@ -413,13 +413,14 @@ export default function RealAppFeatureGrid({ onOpenQr }) {
               <QrCode className="h-4 w-4" />
               <span>Quét Mã Tải App 0đ</span>
             </button>
-            <a
-              href="/app"
-              className="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-3.5 text-xs font-bold text-white hover:bg-white/20 transition backdrop-blur-md"
+            <button
+              type="button"
+              onClick={onOpenQr}
+              className="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-5 py-3.5 text-xs font-bold text-white hover:bg-white/20 transition backdrop-blur-md cursor-pointer"
             >
-              <span>Dùng Trên Trình Duyệt</span>
+              <span>Trải Nghiệm 100% Miễn Phí</span>
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </button>
           </div>
         </div>
 

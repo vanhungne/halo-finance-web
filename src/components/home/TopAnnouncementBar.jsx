@@ -89,15 +89,12 @@ export default function TopAnnouncementBar({ onOpenQr }) {
             <span>Điểm giao dịch</span>
           </a>
 
-          <button
-            type="button"
-            onClick={() => navigate("/app")}
-            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-sky-300 hover:text-white hover:bg-blue-600 transition font-bold text-[10px] sm:text-[11px] whitespace-nowrap"
+          <a
+            href="#free-commitment"
+            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 hover:text-white hover:bg-emerald-600 transition font-bold text-[10px] sm:text-[11px] whitespace-nowrap"
           >
-            <Laptop className="w-3 h-3" />
-            <span className="hidden sm:inline">Web Internet Banking</span>
-            <span className="sm:hidden">Web Banking</span>
-          </button>
+            <span>Cam kết 100% Miễn Phí (0đ)</span>
+          </a>
 
           <span className="hidden sm:inline text-slate-600">|</span>
           <span className="hidden sm:inline-flex items-center gap-1 text-slate-300 font-bold">

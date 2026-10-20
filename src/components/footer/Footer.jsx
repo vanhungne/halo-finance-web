@@ -19,7 +19,7 @@ import images from "../../assets/image.js";
 const productLinks = [
   { label: "Tài Khoản Thanh Toán Số Đẹp (0đ Phí)", href: "#features" },
   { label: "Mô Phỏng Trải Nghiệm App Mobile", href: "#app-simulator" },
-  { label: "Bóc Tách Hóa Đơn AI Gemini 2.0", href: "#ai-scanner" },
+  { label: "Bóc Tách Hóa Đơn Trí Tuệ Nhân Tạo AI", href: "#app-simulator" },
   { label: "Chia Tiền Nhóm Du Lịch VietQR 1 Chạm", href: "#app-simulator" },
   { label: "Quản Lý Sổ Nợ & Tính Lãi Dư Nợ", href: "#calculators" },
   { label: "Báo Cáo Phân Tích Dòng Tiền 360°", href: "#product-preview" },
@@ -43,7 +43,7 @@ const companyLinks = [
   { label: "Tiêu Chuẩn Bảo Mật PCI-DSS & ISO 27001", href: "#security" },
   { label: "Tuân Thủ Nghị Định 13/2023/NĐ-CP", href: "#security" },
   { label: "Câu Hỏi Thường Gặp (FAQ)", href: "#faq" },
-  { label: "Cổng Khách Hàng Web Internet Banking", href: "/app" },
+  { label: "Sổ Thu Chi Miễn Phí 100% Trọn Đời", href: "#free-commitment" },
 ];
 
 function Footer() {
@@ -103,7 +103,7 @@ function Footer() {
               Công Ty Cổ Phần Công Nghệ Tài Chính Halo
             </h4>
             <p className="text-xs leading-relaxed text-slate-400 max-w-sm">
-              Nền tảng tài chính số đa phương thức phục vụ hơn 3.2 triệu cá nhân, gia đình và hộ kinh doanh tại Việt Nam. Kết nối 54+ ngân hàng chuẩn NAPAS 24/7, bóc tách hóa đơn AI Gemini trong 3 giây và quản trị dòng tiền chuẩn mực quốc tế.
+              Nền tảng tài chính số đa phương thức phục vụ hơn 3.2 triệu cá nhân, gia đình và hộ kinh doanh tại Việt Nam. Kết nối 54+ ngân hàng chuẩn NAPAS 24/7, bóc tách hóa đơn Trí Tuệ Nhân Tạo AI trong 3 giây và quản trị dòng tiền chuẩn mực quốc tế.
             </p>
 
             <div className="space-y-2 text-xs text-slate-400 pt-1">

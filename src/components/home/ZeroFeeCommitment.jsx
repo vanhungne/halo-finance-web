@@ -39,7 +39,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       other: "Giới hạn 10 – 30 lượt/tháng",
       otherSub: "Bắt mua thêm gói lượt quét",
       halo: "Không giới hạn số lượng",
-      haloSub: "AI Gemini 2.0 xử lý trong 3 giây",
+      haloSub: "Trí Tuệ Nhân Tạo AI xử lý trong 3 giây",
       haloHighlight: true,
     },
     {
@@ -94,7 +94,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
     {
       icon: <Bot className="h-6 w-6 text-sky-400" />,
       title: "0đ Bóc Tách Hóa Đơn AI",
-      desc: "Trải nghiệm sức mạnh mô hình Gemini 2.0 Flash không giới hạn lượt quét bill cafe, siêu thị, xăng xe.",
+      desc: "Trải nghiệm sức mạnh bóc tách AI siêu tốc không giới hạn lượt quét bill cafe, siêu thị, xăng xe.",
       badge: "Không giới hạn",
     },
     {
@@ -146,7 +146,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
           </h2>
 
           <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-300">
-            Halo Finance hướng tới sứ mệnh bình dân hóa công nghệ tài chính cho người Việt. Mọi tính năng cao cấp từ AI Gemini 2.0, Voice AI đến chia tiền VietQR đều mở sẵn 100% miễn phí, không giới hạn.
+            Halo Finance hướng tới sứ mệnh bình dân hóa công nghệ tài chính cho người Việt. Mọi tính năng cao cấp từ Trí Tuệ Nhân Tạo AI, Voice AI đến chia tiền VietQR đều mở sẵn 100% miễn phí, không giới hạn.
           </p>
         </div>
 
@@ -322,10 +322,10 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
               <span>Quét Mã Tải App 0đ (iOS & Android)</span>
             </button>
             <a
-              href="/app"
+              href="#app-simulator"
               className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3.5 text-xs font-bold text-white hover:bg-white/20 transition hover:-translate-y-0.5"
             >
-              <span>Vào Cổng Web Banking 0đ</span>
+              <span>Trải Nghiệm Trực Tiếp Trên Web</span>
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>

@@ -79,7 +79,7 @@ export default function EpicHero({ onOpenQr }) {
 
           {/* Subtitle */}
           <p className="max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Hệ sinh thái quản trị tài chính cá nhân & quỹ nhóm <strong className="text-slate-900 font-semibold">100% miễn phí trọn đời</strong> (Web Internet Banking & Mobile App) kết nối trực tiếp <strong className="text-blue-700 font-semibold">54+ ngân hàng NAPAS 24/7</strong>. Tự động bóc tách hóa đơn trong 3 giây bằng AI Gemini, chia tiền nhóm VietQR 1 chạm, và bảo vệ tài sản chuẩn <strong className="text-slate-900 font-semibold">PCI-DSS & ISO 27001</strong>.
+            Hệ sinh thái quản trị tài chính cá nhân & quỹ nhóm <strong className="text-slate-900 font-semibold">100% miễn phí trọn đời</strong> kết nối trực tiếp <strong className="text-blue-700 font-semibold">54+ ngân hàng NAPAS 24/7</strong>. Tự động bóc tách hóa đơn trong 3 giây bằng Trí Tuệ Nhân Tạo AI, chia tiền nhóm VietQR 1 chạm, và bảo vệ tài sản chuẩn <strong className="text-slate-900 font-semibold">PCI-DSS & ISO 27001</strong>.
           </p>
 
           {/* Action CTAs Suite */}
@@ -94,15 +94,15 @@ export default function EpicHero({ onOpenQr }) {
               <span>Mở Tài Khoản eKYC (0đ Phí)</span>
             </button>
 
-            {/* Direct Web Internet Banking Portal */}
-            <a
-              href="/app"
-              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50/40 shadow-xs"
+            {/* Download App 0d */}
+            <button
+              type="button"
+              onClick={onOpenQr}
+              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-emerald-500 hover:text-emerald-700 hover:bg-emerald-50/40 shadow-xs cursor-pointer"
             >
-              <Laptop className="h-4 w-4 text-blue-600" />
-              <span>Cổng Web Internet Banking</span>
-              <ArrowUpRight className="h-4 w-4 text-slate-400" />
-            </a>
+              <QrCode className="h-4 w-4 text-emerald-600" />
+              <span>Tải App 0đ Trọn Đời</span>
+            </button>
 
             {/* Mobile Store Buttons */}
             <StoreButtons buttonClassName="bg-slate-900 text-white hover:bg-slate-800 shadow-md transition-all" onOpenQr={onOpenQr} />
@@ -510,14 +510,14 @@ export default function EpicHero({ onOpenQr }) {
                   </div>
 
                   {/* One-click Export Action */}
-                  <a
-                    href="/app"
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition"
+                  <button
+                    type="button"
+                    onClick={onOpenQr}
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition cursor-pointer"
                   >
                     <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Xuất Báo Cáo Kế Toán Excel / PDF</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
-                  </a>
+                  </button>
                 </div>
               </motion.div>
             )}
@@ -534,7 +534,7 @@ export default function EpicHero({ onOpenQr }) {
               <Building2 className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-[10px] font-extrabold uppercase text-blue-700">eKYC AI Gemini</p>
+              <p className="text-[10px] font-extrabold uppercase text-blue-700">eKYC Sinh Trắc Học AI</p>
               <p className="text-xs font-black text-slate-900">Xác thực FaceID 60s</p>
             </div>
           </motion.div>
