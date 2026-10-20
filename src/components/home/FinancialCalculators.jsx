@@ -111,28 +111,28 @@ export default function FinancialCalculators() {
   };
 
   return (
-    <section id="calculators" className="py-24 sm:py-32 bg-slate-900 text-white relative overflow-hidden">
+    <section id="calculators" className="py-24 sm:py-32 bg-white text-slate-900 relative overflow-hidden border-t border-slate-200/80">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-sky-600/10 via-indigo-600/15 to-transparent blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-sky-500/5 via-indigo-500/5 to-transparent blur-[120px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-sky-300 mb-4">
-            <Calculator className="w-4 h-4 text-sky-400" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-sky-700 mb-4">
+            <Calculator className="w-4 h-4 text-sky-600" />
             Công Cụ Tài Chính Trực Tuyến Chuẩn Ngân Hàng
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950">
             Dự Phóng & Tính Toán Dòng Tiền Chính Xác
           </h2>
-          <p className="mt-4 text-slate-400 text-base sm:text-lg">
+          <p className="mt-4 text-slate-600 text-base sm:text-lg">
             Bộ công cụ tính lãi suất tiết kiệm, lịch trả nợ vay và tích lũy đầu tư giúp bạn ra quyết định tài chính sáng suốt trước khi xuống tiền.
           </p>
         </div>
 
         {/* Tab Buttons */}
         <div className="mt-12 flex justify-center">
-          <div className="inline-flex p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
+          <div className="inline-flex p-1.5 rounded-2xl bg-slate-100 border border-slate-200">
             {[
               { id: "savings", label: "Tính Lãi Tiết Kiệm", icon: PiggyBank },
               { id: "loan", label: "Tính Lịch Trả Nợ Vay", icon: Landmark },
@@ -147,8 +147,8 @@ export default function FinancialCalculators() {
                   type="button"
                   className={`flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
                     isActive
-                      ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-500/30"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                      ? "bg-white text-blue-600 shadow-sm font-extrabold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-white/50"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -161,15 +161,15 @@ export default function FinancialCalculators() {
         </div>
 
         {/* Calculator Body */}
-        <div className="mt-10 max-w-4xl mx-auto rounded-3xl border border-white/10 bg-slate-950/60 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl">
+        <div className="mt-10 max-w-4xl mx-auto rounded-3xl border border-slate-200 bg-slate-50/70 p-6 sm:p-10 shadow-lg">
           {/* TAB 1: SAVINGS */}
           {activeTab === "savings" && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-6">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-bold text-slate-300">Số tiền gửi tiết kiệm</label>
-                    <span className="text-lg font-black text-sky-400">{formatVND(savingsDeposit)}</span>
+                    <label className="text-sm font-bold text-slate-700">Số tiền gửi tiết kiệm</label>
+                    <span className="text-lg font-black text-sky-600">{formatVND(savingsDeposit)}</span>
                   </div>
                   <input
                     type="range"
@@ -178,9 +178,9 @@ export default function FinancialCalculators() {
                     step="5000000"
                     value={savingsDeposit}
                     onChange={(e) => setSavingsDeposit(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
                   />
-                  <div className="flex justify-between text-[0.7rem] text-slate-500 mt-1">
+                  <div className="flex justify-between text-[0.7rem] text-slate-400 mt-1 font-semibold">
                     <span>10 triệu</span>
                     <span>500 triệu</span>
                     <span>1 tỷ</span>
@@ -189,11 +189,11 @@ export default function FinancialCalculators() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-bold text-slate-300 mb-2 block">Kỳ hạn gửi</label>
+                    <label className="text-sm font-bold text-slate-700 mb-2 block">Kỳ hạn gửi</label>
                     <select
                       value={savingsMonths}
                       onChange={(e) => setSavingsMonths(Number(e.target.value))}
-                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-semibold focus:outline-none focus:border-sky-500"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 text-sm font-semibold focus:outline-none focus:border-sky-500 shadow-xs"
                     >
                       <option value={1}>1 tháng (3.2%/năm)</option>
                       <option value={3}>3 tháng (3.8%/năm)</option>
@@ -204,27 +204,27 @@ export default function FinancialCalculators() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-bold text-slate-300 mb-2 block">Lãi suất (% / năm)</label>
+                    <label className="text-sm font-bold text-slate-700 mb-2 block">Lãi suất (% / năm)</label>
                     <input
                       type="number"
                       step="0.1"
                       value={savingsRate}
                       onChange={(e) => setSavingsRate(Number(e.target.value))}
-                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-semibold focus:outline-none focus:border-sky-500"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 text-sm font-semibold focus:outline-none focus:border-sky-500 shadow-xs"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-sm font-bold text-slate-300 mb-2 block">Hình thức lĩnh lãi</label>
+                  <label className="text-sm font-bold text-slate-700 mb-2 block">Hình thức lĩnh lãi</label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setSavingsMethod("end")}
                       className={`p-3 rounded-xl border text-xs font-bold text-center transition ${
                         savingsMethod === "end"
-                          ? "bg-sky-500/20 border-sky-400 text-sky-300"
-                          : "bg-white/5 border-white/10 text-slate-400"
+                          ? "bg-sky-100/70 border-sky-400 text-sky-800 shadow-xs"
+                          : "bg-white border-slate-200 text-slate-600 hover:bg-slate-100"
                       }`}
                     >
                       Lĩnh lãi cuối kỳ (Khuyên dùng)
@@ -234,8 +234,8 @@ export default function FinancialCalculators() {
                       onClick={() => setSavingsMethod("monthly")}
                       className={`p-3 rounded-xl border text-xs font-bold text-center transition ${
                         savingsMethod === "monthly"
-                          ? "bg-sky-500/20 border-sky-400 text-sky-300"
-                          : "bg-white/5 border-white/10 text-slate-400"
+                          ? "bg-sky-100/70 border-sky-400 text-sky-800 shadow-xs"
+                          : "bg-white border-slate-200 text-slate-600 hover:bg-slate-100"
                       }`}
                     >
                       Lĩnh lãi định kỳ hàng tháng
@@ -245,24 +245,24 @@ export default function FinancialCalculators() {
               </div>
 
               {/* Result Card */}
-              <div className="lg:col-span-5 rounded-2xl bg-gradient-to-br from-slate-900 to-[#0c1a30] border border-sky-500/30 p-6 space-y-5">
-                <p className="text-xs uppercase font-extrabold tracking-wider text-sky-400">Kết quả dự phóng</p>
+              <div className="lg:col-span-5 rounded-2xl bg-gradient-to-br from-sky-50 via-blue-50/70 to-indigo-50 border border-sky-200/90 shadow-sm p-6 space-y-5">
+                <p className="text-xs uppercase font-extrabold tracking-wider text-sky-800">Kết quả dự phóng</p>
                 <div className="space-y-1">
-                  <span className="text-xs text-slate-400">Tiền lãi nhận được</span>
-                  <p className="text-3xl font-black text-emerald-400">{formatVND(savingsResult.interest)}</p>
+                  <span className="text-xs text-slate-500">Tiền lãi nhận được</span>
+                  <p className="text-3xl font-black text-sky-700">{formatVND(savingsResult.interest)}</p>
                 </div>
-                <div className="pt-4 border-t border-white/10 space-y-3 text-sm">
-                  <div className="flex justify-between text-slate-300">
+                <div className="pt-4 border-t border-slate-200/80 space-y-3 text-sm">
+                  <div className="flex justify-between text-slate-600">
                     <span>Gốc ban đầu:</span>
-                    <span className="font-bold text-white">{formatVND(savingsDeposit)}</span>
+                    <span className="font-bold text-slate-900">{formatVND(savingsDeposit)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-600">
                     <span>Tổng tiền khi đáo hạn:</span>
-                    <span className="font-bold text-sky-300">{formatVND(savingsResult.total)}</span>
+                    <span className="font-bold text-sky-800">{formatVND(savingsResult.total)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-600">
                     <span>Lãi bình quân tháng:</span>
-                    <span className="font-bold text-slate-200">{formatVND(savingsResult.monthlyInterest)}</span>
+                    <span className="font-bold text-slate-800">{formatVND(savingsResult.monthlyInterest)}</span>
                   </div>
                 </div>
               </div>
@@ -275,8 +275,8 @@ export default function FinancialCalculators() {
               <div className="lg:col-span-7 space-y-6">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-bold text-slate-300">Số tiền muốn vay</label>
-                    <span className="text-lg font-black text-rose-400">{formatVND(loanAmount)}</span>
+                    <label className="text-sm font-bold text-slate-700">Số tiền muốn vay</label>
+                    <span className="text-lg font-black text-rose-600">{formatVND(loanAmount)}</span>
                   </div>
                   <input
                     type="range"
@@ -285,9 +285,9 @@ export default function FinancialCalculators() {
                     step="10000000"
                     value={loanAmount}
                     onChange={(e) => setLoanAmount(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-rose-600"
                   />
-                  <div className="flex justify-between text-[0.7rem] text-slate-500 mt-1">
+                  <div className="flex justify-between text-[0.7rem] text-slate-400 mt-1 font-semibold">
                     <span>50 triệu</span>
                     <span>1 tỷ</span>
                     <span>2 tỷ</span>
@@ -296,11 +296,11 @@ export default function FinancialCalculators() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-bold text-slate-300 mb-2 block">Thời hạn vay (tháng)</label>
+                    <label className="text-sm font-bold text-slate-700 mb-2 block">Thời hạn vay (tháng)</label>
                     <select
                       value={loanMonths}
                       onChange={(e) => setLoanMonths(Number(e.target.value))}
-                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-semibold focus:outline-none focus:border-rose-500"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 text-sm font-semibold focus:outline-none focus:border-rose-500 shadow-xs"
                     >
                       <option value={12}>12 tháng (1 năm)</option>
                       <option value={24}>24 tháng (2 năm)</option>
@@ -310,27 +310,27 @@ export default function FinancialCalculators() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-bold text-slate-300 mb-2 block">Lãi suất (% / năm)</label>
+                    <label className="text-sm font-bold text-slate-700 mb-2 block">Lãi suất (% / năm)</label>
                     <input
                       type="number"
                       step="0.1"
                       value={loanRate}
                       onChange={(e) => setLoanRate(Number(e.target.value))}
-                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-semibold focus:outline-none focus:border-rose-500"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 text-sm font-semibold focus:outline-none focus:border-rose-500 shadow-xs"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-sm font-bold text-slate-300 mb-2 block">Phương thức tính lãi</label>
+                  <label className="text-sm font-bold text-slate-700 mb-2 block">Phương thức tính lãi</label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setLoanType("reducing")}
                       className={`p-3 rounded-xl border text-xs font-bold text-center transition ${
                         loanType === "reducing"
-                          ? "bg-rose-500/20 border-rose-400 text-rose-300"
-                          : "bg-white/5 border-white/10 text-slate-400"
+                          ? "bg-rose-100/70 border-rose-400 text-rose-800 shadow-xs"
+                          : "bg-white border-slate-200 text-slate-600 hover:bg-slate-100"
                       }`}
                     >
                       Dư nợ giảm dần (Tiết kiệm hơn)
@@ -340,8 +340,8 @@ export default function FinancialCalculators() {
                       onClick={() => setLoanType("flat")}
                       className={`p-3 rounded-xl border text-xs font-bold text-center transition ${
                         loanType === "flat"
-                          ? "bg-rose-500/20 border-rose-400 text-rose-300"
-                          : "bg-white/5 border-white/10 text-slate-400"
+                          ? "bg-rose-100/70 border-rose-400 text-rose-800 shadow-xs"
+                          : "bg-white border-slate-200 text-slate-600 hover:bg-slate-100"
                       }`}
                     >
                       Niên kim cố định (Trả đều mỗi tháng)
@@ -351,25 +351,25 @@ export default function FinancialCalculators() {
               </div>
 
               {/* Result Card */}
-              <div className="lg:col-span-5 rounded-2xl bg-gradient-to-br from-slate-900 to-[#220d18] border border-rose-500/30 p-6 space-y-5">
-                <p className="text-xs uppercase font-extrabold tracking-wider text-rose-400">Ước tính thanh toán</p>
+              <div className="lg:col-span-5 rounded-2xl bg-gradient-to-br from-rose-50 via-orange-50/70 to-amber-50 border border-rose-200/90 shadow-sm p-6 space-y-5">
+                <p className="text-xs uppercase font-extrabold tracking-wider text-rose-800">Ước tính thanh toán</p>
                 <div className="space-y-1">
-                  <span className="text-xs text-slate-400">Trả tháng đầu tiên</span>
-                  <p className="text-3xl font-black text-rose-300">{formatVND(loanResult.firstMonth)}</p>
+                  <span className="text-xs text-slate-500">Trả tháng đầu tiên</span>
+                  <p className="text-3xl font-black text-rose-700">{formatVND(loanResult.firstMonth)}</p>
                 </div>
-                <div className="pt-4 border-t border-white/10 space-y-3 text-sm">
-                  <div className="flex justify-between text-slate-300">
+                <div className="pt-4 border-t border-slate-200/80 space-y-3 text-sm">
+                  <div className="flex justify-between text-slate-600">
                     <span>Tổng tiền lãi cả kỳ:</span>
-                    <span className="font-bold text-amber-400">{formatVND(loanResult.totalInterest)}</span>
+                    <span className="font-bold text-amber-700">{formatVND(loanResult.totalInterest)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-600">
                     <span>Tổng gốc + lãi:</span>
-                    <span className="font-bold text-white">{formatVND(loanResult.totalPayment)}</span>
+                    <span className="font-bold text-slate-900">{formatVND(loanResult.totalPayment)}</span>
                   </div>
                   {loanType === "reducing" && (
-                    <div className="flex justify-between text-slate-300">
+                    <div className="flex justify-between text-slate-600">
                       <span>Trả tháng cuối cùng:</span>
-                      <span className="font-bold text-emerald-400">{formatVND(loanResult.lastMonth)}</span>
+                      <span className="font-bold text-emerald-700">{formatVND(loanResult.lastMonth)}</span>
                     </div>
                   )}
                 </div>
@@ -383,8 +383,8 @@ export default function FinancialCalculators() {
               <div className="lg:col-span-7 space-y-6">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-bold text-slate-300">Vốn khởi đầu</label>
-                    <span className="text-lg font-black text-amber-400">{formatVND(initialCapital)}</span>
+                    <label className="text-sm font-bold text-slate-700">Vốn khởi đầu</label>
+                    <span className="text-lg font-black text-amber-600">{formatVND(initialCapital)}</span>
                   </div>
                   <input
                     type="range"
@@ -393,14 +393,14 @@ export default function FinancialCalculators() {
                     step="5000000"
                     value={initialCapital}
                     onChange={(e) => setInitialCapital(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-600"
                   />
                 </div>
 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-bold text-slate-300">Tích lũy góp thêm hàng tháng</label>
-                    <span className="text-lg font-black text-sky-400">{formatVND(monthlyContribution)}</span>
+                    <label className="text-sm font-bold text-slate-700">Tích lũy góp thêm hàng tháng</label>
+                    <span className="text-lg font-black text-sky-600">{formatVND(monthlyContribution)}</span>
                   </div>
                   <input
                     type="range"
@@ -409,50 +409,50 @@ export default function FinancialCalculators() {
                     step="1000000"
                     value={monthlyContribution}
                     onChange={(e) => setMonthlyContribution(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-bold text-slate-300 mb-2 block">Thời gian đầu tư (năm)</label>
+                    <label className="text-sm font-bold text-slate-700 mb-2 block">Thời gian đầu tư (năm)</label>
                     <input
                       type="number"
                       min="1"
                       max="40"
                       value={compoundYears}
                       onChange={(e) => setCompoundYears(Number(e.target.value))}
-                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-semibold focus:outline-none focus:border-amber-500"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 text-sm font-semibold focus:outline-none focus:border-amber-500 shadow-xs"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-bold text-slate-300 mb-2 block">Lãi kép kỳ vọng (% / năm)</label>
+                    <label className="text-sm font-bold text-slate-700 mb-2 block">Lãi kép kỳ vọng (% / năm)</label>
                     <input
                       type="number"
                       step="0.5"
                       value={compoundRate}
                       onChange={(e) => setCompoundRate(Number(e.target.value))}
-                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm font-semibold focus:outline-none focus:border-amber-500"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 text-sm font-semibold focus:outline-none focus:border-amber-500 shadow-xs"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Result Card */}
-              <div className="lg:col-span-5 rounded-2xl bg-gradient-to-br from-slate-900 to-[#1f1a0c] border border-amber-500/30 p-6 space-y-5">
-                <p className="text-xs uppercase font-extrabold tracking-wider text-amber-400">Sức mạnh lãi kép</p>
+              <div className="lg:col-span-5 rounded-2xl bg-gradient-to-br from-amber-50 via-yellow-50/70 to-emerald-50 border border-amber-200/90 shadow-sm p-6 space-y-5">
+                <p className="text-xs uppercase font-extrabold tracking-wider text-amber-800">Sức mạnh lãi kép</p>
                 <div className="space-y-1">
-                  <span className="text-xs text-slate-400">Tổng tài sản sau {compoundYears} năm</span>
-                  <p className="text-3xl font-black text-amber-300">{formatVND(compoundResult.finalBalance)}</p>
+                  <span className="text-xs text-slate-500">Tổng tài sản sau {compoundYears} năm</span>
+                  <p className="text-3xl font-black text-amber-700">{formatVND(compoundResult.finalBalance)}</p>
                 </div>
-                <div className="pt-4 border-t border-white/10 space-y-3 text-sm">
-                  <div className="flex justify-between text-slate-300">
+                <div className="pt-4 border-t border-slate-200/80 space-y-3 text-sm">
+                  <div className="flex justify-between text-slate-600">
                     <span>Tổng vốn bạn tự nộp:</span>
-                    <span className="font-bold text-white">{formatVND(compoundResult.totalInvested)}</span>
+                    <span className="font-bold text-slate-900">{formatVND(compoundResult.totalInvested)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-600">
                     <span>Tiền lời sinh ra từ lãi kép:</span>
-                    <span className="font-bold text-emerald-400">+{formatVND(compoundResult.totalInterest)}</span>
+                    <span className="font-bold text-emerald-700">+{formatVND(compoundResult.totalInterest)}</span>
                   </div>
                 </div>
               </div>

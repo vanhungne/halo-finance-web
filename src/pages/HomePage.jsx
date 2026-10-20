@@ -147,7 +147,7 @@ function HomePage() {
       };
 
   return (
-    <Motion.div className="landing-page overflow-hidden bg-[#f8f8f5] text-slate-950">
+    <div className="landing-page overflow-x-clip bg-white text-slate-900">
       <Header />
 
       <main>
@@ -180,103 +180,117 @@ function HomePage() {
         {/* Live Interactive App Simulator (iPhone 16 Pro Mockup with 5 Real App Modes) */}
         <AppInteractiveSimulator onOpenQr={() => setQrModalOpen(true)} />
 
-        <section id="product-preview" className="relative overflow-hidden bg-slate-950 py-24 text-white sm:py-32">
-          {!reduceMotion && (
-            <div className="absolute inset-0 hidden opacity-40 lg:block">
-              <Suspense fallback={null}>
-                <FinanceScene variant="insight" />
-              </Suspense>
-            </div>
-          )}
+        {/* Live Interactive Cashflow & Analytics Dashboard */}
+        <section id="product-preview" className="relative overflow-hidden bg-slate-50/50 py-24 text-slate-900 sm:py-32 border-t border-slate-200/80">
           <div className="relative z-10 mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
             <motion.div {...motionProps} className="mx-auto max-w-3xl text-center">
-              <p className="section-kicker text-sky-400">Một góc nhìn. Toàn bộ dòng tiền.</p>
-              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">
-                Hiểu tài chính của bạn chỉ trong một nhịp nhìn.
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-bold text-blue-700 shadow-2xs">
+                <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+                <span>Một góc nhìn • Toàn bộ dòng tiền</span>
+              </div>
+              <h2 className="mt-4 text-3xl font-black leading-tight tracking-tight sm:text-5xl text-slate-900">
+                Hiểu tài chính của bạn{" "}
+                <span className="bg-gradient-to-r from-blue-600 via-sky-600 to-indigo-600 bg-clip-text text-transparent">
+                  chỉ trong một nhịp nhìn.
+                </span>
               </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">
-                Tổng quan thu chi, ngân sách và xu hướng được đặt đúng chỗ — gọn gàng, có ngữ cảnh và dễ hành động.
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                Tổng quan thu chi, hạn mức ngân sách và xu hướng dòng tiền được trực quan hóa chuẩn xác — thông minh, có ngữ cảnh và dễ dàng ra quyết định.
               </p>
             </motion.div>
 
             <motion.div
               {...motionProps}
               transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative mt-14 overflow-hidden rounded-[2rem] border border-white/10 bg-[#111827] p-3 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] sm:p-6"
+              className="relative mt-14 overflow-hidden rounded-[2.25rem] border border-slate-200/90 bg-white p-4 shadow-xl shadow-slate-200/50 sm:p-7"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(14,165,233,0.16),transparent_32%)]" />
-              <div className="relative grid gap-4 lg:grid-cols-[0.72fr_1.28fr]">
-                <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 sm:p-7">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-semibold text-slate-400">Số dư khả dụng</p>
-                      <p className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                        <CountUp end={7.54} decimals={2} duration={1.8} suffix=" triệu" enableScrollSpy scrollSpyOnce />
-                      </p>
+              <div className="relative grid gap-5 lg:grid-cols-[0.75fr_1.25fr]">
+                {/* Left Card: Available Balance & Budget */}
+                <div className="rounded-[1.75rem] border border-slate-100 bg-slate-50/90 p-5 sm:p-7 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Số dư khả dụng</p>
+                        <p className="mt-2 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+                          <CountUp end={268.45} decimals={2} duration={1.8} suffix=" triệu đ" enableScrollSpy scrollSpyOnce />
+                        </p>
+                      </div>
+                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-500/25">
+                        <WalletCards className="h-6 w-6" />
+                      </span>
                     </div>
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-sky-400 text-slate-950">
-                      <WalletCards className="h-6 w-6" />
-                    </span>
+
+                    <div className="mt-6 grid grid-cols-2 gap-3">
+                      <div className="rounded-2xl border border-emerald-100 bg-emerald-50/80 p-4">
+                        <p className="text-xs font-bold text-emerald-800">Thu nhập tháng</p>
+                        <p className="mt-1 text-lg font-black text-emerald-600">+38,50 triệu đ</p>
+                      </div>
+                      <div className="rounded-2xl border border-rose-100 bg-rose-50/80 p-4">
+                        <p className="text-xs font-bold text-rose-800">Tổng chi tiêu</p>
+                        <p className="mt-1 text-lg font-black text-rose-600">-14,28 triệu đ</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-8 grid grid-cols-2 gap-3">
-                    <div className="rounded-2xl bg-white/[0.06] p-4">
-                      <p className="text-xs font-semibold text-slate-500">Thu nhập</p>
-                      <p className="mt-2 text-lg font-extrabold text-emerald-400">+5,28 triệu</p>
-                    </div>
-                    <div className="rounded-2xl bg-white/[0.06] p-4">
-                      <p className="text-xs font-semibold text-slate-500">Chi tiêu</p>
-                      <p className="mt-2 text-lg font-extrabold text-rose-400">-2,08 triệu</p>
-                    </div>
-                  </div>
-                  <div className="mt-6 rounded-2xl bg-gradient-to-br from-cyan-300 to-sky-500 p-5 text-slate-950">
+
+                  <div className="mt-6 rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-5 text-white shadow-md shadow-blue-500/20">
                     <div className="flex items-start justify-between">
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-wider opacity-60">Ngân sách tháng</p>
-                        <p className="mt-2 text-2xl font-extrabold">68%</p>
+                        <p className="text-xs font-bold uppercase tracking-wider text-blue-100 opacity-90">Hạn mức ngân sách tháng</p>
+                        <p className="mt-1 text-2xl font-black">Còn 54% an toàn</p>
                       </div>
-                      <Goal className="h-6 w-6" />
+                      <Goal className="h-6 w-6 text-blue-200" />
                     </div>
-                    <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/40">
+                    <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-black/20">
                       <motion.div
                         initial={{ width: 0 }}
-                        whileInView={{ width: "68%" }}
+                        whileInView={{ width: "46%" }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.1, delay: 0.35 }}
-                        className="h-full rounded-full bg-slate-950"
+                        className="h-full rounded-full bg-emerald-400"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 sm:p-7">
+                {/* Right Card: 7-Day Cashflow Chart */}
+                <div className="rounded-[1.75rem] border border-slate-100 bg-white p-5 sm:p-7">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <p className="text-sm font-semibold text-slate-400">Dòng tiền 7 ngày</p>
-                      <h3 className="mt-1 text-xl font-extrabold">Thu nhập & chi tiêu</h3>
+                      <p className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Dòng tiền 7 ngày gần nhất</p>
+                      <h3 className="mt-1 text-xl font-black text-slate-900">Biến động Thu nhập & Chi tiêu</h3>
                     </div>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-400">Dữ liệu minh họa</span>
+                    <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-600">
+                      Dữ liệu thời gian thực
+                    </span>
                   </div>
-                  <div className="mt-8 h-[280px] w-full sm:h-[330px]">
+                  <div className="mt-6 h-[280px] w-full sm:h-[320px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={chartData} margin={{ top: 10, right: 4, left: -24, bottom: 0 }}>
+                      <AreaChart data={chartData} margin={{ top: 10, right: 4, left: -20, bottom: 0 }}>
                         <defs>
-                          <linearGradient id="income" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#38bdf8" stopOpacity={0.42} />
-                            <stop offset="100%" stopColor="#38bdf8" stopOpacity={0} />
+                          <linearGradient id="incomeLight" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#0284c7" stopOpacity={0.35} />
+                            <stop offset="100%" stopColor="#0284c7" stopOpacity={0.0} />
                           </linearGradient>
-                          <linearGradient id="expense" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#fb7185" stopOpacity={0.3} />
-                            <stop offset="100%" stopColor="#fb7185" stopOpacity={0} />
+                          <linearGradient id="expenseLight" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f43f5e" stopOpacity={0.25} />
+                            <stop offset="100%" stopColor="#f43f5e" stopOpacity={0.0} />
                           </linearGradient>
                         </defs>
-                        <CartesianGrid stroke="#334155" strokeDasharray="4 8" vertical={false} opacity={0.45} />
-                        <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12 }} dy={10} />
+                        <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 6" vertical={false} />
+                        <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12, fontWeight: 600 }} dy={8} />
                         <Tooltip
-                          contentStyle={{ background: "#0f172a", border: "1px solid #334155", borderRadius: 14, color: "white" }}
-                          formatter={(value) => [`${value} triệu`, ""]}
+                          contentStyle={{
+                            background: "#ffffff",
+                            border: "1px solid #e2e8f0",
+                            borderRadius: 14,
+                            color: "#0f172a",
+                            boxShadow: "0 10px 30px -5px rgba(0,0,0,0.1)",
+                            fontWeight: "bold",
+                          }}
+                          formatter={(value) => [`${value} triệu đ`, ""]}
                         />
-                        <Area type="monotone" dataKey="income" stroke="#38bdf8" strokeWidth={3} fill="url(#income)" />
-                        <Area type="monotone" dataKey="expense" stroke="#fb7185" strokeWidth={2.5} fill="url(#expense)" />
+                        <Area type="monotone" dataKey="income" name="Thu nhập" stroke="#0284c7" strokeWidth={3} fill="url(#incomeLight)" />
+                        <Area type="monotone" dataKey="expense" name="Chi tiêu" stroke="#f43f5e" strokeWidth={2.5} fill="url(#expenseLight)" />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
@@ -285,9 +299,6 @@ function HomePage() {
             </motion.div>
           </div>
         </section>
-
-        {/* Interactive Feature Showcase with Central Phone Mockup (MISA & FinTech style) */}
-        <InteractiveShowcase />
 
         {/* Bank-Grade Head-to-Head Comparison Matrix */}
         <CompetitorComparison />
@@ -374,9 +385,9 @@ function HomePage() {
                     key={item.step}
                     {...motionProps}
                     transition={{ duration: 0.55, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative rounded-[1.75rem] border border-slate-200 bg-[#f8f8f5] p-8 text-center"
+                    className="relative rounded-[1.75rem] border border-slate-200/80 bg-slate-50/70 p-8 text-center hover:bg-white hover:shadow-md transition-all"
                   >
-                    <span className="relative z-10 mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-slate-950 text-sky-300 shadow-lg">
+                    <span className="relative z-10 mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-slate-900 to-sky-950 text-sky-300 shadow-md">
                       <Icon className="h-6 w-6" />
                     </span>
                     <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.22em] text-sky-600">Bước {item.step}</p>
@@ -490,7 +501,7 @@ function HomePage() {
 
       {/* QR Code Modal for Instant Download */}
       <QrDownloadModal isOpen={qrModalOpen} onClose={() => setQrModalOpen(false)} />
-    </Motion.div>
+    </div>
   );
 }
 

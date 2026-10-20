@@ -9,24 +9,30 @@ async function capture() {
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 2 });
+  await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1.5 });
   
   await page.goto('http://localhost:5173/', { waitUntil: 'networkidle0', timeout: 30000 });
   await new Promise(r => setTimeout(r, 1000));
 
-  // Normal screenshot
-  const outputPath = path.resolve('screenshot-preview.png');
-  await page.screenshot({ path: outputPath, fullPage: false });
-  console.log('SCREENSHOT_SAVED: ' + outputPath);
+  const scrollOffsets = [
+    { name: 'scroll-1-hero.png', y: 0 },
+    { name: 'scroll-2-simulator.png', y: 1200 },
+    { name: 'scroll-3-comparison.png', y: 2400 },
+    { name: 'scroll-4-solutions.png', y: 3600 },
+    { name: 'scroll-5-aiscanner.png', y: 4600 },
+    { name: 'scroll-6-calculators.png', y: 5800 },
+    { name: 'scroll-7-rates-health.png', y: 7000 },
+    { name: 'scroll-8-security.png', y: 8200 },
+    { name: 'scroll-9-pricing.png', y: 9400 },
+    { name: 'scroll-10-walloflove.png', y: 10600 },
+  ];
 
-  // Hover over 'Tính năng' dropdown
-  const navButtons = await page.$$('nav button');
-  if (navButtons.length > 0) {
-    await navButtons[0].hover();
+  for (const s of scrollOffsets) {
+    await page.evaluate((top) => window.scrollTo(0, top), s.y);
     await new Promise(r => setTimeout(r, 600));
-    const dropdownPath = path.resolve('screenshot-dropdown.png');
-    await page.screenshot({ path: dropdownPath, fullPage: false });
-    console.log('DROPDOWN_SCREENSHOT_SAVED: ' + dropdownPath);
+    const out = path.resolve(s.name);
+    await page.screenshot({ path: out, fullPage: false });
+    console.log('SAVED: ' + s.name);
   }
 
   await browser.close();

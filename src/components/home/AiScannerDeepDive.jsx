@@ -82,22 +82,22 @@ export default function AiScannerDeepDive() {
     new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(amount);
 
   return (
-    <section id="ai-scanner" className="py-24 sm:py-32 bg-slate-950 text-white relative overflow-hidden">
+    <section id="ai-scanner" className="py-24 sm:py-32 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200/80">
       {/* Background gradients */}
-      <div className="absolute top-0 right-1/4 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-blue-600/10 blur-[140px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 h-[500px] w-[500px] rounded-full bg-cyan-500/5 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-blue-600/5 blur-[140px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-cyan-300 mb-4">
-            <Cpu className="w-4 h-4 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-cyan-700 mb-4">
+            <Cpu className="w-4 h-4 text-cyan-600" />
             Receipt Intelligence v2 Pipeline
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 leading-tight">
             Công Nghệ Bóc Tách Hóa Đơn Bằng AI Độc Quyền
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-400 leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Không chỉ là đọc chữ (OCR) cơ bản — Hệ thống sử dụng mô hình thị giác đa phương thức (Multimodal Vision AI) kết hợp thuật toán đối soát kế toán và phát hiện giả mạo hóa đơn nhiều lớp.
           </p>
         </div>
@@ -134,32 +134,32 @@ export default function AiScannerDeepDive() {
             return (
               <div
                 key={idx}
-                className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm hover:border-cyan-500/40 transition-colors"
+                className="relative rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs hover:border-cyan-500/40 hover:shadow-md transition-all"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-black uppercase text-cyan-400 tracking-wider">
+                  <span className="text-xs font-black uppercase text-cyan-600 tracking-wider">
                     Bước {item.step}
                   </span>
-                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-cyan-500/10 text-cyan-300">
+                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-cyan-50 text-cyan-600">
                     <Icon className="w-5 h-5" />
                   </div>
                 </div>
-                <h4 className="text-base font-extrabold text-white mb-2">{item.title}</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                <h4 className="text-base font-extrabold text-slate-900 mb-2">{item.title}</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
               </div>
             );
           })}
         </div>
 
         {/* Interactive Interactive Scanner Workspace */}
-        <div className="mt-14 rounded-3xl border border-white/15 bg-slate-900/80 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div className="mt-14 rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
             <div>
-              <h3 className="text-xl font-black text-white flex items-center gap-2">
-                <Scan className="w-5 h-5 text-cyan-400" />
+              <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
+                <Scan className="w-5 h-5 text-cyan-600" />
                 Trải Nghiệm Bóc Tách Trực Tiếp Mẫu Hóa Đơn Thực Tế
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Bấm vào một trong các loại hóa đơn dưới đây để quan sát AI xử lý:
               </p>
             </div>
@@ -173,8 +173,8 @@ export default function AiScannerDeepDive() {
                   onClick={() => handleSelect(b)}
                   className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
                     selectedBill.id === b.id
-                      ? "bg-cyan-500 text-slate-950 font-black shadow-lg shadow-cyan-500/30"
-                      : "bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10"
+                      ? "bg-cyan-600 text-white font-black shadow-md shadow-cyan-600/20"
+                      : "bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200/70"
                   }`}
                 >
                   {b.id === "coffee" ? "Hóa đơn Cafe" : b.id === "mart" ? "Siêu thị WinMart" : "Xăng dầu"}
@@ -187,7 +187,7 @@ export default function AiScannerDeepDive() {
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Visual Receipt Card with Scanner Line */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-[340px] rounded-2xl bg-white text-slate-900 p-6 shadow-2xl font-mono text-xs overflow-hidden">
+              <div className="relative w-full max-w-[340px] rounded-2xl bg-slate-50 text-slate-900 p-6 border border-slate-200 shadow-md font-mono text-xs overflow-hidden">
                 {/* Laser scan line */}
                 {isScanning && (
                   <motion.div
@@ -200,7 +200,7 @@ export default function AiScannerDeepDive() {
 
                 {/* Receipt Header */}
                 <div className="text-center pb-4 border-b border-dashed border-slate-300">
-                  <div className="inline-block p-1.5 rounded-full bg-slate-100 text-slate-700 mb-2">
+                  <div className="inline-block p-1.5 rounded-full bg-slate-200/70 text-slate-700 mb-2">
                     <Receipt className="w-5 h-5 mx-auto" />
                   </div>
                   <h4 className="font-black text-sm uppercase">{selectedBill.merchant}</h4>
@@ -252,45 +252,45 @@ export default function AiScannerDeepDive() {
 
             {/* AI Extraction Live Data Output */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="rounded-2xl border border-cyan-500/30 bg-cyan-950/20 p-5 space-y-3">
+              <div className="rounded-2xl border border-cyan-200 bg-cyan-50/50 p-5 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="relative flex h-2.5 w-2.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-500 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-600" />
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">
+                    <span className="text-xs font-bold uppercase tracking-wider text-cyan-800">
                       Kết Quả Bóc Tách Tức Thì (Extraction JSON v2)
                     </span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[0.65rem] font-bold">
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[0.65rem] font-bold">
                     Confidence: 99.8%
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 pt-2 text-xs">
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/5">
-                    <span className="text-slate-400 text-[0.65rem] block">Người bán nhận diện</span>
-                    <span className="font-extrabold text-white text-sm">{selectedBill.merchant}</span>
+                  <div className="p-3 rounded-xl bg-white border border-cyan-100 shadow-xs">
+                    <span className="text-slate-500 text-[0.65rem] block font-medium">Người bán nhận diện</span>
+                    <span className="font-extrabold text-slate-900 text-sm">{selectedBill.merchant}</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/5">
-                    <span className="text-slate-400 text-[0.65rem] block">Tổng tiền xác thực</span>
-                    <span className="font-black text-cyan-400 text-sm">{formatMoney(selectedBill.total)}</span>
+                  <div className="p-3 rounded-xl bg-white border border-cyan-100 shadow-xs">
+                    <span className="text-slate-500 text-[0.65rem] block font-medium">Tổng tiền xác thực</span>
+                    <span className="font-black text-cyan-700 text-sm">{formatMoney(selectedBill.total)}</span>
                   </div>
                 </div>
 
                 {/* Audit Checklist */}
-                <div className="space-y-2 pt-2 border-t border-white/10 text-xs">
-                  <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <div className="space-y-2 pt-2 border-t border-cyan-100 text-xs">
+                  <div className="flex items-center gap-2 text-emerald-700 font-semibold">
+                    <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
                     <span>Đối soát toán học hợp lệ: Phép tính tổng dòng hàng khớp tuyệt đối.</span>
                   </div>
-                  <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  <div className="flex items-center gap-2 text-emerald-700 font-semibold">
+                    <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
                     <span>Kiểm tra chống sửa ảnh: Không có vết chỉnh sửa photoshop tại vùng số tiền.</span>
                   </div>
-                  <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  <div className="flex items-center gap-2 text-emerald-700 font-semibold">
+                    <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
                     <span>Phát hiện hóa đơn trùng: Fingerprint SHA-256 duy nhất, chưa từng ghi nhận trước đó.</span>
                   </div>
                 </div>
@@ -300,12 +300,12 @@ export default function AiScannerDeepDive() {
               <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
                 <a
                   href="#download"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-extrabold text-sm shadow-lg shadow-cyan-500/30 hover:opacity-95 transition"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-extrabold text-sm shadow-md shadow-cyan-600/20 hover:opacity-95 transition"
                 >
                   <Scan className="w-4 h-4" />
                   Trải nghiệm Quét Hóa Đơn Trên App
                 </a>
-                <span className="text-xs text-slate-400 font-medium text-center sm:text-left">
+                <span className="text-xs text-slate-500 font-medium text-center sm:text-left">
                   Hỗ trợ cả hóa đơn in nhiệt nhà hàng, vé xe bus, hóa đơn VAT đỏ và biên lai chuyển khoản.
                 </span>
               </div>

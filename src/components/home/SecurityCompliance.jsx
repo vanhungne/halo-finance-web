@@ -45,21 +45,21 @@ const securityFeatures = [
 
 export default function SecurityCompliance() {
   return (
-    <section id="security" className="py-24 sm:py-32 bg-slate-900 text-white relative overflow-hidden">
+    <section id="security" className="py-24 sm:py-32 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200/80">
       {/* Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-[700px] bg-gradient-to-r from-sky-500/10 via-emerald-500/10 to-indigo-500/10 blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-[700px] bg-gradient-to-r from-sky-500/5 via-emerald-500/5 to-indigo-500/5 blur-[130px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-emerald-300 mb-4">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-emerald-800 mb-4">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
             An Ninh & Pháp Lý Tiêu Chuẩn Ngân Hàng
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 leading-tight">
             Tài Sản & Dữ Liệu Của Bạn Luôn Được Bảo Vệ Cao Nhất
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-400">
+          <p className="mt-4 text-base sm:text-lg text-slate-600">
             Chúng tôi hiểu rằng dữ liệu tài chính là điều nhạy cảm và quan trọng nhất. Halo Finance áp dụng các tiêu chuẩn an ninh mạng khắt khe tương đương với các tổ chức ngân hàng số hàng đầu thế giới.
           </p>
         </div>
@@ -75,13 +75,13 @@ export default function SecurityCompliance() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: idx * 0.07 }}
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-md hover:border-emerald-500/40 hover:bg-white/[0.06] transition-all duration-300"
+                className="rounded-3xl border border-slate-200/90 bg-white p-8 shadow-xs hover:border-emerald-500/50 hover:shadow-lg transition-all duration-300"
               >
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-emerald-400/20 to-teal-500/20 text-emerald-400 border border-emerald-500/30 mb-6">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 mb-6">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h4 className="text-lg font-black text-white mb-2 leading-snug">{sec.title}</h4>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+                <h4 className="text-lg font-black text-slate-900 mb-2 leading-snug">{sec.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                   {sec.desc}
                 </p>
               </motion.div>
@@ -90,21 +90,21 @@ export default function SecurityCompliance() {
         </div>
 
         {/* Trust Badges Footer Bar */}
-        <div className="mt-14 rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-wrap items-center justify-around gap-6 text-center text-xs font-bold text-slate-300">
+        <div className="mt-14 rounded-2xl border border-slate-200 bg-white p-6 flex flex-wrap items-center justify-around gap-6 text-center text-xs font-bold text-slate-700 shadow-sm">
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-400" />
+            <CheckCircle className="w-4 h-4 text-emerald-600" />
             <span>256-bit SSL / TLS 1.3 Certified</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-400" />
+            <CheckCircle className="w-4 h-4 text-emerald-600" />
             <span>2-Factor Authentication Protected</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-400" />
+            <CheckCircle className="w-4 h-4 text-emerald-600" />
             <span>Nghị định 13/2023/NĐ-CP Compliant</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-400" />
+            <CheckCircle className="w-4 h-4 text-emerald-600" />
             <span>Daily Automated Cloud Backup</span>
           </div>
         </div>

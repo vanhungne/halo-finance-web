@@ -38,7 +38,7 @@ const SIMULATOR_SCREENS = [
   },
   {
     id: "group-vietqr",
-    tabTitle: "Chia Tiền Nhóm VietQR",
+    tabTitle: "Chia Tiền VietQR",
     tabSubtitle: "Quyết toán 1 chạm",
     icon: Users2,
     badge: "Tính năng Hot",
@@ -86,7 +86,7 @@ const SIMULATOR_SCREENS = [
   },
   {
     id: "asset-gold",
-    tabTitle: "Quản Lý Tài Sản & Vàng",
+    tabTitle: "Tài Sản & Vàng SJC",
     tabSubtitle: "Định giá thời gian thực",
     icon: TrendingUp,
     badge: "Đầu tư cá nhân",
@@ -156,7 +156,7 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                 >
                   <Icon className="h-5 w-5" />
                 </div>
-                <span className="text-xs font-extrabold sm:text-sm line-clamp-1">{screen.tabTitle}</span>
+                <span className="text-xs font-extrabold sm:text-sm whitespace-nowrap">{screen.tabTitle}</span>
                 <span className="text-[11px] text-slate-500 font-medium hidden sm:block mt-0.5">
                   {screen.tabSubtitle}
                 </span>
