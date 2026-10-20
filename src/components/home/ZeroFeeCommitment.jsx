@@ -17,9 +17,12 @@ import {
   Gift,
   HeartHandshake,
 } from "lucide-react";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function ZeroFeeCommitment({ onOpenQr }) {
   const [txCount, setTxCount] = useState(150);
+  const { lang, strings } = useLanguage();
+  const commitment = strings?.commitment || {};
 
   // Calculate annual savings vs competing apps charging 49k-99k/month or 599k/year
   const monthlyCostCompetitor = txCount > 100 ? 99000 : 49000;
@@ -135,18 +138,18 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-emerald-300 shimmer-badge">
             <Gift className="h-4 w-4 text-emerald-400" />
-            <span>Cam Kết Minh Bạch — 100% Miễn Phí Trọn Đời</span>
+            <span>{commitment.badge || "Cam Kết Minh Bạch — 100% Miễn Phí Trọn Đời"}</span>
           </div>
 
           <h2 className="mt-5 text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15]">
-            Không Bán Gói. Không Phí Ẩn.{" "}
+            {commitment.title || "Không Bán Gói. Không Phí Ẩn."}{" "}
             <span className="block bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 bg-clip-text text-transparent">
-              Mở Khóa Toàn Bộ Sức Mạnh Tài Chính 0đ.
+              {commitment.titleHighlight || "Mở Khóa Toàn Bộ Sức Mạnh Tài Chính 0đ."}
             </span>
           </h2>
 
           <p className="mt-5 text-sm sm:text-base leading-relaxed text-slate-300">
-            Halo Finance hướng tới sứ mệnh bình dân hóa công nghệ tài chính cho người Việt. Mọi tính năng cao cấp từ Trí Tuệ Nhân Tạo AI, Voice AI đến chia tiền VietQR đều mở sẵn 100% miễn phí, không giới hạn.
+            {commitment.subtitle || "Halo Finance hướng tới sứ mệnh bình dân hóa công nghệ tài chính cho người Việt. Mọi tính năng cao cấp từ Trí Tuệ Nhân Tạo AI, Voice AI đến chia tiền VietQR đều mở sẵn 100% miễn phí, không giới hạn."}
           </p>
         </div>
 

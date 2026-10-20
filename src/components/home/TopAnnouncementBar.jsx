@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-import { Sparkles, ArrowRight, X, PhoneCall, MapPin, Globe, ShieldCheck, TrendingUp, Laptop } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Sparkles, PhoneCall, MapPin } from "lucide-react";
+import { useLanguage } from "../../contexts/LanguageContext";
+import LanguageSwitcher from "../common/LanguageSwitcher";
 
 export default function TopAnnouncementBar({ onOpenQr }) {
   const [activeSegment, setActiveSegment] = useState("personal"); // "personal" | "business" | "priority"
-  const navigate = useNavigate();
+  const { strings } = useLanguage();
+  const topBar = strings?.topBar || {};
 
   return (
     <aside
@@ -17,36 +19,36 @@ export default function TopAnnouncementBar({ onOpenQr }) {
           <button
             type="button"
             onClick={() => setActiveSegment("personal")}
-            className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-md transition-all font-semibold text-[10px] sm:text-[11px] whitespace-nowrap ${
+            className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-md transition-all font-semibold text-[10px] sm:text-[11px] whitespace-nowrap cursor-pointer ${
               activeSegment === "personal"
                 ? "bg-slate-800 text-sky-300 font-bold border border-slate-700 shadow-xs ring-1 ring-sky-400/20"
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            Cá nhân
+            {topBar.personal || "Cá nhân"}
           </button>
           <button
             type="button"
             onClick={() => setActiveSegment("business")}
-            className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-md transition-all font-semibold text-[10px] sm:text-[11px] whitespace-nowrap ${
+            className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-md transition-all font-semibold text-[10px] sm:text-[11px] whitespace-nowrap cursor-pointer ${
               activeSegment === "business"
                 ? "bg-slate-800 text-emerald-300 font-bold border border-slate-700 shadow-xs ring-1 ring-emerald-400/20"
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            Doanh nghiệp & Hộ KD
+            {topBar.business || "Doanh nghiệp & Hộ KD"}
           </button>
           <button
             type="button"
             onClick={() => setActiveSegment("priority")}
-            className={`hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-md transition-all font-semibold ${
+            className={`hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-md transition-all font-semibold cursor-pointer ${
               activeSegment === "priority"
                 ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black shadow-xs"
                 : "text-amber-400/90 hover:text-amber-300"
             }`}
           >
             <Sparkles className="w-3 h-3 text-amber-400" />
-            Khách hàng Ưu tiên (Priority)
+            {topBar.priority || "Khách hàng Ưu tiên (Priority)"}
           </button>
         </div>
 
@@ -60,25 +62,25 @@ export default function TopAnnouncementBar({ onOpenQr }) {
           </span>
           <span className="text-slate-600">|</span>
           <span className="flex items-center gap-1 text-slate-300">
-            <span className="text-slate-400">Vàng SJC:</span>
+            <span className="text-slate-400">{topBar.goldSjc || "Vàng SJC"}:</span>
             <strong className="text-amber-400">86.50 Tr/Lượng</strong>
             <span className="text-emerald-400 font-bold">+0.35%</span>
           </span>
           <span className="text-slate-600">|</span>
           <span className="flex items-center gap-1 text-slate-300">
-            <span className="text-slate-400">Lãi suất gửi:</span>
+            <span className="text-slate-400">{topBar.savingsRate || "Lãi suất gửi"}:</span>
             <strong className="text-sky-400">đến 6.2%/năm</strong>
           </span>
         </div>
 
-        {/* Right: Hotline 24/7, Network, Web Portal */}
-        <div className="flex items-center gap-2 sm:gap-4 text-slate-400 shrink-0 ml-2">
+        {/* Right: Hotline 24/7, Network, Zero Fee Badge & Interactive Language Switcher */}
+        <div className="flex items-center gap-2 sm:gap-3.5 text-slate-400 shrink-0 ml-2">
           <a
             href="tel:19006868"
             className="hidden sm:inline-flex items-center gap-1.5 hover:text-white transition"
           >
             <PhoneCall className="w-3 h-3 text-sky-400" />
-            <span>Hotline 24/7: <strong className="text-white">1900 6868</strong></span>
+            <span>{topBar.hotline || "Hotline 24/7"}: <strong className="text-white">1900 6868</strong></span>
           </a>
 
           <a
@@ -86,21 +88,20 @@ export default function TopAnnouncementBar({ onOpenQr }) {
             className="hidden lg:inline-flex items-center gap-1 hover:text-white transition"
           >
             <MapPin className="w-3 h-3 text-slate-400" />
-            <span>Điểm giao dịch</span>
+            <span>{topBar.branches || "Điểm giao dịch"}</span>
           </a>
 
           <a
             href="#free-commitment"
             className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 hover:text-white hover:bg-emerald-600 transition font-bold text-[10px] sm:text-[11px] whitespace-nowrap"
           >
-            <span>Cam kết 100% Miễn Phí (0đ)</span>
+            <span>{topBar.freeBadge || "Cam kết 100% Miễn Phí (0đ)"}</span>
           </a>
 
-          <span className="hidden sm:inline text-slate-600">|</span>
-          <span className="hidden sm:inline-flex items-center gap-1 text-slate-300 font-bold">
-            <Globe className="w-3 h-3 text-slate-400" />
-            VN
-          </span>
+          <span className="hidden sm:inline text-slate-700">|</span>
+
+          {/* Interactive TopBar Language Switcher */}
+          <LanguageSwitcher variant="topbar" />
         </div>
       </div>
     </aside>

@@ -33,6 +33,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import images from "../../assets/image.js";
 import QrDownloadModal from "../home/QrDownloadModal.jsx";
 import TopAnnouncementBar from "../home/TopAnnouncementBar.jsx";
+import { useLanguage } from "../../contexts/LanguageContext.jsx";
+import LanguageSwitcher from "../common/LanguageSwitcher.jsx";
 
 const Motion = motion;
 
@@ -168,6 +170,8 @@ const RESOURCE_ITEMS = [
 export default function Header({ onOpenEbook }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { lang, strings } = useLanguage();
+  const nav = strings?.nav || {};
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState(null);
@@ -257,7 +261,7 @@ export default function Header({ onOpenEbook }) {
                 }`}
                 aria-expanded={activeDropdown === "features"}
               >
-                <span className="whitespace-nowrap">Tính năng</span>
+                <span className="whitespace-nowrap">{nav.features || "Tính năng"}</span>
                 <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "features" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
               </button>
 
@@ -336,7 +340,7 @@ export default function Header({ onOpenEbook }) {
                 }`}
                 aria-expanded={activeDropdown === "solutions"}
               >
-                <span className="whitespace-nowrap">Giải pháp</span>
+                <span className="whitespace-nowrap">{nav.solutions || "Giải pháp"}</span>
                 <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "solutions" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
               </button>
 
@@ -393,7 +397,7 @@ export default function Header({ onOpenEbook }) {
                 }`}
                 aria-expanded={activeDropdown === "tools"}
               >
-                <span className="whitespace-nowrap">Công cụ tính</span>
+                <span className="whitespace-nowrap">{nav.tools || "Công cụ tính"}</span>
                 <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "tools" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
               </button>
 
@@ -448,7 +452,7 @@ export default function Header({ onOpenEbook }) {
               href="#comparison"
               className="rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold text-slate-700 hover:text-blue-600 hover:bg-white/60 transition whitespace-nowrap"
             >
-              So sánh
+              {nav.comparison || "So sánh"}
             </a>
 
             {/* Direct Link: Cam kết 0đ */}
@@ -456,7 +460,7 @@ export default function Header({ onOpenEbook }) {
               href="#free-commitment"
               className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold text-slate-700 hover:text-emerald-600 hover:bg-emerald-50/60 transition whitespace-nowrap"
             >
-              <span>Cam kết 0đ</span>
+              <span>{nav.commitment || "Cam kết 0đ"}</span>
               <span className="rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-1.5 py-0.2">Free</span>
             </a>
 
@@ -474,7 +478,7 @@ export default function Header({ onOpenEbook }) {
                 }`}
                 aria-expanded={activeDropdown === "resources"}
               >
-                <span className="whitespace-nowrap">Tài nguyên</span>
+                <span className="whitespace-nowrap">{nav.resources || "Tài nguyên"}</span>
                 <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${activeDropdown === "resources" ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
               </button>
 
@@ -534,27 +538,30 @@ export default function Header({ onOpenEbook }) {
           {/* ============================================================== */}
           {/* RIGHT: ACTIONS & CALL-TO-ACTIONS                               */}
           {/* ============================================================== */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+
+            {/* Language Switcher VN | EN */}
+            <LanguageSwitcher variant="header" />
 
             {/* QR Download Trigger */}
             <button
               type="button"
               onClick={() => setQrModalOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-blue-50/50 hover:border-blue-300 hover:text-blue-600 shadow-2xs transition whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-blue-50/50 hover:border-blue-300 hover:text-blue-600 shadow-2xs transition whitespace-nowrap cursor-pointer"
               title="Quét mã QR tải app bằng camera điện thoại"
             >
               <QrCode className="h-3.5 w-3.5 text-blue-600" />
-              <span>Mã QR App</span>
+              <span>{nav.appQr || "Mã QR App"}</span>
             </button>
 
             {/* Primary Action Button - eKYC Account */}
             <button
               type="button"
               onClick={() => setQrModalOpen(true)}
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-4.5 py-2.5 text-xs font-extrabold text-white shadow-md shadow-blue-500/25 transition hover:-translate-y-0.5 whitespace-nowrap"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-4.5 py-2.5 text-xs font-extrabold text-white shadow-md shadow-blue-500/25 transition hover:-translate-y-0.5 whitespace-nowrap cursor-pointer"
             >
               <Sparkles className="h-3.5 w-3.5 text-amber-300 fill-amber-300" />
-              <span>Mở Tài Khoản eKYC</span>
+              <span>{nav.openEkyc || "Mở Tài Khoản eKYC"}</span>
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
@@ -640,6 +647,11 @@ export default function Header({ onOpenEbook }) {
                     </div>
                   </a>
                 </div>
+              </div>
+
+              {/* Language Switcher in Mobile Drawer */}
+              <div className="p-4 pb-1">
+                <LanguageSwitcher variant="mobile" />
               </div>
 
               {/* Accordion Categories */}
@@ -813,7 +825,7 @@ export default function Header({ onOpenEbook }) {
                       }}
                       className="w-full py-2.5 rounded-xl border border-slate-200 text-slate-800 font-bold text-xs hover:bg-slate-50 cursor-pointer"
                     >
-                      Tải App Miễn Phí
+                      {nav.downloadApp || "Tải App Miễn Phí"}
                     </button>
                     <button
                       type="button"
@@ -821,9 +833,9 @@ export default function Header({ onOpenEbook }) {
                         setMobileMenuOpen(false);
                         setQrModalOpen(true);
                       }}
-                      className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-extrabold text-xs text-center shadow-md shadow-blue-500/20"
+                      className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-extrabold text-xs text-center shadow-md shadow-blue-500/20 cursor-pointer"
                     >
-                      Mở eKYC 0đ Phí
+                      {nav.openEkyc || "Mở eKYC 0đ Phí"}
                     </button>
                   </div>
                 </div>

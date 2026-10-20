@@ -32,12 +32,15 @@ import {
 } from "lucide-react";
 import images from "../../assets/image";
 import StoreButtons from "./StoreButtons";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function EpicHero({ onOpenQr }) {
   const reduceMotion = useReducedMotion();
   const [showBalance, setShowBalance] = useState(true);
   const [heroMode, setHeroMode] = useState("mobile"); // "mobile" | "card" | "web"
   const [cardLocked, setCardLocked] = useState(false);
+  const { lang, strings } = useLanguage();
+  const hero = strings?.hero || {};
 
   return (
     <section
@@ -66,20 +69,20 @@ export default function EpicHero({ onOpenQr }) {
           {/* 100% Free Guarantee Badge */}
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/80 bg-emerald-50/95 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-emerald-900 shadow-xs backdrop-blur-md shimmer-badge">
             <Gift className="h-4 w-4 text-emerald-600" />
-            <span>Cam Kết 100% Miễn Phí Trọn Đời • 0đ Phí Ẩn</span>
+            <span>{hero.badge || "Cam Kết 100% Miễn Phí Trọn Đời • 0đ Phí Ẩn"}</span>
           </div>
 
           {/* Headline - Institutional Scale */}
           <h1 className="text-3xl sm:text-5xl lg:text-[4.1rem] font-black leading-[1.08] tracking-[-0.035em] text-slate-900">
-            <span className="block text-slate-900">Làm Chủ Dòng Tiền.</span>
+            <span className="block text-slate-900">{hero.title1 || "Làm Chủ Dòng Tiền."}</span>
             <span className="block mt-1 bg-gradient-to-r from-blue-600 via-sky-500 to-emerald-600 bg-clip-text text-transparent">
-              Quản Trị Tài Chính Cùng AI.
+              {hero.title2 || "Quản Trị Tài Chính Cùng AI."}
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Hệ sinh thái quản trị tài chính cá nhân & quỹ nhóm <strong className="text-slate-900 font-semibold">100% miễn phí trọn đời</strong> kết nối trực tiếp <strong className="text-blue-700 font-semibold">54+ ngân hàng NAPAS 24/7</strong>. Tự động bóc tách hóa đơn trong 3 giây bằng Trí Tuệ Nhân Tạo AI, chia tiền nhóm VietQR 1 chạm, và bảo vệ tài sản chuẩn <strong className="text-slate-900 font-semibold">PCI-DSS & ISO 27001</strong>.
+            {hero.desc || "Hệ sinh thái quản trị tài chính cá nhân & quỹ nhóm 100% miễn phí trọn đời kết nối trực tiếp 54+ ngân hàng NAPAS 24/7. Tự động bóc tách hóa đơn trong 3 giây bằng Trí Tuệ Nhân Tạo AI, chia tiền nhóm VietQR 1 chạm, và bảo vệ tài sản chuẩn PCI-DSS & ISO 27001."}
           </p>
 
           {/* Action CTAs Suite */}
@@ -88,10 +91,10 @@ export default function EpicHero({ onOpenQr }) {
             <button
               type="button"
               onClick={onOpenQr}
-              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-blue-500/25 transition hover:opacity-95 hover:-translate-y-0.5"
+              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-blue-500/25 transition hover:opacity-95 hover:-translate-y-0.5 cursor-pointer"
             >
               <Building2 className="h-5 w-5 text-blue-200" />
-              <span>Mở Tài Khoản eKYC (0đ Phí)</span>
+              <span>{hero.ctaEkyc || "Mở Tài Khoản eKYC (0đ Phí)"}</span>
             </button>
 
             {/* Download App 0d */}
@@ -101,7 +104,7 @@ export default function EpicHero({ onOpenQr }) {
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-emerald-500 hover:text-emerald-700 hover:bg-emerald-50/40 shadow-xs cursor-pointer"
             >
               <QrCode className="h-4 w-4 text-emerald-600" />
-              <span>Tải App 0đ Trọn Đời</span>
+              <span>{hero.ctaDownload || "Tải App 0đ Trọn Đời"}</span>
             </button>
 
             {/* Mobile Store Buttons */}
@@ -114,19 +117,19 @@ export default function EpicHero({ onOpenQr }) {
               <span className="grid h-4 w-4 place-items-center rounded-full bg-emerald-100 text-emerald-700">
                 <Check className="h-2.5 w-2.5 stroke-[3]" />
               </span>
-              Liên kết 54+ ngân hàng NAPAS 24/7
+              {hero.guarantee1 || "Liên kết 54+ ngân hàng NAPAS 24/7"}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="grid h-4 w-4 place-items-center rounded-full bg-blue-100 text-blue-700">
                 <Check className="h-2.5 w-2.5 stroke-[3]" />
               </span>
-              Chuẩn an ninh số PCI-DSS & ISO 27001
+              {hero.guarantee2 || "Chuẩn an ninh số PCI-DSS & ISO 27001"}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="grid h-4 w-4 place-items-center rounded-full bg-indigo-100 text-indigo-700">
                 <ShieldCheck className="h-2.5 w-2.5 stroke-[3]" />
               </span>
-              Tuân thủ Nghị định 13/2023/NĐ-CP
+              {hero.guarantee3 || "Tuân thủ Nghị định 13/2023/NĐ-CP"}
             </span>
           </div>
 

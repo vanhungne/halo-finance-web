@@ -15,6 +15,7 @@ import {
   Award,
 } from "lucide-react";
 import images from "../../assets/image.js";
+import LanguageSwitcher from "../common/LanguageSwitcher.jsx";
 
 const productLinks = [
   { label: "Tài Khoản Thanh Toán Số Đẹp (0đ Phí)", href: "#features" },
@@ -188,10 +189,10 @@ function Footer() {
 
             <div className="pt-2">
               <a
-                href="/app"
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 px-3 py-2.5 text-xs font-black text-white shadow-md shadow-blue-500/20 transition"
+                href="#free-commitment"
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3 py-2.5 text-xs font-black text-white shadow-md shadow-emerald-500/20 transition cursor-pointer"
               >
-                <span>Cổng Web Internet Banking</span>
+                <span>Cam Kết 100% Miễn Phí (0đ)</span>
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </div>
@@ -200,8 +201,11 @@ function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="flex flex-col gap-4 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Halo Finance Corporation. Mọi quyền được bảo lưu.</p>
+        <div className="flex flex-col gap-4 pt-8 text-xs text-slate-500 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <p>© {new Date().getFullYear()} Halo Finance Corporation. Mọi quyền được bảo lưu.</p>
+            <LanguageSwitcher variant="footer" />
+          </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-slate-400 text-[11px]">
             <a href="#security" className="hover:text-white transition">Chính sách an toàn thông tin</a>
             <span>•</span>
