@@ -22,7 +22,7 @@ function AppleIcon() {
   );
 }
 
-function StoreLink({ href, label, title, icon, className = "" }) {
+function StoreLink({ href, label, title, icon, className = "", onFallbackClick }) {
   const content = (
     <>
       {icon}
@@ -33,11 +33,16 @@ function StoreLink({ href, label, title, icon, className = "" }) {
     </>
   );
 
-  const styles = `group inline-flex min-h-16 items-center justify-center gap-3 rounded-2xl border border-white/10 bg-slate-950 px-5 py-3 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.8)] transition hover:-translate-y-1 hover:bg-sky-950 hover:shadow-[0_22px_45px_-16px_rgba(14,165,233,0.45)] ${className}`;
+  const styles = `group inline-flex min-h-16 items-center justify-center gap-3 rounded-2xl border border-white/10 bg-slate-950 px-5 py-3 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.8)] transition hover:-translate-y-1 hover:bg-sky-950 hover:shadow-[0_22px_45px_-16px_rgba(14,165,233,0.45)] cursor-pointer ${className}`;
 
   if (!href) {
     return (
-      <button type="button" className={styles} title="Sẽ cập nhật đường dẫn khi ứng dụng được phát hành">
+      <button
+        type="button"
+        onClick={onFallbackClick}
+        className={styles}
+        title="Bấm để quét mã QR tải bản cài đặt"
+      >
         {content}
       </button>
     );
@@ -50,7 +55,7 @@ function StoreLink({ href, label, title, icon, className = "" }) {
   );
 }
 
-export default function StoreButtons({ id, className = "", buttonClassName = "" }) {
+export default function StoreButtons({ id, className = "", buttonClassName = "", onOpenQr }) {
   return (
     <div id={id} className={`flex flex-col gap-3 sm:flex-row ${className}`}>
       <StoreLink
@@ -59,6 +64,7 @@ export default function StoreButtons({ id, className = "", buttonClassName = "" 
         title="Google Play"
         icon={<GooglePlayIcon />}
         className={buttonClassName}
+        onFallbackClick={onOpenQr}
       />
       <StoreLink
         href={APP_STORE_URL}
@@ -66,7 +72,9 @@ export default function StoreButtons({ id, className = "", buttonClassName = "" 
         title="App Store"
         icon={<AppleIcon />}
         className={buttonClassName}
+        onFallbackClick={onOpenQr}
       />
     </div>
   );
 }
+

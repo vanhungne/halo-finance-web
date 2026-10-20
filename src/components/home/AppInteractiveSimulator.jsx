@@ -19,7 +19,7 @@ import {
   Zap,
 } from "lucide-react";
 
-export const SIMULATOR_SCREENS = [
+const SIMULATOR_SCREENS = [
   {
     id: "ai-scanner",
     tabTitle: "Quét Hóa Đơn AI",
@@ -132,8 +132,8 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
           </p>
         </div>
 
-        {/* Feature Selector Tabs (Horizontal on mobile, list on desktop) */}
-        <div className="mt-12 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+        {/* Feature Selector Tabs (Balanced Flex Layout) */}
+        <div className="mt-10 flex flex-wrap items-stretch justify-center gap-2.5 sm:gap-3.5 max-w-5xl mx-auto">
           {SIMULATOR_SCREENS.map((screen, idx) => {
             const Icon = screen.icon;
             const isActive = activeTab === idx;
@@ -142,12 +142,13 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                 key={screen.id}
                 type="button"
                 onClick={() => setActiveTab(idx)}
-                className={`relative flex flex-col items-center justify-center rounded-2xl p-4 text-center transition-all duration-200 border ${
+                className={`relative flex flex-1 min-w-[140px] max-w-[190px] flex-col items-center justify-center rounded-2xl p-3.5 sm:p-4 text-center transition-all duration-200 border cursor-pointer ${
                   isActive
-                    ? "border-blue-600 bg-white text-blue-700 shadow-md shadow-blue-500/10 -translate-y-1"
-                    : "border-slate-200/80 bg-white/70 text-slate-700 hover:bg-white hover:border-slate-300"
+                    ? "border-blue-600 bg-white text-blue-700 shadow-lg shadow-blue-500/15 -translate-y-1 ring-2 ring-blue-600/10"
+                    : "border-slate-200/90 bg-white/80 text-slate-700 hover:bg-white hover:border-slate-300 hover:shadow-xs"
                 }`}
               >
+
                 <div
                   className={`grid h-10 w-10 place-items-center rounded-xl mb-2 transition-colors ${
                     isActive ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"

@@ -64,28 +64,30 @@ export default function EpicHero({ onOpenQr }) {
           className="lg:col-span-7 space-y-6"
         >
           {/* Top Laurel / Trust Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-3.5 py-1.5 text-xs font-bold text-blue-700 shadow-xs">
-            <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
-            <span>Ứng dụng Quản lý Tài chính Cá nhân & Gia đình #1 Việt Nam</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1.5 text-xs font-bold text-blue-700 shadow-xs backdrop-blur-md">
+            <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+            <span>Nền tảng Quản lý Tài chính & Chia tiền Nhóm #1 Việt Nam</span>
           </div>
 
-          {/* Headline - Human, Authentic, Clear */}
-          <h1 className="text-3xl sm:text-5xl lg:text-[3.85rem] font-extrabold leading-[1.1] tracking-[-0.03em] text-slate-900">
-            <span className="block text-blue-600">Sổ Thu Chi Halo Finance</span>
-            <span className="block mt-1 text-slate-900">
-              Ghi chép thông minh. Vững vàng tài chính.
+          {/* Headline - High-Impact Modern Typography */}
+          <h1 className="text-3xl sm:text-5xl lg:text-[3.85rem] font-black leading-[1.1] tracking-[-0.035em] text-slate-900">
+            <span className="block text-slate-900">Làm Chủ Dòng Tiền.</span>
+            <span className="block mt-1 bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600 bg-clip-text text-transparent">
+              Quản Trị Thông Minh Cùng AI.
             </span>
           </h1>
 
-          {/* Relatable Subtitle in MISA style */}
+          {/* Subtitle */}
           <p className="max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Quản lý tài chính cá nhân không dễ dàng, nhưng đội ngũ Halo Finance luôn nỗ lực giúp việc ghi chép thu chi của bạn trở nên <strong className="text-slate-900 font-semibold">đơn giản, khoa học và minh bạch nhất</strong>. Tự động hóa ghi chép với AI, quản lý đa ví ngân hàng, kiểm soát hạn mức và cùng gia đình tích lũy cho tương lai.
+            Không còn mệt mỏi với những cuốn sổ tay hay bảng tính rườm rà. <strong className="text-slate-900 font-semibold">Halo Finance</strong> tự động hóa bóc tách hóa đơn trong 3 giây, chia tiền nhóm du lịch ăn uống VietQR 1 chạm, và đồng bộ biến động tài khoản ngân hàng an toàn tuyệt đối.
           </p>
+
 
           {/* Action CTAs Suite */}
           <div className="flex flex-wrap items-center gap-3.5 pt-2">
             {/* Primary App Store & Google Play Store Buttons */}
-            <StoreButtons buttonClassName="bg-slate-900 text-white hover:bg-blue-700 shadow-md transition-all duration-200" />
+            <StoreButtons buttonClassName="bg-slate-900 text-white hover:bg-blue-700 shadow-md transition-all duration-200" onOpenQr={onOpenQr} />
+
 
             {/* QR Download Button */}
             <button

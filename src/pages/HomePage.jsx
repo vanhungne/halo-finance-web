@@ -476,7 +476,8 @@ function HomePage() {
               <p className="section-kicker text-sky-400">Sẵn sàng để bắt đầu?</p>
               <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">Một quyết định nhỏ hôm nay. Một tương lai chủ động hơn.</h2>
               <p className="mt-6 max-w-xl text-base leading-7 text-white/65 sm:text-lg">Bắt đầu xây dựng thói quen tài chính rõ ràng cùng Trợ Lý Tài Chính.</p>
-              <StoreButtons className="mt-9" buttonClassName="border-white/20 bg-white/10 backdrop-blur-xl" />
+              <StoreButtons className="mt-9" buttonClassName="border-white/20 bg-white/10 backdrop-blur-xl" onOpenQr={() => setQrModalOpen(true)} />
+
             </motion.div>
           </div>
         </section>

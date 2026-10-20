@@ -21,29 +21,33 @@ export default function TopAnnouncementBar({ onOpenQr }) {
   return (
     <aside
       aria-label="Thông báo cập nhật ứng dụng"
-      className="relative z-50 overflow-hidden bg-gradient-to-r from-blue-700 via-sky-600 to-indigo-700 px-4 py-2 text-white shadow-xs"
+      className="relative z-50 overflow-hidden bg-slate-950 text-slate-200 border-b border-white/10 px-4 py-2 text-xs"
     >
-      <div className="mx-auto flex max-w-[1380px] items-center justify-between text-xs sm:text-sm">
-        <div className="flex flex-1 items-center justify-center gap-2 sm:gap-3 text-center">
-          <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wider backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1380px] items-center justify-between">
+        <div className="flex flex-1 items-center justify-center gap-2.5 sm:gap-3 text-center">
+          <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/20 border border-blue-400/30 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-sky-300">
             <Sparkles className="h-3 w-3 text-amber-300" /> Bản Mới 2.0
           </span>
-          <p className="font-medium text-white/95">
-            <strong className="font-bold text-white">Halo Finance 2.0 đã ra mắt:</strong> Bóc tách hóa đơn AI siêu tốc & Chia tiền nhóm VietQR 1 chạm.
+          <p className="font-medium text-slate-300 hidden sm:inline">
+            <strong className="font-bold text-white">Halo Finance 2.0:</strong> Bóc tách hóa đơn tự động bằng AI Gemini & Chia tiền nhóm VietQR 1 chạm.
+          </p>
+          <p className="font-medium text-slate-300 sm:hidden">
+            <strong className="font-bold text-white">Bản 2.0:</strong> AI Bóc tách hóa đơn & VietQR.
           </p>
           <button
             type="button"
             onClick={onOpenQr}
-            className="inline-flex items-center gap-1 font-bold text-amber-300 hover:text-white underline underline-offset-4 transition"
+            className="inline-flex items-center gap-1 font-bold text-sky-400 hover:text-sky-300 underline underline-offset-4 transition"
           >
-            Tải app ngay <ArrowRight className="h-3.5 w-3.5" />
+            <span>Trải nghiệm ngay</span>
+            <ArrowRight className="h-3 w-3" />
           </button>
         </div>
 
         <button
           type="button"
           onClick={handleDismiss}
-          className="ml-2 rounded-full p-1 text-white/70 hover:bg-white/10 hover:text-white transition"
+          className="ml-2 rounded-full p-1 text-slate-400 hover:bg-white/10 hover:text-white transition"
           aria-label="Đóng thông báo"
         >
           <X className="h-3.5 w-3.5" />
