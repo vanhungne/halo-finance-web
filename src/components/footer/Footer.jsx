@@ -38,7 +38,7 @@ const toolLinks = [
 
 const companyLinks = [
   { label: "Về Halo Finance (Trợ Lý Tài Chính)", href: "#home" },
-  { label: "Bảng Giá Gói Dịch Vụ & Premium", href: "#pricing" },
+  { label: "Cam Kết Miễn Phí 100% Trọn Đời (0đ)", href: "#free-commitment" },
   { label: "Đánh Giá Từ 3.2M+ Người Dùng", href: "#reviews" },
   { label: "Tiêu Chuẩn Bảo Mật PCI-DSS & ISO 27001", href: "#security" },
   { label: "Tuân Thủ Nghị Định 13/2023/NĐ-CP", href: "#security" },

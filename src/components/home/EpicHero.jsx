@@ -28,6 +28,7 @@ import {
   ExternalLink,
   Shield,
   FileSpreadsheet,
+  Gift,
 } from "lucide-react";
 import images from "../../assets/image";
 import StoreButtons from "./StoreButtons";
@@ -62,23 +63,23 @@ export default function EpicHero({ onOpenQr }) {
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           className="lg:col-span-7 space-y-6"
         >
-          {/* Institutional Banking Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-300/80 bg-blue-50/95 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-blue-800 shadow-xs backdrop-blur-md">
-            <Building2 className="h-4 w-4 text-blue-600" />
-            <span>Định Chế Tài Chính Số & Quản Trị Dòng Tiền Thế Hệ Mới</span>
+          {/* 100% Free Guarantee Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/80 bg-emerald-50/95 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-emerald-900 shadow-xs backdrop-blur-md shimmer-badge">
+            <Gift className="h-4 w-4 text-emerald-600" />
+            <span>Cam Kết 100% Miễn Phí Trọn Đời • 0đ Phí Ẩn</span>
           </div>
 
           {/* Headline - Institutional Scale */}
           <h1 className="text-3xl sm:text-5xl lg:text-[4.1rem] font-black leading-[1.08] tracking-[-0.035em] text-slate-900">
             <span className="block text-slate-900">Làm Chủ Dòng Tiền.</span>
-            <span className="block mt-1 bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600 bg-clip-text text-transparent">
-              Ngân Hàng Số Cùng AI.
+            <span className="block mt-1 bg-gradient-to-r from-blue-600 via-sky-500 to-emerald-600 bg-clip-text text-transparent">
+              Quản Trị Tài Chính Cùng AI.
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Hệ sinh thái tài chính số đa phương thức <strong className="text-slate-900 font-semibold">(Web Internet Banking & Mobile App)</strong> kết nối trực tiếp <strong className="text-blue-700 font-semibold">54+ ngân hàng chuẩn NAPAS 24/7</strong>. Tự động bóc tách hóa đơn trong 3 giây bằng AI Gemini, chia tiền nhóm VietQR 1 chạm, và bảo vệ tài sản theo chuẩn an ninh <strong className="text-slate-900 font-semibold">PCI-DSS & ISO 27001</strong>.
+            Hệ sinh thái quản trị tài chính cá nhân & quỹ nhóm <strong className="text-slate-900 font-semibold">100% miễn phí trọn đời</strong> (Web Internet Banking & Mobile App) kết nối trực tiếp <strong className="text-blue-700 font-semibold">54+ ngân hàng NAPAS 24/7</strong>. Tự động bóc tách hóa đơn trong 3 giây bằng AI Gemini, chia tiền nhóm VietQR 1 chạm, và bảo vệ tài sản chuẩn <strong className="text-slate-900 font-semibold">PCI-DSS & ISO 27001</strong>.
           </p>
 
           {/* Action CTAs Suite */}

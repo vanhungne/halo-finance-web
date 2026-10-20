@@ -451,12 +451,13 @@ export default function Header({ onOpenEbook }) {
               So sánh
             </a>
 
-            {/* Direct Link: Bảng giá */}
+            {/* Direct Link: Cam kết 0đ */}
             <a
-              href="#pricing"
-              className="rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold text-slate-700 hover:text-blue-600 hover:bg-white/60 transition whitespace-nowrap"
+              href="#free-commitment"
+              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13.5px] font-semibold text-slate-700 hover:text-emerald-600 hover:bg-emerald-50/60 transition whitespace-nowrap"
             >
-              Bảng giá
+              <span>Cam kết 0đ</span>
+              <span className="rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-1.5 py-0.2">Free</span>
             </a>
 
             {/* Dropdown 4: Tài nguyên */}
@@ -796,10 +797,11 @@ export default function Header({ onOpenEbook }) {
                     <span>Hệ sinh thái Thẻ Titanium VIP</span>
                     <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
                   </a>
-                  <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between">
-                    <span>Bảng giá & Gói dịch vụ</span>
-                    <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
+                  <a href="#free-commitment" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between text-emerald-700">
+                    <span className="font-extrabold">Cam kết 100% Miễn Phí (0đ)</span>
+                    <span className="rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5">0đ Phí</span>
                   </a>
+
                   <button
                     type="button"
                     onClick={() => {

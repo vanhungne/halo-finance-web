@@ -41,7 +41,6 @@ import StoreButtons from "../components/home/StoreButtons.jsx";
 import TrustBadges from "../components/home/TrustBadges.jsx";
 import InteractiveShowcase from "../components/home/InteractiveShowcase.jsx";
 import SolutionsSegment from "../components/home/SolutionsSegment.jsx";
-import AiScannerDeepDive from "../components/home/AiScannerDeepDive.jsx";
 import FinancialCalculators from "../components/home/FinancialCalculators.jsx";
 import LiveMarketRates from "../components/home/LiveMarketRates.jsx";
 import FinancialHealthCheck from "../components/home/FinancialHealthCheck.jsx";
@@ -61,7 +60,7 @@ import LiveSocialProofTicker from "../components/home/LiveSocialProofTicker.jsx"
 import EbookDownloadModal from "../components/home/EbookDownloadModal.jsx";
 import GlobalInfrastructure from "../components/home/GlobalInfrastructure.jsx";
 import InstitutionalOnboarding from "../components/home/InstitutionalOnboarding.jsx";
-import InstitutionalPricing from "../components/home/InstitutionalPricing.jsx";
+import ZeroFeeCommitment from "../components/home/ZeroFeeCommitment.jsx";
 import RealAppFeatureGrid from "../components/home/RealAppFeatureGrid.jsx";
 
 
@@ -119,38 +118,39 @@ const features = [
 
 const faqItems = [
   {
-    q: "Halo Finance được cấp phép và bảo chứng pháp lý như thế nào?",
-    a: "Halo Finance là nền tảng công nghệ tài chính số liên kết trực tiếp với mạng lưới chuyển mạch quốc gia NAPAS 24/7 và 54+ ngân hàng thương mại cổ phần tại Việt Nam. Toàn bộ tiền gửi và giao dịch thanh toán được bảo vệ theo quy định của Ngân hàng Nhà nước Việt Nam (NHNN) và Luật Các Tổ Chức Tín Dụng.",
+    q: "Halo Finance có thực sự miễn phí 100% trọn đời không? Có phát sinh chi phí ẩn không?",
+    a: "Cam kết 100% miễn phí trọn đời: 0đ phí tải app, 0đ phí mở tài khoản eKYC, 0đ phí bóc tách hóa đơn AI Gemini 2.0, 0đ phí chuyển khoản VietQR và 0đ phí duy trì số dư tối thiểu. Toàn bộ tính năng cao cấp đều được mở khóa sẵn mà không có bất kỳ chi phí ẩn nào.",
   },
   {
-    q: "Tiền gửi và số dư tài khoản của tôi được bảo vệ và mã hóa ra sao?",
-    a: "Tài sản của bạn được lưu ký an toàn tại các ngân hàng đối tác chuẩn Tier-1 (Vietcombank, MB, Techcombank). Hạ tầng Halo áp dụng tiêu chuẩn bảo mật dữ liệu thẻ quốc tế cao nhất PCI-DSS Level 1, mã hóa toàn trình AES-256 GCM và đối chiếu sinh trắc học khuôn mặt theo Quyết định 2345/QĐ-NHNN.",
+    q: "Tại sao Halo Finance lại cung cấp AI Gemini và mọi tính năng cao cấp miễn phí 0 đồng?",
+    a: "Trong giai đoạn đầu phát triển, Halo Finance ưu tiên tối đa sứ mệnh bình dân hóa công nghệ tài chính, giúp người Việt làm chủ dòng tiền thông minh. Chúng tôi tập trung tạo giá trị thực sự cho cộng đồng thay vì bán các gói đăng ký thu phí rườm rà.",
   },
   {
-    q: "Mở tài khoản số đẹp có phát sinh phí duy trì hoặc phí ẩn không?",
-    a: "Cam kết minh bạch tuyệt đối: 0đ phí mở tài khoản, 0đ phí duy trì số dư tối thiểu trọn đời và 0đ phí chuyển khoản liên ngân hàng 24/7. Bạn được tự do chọn các đuôi số phong thủy (Tứ quý, Thần tài, Lộc phát, Ngày sinh) hoàn toàn miễn phí ngay trong luồng eKYC 60 giây.",
+    q: "Dữ liệu tài chính và thu chi của tôi có bị bán cho bên thứ ba không?",
+    a: "Tuyệt đối không! Halo Finance tuân thủ nghiêm ngặt Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân và tiêu chuẩn PCI-DSS Level 1. Toàn bộ dữ liệu thu chi được mã hóa đầu cuối với khóa AES-256 GCM. Chúng tôi độc lập pháp lý và không bao giờ chia sẻ dữ liệu cho công ty bảo hiểm hay tổ chức quảng cáo.",
+  },
+  {
+    q: "Tôi có bị giới hạn số lượng giao dịch hoặc số lượt quét hóa đơn mỗi tháng không?",
+    a: "Hoàn toàn không giới hạn! Bạn có thể thêm hàng nghìn khoản thu chi, quét hóa đơn siêu thị, xăng xe, nhà hàng mỗi ngày bằng camera AI Gemini 2.0 mà không bao giờ bị giới hạn số lượt hay bắt nâng cấp tài khoản.",
   },
   {
     q: "Công nghệ bóc tách hóa đơn AI Gemini 2.0 hoạt động như thế nào?",
-    a: "Trợ lý AI Gemini 2.0 tích hợp mô hình thị giác máy tính OCR đa ngôn ngữ, tự động nhận diện hóa đơn viết tay, bill rách mờ, hóa đơn điện tử VAT hay biên lai quán cafe. Chỉ trong 3 giây, tiền hàng, thuế suất VAT và danh mục chi tiêu được phân loại chính xác tới 99.4% mà không cần nhập thủ công.",
+    a: "Trợ lý AI Gemini 2.0 tích hợp mô hình thị giác máy tính OCR đa ngôn ngữ, tự động nhận diện hóa đơn viết tay, bill in nhiệt mờ, hóa đơn VAT điện tử hay biên lai chuyển khoản. Chỉ trong 3 giây, tiền hàng, thuế suất VAT và danh mục chi tiêu được phân loại chính xác tới 99.4%.",
   },
   {
-    q: "Đặc quyền và hạn mức chi tiêu của Thẻ Halo Titanium VIP?",
-    a: "Thẻ Halo Titanium VIP được chế tác từ kim loại nguyên khối mạ khắc laser, tích hợp chip kép Dual EMV Contactless. Khách hàng VIP được hoàn tiền 3.5% không giới hạn cho ẩm thực, mua sắm, du lịch; miễn phí phòng chờ sân bay DragonPass tại 1.300+ sân bay quốc tế và hạn mức thấu chi tín dụng lên đến 500 triệu đồng.",
+    q: "Tính năng Quỹ nhóm và Chia tiền VietQR 1 chạm hoạt động như thế nào?",
+    a: "Bạn có thể tạo quỹ nhóm cho gia đình, nhóm bạn du lịch hay hội phụ huynh. Khi có chi tiêu phát sinh, hệ thống tự động tính toán phần tiền của từng người và sinh mã VietQR cá nhân hóa. Thành viên chỉ cần quét mã 1 chạm là gạch nợ tự động, có Giám sát viên duyệt chi minh bạch 2 lớp.",
   },
   {
-    q: "Doanh nghiệp SME và Hộ kinh doanh tích hợp VietQR và SePay như thế nào?",
-    a: "Doanh nghiệp có thể tạo cổng thanh toán mã VietQR động theo từng đơn hàng chỉ trong 2 phút qua API Webhooks SePay. Khi khách hàng chuyển khoản, hệ thống tự động đối soát và gạch nợ trong mili-giây, đồng thời kết nối trực tiếp với phần mềm kế toán MISA, Fast và Tổng cục Thuế.",
+    q: "Halo Finance có hỗ trợ xuất báo cáo ra file Excel để làm kế toán hoặc khai thuế không?",
+    a: "Có. Bạn có thể xuất toàn bộ dữ liệu thu chi, sao kê dòng tiền và phân loại ngân sách ra định dạng file Excel (CSV/XLSX) hoặc PDF chuẩn mực hoàn toàn miễn phí chỉ với một thao tác bấm.",
   },
   {
-    q: "Tôi có thể sử dụng Thẻ Halo khi đi du lịch hoặc công tác nước ngoài không?",
-    a: "Có. Thẻ Halo Titanium Contactless được chấp nhận tại hơn 200 quốc gia và vùng lãnh thổ, tại hàng triệu điểm thanh toán POS và cây ATM có biểu tượng Visa/Mastercard toàn cầu với tỷ giá ngoại tệ quy đổi cạnh tranh nhất thị trường.",
-  },
-  {
-    q: "Tôi cần hỗ trợ kỹ thuật hoặc khiếu nại giao dịch thì liên hệ ai?",
-    a: "Đội ngũ CSKH và Chuyên viên Priority Banker trực tiếp hỗ trợ 24/7/365 qua Hotline khẩn cấp 1900 6868, Live Chat trong ứng dụng hoặc email contact@halofinance.vn với cam kết phản hồi trong vòng 60 giây.",
+    q: "Tôi cần hỗ trợ kỹ thuật hoặc góp ý phát triển ứng dụng thì liên hệ ai?",
+    a: "Đội ngũ kỹ sư và hỗ trợ khách hàng luôn trực tuyến 24/7 qua Hotline 1900 6868, Live Chat trong ứng dụng hoặc email contact@halofinance.vn với cam kết phản hồi nhanh chóng.",
   },
 ];
+
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
@@ -176,181 +176,55 @@ function HomePage() {
       <Header onOpenEbook={() => setEbookModalOpen(true)} />
 
       <main>
-        {/* Epic High-Converting Hero Section */}
+        {/* 1. Epic High-Converting Hero Section */}
         <EpicHero onOpenQr={() => setQrModalOpen(true)} />
 
-        {/* Commercial Banking Quick Action Bar */}
+        {/* 2. Commercial Banking Quick Action Bar */}
         <BankingQuickActionBar onOpenQr={() => setQrModalOpen(true)} />
 
-        {/* Institutional Scale Metrics & 54+ Bank Partner Ecosystem */}
+        {/* 3. Institutional Scale Metrics & 54+ Bank Partner Ecosystem */}
         <BankingEcosystemMarquee />
 
-        {/* Omnichannel Internet Banking Web Portal Showcase */}
-        <WebPortalShowcase />
-
-        {/* International Payment Cards & VIP Priority Privileges */}
-        <VipCardShowcase onOpenQr={() => setQrModalOpen(true)} />
-
-        {/* Live Interactive App Simulator (iPhone 16 Pro Mockup with 7 Real App Modes) */}
+        {/* 4. Live Interactive App Simulator (iPhone 16 Pro Mockup with 7 Real App Modes - Instant WOW) */}
         <AppInteractiveSimulator onOpenQr={() => setQrModalOpen(true)} />
 
-        {/* Complete Audited 16+ Real App Features Directory */}
+        {/* 5. Complete Audited 16+ Real App Features Directory */}
         <RealAppFeatureGrid onOpenQr={() => setQrModalOpen(true)} />
 
-        {/* Live Interactive Cashflow & Analytics Dashboard */}
-        <section id="product-preview" className="relative overflow-hidden bg-slate-50/50 py-24 text-slate-900 sm:py-32 border-t border-slate-200/80">
-          <div className="relative z-10 mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-12">
-            <motion.div {...motionProps} className="mx-auto max-w-3xl text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-bold text-blue-700 shadow-2xs">
-                <Sparkles className="h-3.5 w-3.5 text-blue-600" />
-                <span>Một góc nhìn • Toàn bộ dòng tiền</span>
-              </div>
-              <h2 className="mt-4 text-3xl font-black leading-tight tracking-tight sm:text-5xl text-slate-900">
-                Hiểu tài chính của bạn{" "}
-                <span className="bg-gradient-to-r from-blue-600 via-sky-600 to-indigo-600 bg-clip-text text-transparent">
-                  chỉ trong một nhịp nhìn.
-                </span>
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-                Tổng quan thu chi, hạn mức ngân sách và xu hướng dòng tiền được trực quan hóa chuẩn xác — thông minh, có ngữ cảnh và dễ dàng ra quyết định.
-              </p>
-            </motion.div>
+        {/* 6. Omnichannel Internet Banking Web Portal Showcase */}
+        <WebPortalShowcase />
 
-            <motion.div
-              {...motionProps}
-              transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative mt-14 overflow-hidden rounded-[2.25rem] border border-slate-200/90 bg-white p-4 shadow-xl shadow-slate-200/50 sm:p-7"
-            >
-              <div className="relative grid gap-5 lg:grid-cols-[0.75fr_1.25fr]">
-                {/* Left Card: Available Balance & Budget */}
-                <div className="rounded-[1.75rem] border border-slate-100 bg-slate-50/90 p-5 sm:p-7 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Số dư khả dụng</p>
-                        <p className="mt-2 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-                          <CountUp end={268.45} decimals={2} duration={1.8} suffix=" triệu đ" enableScrollSpy scrollSpyOnce />
-                        </p>
-                      </div>
-                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-white shadow-md shadow-blue-500/25">
-                        <WalletCards className="h-6 w-6" />
-                      </span>
-                    </div>
+        {/* 7. Zero Fee Commitment (100% Miễn Phí Trọn Đời - Không Bán Gói - Không Phí Ẩn) */}
+        <ZeroFeeCommitment onOpenQr={() => setQrModalOpen(true)} />
 
-                    <div className="mt-6 grid grid-cols-2 gap-3">
-                      <div className="rounded-2xl border border-emerald-100 bg-emerald-50/80 p-4">
-                        <p className="text-xs font-bold text-emerald-800">Thu nhập tháng</p>
-                        <p className="mt-1 text-lg font-black text-emerald-600">+38,50 triệu đ</p>
-                      </div>
-                      <div className="rounded-2xl border border-rose-100 bg-rose-50/80 p-4">
-                        <p className="text-xs font-bold text-rose-800">Tổng chi tiêu</p>
-                        <p className="mt-1 text-lg font-black text-rose-600">-14,28 triệu đ</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 p-5 text-white shadow-md shadow-blue-500/20">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-blue-100 opacity-90">Hạn mức ngân sách tháng</p>
-                        <p className="mt-1 text-2xl font-black">Còn 54% an toàn</p>
-                      </div>
-                      <Goal className="h-6 w-6 text-blue-200" />
-                    </div>
-                    <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-black/20">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "46%" }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.1, delay: 0.35 }}
-                        className="h-full rounded-full bg-emerald-400"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Card: 7-Day Cashflow Chart */}
-                <div className="rounded-[1.75rem] border border-slate-100 bg-white p-5 sm:p-7">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Dòng tiền 7 ngày gần nhất</p>
-                      <h3 className="mt-1 text-xl font-black text-slate-900">Biến động Thu nhập & Chi tiêu</h3>
-                    </div>
-                    <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-bold text-slate-600">
-                      Dữ liệu thời gian thực
-                    </span>
-                  </div>
-                  <div className="mt-6 h-[280px] w-full sm:h-[320px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={chartData} margin={{ top: 10, right: 4, left: -20, bottom: 0 }}>
-                        <defs>
-                          <linearGradient id="incomeLight" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#0284c7" stopOpacity={0.35} />
-                            <stop offset="100%" stopColor="#0284c7" stopOpacity={0.0} />
-                          </linearGradient>
-                          <linearGradient id="expenseLight" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#f43f5e" stopOpacity={0.25} />
-                            <stop offset="100%" stopColor="#f43f5e" stopOpacity={0.0} />
-                          </linearGradient>
-                        </defs>
-                        <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 6" vertical={false} />
-                        <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12, fontWeight: 600 }} dy={8} />
-                        <Tooltip
-                          contentStyle={{
-                            background: "#ffffff",
-                            border: "1px solid #e2e8f0",
-                            borderRadius: 14,
-                            color: "#0f172a",
-                            boxShadow: "0 10px 30px -5px rgba(0,0,0,0.1)",
-                            fontWeight: "bold",
-                          }}
-                          formatter={(value) => [`${value} triệu đ`, ""]}
-                        />
-                        <Area type="monotone" dataKey="income" name="Thu nhập" stroke="#0284c7" strokeWidth={3} fill="url(#incomeLight)" />
-                        <Area type="monotone" dataKey="expense" name="Chi tiêu" stroke="#f43f5e" strokeWidth={2.5} fill="url(#expenseLight)" />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Bank-Grade Head-to-Head Comparison Matrix */}
+        {/* 8. Bank-Grade Head-to-Head Comparison Matrix */}
         <CompetitorComparison />
 
-        {/* Tailored Solutions (Personal & Family, Small Business & Online Shop, Investors) */}
+        {/* 9. Tailored Solutions (Personal & Family, Small Business & Online Shop, Investors) */}
         <SolutionsSegment />
 
-        {/* AI Receipt Intelligence v2 Deep Dive */}
-        <AiScannerDeepDive />
-
-        {/* Bank-Grade Financial Calculators */}
+        {/* 10. Bank-Grade Financial Calculators */}
         <FinancialCalculators />
 
-        {/* Live Market Rates (Currencies, SJC Gold, Deposit Rates) */}
+        {/* 11. Live Market Rates (Currencies, SJC Gold, Deposit Rates) */}
         <LiveMarketRates />
 
-        {/* Financial Health Check Interactive Quiz */}
+        {/* 12. Financial Health Check Interactive Quiz */}
         <FinancialHealthCheck />
 
-        {/* Bank-grade Security & Compliance */}
+        {/* 13. Bank-grade Security & Compliance */}
         <SecurityCompliance />
 
-        {/* 3-Step World-Class Banking Onboarding Flow */}
+        {/* 14. 3-Step World-Class Banking Onboarding Flow */}
         <InstitutionalOnboarding onOpenQr={() => setQrModalOpen(true)} />
 
-        {/* Global Banking Infrastructure & Multi-Region Cloud Network */}
+        {/* 15. Global Banking Infrastructure & Multi-Region Cloud Network */}
         <GlobalInfrastructure />
 
-        {/* Institutional 3-Tier Pricing & Enterprise Membership */}
-        <InstitutionalPricing onOpenQr={() => setQrModalOpen(true)} />
-
-        {/* High-Converting Marketing Lead Magnet: Free 2026 Ebook & 30-Day Premium Gift */}
+        {/* 16. High-Converting Marketing Lead Magnet: Free 2026 Ebook */}
         <MarketingLeadMagnet />
 
-        {/* App Ratings & Trust Badges */}
+        {/* 17. App Ratings & Trust Badges */}
         <div className="bg-slate-50/70 border-t border-slate-200/80 py-12">
           <TrustBadges />
         </div>

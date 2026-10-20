@@ -156,9 +156,9 @@ export default function SolutionsSegment() {
                 <div>
                   <a
                     href="#download"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-950 text-white font-extrabold text-sm shadow-lg hover:bg-sky-600 transition"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/20 transition"
                   >
-                    Bắt đầu với gói {current.title}
+                    <span>Trải nghiệm 0đ cho {current.title}</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
