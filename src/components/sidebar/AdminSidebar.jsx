@@ -22,8 +22,10 @@ import {
   Megaphone,
   Settings2,
   LogOut,
+  ScanSearch,
+  PanelTop,
 } from "lucide-react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthSessionContext.js";
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "../modal/ConfirmModal";
 
@@ -58,6 +60,7 @@ export default function AdminSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarItem icon={<ChartPie size={20} />} label="Tổng quan" path="/admin" />
+              <SidebarItem icon={<PanelTop size={20} />} label="Admin V2 console" path="/admin-v2" />
               <SidebarItem icon={<User size={20} />} label="Người dùng" path="/admin/users" />
               <SidebarItem icon={<ScrollText size={20} />} label="Báo cáo & Hỗ trợ" path="/admin/reports" />
             </SidebarMenu>
@@ -95,6 +98,7 @@ export default function AdminSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarItem icon={<Settings2 size={20} />} label="Cấu hình" path="/admin/config" />
+              <SidebarItem icon={<ScanSearch size={20} />} label="Phân loại hóa đơn" path="/admin/receipt-classification" />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

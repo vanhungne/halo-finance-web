@@ -1,0 +1,80 @@
+/* Admin V2 design contract. Pages and primitives consume these semantic tokens. */
+:root {
+  --admin-font-sans: "Be Vietnam Pro", "Geist Variable", system-ui, sans-serif;
+  --admin-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --admin-text-meta: 0.6875rem;
+  --admin-text-label: 0.75rem;
+  --admin-text-body: 0.875rem;
+  --admin-text-section: 1rem;
+  --admin-text-kpi: 1.25rem;
+  --admin-text-title: 1.5rem;
+
+  --admin-space-1: 0.25rem;
+  --admin-space-half: 0.125rem;
+  --admin-space-1-5: 0.375rem;
+  --admin-space-2: 0.5rem;
+  --admin-space-2-5: 0.625rem;
+  --admin-space-3: 0.75rem;
+  --admin-space-4: 1rem;
+  --admin-space-6: 1.5rem;
+  --admin-space-8: 2rem;
+
+  --admin-size-icon-button: 2.5rem;
+  /* 36px desktop controls; the mobile media query raises touch targets to 44px. */
+  --admin-size-control: 2.25rem;
+  --admin-size-header: 4rem;
+  --admin-size-sidebar: 16rem;
+  --admin-size-sidebar-collapsed: 3rem;
+  --admin-size-brand-mark: 2rem;
+  --admin-size-session-dot: 0.5rem;
+  --admin-width-content: 100rem;
+  --admin-radius-control: 0.5rem;
+  --admin-radius-panel: 0.75rem;
+  --admin-radius-dialog: 1rem;
+  --admin-radius-pill: 999px;
+
+  --admin-bg: #f5f7fa;
+  --admin-surface: #ffffff;
+  --admin-surface-muted: #eef2f6;
+  --admin-border: #dbe2ea;
+  --admin-border-strong: #c5d0dc;
+  --admin-text: #17212b;
+  --admin-text-muted: #607080;
+  --admin-primary: #1b73b8;
+  --admin-primary-strong: #12558d;
+  --admin-on-primary: #ffffff;
+  --admin-focus: #1b73b8;
+  --admin-success: #147a55;
+  --admin-warning: #9b6500;
+  --admin-danger: #b42318;
+  --admin-on-danger: #ffffff;
+  --admin-info: #2563a6;
+
+  --admin-shadow: 0 1px 2px rgb(23 33 43 / 0.06);
+  --admin-shadow-dialog: 0 16px 48px rgb(0 0 0 / 0.22);
+  --admin-overlay: rgb(0 0 0 / 0.42);
+  --admin-motion-fast: 180ms;
+}
+
+[data-admin-theme="dark"] {
+  --admin-bg: #111923;
+  --admin-surface: #17222d;
+  --admin-surface-muted: #202e3b;
+  --admin-border: #304150;
+  --admin-border-strong: #425668;
+  --admin-text: #edf3f7;
+  --admin-text-muted: #a7b7c5;
+  --admin-primary: #65b7ef;
+  --admin-primary-strong: #9fd6f5;
+  --admin-on-primary: #111923;
+  --admin-focus: #8ed0f6;
+  --admin-success: #65d6a5;
+  --admin-warning: #f5c15f;
+  --admin-danger: #ff9b91;
+  --admin-on-danger: #111923;
+  --admin-info: #8bc7ff;
+  --admin-shadow: 0 1px 2px rgb(0 0 0 / 0.24);
+  --admin-shadow-dialog: 0 16px 48px rgb(0 0 0 / 0.42);
+  --admin-overlay: rgb(0 0 0 / 0.62);
+}

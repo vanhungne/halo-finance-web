@@ -1,0 +1,20 @@
+{
+  "fixtureApi": true,
+  "realBackendQualified": false,
+  "browser": "Chrome headless, owned context",
+  "checks": [
+    "real React login and shared authenticated bootstrap",
+    "two actual tabs share one rotation and observe a queued platform lock",
+    "cross-tab local logout clears private views before remote acknowledgement",
+    "late old-account HTTP200 cannot return data or retain the prior query cache",
+    "session boundary cancels actual step-up dialog and prevents old command resubmission",
+    "same-session credential rotation cancels proof while preserving that actor's cache",
+    "server refresh refusal closes both tab views",
+    "two real React timer cycles use current refresh credentials across both tabs"
+  ],
+  "simultaneousRefreshExchanges": 1,
+  "protectedCommandRequests": 2,
+  "automaticTimerCycles": 2,
+  "credentialLogDetected": false,
+  "pageErrors": []
+}

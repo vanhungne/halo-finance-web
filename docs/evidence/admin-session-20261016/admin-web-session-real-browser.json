@@ -1,0 +1,13 @@
+{
+  "realBackendQualified": true,
+  "qualificationScope": "owned loopback Program/PostgreSQL synthetic-account session journey only",
+  "checks": [
+    "real login and two-tab rotation with one real refresh exchange",
+    "real Admin suspension rejects access/refresh and closes both private views",
+    "fresh credentials after reactivation and acknowledged real logout",
+    "real Program restart, fresh login and authorized private read"
+  ],
+  "credentialLog": false,
+  "pageErrors": [],
+  "twoTabRealRefreshExchanges": 1
+}

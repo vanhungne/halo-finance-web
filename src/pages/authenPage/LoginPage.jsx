@@ -1,16 +1,18 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 import images from "../../assets/image";
-import { loginApi } from "../../services/auth";
-import { AuthContext } from "../../contexts/AuthContext";
+import { authSessionMessage } from "../../services/auth/sessionMessages";
+import { readAdminLocale } from "../../adminV2/adminMessages";
+import { AuthContext } from "../../contexts/AuthSessionContext.js";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 
 function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "", rememberMe: true });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { auth, setAuth } = useContext(AuthContext);
+  const [twoFactor, setTwoFactor] = useState(null);
+  const { auth, login, verifyTwoFactor, sessionError } = useContext(AuthContext);
+  const locale = readAdminLocale(() => window.localStorage);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -22,30 +24,16 @@ function LoginPage() {
     setError("");
 
     try {
-      const data = await loginApi(form);
-
-      localStorage.setItem("access_token", data.accessToken);
-      if (data.refreshToken) localStorage.setItem("refresh_token", data.refreshToken);
-
-      const decoded = jwtDecode(data.accessToken);
-      if (decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Admin") {
-        setAuth({
-          isLoggedIn: true,
-          userId: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
-          roleName: decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
-          email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
-          avatar: decoded["avatar"],
-          fullName: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-        });
-      } else {
-        setError("Bạn không có thẩm quyền để truy cập trang này.");
-      }
+      if (twoFactor) await verifyTwoFactor({ challenge: twoFactor.challenge, otpCode: form.otpCode });
+      else await login(form);
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed. Please check your credentials.");
-      console.log(err);
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
+      if (err.code === "AUTH_TWO_FACTOR_REQUIRED" && err.details?.challenge) {
+        setTwoFactor(err.details);
+        setForm((current) => ({ ...current, otpCode: "" }));
+      }
+      setError(authSessionMessage(err.code, locale));
     } finally {
+      setForm((current) => ({ ...current, password: "" }));
       setLoading(false);
     }
   };
@@ -58,7 +46,7 @@ function LoginPage() {
     if (auth?.roleName === "Admin") {
       navigate("/admin");
     }
-  }, [auth]);
+  }, [auth, navigate]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 lg:px-8">
@@ -79,6 +67,14 @@ function LoginPage() {
           </div>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
+            {twoFactor && <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+              Nhập mã {twoFactor.method === "authenticator" ? "trong ứng dụng xác thực" : "được gửi qua SMS"} để tiếp tục.
+            </div>}
+            {twoFactor ? <input
+              name="otpCode" type="text" inputMode="numeric" pattern="[0-9]{6}" maxLength={6}
+              placeholder="Mã xác thực 6 số" value={form.otpCode ?? ""} onChange={handleChange} autoComplete="one-time-code" required
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 text-sm sm:text-base"
+            /> : <>
             <input
               name="email"
               type="email"
@@ -106,11 +102,11 @@ function LoginPage() {
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
-            </div>
+            </div></>}
 
-            {error && (
+            {(error || sessionError) && (
               <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-sm text-red-600">{error}</p>
+                <p className="text-sm text-red-600" role="alert">{error || authSessionMessage(sessionError, locale)}</p>
               </div>
             )}
 
@@ -125,10 +121,11 @@ function LoginPage() {
                   Đăng nhập...
                 </div>
               ) : (
-                "Đăng nhập"
+                twoFactor ? "Xác nhận mã" : "Đăng nhập"
               )}
             </button>
           </form>
+          {twoFactor && <button type="button" onClick={() => { setTwoFactor(null); setError(""); setForm((current) => ({ ...current, otpCode: "" })); }} className="mt-3 w-full text-sm text-gray-600 hover:text-yellow-600">Quay lại đăng nhập</button>}
           <div className="text-center mt-6">
             <button
               onClick={handleBackHome}

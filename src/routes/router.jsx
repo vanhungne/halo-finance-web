@@ -1,9 +1,11 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import adminRoute from "./route/adminRoute";
+import adminV2Route from "./route/adminV2Route";
 import ROUTES from ".";
 import LoginPage from "../pages/authenPage/LoginPage";
 import publicRoute from "./route/publicRoute";
 import AdminLayout from "../layout/adminLayout";
+import AdminV2Layout from "../adminV2/AdminV2Layout";
 import ProtectedRoute from "./route/protectedRoute";
 import NotFoundPage from "../pages/NotFoundPage";
 import ConfirmEmailSuccess from "../pages/ConfirmEmailSuccess";
@@ -34,6 +36,11 @@ export const router = createBrowserRouter([
                 path: "/admin",
                 element: <AdminLayout />,
                 children: [...adminRoute],
+            },
+            {
+                path: "/admin-v2",
+                element: <AdminV2Layout />,
+                children: [...adminV2Route],
             },
         ],
     },

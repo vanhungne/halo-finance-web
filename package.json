@@ -7,11 +7,16 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "admin:generate": "node scripts/admin-client.mjs",
+    "admin:check": "node scripts/admin-client.mjs --check",
+    "admin:typecheck": "node scripts/admin-client.mjs --check && tsc -p tsconfig.admin.json",
+    "test:admin": "node --test --test-isolation=none tests/adminSubscriptionCatalog.test.mjs tests/adminTransport.test.mjs tests/adminCommandOutcome.test.mjs tests/adminRecoveryJournal.test.mjs tests/adminStepUpBroker.test.mjs tests/adminNavigation.test.mjs tests/adminRecoveryInvalidation.test.mjs tests/adminLocale.test.mjs tests/adminBlogContent.test.mjs tests/adminAuditFilters.test.mjs tests/adminReportContent.test.mjs tests/authSession.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.14",
+    "@tanstack/react-query": "^5.104.1",
     "@tiptap/extension-bullet-list": "^3.9.0",
     "@tiptap/extension-code-block-lowlight": "^3.9.0",
     "@tiptap/extension-image": "^3.9.0",
@@ -51,8 +56,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+    "orval": "8.41.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.14",
+    "typescript": "5.9.3",
     "vite": "^7.1.7"
   }
 }
