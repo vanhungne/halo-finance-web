@@ -430,7 +430,6 @@ export const aiManagementService = {
             },
           ],
           generationConfig: {
-            temperature: typeof config.temperature === "number" ? config.temperature : 0.1,
             responseMimeType: "application/json",
           },
         }),
