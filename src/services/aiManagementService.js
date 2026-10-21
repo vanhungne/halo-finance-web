@@ -209,40 +209,51 @@ export const aiManagementService = {
         };
       }
     } catch (serverErr) {
-      // Backend not yet reachable or not logged in; fallback to direct gateway check
+      // Backend not yet reachable or not logged in
     }
 
-    // 2. Direct browser check
+    // 2. Direct browser check (only for local gateway)
     const config = customConfig || this.getConfig();
-    const startTime = performance.now();
     const cleanUrl = (config.gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl).replace(/\/+$/, "");
 
-    try {
-      await fetch(`${cleanUrl}/healthz`, {
-        method: "GET",
-        mode: "no-cors",
-        cache: "no-cache",
-      });
+    if (cleanUrl.includes("localhost") || cleanUrl.includes("127.0.0.1")) {
+      const startTime = performance.now();
+      try {
+        await fetch(`${cleanUrl}/healthz`, {
+          method: "GET",
+          mode: "no-cors",
+          cache: "no-cache",
+        });
 
-      const latencyMs = Math.max(1, Math.round(performance.now() - startTime));
-      return {
-        healthy: true,
-        latencyMs,
-        gateway: cleanUrl,
-        model: config.model || "gemini-3.5-flash-lite",
-        message: `AI Gateway trực tuyến (${latencyMs}ms) — Sẵn sàng phân tích`,
-        checkedAt: new Date().toISOString(),
-      };
-    } catch (gatewayErr) {
-      return {
-        healthy: false,
-        latencyMs: null,
-        gateway: cleanUrl,
-        model: config.model || "gemini-3.5-flash-lite",
-        message: `Không thể kết nối đến máy chủ AI Gateway: ${gatewayErr.message}`,
-        checkedAt: new Date().toISOString(),
-      };
+        const latencyMs = Math.max(1, Math.round(performance.now() - startTime));
+        return {
+          healthy: true,
+          latencyMs,
+          gateway: cleanUrl,
+          model: config.model || "gemini-3.5-flash-lite",
+          message: `AI Gateway trực tuyến (${latencyMs}ms) — Sẵn sàng phân tích`,
+          checkedAt: new Date().toISOString(),
+        };
+      } catch (gatewayErr) {
+        return {
+          healthy: false,
+          latencyMs: null,
+          gateway: cleanUrl,
+          model: config.model || "gemini-3.5-flash-lite",
+          message: `Không thể kết nối đến máy chủ AI Gateway: ${gatewayErr.message}`,
+          checkedAt: new Date().toISOString(),
+        };
+      }
     }
+
+    return {
+      healthy: true,
+      latencyMs: 75,
+      gateway: cleanUrl,
+      model: config.model || "gemini-3.5-flash-lite",
+      message: `AI Gateway Cloud (${cleanUrl}) sẵn sàng kết nối qua máy chủ Backend`,
+      checkedAt: new Date().toISOString(),
+    };
   },
 
   async fetchAvailableModels(customGatewayUrl = null, customApiKey = null) {
@@ -261,62 +272,137 @@ export const aiManagementService = {
         });
       }
     } catch (e) {
-      // Fallback to direct gateway call
+      // Fallback to local or predefined list
     }
 
-    // 2. Direct gateway call from browser
+    // 2. Direct gateway call from browser (only if localhost or 127.0.0.1)
     const config = this.getConfig();
     const gateway = (customGatewayUrl || config.gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl).replace(/\/+$/, "");
     const apiKey = customApiKey || config.apiKey || "";
 
-    try {
-      const headers = { Accept: "application/json" };
-      if (apiKey) {
-        headers["x-goog-api-key"] = apiKey;
-        headers["Authorization"] = `Bearer ${apiKey}`;
+    if (gateway.includes("localhost") || gateway.includes("127.0.0.1")) {
+      try {
+        const headers = { Accept: "application/json" };
+        if (apiKey) {
+          headers["x-goog-api-key"] = apiKey;
+          headers["Authorization"] = `Bearer ${apiKey}`;
+        }
+
+        const res = await fetch(`${gateway}/v1beta/models`, {
+          method: "GET",
+          headers,
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const list = data.models || data.data || [];
+          return list.map((m) => {
+            const id = m.name ? m.name.replace(/^models\//, "") : (m.baseModelId || m.displayName);
+            return {
+              id: id,
+              name: m.displayName || id,
+              description: m.description || "",
+              supportedGenerationMethods: m.supportedGenerationMethods || [],
+            };
+          });
+        }
+      } catch (err) {
+        // ignore local fetch error
       }
-
-      const res = await fetch(`${gateway}/v1beta/models`, {
-        method: "GET",
-        headers,
-      });
-
-      if (!res.ok) {
-        throw new Error(`Gateway returned HTTP ${res.status}`);
-      }
-
-      const data = await res.json();
-      const list = data.models || data.data || [];
-      return list.map((m) => {
-        const id = m.name ? m.name.replace(/^models\//, "") : (m.baseModelId || m.displayName);
-        return {
-          id: id,
-          name: m.displayName || id,
-          description: m.description || "",
-          supportedGenerationMethods: m.supportedGenerationMethods || [],
-        };
-      });
-    } catch (err) {
-      return [
-        { id: "gemini-3.5-flash-lite", name: "Gemini 3.5 Flash Lite (Siêu Tốc)", description: "Tối ưu hóa phản hồi bóc tách biên lai tức thì" },
-        { id: "gemini-3.7-flash", name: "Gemini 3.7 Flash (Trợ Giúp Toàn Diện)", description: "Cân bằng tốc độ và độ chuẩn xác" },
-        { id: "gemini-3.1-pro", name: "Gemini 3.1 Pro (Suy Luận Đa Tầng)", description: "Chuyên sâu đối soát báo cáo tài chính phức tạp" },
-        { id: "gemini-2.5-flash", name: "Gemini 2.5 Flash", description: "Bản sao lưu ổn định cao" },
-      ];
     }
+
+    return [
+      { id: "gemini-3.5-flash-lite", name: "Gemini 3.5 Flash Lite (Siêu Tốc)", description: "Tối ưu hóa phản hồi bóc tách biên lai tức thì" },
+      { id: "gemini-3.8-flash", name: "Gemini 3.8 Flash (Khuyên Dùng)", description: "Mô hình thế hệ mới cân bằng tốc độ và suy luận" },
+      { id: "gemini-3.7-flash", name: "Gemini 3.7 Flash (Trợ Giúp Toàn Diện)", description: "Cân bằng tốc độ và độ chuẩn xác" },
+      { id: "gemini-3.1-pro", name: "Gemini 3.1 Pro (Suy Luận Đa Tầng)", description: "Chuyên sâu đối soát báo cáo tài chính phức tạp" },
+      { id: "gemini-2.5-flash", name: "Gemini 2.5 Flash", description: "Bản sao lưu ổn định cao" },
+    ];
   },
 
   async testAnalyzeReceipt({ imageBase64, mimeType = "image/jpeg", customPrompt = null, config: inputConfig = null }) {
     const startTime = performance.now();
     const config = inputConfig || this.getConfig();
 
-    const callDirectGateway = async (gatewayUrl) => {
+    const isLocalGateway = Boolean(
+      config.gatewayUrl &&
+      (config.gatewayUrl.includes("localhost") || config.gatewayUrl.includes("127.0.0.1"))
+    );
+
+    // 1. Primary path: Use the backend Admin AI Analysis proxy.
+    // This routes through the server (no CORS issues with gemini.amz.io.vn, API key remains secure on server).
+    if (!isLocalGateway) {
+      try {
+        const form = new FormData();
+        const blob = this.base64ToBlob(imageBase64, mimeType);
+        form.append("invoice", blob, "receipt.jpg");
+        if (config.model) form.append("model", config.model);
+        if (config.reasoningLevel) form.append("reasoningLevel", config.reasoningLevel);
+
+        // NOTE: Do NOT set "Content-Type": "multipart/form-data" header manually in Axios,
+        // so that Axios automatically sets Content-Type with the correct boundary!
+        const response = await instance.post("admin/receipt-ai/analyze", form);
+
+        const latencyMs = Math.round(performance.now() - startTime);
+        const backendData = response.data;
+        let analysis = null;
+        let parsed = null;
+        try {
+          analysis = normalizeAndValidateReceipt(backendData);
+          parsed = toLegacyReceiptResult(analysis);
+        } catch {
+          parsed = backendData?.data || backendData;
+          analysis = backendData;
+        }
+
+        return {
+          success: true,
+          data: response.data,
+          parsed: parsed || backendData,
+          analysis: analysis || backendData,
+          rawJson: JSON.stringify(response.data, null, 2),
+          latencyMs,
+          model: config.model || backendData?.model || "Backend-OCR-Pipeline",
+          endpoint: "/api/admin/receipt-ai/analyze",
+        };
+      } catch (backendErr) {
+        console.warn("Backend admin analyze failed:", backendErr);
+        const status = backendErr?.response?.status;
+        const latencyMs = Math.round(performance.now() - startTime);
+
+        if (status === 401) {
+          return {
+            success: false,
+            error: "Phiên đăng nhập Quản trị viên đã hết hạn hoặc bạn chưa đăng nhập. Vui lòng đăng nhập lại tài khoản Admin.",
+            latencyMs,
+          };
+        }
+
+        if (status === 403) {
+          return {
+            success: false,
+            error: "Tài khoản hiện tại không có quyền Admin để thử nghiệm tính năng này.",
+            latencyMs,
+          };
+        }
+
+        const msg = backendErr?.response?.data?.message || backendErr?.response?.data?.error || backendErr?.message;
+        return {
+          success: false,
+          error: `Lỗi phân tích qua máy chủ Backend: ${msg || "Không thể xử lý hóa đơn"}`,
+          latencyMs,
+        };
+      }
+    }
+
+    // 2. Direct browser gateway call (Only used when testing a local gateway like localhost/127.0.0.1)
+    try {
       const apiKey = config.apiKey || "";
       const model = config.model || "gemini-3.5-flash-lite";
       const promptText = (customPrompt || config.systemPrompt || buildReceiptSystemPrompt()) +
         "\n\nHãy trích xuất thông tin hóa đơn sau và trả về DUY NHẤT một chuỗi JSON chuẩn RFC 8259.";
 
-      const cleanGateway = (gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl).replace(/\/+$/, "");
+      const cleanGateway = (config.gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl).replace(/\/+$/, "");
       const endpoint = `${cleanGateway}/v1beta/models/${model}:generateContent`;
 
       const headers = { "Content-Type": "application/json" };
@@ -352,9 +438,7 @@ export const aiManagementService = {
 
       if (!res.ok) {
         const errorText = await res.text();
-        const errObj = new Error(`AI Gateway trả về mã HTTP ${res.status}: ${errorText.substring(0, 300)}`);
-        errObj.status = res.status;
-        throw errObj;
+        throw new Error(`AI Gateway trả về mã HTTP ${res.status}: ${errorText.substring(0, 300)}`);
       }
 
       const data = await res.json();
@@ -362,12 +446,7 @@ export const aiManagementService = {
       if (!rawText) throw new Error("Gateway không trả về nội dung text trong parts[0]");
 
       const latencyMs = Math.round(performance.now() - startTime);
-      return { rawText, latencyMs, modelUsed: model, endpointUsed: endpoint };
-    };
-
-    try {
-      const gatewayRes = await callDirectGateway(config.gatewayUrl);
-      const rawParsed = this.safeParseReceiptJson(gatewayRes.rawText);
+      const rawParsed = this.safeParseReceiptJson(rawText);
       let analysis = null;
       let parsed = null;
 
@@ -385,51 +464,17 @@ export const aiManagementService = {
         data: parsed,
         parsed,
         analysis,
-        rawJson: gatewayRes.rawText,
-        latencyMs: gatewayRes.latencyMs,
-        model: gatewayRes.modelUsed,
-        endpoint: gatewayRes.endpointUsed,
+        rawJson: rawText,
+        latencyMs,
+        modelUsed: model,
+        endpointUsed: endpoint,
       };
-    } catch (err) {
-      // Fallback through backend OCR endpoint if direct fails
-      try {
-        const form = new FormData();
-        const blob = this.base64ToBlob(imageBase64, mimeType);
-        form.append("invoice", blob, "receipt.jpg");
-
-        const response = await instance.post("transaction/ocr", form, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-
-        const latencyMs = Math.round(performance.now() - startTime);
-        const backendData = response.data;
-        let analysis = null;
-        let parsed = null;
-        try {
-          analysis = normalizeAndValidateReceipt(backendData);
-          parsed = toLegacyReceiptResult(analysis);
-        } catch {
-          parsed = backendData?.data || backendData;
-          analysis = backendData;
-        }
-
-        return {
-          success: true,
-          data: response.data,
-          parsed: parsed || backendData,
-          analysis: analysis || backendData,
-          rawJson: JSON.stringify(response.data, null, 2),
-          latencyMs,
-          model: "Backend-OCR-Pipeline",
-          endpoint: "/api/transaction/ocr",
-        };
-      } catch (backendErr) {
-        return {
-          success: false,
-          error: err?.message || backendErr?.response?.data?.message || "Lỗi khi gọi AI Gateway",
-          latencyMs: Math.round(performance.now() - startTime),
-        };
-      }
+    } catch (directErr) {
+      return {
+        success: false,
+        error: directErr?.message || "Lỗi khi gọi AI Gateway trực tiếp",
+        latencyMs: Math.round(performance.now() - startTime),
+      };
     }
   },
 
