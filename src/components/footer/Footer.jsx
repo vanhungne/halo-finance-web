@@ -207,9 +207,11 @@ function Footer() {
             <LanguageSwitcher variant="footer" />
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-slate-400 text-[11px]">
-            <a href="#security" className="hover:text-white transition">Chính sách an toàn thông tin</a>
+            <a href="/privacy" className="hover:text-white transition">Chính sách bảo mật</a>
             <span>•</span>
-            <a href="#home" className="hover:text-white transition">Điều khoản dịch vụ ngân hàng</a>
+            <a href="/terms" className="hover:text-white transition">Điều khoản sử dụng</a>
+            <span>•</span>
+            <a href="/delete-account" className="hover:text-white transition">Yêu cầu xóa tài khoản</a>
             <span>•</span>
             <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-1">
               Sitemap XML <ExternalLink className="h-3 w-3" />
