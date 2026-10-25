@@ -60,7 +60,7 @@ const recentTransactions = [
 export default function CustomerDashboard() {
   const [vietQrModalOpen, setVietQrModalOpen] = useState(false);
   const [qrAmount, setQrAmount] = useState(500000);
-  const [qrContent, setQrContent] = useState("CHUYEN TIEN HALO FINANCE");
+  const [qrContent, setQrContent] = useState("CHUYEN TIEN TRO LY TAI CHINH");
 
   const formatVND = (num) =>
     new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(num);

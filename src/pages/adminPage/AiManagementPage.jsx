@@ -946,7 +946,7 @@ export default function AiManagementPage() {
                   <Input
                     value={config.gatewayUrl}
                     onChange={(e) => setConfig({ ...config, gatewayUrl: e.target.value })}
-                    placeholder="https://gemini.amz.io.vn"
+                    placeholder="https://gemini.amzpro.space"
                     className="text-xs font-mono"
                   />
                   <Button

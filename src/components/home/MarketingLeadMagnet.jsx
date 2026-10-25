@@ -48,7 +48,7 @@ export default function MarketingLeadMagnet() {
             </h2>
 
             <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
-              Cẩm nang thực chiến dài 45 trang được đội ngũ chuyên gia tài chính Halo Finance đúc kết: phương pháp phân bổ thu nhập 6 chiếc lọ cải tiến, chiến lược trả nợ tuyết lăn và cách tạo thói quen tích lũy không áp lực.
+              Cẩm nang thực chiến dài 45 trang được đội ngũ chuyên gia tài chính Trợ Lý Tài Chính đúc kết: phương pháp phân bổ thu nhập 6 chiếc lọ cải tiến, chiến lược trả nợ tuyết lăn và cách tạo thói quen tích lũy không áp lực.
             </p>
 
             <div className="grid gap-2.5 sm:grid-cols-2 pt-1 text-sm font-semibold text-white/95">

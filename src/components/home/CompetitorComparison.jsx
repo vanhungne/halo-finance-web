@@ -4,7 +4,7 @@ const COMPARISON_ROWS = [
   {
     feature: "Mở tài khoản & Định danh eKYC số đẹp",
     subtitle: "Xác thực CCCD gắn chip & FaceID online 100% không cần ra quầy",
-    halo: { status: "full", text: "Online 60s, chọn số đẹp 0đ" },
+    tltc: { status: "full", text: "Online 60s, chọn số đẹp 0đ" },
     tradBank: { status: "partial", text: "Phải ra quầy xếp hàng, thủ tục giấy tờ" },
     otherApps: { status: "none", text: "Chỉ ghi chép ảo, không có tài khoản" },
     manual: { status: "none", text: "Không hỗ trợ" },
@@ -12,7 +12,7 @@ const COMPARISON_ROWS = [
   {
     feature: "Gom dòng tiền 54+ Ngân hàng liên kết (NAPAS)",
     subtitle: "Quản lý tập trung Vietcombank, Techcombank, MB, VPB trên 1 màn hình",
-    halo: { status: "full", text: "Hub gom tự động 54+ ngân hàng" },
+    tltc: { status: "full", text: "Hub gom tự động 54+ ngân hàng" },
     tradBank: { status: "none", text: "Chỉ xem được tài khoản nội bộ ngân hàng đó" },
     otherApps: { status: "none", text: "Phải tự nhập tay từng giao dịch" },
     manual: { status: "none", text: "Tự tải sao kê về gõ lại" },
@@ -20,7 +20,7 @@ const COMPARISON_ROWS = [
   {
     feature: "Bóc tách hóa đơn ăn uống/siêu thị bằng Trí Tuệ Nhân Tạo AI",
     subtitle: "Chụp ảnh bill trong 3s, tự bóc tách từng món ăn, chiết khấu và thuế VAT",
-    halo: { status: "full", text: "AI OCR Đa Tầng nhận diện chính xác 100%" },
+    tltc: { status: "full", text: "AI OCR Đa Tầng nhận diện chính xác 100%" },
     tradBank: { status: "none", text: "Không có tính năng bóc tách hóa đơn" },
     otherApps: { status: "partial", text: "Chỉ đọc tổng tiền, hay lỗi font chữ" },
     manual: { status: "none", text: "Tự gõ từng dòng rất tốn thời gian" },
@@ -28,7 +28,7 @@ const COMPARISON_ROWS = [
   {
     feature: "Chia tiền nhóm & Tạo mã VietQR thanh toán 1 chạm",
     subtitle: "Tự tính ai nợ ai số lần chuyển ít nhất, quét mã QR trả tiền ngay",
-    halo: { status: "full", text: "Thuật toán tối ưu + VietQR động 1 chạm" },
+    tltc: { status: "full", text: "Thuật toán tối ưu + VietQR động 1 chạm" },
     tradBank: { status: "partial", text: "Phải hỏi số tài khoản từng người, chuyển tay" },
     otherApps: { status: "partial", text: "Chỉ tính số tiền, không có mã VietQR" },
     manual: { status: "none", text: "Tính tay dễ nhầm lẫn, mất tình cảm" },
@@ -36,7 +36,7 @@ const COMPARISON_ROWS = [
   {
     feature: "Biểu phí quản lý & Dịch vụ số",
     subtitle: "Phí mở tài khoản, phí chuyển tiền NAPAS 24/7 và phí thường niên",
-    halo: { status: "full", text: "0đ Phí trọn đời, 0đ SMS, 0đ chuyển tiền" },
+    tltc: { status: "full", text: "0đ Phí trọn đời, 0đ SMS, 0đ chuyển tiền" },
     tradBank: { status: "partial", text: "Thu phí SMS 11k-55k/tháng, phí duy trì" },
     otherApps: { status: "none", text: "Thu phí theo tháng hoặc chèn quảng cáo phiền toái" },
     manual: { status: "full", text: "Miễn phí nhưng tốn nhiều thời gian" },
@@ -44,7 +44,7 @@ const COMPARISON_ROWS = [
   {
     feature: "Cổng Web Internet Banking đa thiết bị (PC + Mobile)",
     subtitle: "Làm việc linh hoạt trên máy tính văn phòng và điện thoại cá nhân",
-    halo: { status: "full", text: "Web Portal chuyên nghiệp + App Mobile" },
+    tltc: { status: "full", text: "Web Portal chuyên nghiệp + App Mobile" },
     tradBank: { status: "partial", text: "Web thường nặng, giao diện cũ kỹ" },
     otherApps: { status: "none", text: "Đa số chỉ có app điện thoại" },
     manual: { status: "partial", text: "Excel xem trên điện thoại rất khó thao tác" },
@@ -52,7 +52,7 @@ const COMPARISON_ROWS = [
   {
     feature: "Bảo mật & Tuân thủ an ninh số quốc tế",
     subtitle: "Mã hóa AES-256, TLS 1.3, chuẩn PCI-DSS Level 1 & ISO 27001",
-    halo: { status: "full", text: "PCI-DSS Level 1 & Tuân thủ NĐ 13" },
+    tltc: { status: "full", text: "PCI-DSS Level 1 & Tuân thủ NĐ 13" },
     tradBank: { status: "full", text: "Chuẩn an ninh ngân hàng" },
     otherApps: { status: "partial", text: "Chính sách dữ liệu không rõ ràng" },
     manual: { status: "none", text: "Dễ thất lạc sổ sách hoặc mất file" },
@@ -75,7 +75,7 @@ export default function CompetitorComparison() {
             <span>Ma Trận Năng Lực So Sánh Trực Tiếp</span>
           </div>
           <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl text-slate-900">
-            Halo Finance Khác Gì So Với{" "}
+            Trợ Lý Tài Chính Khác Gì So Với{" "}
             <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Ngân Hàng Truyền Thống
             </span>
@@ -101,7 +101,7 @@ export default function CompetitorComparison() {
                 <th className="py-4 px-4 font-black text-blue-700 bg-blue-50/90 rounded-t-2xl text-center w-[28%] border-x-2 border-t-2 border-blue-500/40">
                   <div className="flex items-center justify-center gap-1.5">
                     <Sparkles className="h-4 w-4 text-blue-600" />
-                    <span className="text-sm sm:text-base">Halo Digital Finance</span>
+                    <span className="text-sm sm:text-base">Trợ Lý Tài Chính</span>
                   </div>
                   <span className="text-[10px] lowercase font-extrabold text-blue-600 block mt-0.5">Thế hệ Ngân hàng số 2.0</span>
                 </th>
@@ -127,13 +127,13 @@ export default function CompetitorComparison() {
                     <div className="text-xs text-slate-500 font-normal mt-0.5 leading-relaxed">{row.subtitle}</div>
                   </td>
 
-                  {/* Halo Digital Finance Highlight Column */}
+                  {/* Trợ Lý Tài Chính Highlight Column */}
                   <td className="py-4 px-4 bg-blue-50/40 border-x-2 border-blue-500/30 text-center">
                     <div className="flex flex-col items-center justify-center gap-1">
                       <span className="grid h-7 w-7 place-items-center rounded-full bg-blue-600 text-white font-black shadow-md shadow-blue-500/25">
                         <Check className="h-4 w-4 stroke-[3]" />
                       </span>
-                      <span className="text-xs font-black text-blue-900">{row.halo.text}</span>
+                      <span className="text-xs font-black text-blue-900">{row.tltc.text}</span>
                     </div>
                   </td>
 

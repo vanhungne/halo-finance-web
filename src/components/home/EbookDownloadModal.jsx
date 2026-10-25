@@ -114,7 +114,7 @@ export default function EbookDownloadModal({ isOpen, onClose }) {
                 </p>
                 <p className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Voucher mã kích hoạt 30 ngày trải nghiệm Halo VIP</span>
+                  <span>Voucher mã kích hoạt 30 ngày trải nghiệm VIP</span>
                 </p>
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function EbookDownloadModal({ isOpen, onClose }) {
                 </span>
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                45 trang thực chiến đúc kết bởi chuyên gia tài chính định chế Halo Finance. Đã có hơn <strong className="text-blue-700 font-bold">+18.400 cá nhân và chủ hộ kinh doanh</strong> tải về và áp dụng thành công.
+                45 trang thực chiến đúc kết bởi chuyên gia tài chính định chế Trợ Lý Tài Chính. Đã có hơn <strong className="text-blue-700 font-bold">+18.400 cá nhân và chủ hộ kinh doanh</strong> tải về và áp dụng thành công.
               </p>
             </div>
 

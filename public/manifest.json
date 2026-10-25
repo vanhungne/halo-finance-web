@@ -1,6 +1,6 @@
 {
-  "name": "Trợ Lý Tài Chính (Halo Finance)",
-  "short_name": "Halo Finance",
+  "name": "Trợ Lý Tài Chính",
+  "short_name": "Trợ Lý Tài Chính",
   "description": "Ứng dụng quản lý thu chi cá nhân, bóc tách hóa đơn AI và chia tiền nhóm thông minh.",
   "start_url": "/",
   "display": "standalone",

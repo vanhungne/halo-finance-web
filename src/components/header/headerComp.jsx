@@ -145,8 +145,8 @@ const TOOL_ITEMS = [
 const RESOURCE_ITEMS = [
   {
     icon: Scale,
-    title: "So Sánh Halo Finance",
-    desc: "Tại sao Halo vượt trội sổ tay, Excel và các app cũ?",
+    title: "So Sánh Tính Năng",
+    desc: "Tại sao ứng dụng vượt trội sổ tay, Excel và các app cũ?",
     href: "#comparison",
     color: "bg-sky-50 text-sky-600",
   },
@@ -221,15 +221,15 @@ export default function Header({ onOpenEbook }) {
           {/* LEFT: PROMINENT BRAND LOGO                                     */}
           {/* ============================================================== */}
           <div className="flex items-center gap-3 shrink-0">
-            <a href="#home" className="group flex items-center shrink-0 gap-2.5" aria-label="Halo Finance - Trang chủ">
+            <a href="#home" className="group flex items-center shrink-0 gap-2.5" aria-label="Trợ Lý Tài Chính - Trang chủ">
               <img
                 src={images.logo}
-                alt="Halo Finance - Trợ Lý Tài Chính"
+                alt="Trợ Lý Tài Chính"
                 className="h-12 sm:h-13 lg:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
               <div className="hidden sm:flex flex-col border-l border-slate-300/80 pl-2.5 leading-tight">
                 <span className="text-[11px] font-black tracking-wider uppercase text-slate-900">
-                  HALO FINANCE
+                  TRỢ LÝ TÀI CHÍNH
                 </span>
                 <span className="text-[9.5px] font-bold text-blue-600">
                   Định Chế Tài Chính Số
@@ -594,10 +594,10 @@ export default function Header({ onOpenEbook }) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-white font-black text-sm shadow-md shadow-blue-500/30">
-                      H
+                      T
                     </div>
                     <div>
-                      <p className="text-xs font-black uppercase tracking-wider text-sky-400">Halo Digital Finance</p>
+                      <p className="text-xs font-black uppercase tracking-wider text-sky-400">Trợ Lý Tài Chính</p>
                       <p className="text-sm font-extrabold text-white">Định Chế Tài Chính Số</p>
                     </div>
                   </div>
@@ -778,7 +778,7 @@ export default function Header({ onOpenEbook }) {
                 {/* Direct Links */}
                 <div className="flex flex-col gap-2 pt-1 text-xs font-bold text-slate-800">
                   <a href="#comparison" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between">
-                    <span>So sánh Halo vs Ngân hàng truyền thống</span>
+                    <span>So sánh với Ngân hàng & Sổ thu chi truyền thống</span>
                     <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
                   </a>
                   <a href="#cards" onClick={() => setMobileMenuOpen(false)} className="py-1.5 flex items-center justify-between">

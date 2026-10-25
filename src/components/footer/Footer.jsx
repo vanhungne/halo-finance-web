@@ -38,7 +38,7 @@ const toolLinks = [
 ];
 
 const companyLinks = [
-  { label: "Về Halo Finance (Trợ Lý Tài Chính)", href: "#home" },
+  { label: "Về Trợ Lý Tài Chính", href: "#home" },
   { label: "Cam Kết Miễn Phí 100% Trọn Đời (0đ)", href: "#free-commitment" },
   { label: "Đánh Giá Từ 3.2M+ Người Dùng", href: "#reviews" },
   { label: "Tiêu Chuẩn Bảo Mật PCI-DSS & ISO 27001", href: "#security" },
@@ -55,7 +55,7 @@ function Footer() {
         {/* Top Institutional Header: Hotline & Support Network */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-12 border-b border-slate-800/80">
           <div className="flex items-center gap-3">
-            <img src={images.logo} alt="Halo Finance" className="h-10 w-auto brightness-0 invert" />
+            <img src={images.logo} alt="Trợ Lý Tài Chính" className="h-10 w-auto brightness-0 invert" />
             <span className="hidden sm:inline text-slate-700">|</span>
             <span className="hidden sm:inline text-xs font-bold text-slate-300">
               Định Chế Quản Trị Dòng Tiền & Ngân Hàng Số Thế Hệ Mới
@@ -79,7 +79,7 @@ function Footer() {
               </span>
               <div>
                 <span className="text-[10px] text-slate-500 uppercase block font-bold">Email tiếp nhận</span>
-                <strong className="text-slate-200 text-xs font-semibold">contact@halofinance.vn</strong>
+                <strong className="text-slate-200 text-xs font-semibold">contact@trolytaichinh.vn</strong>
               </div>
             </div>
 
@@ -101,7 +101,7 @@ function Footer() {
           {/* Brand Info & Legal Entity Details */}
           <div className="lg:col-span-4 space-y-4">
             <h4 className="text-sm font-black uppercase text-white tracking-wider">
-              Công Ty Cổ Phần Công Nghệ Tài Chính Halo
+              Công Ty Cổ Phần Công Nghệ Trợ Lý Tài Chính
             </h4>
             <p className="text-xs leading-relaxed text-slate-400 max-w-sm">
               Nền tảng tài chính số đa phương thức phục vụ hơn 3.2 triệu cá nhân, gia đình và hộ kinh doanh tại Việt Nam. Kết nối 54+ ngân hàng chuẩn NAPAS 24/7, bóc tách hóa đơn Trí Tuệ Nhân Tạo AI trong 3 giây và quản trị dòng tiền chuẩn mực quốc tế.
@@ -203,7 +203,7 @@ function Footer() {
         {/* Bottom Bar: Copyright & Compliance */}
         <div className="flex flex-col gap-4 pt-8 text-xs text-slate-500 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <p>© {new Date().getFullYear()} Halo Finance Corporation. Mọi quyền được bảo lưu.</p>
+            <p>© {new Date().getFullYear()} Trợ Lý Tài Chính. Mọi quyền được bảo lưu.</p>
             <LanguageSwitcher variant="footer" />
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-slate-400 text-[11px]">

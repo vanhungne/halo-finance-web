@@ -118,16 +118,16 @@ const features = [
 
 const faqItems = [
   {
-    q: "Halo Finance có thực sự miễn phí 100% trọn đời không? Có phát sinh chi phí ẩn không?",
+    q: "Trợ Lý Tài Chính có thực sự miễn phí 100% trọn đời không? Có phát sinh chi phí ẩn không?",
     a: "Cam kết 100% miễn phí trọn đời: 0đ phí tải app, 0đ phí mở tài khoản eKYC, 0đ phí bóc tách hóa đơn Trí Tuệ Nhân Tạo AI, 0đ phí chuyển khoản VietQR và 0đ phí duy trì số dư tối thiểu. Toàn bộ tính năng cao cấp đều được mở khóa sẵn mà không có bất kỳ chi phí ẩn nào.",
   },
   {
-    q: "Tại sao Halo Finance lại cung cấp Trí Tuệ Nhân Tạo AI và mọi tính năng cao cấp miễn phí 0 đồng?",
-    a: "Trong giai đoạn đầu phát triển, Halo Finance ưu tiên tối đa sứ mệnh bình dân hóa công nghệ tài chính, giúp người Việt làm chủ dòng tiền thông minh. Chúng tôi tập trung tạo giá trị thực sự cho cộng đồng thay vì bán các gói đăng ký thu phí rườm rà.",
+    q: "Tại sao Trợ Lý Tài Chính lại cung cấp Trí Tuệ Nhân Tạo AI và mọi tính năng cao cấp miễn phí 0 đồng?",
+    a: "Trong giai đoạn đầu phát triển, Trợ Lý Tài Chính ưu tiên tối đa sứ mệnh bình dân hóa công nghệ tài chính, giúp người Việt làm chủ dòng tiền thông minh. Chúng tôi tập trung tạo giá trị thực sự cho cộng đồng thay vì bán các gói đăng ký thu phí rườm rà.",
   },
   {
     q: "Dữ liệu tài chính và thu chi của tôi có bị bán cho bên thứ ba không?",
-    a: "Tuyệt đối không! Halo Finance tuân thủ nghiêm ngặt Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân và tiêu chuẩn PCI-DSS Level 1. Toàn bộ dữ liệu thu chi được mã hóa đầu cuối với khóa AES-256 GCM. Chúng tôi độc lập pháp lý và không bao giờ chia sẻ dữ liệu cho công ty bảo hiểm hay tổ chức quảng cáo.",
+    a: "Tuyệt đối không! Trợ Lý Tài Chính tuân thủ nghiêm ngặt Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân và tiêu chuẩn PCI-DSS Level 1. Toàn bộ dữ liệu thu chi được mã hóa đầu cuối với khóa AES-256 GCM. Chúng tôi độc lập pháp lý và không bao giờ chia sẻ dữ liệu cho công ty bảo hiểm hay tổ chức quảng cáo.",
   },
   {
     q: "Tôi có bị giới hạn số lượng giao dịch hoặc số lượt quét hóa đơn mỗi tháng không?",
@@ -142,12 +142,12 @@ const faqItems = [
     a: "Bạn có thể tạo quỹ nhóm cho gia đình, nhóm bạn du lịch hay hội phụ huynh. Khi có chi tiêu phát sinh, hệ thống tự động tính toán phần tiền của từng người và sinh mã VietQR cá nhân hóa. Thành viên chỉ cần quét mã 1 chạm là gạch nợ tự động, có Giám sát viên duyệt chi minh bạch 2 lớp.",
   },
   {
-    q: "Halo Finance có hỗ trợ xuất báo cáo ra file Excel để làm kế toán hoặc khai thuế không?",
+    q: "Trợ Lý Tài Chính có hỗ trợ xuất báo cáo ra file Excel để làm kế toán hoặc khai thuế không?",
     a: "Có. Bạn có thể xuất toàn bộ dữ liệu thu chi, sao kê dòng tiền và phân loại ngân sách ra định dạng file Excel (CSV/XLSX) hoặc PDF chuẩn mực hoàn toàn miễn phí chỉ với một thao tác bấm.",
   },
   {
     q: "Tôi cần hỗ trợ kỹ thuật hoặc góp ý phát triển ứng dụng thì liên hệ ai?",
-    a: "Đội ngũ kỹ sư và hỗ trợ khách hàng luôn trực tuyến 24/7 qua Hotline 1900 6868, Live Chat trong ứng dụng hoặc email contact@halofinance.vn với cam kết phản hồi nhanh chóng.",
+    a: "Đội ngũ kỹ sư và hỗ trợ khách hàng luôn trực tuyến 24/7 qua Hotline 1900 6868, Live Chat trong ứng dụng hoặc email contact@trolytaichinh.vn với cam kết phản hồi nhanh chóng.",
   },
 ];
 
@@ -246,7 +246,7 @@ function HomePage() {
                 </span>
               </h2>
               <p className="mt-4 text-base text-slate-600 leading-relaxed">
-                Minh bạch pháp lý, tiêu chuẩn an toàn vốn và cam kết dịch vụ chuẩn quốc tế của hệ sinh thái Halo Finance.
+                Minh bạch pháp lý, tiêu chuẩn an toàn vốn và cam kết dịch vụ chuẩn quốc tế của hệ sinh thái Trợ Lý Tài Chính.
               </p>
 
               <div className="relative mt-10 hidden overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 p-8 text-white shadow-xl lg:block">
@@ -285,7 +285,7 @@ function HomePage() {
           <div className="relative mx-auto min-h-[560px] max-w-[1440px] overflow-hidden rounded-[2.75rem] bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white shadow-2xl">
             <img
               src={images.ready}
-              alt="Hệ sinh thái định chế tài chính số Halo Finance"
+              alt="Hệ sinh thái định chế tài chính số Trợ Lý Tài Chính"
               className="absolute inset-0 h-full w-full object-cover object-center opacity-30 mix-blend-luminosity"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-transparent" />
@@ -305,7 +305,7 @@ function HomePage() {
               </h2>
 
               <p className="mt-5 max-w-xl text-sm sm:text-base leading-relaxed text-slate-300">
-                Hơn 3.2 triệu khách hàng cá nhân, chủ hộ kinh doanh và doanh nghiệp đã tin tưởng làm chủ dòng tiền cùng Halo Finance. Khởi tạo tài khoản số đẹp 0đ phí ngay hôm nay.
+                Hơn 3.2 triệu khách hàng cá nhân, chủ hộ kinh doanh và doanh nghiệp đã tin tưởng làm chủ dòng tiền cùng Trợ Lý Tài Chính. Khởi tạo tài khoản số đẹp 0đ phí ngay hôm nay.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">

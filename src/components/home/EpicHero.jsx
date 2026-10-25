@@ -139,7 +139,7 @@ export default function EpicHero({ onOpenQr }) {
               <img
                 className="inline-block h-9 w-9 rounded-full ring-2 ring-white object-cover"
                 src={images.avatar}
-                alt="Khách hàng Halo Finance"
+                alt="Khách hàng Trợ Lý Tài Chính"
               />
               <div className="inline-grid h-9 w-9 place-items-center rounded-full bg-blue-600 text-white text-xs font-black ring-2 ring-white">
                 3.2M
@@ -238,11 +238,11 @@ export default function EpicHero({ onOpenQr }) {
                   <div className="flex justify-between items-center pb-2 border-b border-slate-200/80">
                     <div className="flex items-center gap-2">
                       <div className="grid h-7 w-7 place-items-center rounded-lg bg-blue-600 text-white font-bold text-xs shadow-xs">
-                        H
+                        T
                       </div>
                       <div>
                         <span className="text-[0.6rem] text-slate-500 block leading-tight font-medium">Tài Khoản Thanh Toán Số Đẹp</span>
-                        <span className="font-extrabold text-slate-900 text-[0.72rem]">Halo Private Banking</span>
+                        <span className="font-extrabold text-slate-900 text-[0.72rem]">Trợ Lý Tài Chính Private Banking</span>
                       </div>
                     </div>
                     <button
@@ -367,7 +367,7 @@ export default function EpicHero({ onOpenQr }) {
                   <div className="relative z-10 flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-black tracking-[0.2em] uppercase text-amber-400">
-                        HALO TITANIUM
+                        BLACK TITANIUM
                       </span>
                       <span className="px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 text-[9px] font-black">
                         VIP
@@ -397,7 +397,7 @@ export default function EpicHero({ onOpenQr }) {
                     <div className="flex justify-between items-end text-[10px] uppercase font-mono tracking-wider text-slate-400 pt-1">
                       <div>
                         <span className="block text-[8px] text-slate-500 font-sans">Chủ thẻ</span>
-                        <strong className="text-slate-200 text-xs">NGUYEN VAN HALO</strong>
+                        <strong className="text-slate-200 text-xs">NGUYEN VAN AN</strong>
                       </div>
                       <div>
                         <span className="block text-[8px] text-slate-500 font-sans">Hiệu lực</span>
@@ -465,7 +465,7 @@ export default function EpicHero({ onOpenQr }) {
                   </div>
                   <div className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-[10.5px] font-mono text-slate-600 flex items-center gap-1.5">
                     <Lock className="w-3 h-3 text-emerald-600" />
-                    <span>portal.halofinance.vn/dashboard</span>
+                    <span>portal.trolytaichinh.vn/dashboard</span>
                   </div>
                   <span className="text-[10px] font-bold text-blue-600">Web Portal</span>
                 </div>

@@ -9,7 +9,7 @@ const reviews = [
     rating: 5,
     title: "Không còn cảnh 'cháy túi' không rõ lý do",
     content:
-      "Trước đây mình có tiền trong Techcombank, VPBank và ví MoMo, tháng nào cũng hết nhẵn mà không biết tiêu vào đâu. Từ khi dùng Halo Finance quản lý dòng tiền tập trung, mình cắt giảm được 30% các khoản chi lặt vặt và tháng vừa rồi đã tích lũy được 9.5 triệu!",
+      "Trước đây mình có tiền trong Techcombank, VPBank và ví MoMo, tháng nào cũng hết nhẵn mà không biết tiêu vào đâu. Từ khi dùng Trợ Lý Tài Chính quản lý dòng tiền tập trung, mình cắt giảm được 30% các khoản chi lặt vặt và tháng vừa rồi đã tích lũy được 9.5 triệu!",
     tag: "Quản lý dòng tiền",
   },
   {
@@ -29,7 +29,7 @@ const reviews = [
     rating: 5,
     title: "App quản lý tài sản đầu tư tốt nhất hiện nay",
     content:
-      "Mình theo dõi cả vàng miếng SJC, danh mục cổ phiếu và sổ tiết kiệm 12 tháng. Halo Finance tính toán tổng tài sản ròng Net Worth và PnL thời gian thực rất chuẩn xác. Giao diện mượt mà và sang trọng, vượt trội so với các app truyền thống.",
+      "Mình theo dõi cả vàng miếng SJC, danh mục cổ phiếu và sổ tiết kiệm 12 tháng. Trợ Lý Tài Chính tính toán tổng tài sản ròng Net Worth và PnL thời gian thực rất chuẩn xác. Giao diện mượt mà và sang trọng, vượt trội so với các app truyền thống.",
     tag: "Tài sản đầu tư",
   },
   {
@@ -78,7 +78,7 @@ export default function WallOfLove() {
             Được Hơn 2.5 Triệu Người Dùng Tin Cậy
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600">
-            Xem cộng đồng nói gì về trải nghiệm làm chủ tài chính và quản lý dòng tiền thông minh mỗi ngày cùng Halo Finance.
+            Xem cộng đồng nói gì về trải nghiệm làm chủ tài chính và quản lý dòng tiền thông minh mỗi ngày cùng Trợ Lý Tài Chính.
           </p>
         </div>
 

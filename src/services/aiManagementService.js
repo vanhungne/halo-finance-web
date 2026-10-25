@@ -37,10 +37,10 @@ export const REASONING_LEVELS = [
 export const DEFAULT_AI_CONFIG = {
   provider: "gateway",
   promptVersion: "receipt-intelligence-v2",
-  gatewayUrl: "https://gemini.amz.io.vn",
+  gatewayUrl: "https://gemini.amzpro.space",
   model: "gemini-3.5-flash-lite",
   reasoningLevel: "low",
-  apiKey: "gemi-z4YSxyrXsPZGA7FAwVkjohuRgetLjG73-cFYsGvL5o0",
+  apiKey: "gemi-FZO6Ty4KjEJAL0N2vHJmHnJtZLvohkMo-SX28snwc5U",
   temperature: 0.1,
   systemPrompt: buildReceiptSystemPrompt(),
 };
@@ -143,10 +143,16 @@ export const aiManagementService = {
       const raw = localStorage.getItem(STORAGE_KEY_CONFIG);
       if (!raw) return DEFAULT_AI_CONFIG;
       const stored = JSON.parse(raw);
+      const isDeprecatedUrl = !stored.gatewayUrl || stored.gatewayUrl.includes("gemini.amz.io.vn");
+      const gatewayUrl = isDeprecatedUrl ? DEFAULT_AI_CONFIG.gatewayUrl : stored.gatewayUrl;
+      const apiKey = (!stored.apiKey || stored.apiKey === "gemi-z4YSxyrXsPZGA7FAwVkjohuRgetLjG73-cFYsGvL5o0")
+        ? DEFAULT_AI_CONFIG.apiKey
+        : stored.apiKey;
       return {
         ...DEFAULT_AI_CONFIG,
         ...stored,
-        gatewayUrl: stored.gatewayUrl || DEFAULT_AI_CONFIG.gatewayUrl,
+        gatewayUrl,
+        apiKey,
         provider: "gateway",
       };
     } catch {
@@ -330,7 +336,7 @@ export const aiManagementService = {
     );
 
     // 1. Primary path: Use the backend Admin AI Analysis proxy.
-    // This routes through the server (no CORS issues with gemini.amz.io.vn, API key remains secure on server).
+    // This routes through the server (no CORS issues with gemini.amzpro.space, API key remains secure on server).
     if (!isLocalGateway) {
       try {
         const form = new FormData();
@@ -370,10 +376,15 @@ export const aiManagementService = {
         const status = backendErr?.response?.status;
         const latencyMs = Math.round(performance.now() - startTime);
 
+        const serverMsg = backendErr?.response?.data?.message || backendErr?.response?.data?.error;
+
         if (status === 401) {
+          const isSessionExpired = !serverMsg || serverMsg.toLowerCase().includes("chưa đăng nhập") || serverMsg.toLowerCase().includes("hết hạn");
           return {
             success: false,
-            error: "Phiên đăng nhập Quản trị viên đã hết hạn hoặc bạn chưa đăng nhập. Vui lòng đăng nhập lại tài khoản Admin.",
+            error: isSessionExpired
+              ? "Phiên đăng nhập Quản trị viên đã hết hạn hoặc bạn chưa đăng nhập. Vui lòng đăng nhập lại tài khoản Admin."
+              : `Lỗi xác thực (401): ${serverMsg}`,
             latencyMs,
           };
         }
@@ -386,7 +397,7 @@ export const aiManagementService = {
           };
         }
 
-        const msg = backendErr?.response?.data?.message || backendErr?.response?.data?.error || backendErr?.message;
+        const msg = serverMsg || backendErr?.message;
         return {
           success: false,
           error: `Lỗi phân tích qua máy chủ Backend: ${msg || "Không thể xử lý hóa đơn"}`,

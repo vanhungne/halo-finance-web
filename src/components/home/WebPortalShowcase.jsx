@@ -40,7 +40,7 @@ export default function WebPortalShowcase() {
             </span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Không chỉ gói gọn trên chiếc điện thoại di động. Halo Finance cung cấp Cổng Web Internet Banking chuyên nghiệp dành cho máy tính, giúp bạn làm chủ dòng tiền, phân tích đa chiều và xuất dữ liệu kế toán chuẩn mực.
+            Không chỉ gói gọn trên chiếc điện thoại di động. Trợ Lý Tài Chính cung cấp Cổng Web Internet Banking chuyên nghiệp dành cho máy tính, giúp bạn làm chủ dòng tiền, phân tích đa chiều và xuất dữ liệu kế toán chuẩn mực.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export default function WebPortalShowcase() {
               <span className="h-3 w-3 rounded-full bg-emerald-400" />
               <div className="ml-4 hidden sm:flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 text-xs font-mono">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>https://portal.halofinance.vn/dashboard</span>
+                <span>https://portal.trolytaichinh.vn/dashboard</span>
               </div>
             </div>
 
@@ -114,10 +114,10 @@ export default function WebPortalShowcase() {
             <div className="hidden lg:block lg:col-span-3 rounded-2xl bg-slate-50/80 border border-slate-200/70 p-4 space-y-4">
               <div className="flex items-center gap-2 pb-3 border-b border-slate-200">
                 <div className="grid h-8 w-8 place-items-center rounded-xl bg-blue-600 text-white font-black text-xs">
-                  H
+                  TL
                 </div>
                 <div>
-                  <p className="text-xs font-black text-slate-900 leading-tight">Halo Web Portal</p>
+                  <p className="text-xs font-black text-slate-900 leading-tight">Cổng Web Tài Chính</p>
                   <p className="text-[10px] text-slate-500 font-medium">Bản Doanh Nghiệp & Cá Nhân</p>
                 </div>
               </div>

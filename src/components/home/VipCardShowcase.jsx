@@ -16,7 +16,7 @@ import {
 const CARDS_DATA = [
   {
     id: "virtual",
-    name: "Halo Smart Virtual",
+    name: "Thẻ Smart Virtual",
     category: "Thẻ Phi Vật Lý Số",
     tier: "Miễn Phí Trọn Đời",
     color: "from-blue-600 via-sky-600 to-indigo-700",
@@ -35,7 +35,7 @@ const CARDS_DATA = [
   },
   {
     id: "platinum",
-    name: "Halo Platinum Dual",
+    name: "Thẻ Platinum Dual",
     category: "Thẻ Nhựa Sinh Học Tái Chế",
     tier: "Phổ Biến Nhất",
     color: "from-slate-800 via-slate-900 to-slate-950",
@@ -48,13 +48,13 @@ const CARDS_DATA = [
       "Chip EMV Contactless quẹt chạm siêu tốc",
       "Rút tiền miễn phí tại 17.000+ ATM toàn quốc",
       "Bảo hiểm gian lận thanh toán 250 triệu VNĐ",
-      "Tích lũy điểm thưởng Halo Rewards đổi vé máy bay",
+      "Tích lũy điểm thưởng Rewards đổi vé máy bay",
     ],
     recommended: true,
   },
   {
     id: "titanium",
-    name: "Halo Black Titanium",
+    name: "Thẻ Black Titanium VIP",
     category: "Thẻ Kim Loại Nguyên Khối VIP",
     tier: "Khách Hàng Ưu Tiên Priority",
     color: "from-neutral-950 via-stone-900 to-black",
@@ -136,7 +136,7 @@ export default function VipCardShowcase({ onOpenQr }) {
 
                     <div className="relative z-10 flex justify-between items-center">
                       <span className="text-xs font-black tracking-widest uppercase">
-                        HALO {card.id.toUpperCase()}
+                        PREMIUM {card.id.toUpperCase()}
                       </span>
                       <Wifi className="w-4 h-4 opacity-80 rotate-90" />
                     </div>
@@ -151,7 +151,7 @@ export default function VipCardShowcase({ onOpenQr }) {
                     <div className="relative z-10 flex justify-between items-end font-mono">
                       <div>
                         <div className="text-xs tracking-[0.2em] opacity-90">•••• 8888</div>
-                        <div className="text-[9px] uppercase tracking-wider opacity-75 mt-0.5">NGUYEN VAN HALO</div>
+                        <div className="text-[9px] uppercase tracking-wider opacity-75 mt-0.5">NGUYEN VAN AN</div>
                       </div>
                       <span className="font-black italic text-sm tracking-tight text-amber-300">
                         VISA
@@ -214,7 +214,7 @@ export default function VipCardShowcase({ onOpenQr }) {
                         : "bg-slate-900 text-white hover:bg-slate-800"
                     }`}
                   >
-                    <span>Mở Thẻ {card.name.split(" ")[1]} Ngay</span>
+                    <span>Mở {card.name} Ngay</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>

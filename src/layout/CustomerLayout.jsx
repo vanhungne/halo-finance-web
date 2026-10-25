@@ -68,7 +68,7 @@ export default function CustomerLayout() {
           </button>
 
           <a href="/" className="flex items-center gap-3">
-            <img src={images.logo} alt="Halo Finance" className="h-9 w-auto" />
+            <img src={images.logo} alt="Trợ Lý Tài Chính" className="h-9 w-auto" />
             <div className="hidden sm:block">
               <span className="block text-[0.65rem] font-extrabold uppercase tracking-widest text-sky-400">
                 Internet Banking & Wealth Hub

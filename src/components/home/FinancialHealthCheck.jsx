@@ -86,7 +86,7 @@ export default function FinancialHealthCheck() {
         tone: "text-emerald-500",
         badgeBg: "bg-emerald-100 text-emerald-800",
         advice:
-          "Chúc mừng bạn! Kỷ luật tài chính của bạn rất xuất sắc. Bước tiếp theo là tối ưu danh mục tài sản đầu tư và gia tăng tỷ suất sinh lời cùng Halo Finance.",
+          "Chúc mừng bạn! Kỷ luật tài chính của bạn rất xuất sắc. Bước tiếp theo là tối ưu danh mục tài sản đầu tư và gia tăng tỷ suất sinh lời cùng Trợ Lý Tài Chính.",
       };
     } else if (score >= 50) {
       return {
@@ -102,7 +102,7 @@ export default function FinancialHealthCheck() {
         tone: "text-amber-500",
         badgeBg: "bg-amber-100 text-amber-800",
         advice:
-          "Dòng tiền của bạn đang có rủi ro cao khi gặp biến cố. Hãy cài đặt ngay Halo Finance để bóc tách thu chi, lập hạn mức ngân sách và cắt giảm chi tiêu không cần thiết.",
+          "Dòng tiền của bạn đang có rủi ro cao khi gặp biến cố. Hãy cài đặt ngay Trợ Lý Tài Chính để bóc tách thu chi, lập hạn mức ngân sách và cắt giảm chi tiêu không cần thiết.",
       };
     }
   };

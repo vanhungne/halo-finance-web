@@ -60,7 +60,7 @@ export default function SecurityCompliance() {
             Tài Sản & Dữ Liệu Của Bạn Luôn Được Bảo Vệ Cao Nhất
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600">
-            Chúng tôi hiểu rằng dữ liệu tài chính là điều nhạy cảm và quan trọng nhất. Halo Finance áp dụng các tiêu chuẩn an ninh mạng khắt khe tương đương với các tổ chức ngân hàng số hàng đầu thế giới.
+            Chúng tôi hiểu rằng dữ liệu tài chính là điều nhạy cảm và quan trọng nhất. Trợ Lý Tài Chính áp dụng các tiêu chuẩn an ninh mạng khắt khe tương đương với các tổ chức ngân hàng số hàng đầu thế giới.
           </p>
         </div>
 

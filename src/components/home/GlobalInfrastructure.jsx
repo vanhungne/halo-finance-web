@@ -131,7 +131,7 @@ export default function GlobalInfrastructure() {
               metric: 200,
               suffix: "+",
               title: "Quốc gia & Vùng lãnh thổ",
-              desc: "Mạng lưới chấp nhận thẻ thanh toán Halo VIP & SWIFT",
+              desc: "Mạng lưới chấp nhận thẻ thanh toán VIP & SWIFT",
               color: "text-amber-400",
             },
           ].map((item, index) => (

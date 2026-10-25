@@ -88,7 +88,7 @@ export default function SolutionsSegment() {
             Đáp Ứng Mọi Nhu Cầu Quản Lý Tài Chính
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600">
-            Dù bạn muốn tối ưu chi tiêu gia đình, quản lý công nợ kinh doanh hay theo dõi danh mục đầu tư — Halo Finance luôn có giải pháp hoàn hảo cho bạn.
+            Dù bạn muốn tối ưu chi tiêu gia đình, quản lý công nợ kinh doanh hay theo dõi danh mục đầu tư — Trợ Lý Tài Chính luôn có giải pháp hoàn hảo cho bạn.
           </p>
         </div>
 

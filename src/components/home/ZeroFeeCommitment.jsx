@@ -118,8 +118,8 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       feature: isEn ? "Core Subscription & Hidden Charges" : "Chi phí bản quyền & Phí duy trì định kỳ",
       legacy: isEn ? "599,000đ – 1,499,000đ/year + Paywalled features" : "599.000đ – 1.499.000đ/năm + Khóa tính năng Pro",
       legacySub: isEn ? "Subscription lock-in with restricted exports" : "Bắt trả tiền duy trì nếu không sẽ bị khóa tính năng",
-      halo: isEn ? "0đ Forever (Zero-Consumer-Fee by Design)" : "0đ Miễn Phí Vĩnh Viễn Toàn Diện",
-      haloSub: isEn ? "Open-access digital utility powered by modern architecture" : "Cam kết hạ tầng công ích số mở, không có phí ẩn",
+      tltc: isEn ? "0đ Forever (Zero-Consumer-Fee by Design)" : "0đ Miễn Phí Vĩnh Viễn Toàn Diện",
+      tltcSub: isEn ? "Open-access digital utility powered by modern architecture" : "Cam kết hạ tầng công ích số mở, không có phí ẩn",
       highlight: true,
     },
     {
@@ -127,8 +127,8 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       feature: isEn ? "AI Vision OCR & Voice-to-Ledger Limits" : "Giới hạn bóc tách hóa đơn & Giọng nói AI",
       legacy: isEn ? "Capped at 10–30 bills/month; extra fee per token" : "Giới hạn 10 – 30 hóa đơn/tháng; bắt mua thêm lượt",
       legacySub: isEn ? "Third-party APIs with high latency and data leak risk" : "Thời gian chờ lâu, gửi ảnh raw lên cloud trung gian",
-      halo: isEn ? "Unlimited Autonomous AI Parsing" : "Không Giới Hạn Lượt Quét & Nhập Giọng Nói",
-      haloSub: isEn ? "Sub-3 second parsing with full VAT & line-item breakdown" : "Trí tuệ nhân tạo nhận diện tiếng Việt 3 miền siêu tốc",
+      tltc: isEn ? "Unlimited Autonomous AI Parsing" : "Không Giới Hạn Lượt Quét & Nhập Giọng Nói",
+      tltcSub: isEn ? "Sub-3 second parsing with full VAT & line-item breakdown" : "Trí tuệ nhân tạo nhận diện tiếng Việt 3 miền siêu tốc",
       highlight: true,
     },
     {
@@ -136,8 +136,8 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       feature: isEn ? "Multi-Party Settlement & Governance" : "Thuật toán quyết toán nợ & Phân quyền",
       legacy: isEn ? "Basic manual equal split; no approval workflow" : "Chỉ chia đều cơ bản; không có quy trình kiểm soát",
       legacySub: isEn ? "Requires manual calculation and repetitive transfers" : "Phải tự tính tay ngoài Excel, dễ mâu thuẫn quỹ",
-      halo: isEn ? "Bipartite Min-Flow Algorithm + Dual Governance" : "Thuật Toán Đồ Thị Bipartite + Duyệt Chi 2 Lớp",
-      haloSub: isEn ? "Reduces transfers by 80%; 1-touch VietQR with auto-reconcile" : "Tối giản số lần chuyển khoản + Tạo mã VietQR 1 chạm",
+      tltc: isEn ? "Bipartite Min-Flow Algorithm + Dual Governance" : "Thuật Toán Đồ Thị Bipartite + Duyệt Chi 2 Lớp",
+      tltcSub: isEn ? "Reduces transfers by 80%; 1-touch VietQR with auto-reconcile" : "Tối giản số lần chuyển khoản + Tạo mã VietQR 1 chạm",
       highlight: true,
     },
     {
@@ -145,8 +145,8 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       feature: isEn ? "Omni-Channel Automated Ingestion" : "Hạ tầng kết nối 54+ ngân hàng Napas",
       legacy: isEn ? "Manual input or delayed CSV uploads only" : "Nhập tay thủ công hoặc chỉ hỗ trợ 1-2 ngân hàng lớn",
       legacySub: isEn ? "Fails with complex multi-wallet structures" : "Dễ sai lệch số dư thực tế tại các tài khoản thẻ",
-      halo: isEn ? "24/7 SePay Webhook + Smart Gmail Engine" : "Webhook Real-Time SePay + Quét Email Tự Động",
-      haloSub: isEn ? "Instant balance delta recording across 54+ NAPAS banks" : "Biến động số dư cập nhật tức thì, không cần mở app",
+      tltc: isEn ? "24/7 SePay Webhook + Smart Gmail Engine" : "Webhook Real-Time SePay + Quét Email Tự Động",
+      tltcSub: isEn ? "Instant balance delta recording across 54+ NAPAS banks" : "Biến động số dư cập nhật tức thì, không cần mở app",
       highlight: true,
     },
     {
@@ -154,8 +154,8 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       feature: isEn ? "Financial Statements & Tax Reporting" : "Xuất báo cáo tài chính & Đối soát kế toán",
       legacy: isEn ? "Watermarked PDF or paywalled Excel exports" : "Khóa tính năng xuất file, chèn logo quảng cáo",
       legacySub: isEn ? "Restricted data portability locking user data" : "Không cho tải toàn bộ lịch sử chi tiêu nguyên bản",
-      halo: isEn ? "Standard IFRS / VAS Full Data Portability" : "Xuất File Excel / CSV / PDF Chuẩn Mực 0đ",
-      haloSub: isEn ? "Complete transaction ledger ready for accounting and audit" : "Dữ liệu cấu trúc sạch, sẵn sàng kê khai thuế",
+      tltc: isEn ? "Standard IFRS / VAS Full Data Portability" : "Xuất File Excel / CSV / PDF Chuẩn Mực 0đ",
+      tltcSub: isEn ? "Complete transaction ledger ready for accounting and audit" : "Dữ liệu cấu trúc sạch, sẵn sàng kê khai thuế",
       highlight: true,
     },
     {
@@ -163,8 +163,8 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       feature: isEn ? "Zero Commercial Monetization of Financial Data" : "Cam kết không kinh doanh dữ liệu người dùng",
       legacy: isEn ? "Data mined for targeted loans, credit cards & insurance" : "Bán dữ liệu cho bên thứ ba chào mời vay nợ",
       legacySub: isEn ? "Third-party ad tracking scripts embedded in client" : "Chứa mã theo dõi quảng cáo, banner che giao diện",
-      halo: isEn ? "Zero Ad-Tracking & Hardware-Encrypted Storage" : "Cam Kết Tuyệt Đối 100% Không Quảng Cáo & Bán Data",
-      haloSub: isEn ? "Decree 13/2023/ND-CP, PCI-DSS & ISO 27001 sovereign posture" : "Mã hóa AES-256 GCM, chuẩn an ninh số quốc tế",
+      tltc: isEn ? "Zero Ad-Tracking & Hardware-Encrypted Storage" : "Cam Kết Tuyệt Đối 100% Không Quảng Cáo & Bán Data",
+      tltcSub: isEn ? "Decree 13/2023/ND-CP, PCI-DSS & ISO 27001 sovereign posture" : "Mã hóa AES-256 GCM, chuẩn an ninh số quốc tế",
       highlight: true,
     },
   ];
@@ -208,8 +208,8 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
 
           <p className="mx-auto max-w-3xl text-sm sm:text-base lg:text-lg leading-relaxed text-slate-400 font-normal">
             {isEn
-              ? "We believe personal financial autonomy and collective transparency are fundamental rights. Halo Finance eliminates predatory subscription paywalls, data mining, and intrusive ads through edge computing and proprietary algorithmic optimization."
-              : "Chúng tôi tin rằng tự do quản trị tài chính cá nhân và tính minh bạch trong tập thể là quyền cơ bản của mỗi con người. Halo Finance loại bỏ hoàn toàn các rào cản thuê bao (paywall), quảng cáo và phí ẩn bằng hạ tầng tính toán biên và thuật toán tài chính chuyên sâu."}
+              ? "We believe personal financial autonomy and collective transparency are fundamental rights. Trợ Lý Tài Chính eliminates predatory subscription paywalls, data mining, and intrusive ads through edge computing and proprietary algorithmic optimization."
+              : "Chúng tôi tin rằng tự do quản trị tài chính cá nhân và tính minh bạch trong tập thể là quyền cơ bản của mỗi con người. Trợ Lý Tài Chính loại bỏ hoàn toàn các rào cản thuê bao (paywall), quảng cáo và phí ẩn bằng hạ tầng tính toán biên và thuật toán tài chính chuyên sâu."}
           </p>
 
           {/* Quick Institutional Highlights */}
@@ -317,14 +317,14 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
 
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
                 {isEn
-                  ? "How Halo Simplifies 12 Cross-Debts Into Just 2 Transfers"
-                  : "Cách Halo Tối Giản 12 Khoản Nợ Chéo Thành Đúng 2 Lệnh Chuyển"}
+                  ? "How Our Algorithm Simplifies 12 Cross-Debts Into Just 2 Transfers"
+                  : "Cách Tối Giản 12 Khoản Nợ Chéo Thành Đúng 2 Lệnh Chuyển"}
               </h3>
 
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 {isEn
-                  ? "In traditional group spending, everyone pays for someone else, resulting in a chaotic web of transfers. Halo's proprietary Bipartite Reconciliation computes net balances across members and resolves the entire group with minimal transactions."
-                  : "Khi đi du lịch hoặc chi tiêu gia đình, mọi người thường ứng tiền chéo cho nhau. Thay vì bắt 5 thành viên phải thực hiện 12 giao dịch chuyển khoản rắc rối, thuật toán Halo tính toán số dư ròng và tìm đường đi ngắn nhất để xóa sạch công nợ chỉ trong 2 lần quét VietQR."}
+                  ? "In traditional group spending, everyone pays for someone else, resulting in a chaotic web of transfers. Our proprietary Bipartite Reconciliation computes net balances across members and resolves the entire group with minimal transactions."
+                  : "Khi đi du lịch hoặc chi tiêu gia đình, mọi người thường ứng tiền chéo cho nhau. Thay vì bắt 5 thành viên phải thực hiện 12 giao dịch chuyển khoản rắc rối, thuật toán thông minh tính toán số dư ròng và tìm đường đi ngắn nhất để xóa sạch công nợ chỉ trong 2 lần quét VietQR."}
               </p>
 
               {/* Mode Toggle */}
@@ -349,7 +349,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
                       : "text-slate-400 hover:text-white bg-slate-800/40 border border-transparent"
                   }`}
                 >
-                  {isEn ? "Halo Min-Flow (2 Transfers)" : "Thuật Toán Halo (2 Lệnh Quyết Toán)"}
+                  {isEn ? "Min-Flow Algorithm (2 Transfers)" : "Thuật Toán Tối Ưu (2 Lệnh Quyết Toán)"}
                 </button>
               </div>
             </div>
@@ -452,7 +452,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
                 <span>{isEn ? "TCO & VALUE PROJECTION ENGINE" : "CÔNG CỤ ĐỊNH LƯỢNG GIÁ TRỊ & TIẾT KIỆM"}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
-                {isEn ? "Calculate Your Annual Financial Gain With Halo" : "Ước Tính Giá Trị Bạn Nhận Được Mỗi Năm"}
+                {isEn ? "Calculate Your Annual Financial Gain" : "Ước Tính Giá Trị Bạn Nhận Được Mỗi Năm"}
               </h3>
             </div>
 
@@ -596,7 +596,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
             </span>
             <h3 className="text-2xl sm:text-4xl font-black text-white">
               {isEn
-                ? "Why Halo Outperforms Traditional Budgeting Platforms"
+                ? "Why Trợ Lý Tài Chính Outperforms Traditional Budgeting Platforms"
                 : "Sự Khác Biệt Giữa Định Chế Số Thế Hệ Mới & Ứng Dụng Cũ"}
             </h3>
             <p className="text-xs sm:text-sm text-slate-400">
@@ -622,7 +622,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
                   <th className="py-4.5 px-6 font-black text-cyan-300 w-[34%] uppercase tracking-wider font-mono bg-cyan-950/20 border-l border-cyan-500/30">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-cyan-400" />
-                      <span>{isEn ? "Halo Sovereign FinTech Platform" : "Nền Tảng Tài Chính Số Halo"}</span>
+                      <span>{isEn ? "Trợ Lý Tài Chính Platform" : "Nền Tảng Trợ Lý Tài Chính"}</span>
                     </div>
                   </th>
                 </tr>
@@ -643,9 +643,9 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
                     <td className="py-4.5 px-6 font-bold bg-cyan-950/15 border-l border-cyan-500/20 text-cyan-300">
                       <span className="font-black text-cyan-400 flex items-center gap-2">
                         <Check className="h-4 w-4 text-cyan-400 stroke-[3]" />
-                        {row.halo}
+                        {row.tltc}
                       </span>
-                      <span className="text-[11px] text-slate-400 font-normal mt-0.5 block">{row.haloSub}</span>
+                      <span className="text-[11px] text-slate-400 font-normal mt-0.5 block">{row.tltcSub}</span>
                     </td>
                   </tr>
                 ))}
@@ -677,7 +677,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               {isEn
                 ? "We formally pledge that all core financial modules — from AI Vision OCR, multi-entity wallets, and graph debt settlement to banking reconciliation — will remain 100% free with unlimited access for all individuals and households."
-                : "Đội ngũ kỹ thuật Halo Finance long trọng cam kết: Mọi năng lực cốt lõi từ bóc tách hóa đơn AI, quản lý đa ví, quyết toán quỹ nhóm đồ thị đến đối soát ngân hàng Napas 24/7 sẽ luôn luôn mở sẵn 100% miễn phí vĩnh viễn cho mọi cá nhân và gia đình Việt Nam."}
+                : "Đội ngũ phát triển Trợ Lý Tài Chính long trọng cam kết: Mọi năng lực cốt lõi từ bóc tách hóa đơn AI, quản lý đa ví, quyết toán quỹ nhóm đồ thị đến đối soát ngân hàng Napas 24/7 sẽ luôn luôn mở sẵn 100% miễn phí vĩnh viễn cho mọi cá nhân và gia đình Việt Nam."}
             </p>
 
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
