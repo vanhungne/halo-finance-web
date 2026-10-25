@@ -145,7 +145,7 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
       feature: isEn ? "Omni-Channel Automated Ingestion" : "Hạ tầng kết nối 54+ ngân hàng Napas",
       legacy: isEn ? "Manual input or delayed CSV uploads only" : "Nhập tay thủ công hoặc chỉ hỗ trợ 1-2 ngân hàng lớn",
       legacySub: isEn ? "Fails with complex multi-wallet structures" : "Dễ sai lệch số dư thực tế tại các tài khoản thẻ",
-      tltc: isEn ? "24/7 SePay Webhook + Smart Gmail Engine" : "Webhook Real-Time SePay + Quét Email Tự Động",
+      tltc: isEn ? "24/7 SePay Webhook + Smart AI Receipt Engine" : "Webhook Real-Time SePay + AI Quét Hóa Đơn Tự Động",
       tltcSub: isEn ? "Instant balance delta recording across 54+ NAPAS banks" : "Biến động số dư cập nhật tức thì, không cần mở app",
       highlight: true,
     },

@@ -73,7 +73,7 @@ const FEATURE_ITEMS = [
   {
     icon: TrendingUp,
     title: "Tài Sản & Vàng SJC",
-    desc: "Định giá danh mục vàng, tiết kiệm & chứng khoán real-time",
+    desc: "Định giá danh mục vàng, đầu tư & chứng khoán real-time",
     href: "#rates",
     color: "bg-rose-50 text-rose-600",
   },

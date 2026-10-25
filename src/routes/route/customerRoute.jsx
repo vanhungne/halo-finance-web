@@ -27,10 +27,6 @@ const customerRoute = [
     element: <CustomerDashboard />,
   },
   {
-    path: "savings",
-    element: <CustomerDashboard />,
-  },
-  {
     path: "reports",
     element: <CustomerDashboard />,
   },

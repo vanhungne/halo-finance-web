@@ -28,7 +28,7 @@ const solutions = [
     features: [
       { title: "Quản lý Đa Ví Thông Minh", desc: "Tập trung tiền mặt, tài khoản Vietcombank, Techcombank, MB, ví MoMo." },
       { title: "Quỹ Gia Đình Chung", desc: "Vợ chồng cùng ghi nhận chi phí sinh hoạt, đối soát thu chi minh bạch." },
-      { title: "Sổ Tiết Kiệm & Mục Tiêu 52 Tuần", desc: "Đặt mục tiêu mua nhà, mua xe hay quỹ khẩn cấp 6 tháng có lộ trình." },
+      { title: "Kế Hoạch Dự Phòng 52 Tuần", desc: "Thiết lập kế hoạch tài chính cá nhân và quỹ dự phòng an toàn theo lộ trình." },
       { title: "AI Quét Hóa Đơn Tức Thì", desc: "Chụp ảnh hóa đơn siêu thị, ăn uống — AI tự bóc tách và phân loại." },
     ],
     highlightQuote: "Giúp hơn 1.8 triệu gia đình Việt Nam tiết kiệm thêm 20-30% thu nhập mỗi tháng.",
@@ -60,7 +60,7 @@ const solutions = [
     icon: TrendingUp,
     color: "from-amber-500 to-orange-600",
     features: [
-      { title: "Định Giá Danh Mục Tài Sản Ròng", desc: "Tổng hợp Vàng miếng SJC, Cổ phiếu, BĐS cho thuê, Sổ tiết kiệm kỳ hạn." },
+      { title: "Định Giá Danh Mục Tài Sản Ròng", desc: "Tổng hợp Vàng miếng SJC, Cổ phiếu, BĐS cho thuê, Chứng chỉ quỹ." },
       { title: "Tính Toán Tỷ Suất Sinh Lời (PnL)", desc: "Theo dõi giá vốn, giá thị trường hiện tại và tỷ lệ lãi/lỗ tức thời." },
       { title: "Cảnh Báo Tỷ Lệ An Toàn Dòng Tiền", desc: "Đảm bảo luôn duy trì tỷ lệ tiền mặt dự phòng khẩn cấp trước biến động." },
       { title: "Biểu Đồ Tăng Trưởng Tài Sản Đa Niên", desc: "Phân tích tốc độ gia tăng tài sản theo từng quý và năm dài hạn." },

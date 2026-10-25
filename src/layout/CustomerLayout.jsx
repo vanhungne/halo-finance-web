@@ -34,7 +34,6 @@ const NAV_ITEMS = [
   { label: "Quỹ Nhóm & Gia Đình", icon: Users2, path: "/app/group-fund" },
   { label: "Tài Sản Đầu Tư", icon: TrendingUp, path: "/app/investments" },
   { label: "Sổ Vay Nợ", icon: HandCoins, path: "/app/debts" },
-  { label: "Sổ Tiết Kiệm", icon: PiggyBank, path: "/app/savings" },
   { label: "Báo Cáo Kế Toán", icon: FileSpreadsheet, path: "/app/reports" },
   { label: "Bảo Mật & 2FA", icon: ShieldCheck, path: "/app/security" },
 ];
@@ -50,7 +49,7 @@ export default function CustomerLayout() {
     { title: "Lương tháng 10", desc: "+ 38.500.000 đ từ Công ty CP Công Nghệ ABC", time: "10 phút trước", unread: true },
     { title: "Quỹ Gia Đình Nhỏ", desc: "Lan Phương đã đóng góp 5.000.000 đ vào quỹ chung", time: "2 giờ trước", unread: true },
     { title: "AI Quét Hóa Đơn", desc: "Bóc tách thành công hóa đơn WinMart 277.560 đ", time: "Hôm qua", unread: false },
-    { title: "Nhắc nhở đáo hạn", desc: "Sổ tiết kiệm BIDV 12 tháng sắp đến hạn tái tục", time: "2 ngày trước", unread: false },
+    { title: "Báo cáo tài chính", desc: "Báo cáo chi tiêu cá nhân tháng 10 đã sẵn sàng", time: "2 ngày trước", unread: false },
   ];
 
   return (

@@ -110,7 +110,7 @@ export default function CustomerDashboard() {
           <p className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             {formatVND(485900000)}
           </p>
-          <p className="text-xs text-slate-400">Đã bao gồm tài sản vàng & sổ tiết kiệm</p>
+          <p className="text-xs text-slate-400">Đã bao gồm tài sản vàng & danh mục đầu tư</p>
         </div>
 
         <div className="p-6 rounded-2xl bg-[#0e1627] border border-slate-800 space-y-2">
@@ -143,7 +143,7 @@ export default function CustomerDashboard() {
           <p className="text-2xl sm:text-3xl font-black text-sky-400 tracking-tight">
             +{formatVND(26550000)}
           </p>
-          <p className="text-xs text-slate-400">Tự động chuyển vào Sổ Tiết Kiệm</p>
+          <p className="text-xs text-slate-400">Tự động phân bổ vào quỹ tích lũy</p>
         </div>
       </div>
 
