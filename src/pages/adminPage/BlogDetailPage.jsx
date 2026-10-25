@@ -152,7 +152,7 @@ const BlogDetailPage = () => {
             contentJson: JSON.stringify(val.json),
             contentHtml: val.html
         }));
-        if (html) setErrors((prev) => ({ ...prev, contentHtml: "" }));
+        if (val?.html) setErrors((prev) => ({ ...prev, contentHtml: "" }));
     };
 
     const handleConfirm = async () => {
