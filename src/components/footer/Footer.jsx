@@ -1,64 +1,57 @@
 import {
-  ArrowUpRight,
   Facebook,
   Instagram,
   Mail,
-  MapPin,
   Youtube,
   ShieldCheck,
-  Lock,
-  Smartphone,
-  ExternalLink,
   PhoneCall,
   Building2,
   FileText,
-  Award,
+  ExternalLink,
+  ArrowUpRight,
 } from "lucide-react";
 import images from "../../assets/image.js";
 import LanguageSwitcher from "../common/LanguageSwitcher.jsx";
 
 const productLinks = [
-  { label: "Tài Khoản Thanh Toán Số Đẹp (0đ Phí)", href: "#features" },
-  { label: "Mô Phỏng Trải Nghiệm App Mobile", href: "#app-simulator" },
-  { label: "Bóc Tách Hóa Đơn Trí Tuệ Nhân Tạo AI", href: "#app-simulator" },
-  { label: "Chia Tiền Nhóm Du Lịch VietQR 1 Chạm", href: "#app-simulator" },
-  { label: "Quản Lý Sổ Nợ & Tính Lãi Dư Nợ", href: "#calculators" },
-  { label: "Báo Cáo Phân Tích Dòng Tiền 360°", href: "#product-preview" },
-  { label: "Định Giá Danh Mục Vàng SJC & Tài Sản", href: "#rates" },
+  { label: "Bóc Tách Hóa Đơn AI (OCR 3 Giây)", href: "#features" },
+  { label: "Chia Tiền Nhóm VietQR 1 Chạm", href: "#app-simulator" },
+  { label: "Sổ Thu Chi & Ngân Sách 50/30/20", href: "#features" },
+  { label: "Báo Cáo Dòng Tiền & Xuất File Excel", href: "#features" },
+  { label: "Quản Lý Quỹ Chung & Hội Nhóm", href: "#features" },
+  { label: "Cổng Web Portal Tiện Lợi Trên PC", href: "/login" },
 ];
 
-const toolLinks = [
-  { label: "Tính Lãi Tiết Kiệm Tích Lũy Bậc Thang", href: "#calculators" },
-  { label: "Bảng Khấu Hao Lịch Trả Nợ Vay Ngân Hàng", href: "#calculators" },
-  { label: "Tính Sức Mạnh Lãi Kép Đầu Tư 10 - 30 Năm", href: "#calculators" },
-  { label: "Trắc Nghiệm Chấm Điểm Sức Khỏe Tài Chính", href: "#health-check" },
-  { label: "Bảng Tỷ Giá Ngoại Tệ & Giá Vàng SJC", href: "#rates" },
-  { label: "Ma Trận So Sánh Tính Năng Vượt Trội", href: "#comparison" },
-  { label: "Tải Miễn Phí Ebook Tài Chính 2026", href: "#ebook" },
+const resourceLinks = [
+  { label: "Ma Trận So Sánh Tính Năng", href: "#comparison" },
+  { label: "Cam Kết 100% Miễn Phí (0đ Phí Ẩn)", href: "#free-commitment" },
+  { label: "Trắc Nghiệm Sức Khỏe Tài Chính", href: "#health-check" },
+  { label: "Tải Cẩm Nang Tài Chính Miễn Phí", href: "#ebook" },
+  { label: "Mô Phỏng Trải Nghiệm App Mobile", href: "#app-simulator" },
 ];
 
 const companyLinks = [
   { label: "Về Trợ Lý Tài Chính", href: "#home" },
-  { label: "Cam Kết Miễn Phí 100% Trọn Đời (0đ)", href: "#free-commitment" },
-  { label: "Đánh Giá Từ 3.2M+ Người Dùng", href: "#reviews" },
-  { label: "Tiêu Chuẩn Bảo Mật PCI-DSS & ISO 27001", href: "#security" },
+  { label: "Cam Kết Quyền Riêng Tư & An Toàn", href: "#security" },
   { label: "Tuân Thủ Nghị Định 13/2023/NĐ-CP", href: "#security" },
+  { label: "Đánh Giá Từ Cộng Đồng Người Dùng", href: "#reviews" },
   { label: "Câu Hỏi Thường Gặp (FAQ)", href: "#faq" },
-  { label: "Sổ Thu Chi Miễn Phí 100% Trọn Đời", href: "#free-commitment" },
+  { label: "Chính Sách Bảo Mật", href: "/privacy" },
+  { label: "Điều Khoản Sử Dụng", href: "/terms" },
 ];
 
 function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-400 pt-16 sm:pt-20 pb-28 sm:pb-16 border-t border-slate-800">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10">
+    <footer className="bg-slate-950 text-slate-400 pt-16 pb-24 sm:pb-16 border-t border-slate-800">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         
-        {/* Top Institutional Header: Hotline & Support Network */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-12 border-b border-slate-800/80">
+        {/* Top Header: Hotline & Support Network */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-10 border-b border-slate-800/80">
           <div className="flex items-center gap-3">
             <img src={images.logo} alt="Trợ Lý Tài Chính" className="h-10 w-auto brightness-0 invert" />
             <span className="hidden sm:inline text-slate-700">|</span>
             <span className="hidden sm:inline text-xs font-bold text-slate-300">
-              Định Chế Quản Trị Dòng Tiền & Ngân Hàng Số Thế Hệ Mới
+              Sổ Thu Chi Thông Minh & Bóc Tách Hóa Đơn AI
             </span>
           </div>
 
@@ -89,22 +82,22 @@ function Footer() {
               </span>
               <div>
                 <span className="text-[10px] text-slate-500 uppercase block font-bold">Bảo chứng an toàn</span>
-                <strong className="text-amber-300 text-xs font-bold">PCI-DSS & ISO 27001</strong>
+                <strong className="text-amber-300 text-xs font-bold">Mã Hóa AES-256</strong>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Top 4-Column Links Grid */}
-        <div className="grid gap-10 py-14 border-b border-slate-800/80 lg:grid-cols-12">
+        {/* 4-Column Links Grid */}
+        <div className="grid gap-10 py-12 border-b border-slate-800/80 lg:grid-cols-12">
           
-          {/* Brand Info & Legal Entity Details */}
-          <div className="lg:col-span-4 space-y-4">
-            <h4 className="text-sm font-black uppercase text-white tracking-wider">
-              Công Ty Cổ Phần Công Nghệ Trợ Lý Tài Chính
-            </h4>
+          {/* Brand Info & Mission Details */}
+          <div className="lg:col-span-5 space-y-4">
+            <h3 className="text-sm font-black uppercase text-white tracking-wider">
+              Trợ Lý Tài Chính (TroLyTaiChinh)
+            </h3>
             <p className="text-xs leading-relaxed text-slate-400 max-w-sm">
-              Nền tảng tài chính số đa phương thức phục vụ hơn 3.2 triệu cá nhân, gia đình và hộ kinh doanh tại Việt Nam. Kết nối 54+ ngân hàng chuẩn NAPAS 24/7, bóc tách hóa đơn Trí Tuệ Nhân Tạo AI trong 3 giây và quản trị dòng tiền chuẩn mực quốc tế.
+              Ứng dụng quản trị tài chính cá nhân và quỹ nhóm thông minh hàng đầu tại Việt Nam. Bóc tách hóa đơn bằng AI trong 3 giây, quản trị ngân sách 50/30/20, chia tiền nhóm VietQR 1 chạm và mã hóa an toàn dữ liệu chuẩn AES-256.
             </p>
 
             <div className="space-y-2 text-xs text-slate-400 pt-1">
@@ -146,9 +139,9 @@ function Footer() {
             </div>
           </div>
 
-          {/* Column 1: Sản phẩm ngân hàng số */}
+          {/* Column 1: Tính năng */}
           <div className="lg:col-span-3 space-y-4">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Sản Phẩm & Dịch Vụ</p>
+            <h4 className="text-xs font-black uppercase tracking-[0.16em] text-white">Tính Năng Cốt Lõi</h4>
             <ul className="space-y-2 text-xs font-medium">
               {productLinks.map((link) => (
                 <li key={link.label}>
@@ -160,11 +153,11 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Column 2: Công cụ tài chính */}
-          <div className="lg:col-span-3 space-y-4">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Công Cụ Trực Tuyến</p>
+          {/* Column 2: Tài nguyên */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="text-xs font-black uppercase tracking-[0.16em] text-white">Tài Nguyên</h4>
             <ul className="space-y-2 text-xs font-medium">
-              {toolLinks.map((link) => (
+              {resourceLinks.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="hover:text-white transition hover:underline underline-offset-4">
                     {link.label}
@@ -174,9 +167,9 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Pháp lý & Cổng Web */}
+          {/* Column 3: Pháp lý & Hỗ trợ */}
           <div className="lg:col-span-2 space-y-4">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Pháp Lý & Hỗ Trợ</p>
+            <h4 className="text-xs font-black uppercase tracking-[0.16em] text-white">Pháp Lý & Hỗ Trợ</h4>
             <ul className="space-y-2 text-xs font-medium">
               {companyLinks.map((link) => (
                 <li key={link.label}>
@@ -190,9 +183,9 @@ function Footer() {
             <div className="pt-2">
               <a
                 href="#free-commitment"
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3 py-2.5 text-xs font-black text-white shadow-md shadow-emerald-500/20 transition cursor-pointer"
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-3 py-2 text-xs font-black text-white shadow-md shadow-emerald-500/20 transition cursor-pointer"
               >
-                <span>Cam Kết 100% Miễn Phí (0đ)</span>
+                <span>Cam Kết 100% Miễn Phí</span>
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </div>
@@ -201,12 +194,12 @@ function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="flex flex-col gap-4 pt-8 text-xs text-slate-500 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-4 pt-6 text-xs text-slate-500 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <p>© {new Date().getFullYear()} Trợ Lý Tài Chính. Mọi quyền được bảo lưu.</p>
             <LanguageSwitcher variant="footer" />
           </div>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-slate-400 text-[11px]">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-slate-400 text-[11px]">
             <a href="/privacy" className="hover:text-white transition">Chính sách bảo mật</a>
             <span>•</span>
             <a href="/terms" className="hover:text-white transition">Điều khoản sử dụng</a>
@@ -216,8 +209,6 @@ function Footer() {
             <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-1">
               Sitemap XML <ExternalLink className="h-3 w-3" />
             </a>
-            <span>•</span>
-            <span className="text-emerald-400 font-semibold">Đã thông báo Bộ Công Thương</span>
           </div>
         </div>
 

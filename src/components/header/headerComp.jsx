@@ -232,7 +232,7 @@ export default function Header({ onOpenEbook }) {
                   TRỢ LÝ TÀI CHÍNH
                 </span>
                 <span className="text-[9.5px] font-bold text-blue-600">
-                  Định Chế Tài Chính Số
+                  Sổ Thu Chi & Hóa Đơn AI
                 </span>
               </div>
             </a>
@@ -598,7 +598,7 @@ export default function Header({ onOpenEbook }) {
                     </div>
                     <div>
                       <p className="text-xs font-black uppercase tracking-wider text-sky-400">Trợ Lý Tài Chính</p>
-                      <p className="text-sm font-extrabold text-white">Định Chế Tài Chính Số</p>
+                      <p className="text-sm font-extrabold text-white">Sổ Thu Chi & Hóa Đơn AI</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[10px] font-bold text-emerald-300">

@@ -80,7 +80,7 @@ export default function SecurityCompliance() {
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 mb-6">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h4 className="text-lg font-black text-slate-900 mb-2 leading-snug">{sec.title}</h4>
+                <h3 className="text-lg font-black text-slate-900 mb-2 leading-snug">{sec.title}</h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                   {sec.desc}
                 </p>

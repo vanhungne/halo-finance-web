@@ -59,7 +59,7 @@ export default function StickyDownloadBar({ onOpenQr }) {
             className="flex-1 flex items-center justify-center gap-1.5 h-10 px-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white font-black text-xs shadow-md shadow-blue-500/25 transition active:scale-[0.98]"
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-300 fill-amber-300 shrink-0" />
-            <span className="truncate">Mở Tài Khoản eKYC</span>
+            <span className="truncate">Tải App Miễn Phí (0đ)</span>
           </button>
 
           {/* Scroll to top button */}
@@ -92,7 +92,7 @@ export default function StickyDownloadBar({ onOpenQr }) {
           <span className="grid h-6 w-6 place-items-center rounded-full bg-white/20 text-white">
             <QrCode className="h-3.5 w-3.5" />
           </span>
-          <span>Tải App Miễn Phí (eKYC 0đ)</span>
+          <span>Tải App Miễn Phí (0đ)</span>
         </button>
 
         {/* Back to top button */}

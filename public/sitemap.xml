@@ -6,94 +6,46 @@
   <!-- Trang chủ chính thức -->
   <url>
     <loc>https://trolytaichinh.vn/</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://trolytaichinh.vn/og-preview.jpg</image:loc>
-      <image:title>Trợ Lý Tài Chính - Sổ Thu Chi Thông Minh AI</image:title>
-      <image:caption>Giao diện ứng dụng quản lý thu chi cá nhân và chia tiền nhóm</image:caption>
+      <image:title>Trợ Lý Tài Chính - Sổ Thu Chi Thông Minh &amp; Bóc Tách Hóa Đơn AI</image:title>
+      <image:caption>Giao diện ứng dụng quản lý thu chi cá nhân và chia tiền nhóm VietQR</image:caption>
     </image:image>
   </url>
 
-  <!-- Section Tính năng cốt lõi -->
+  <!-- Chính sách bảo mật (Apple & Google Play Store Compliance) -->
   <url>
-    <loc>https://trolytaichinh.vn/#features</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Section AI Quét Hóa Đơn (Gemini 2.0) -->
-  <url>
-    <loc>https://trolytaichinh.vn/#ai-scanner</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Section Chi Tiêu Nhóm & Chia Tiền VietQR -->
-  <url>
-    <loc>https://trolytaichinh.vn/#group-expense</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Section Bảng So Sánh Đối Đầu -->
-  <url>
-    <loc>https://trolytaichinh.vn/#comparison</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Công Cụ Tính Lãi Suất & Tài Chính -->
-  <url>
-    <loc>https://trolytaichinh.vn/#calculators</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Tỷ Giá & Thị Trường (Vàng, Ngoại Tệ) -->
-  <url>
-    <loc>https://trolytaichinh.vn/#rates</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Chấm Điểm Sức Khỏe Tài Chính -->
-  <url>
-    <loc>https://trolytaichinh.vn/#health-check</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Bảng Giá & Gói Dịch Vụ -->
-  <url>
-    <loc>https://trolytaichinh.vn/#pricing</loc>
-    <lastmod>2026-10-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Section Bảo Mật & Chứng Chỉ -->
-  <url>
-    <loc>https://trolytaichinh.vn/#security</loc>
-    <lastmod>2026-10-20</lastmod>
+    <loc>https://trolytaichinh.vn/privacy</loc>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Section Câu Hỏi Thường Gặp FAQ -->
+  <!-- Điều khoản sử dụng -->
   <url>
-    <loc>https://trolytaichinh.vn/#faq</loc>
-    <lastmod>2026-10-20</lastmod>
+    <loc>https://trolytaichinh.vn/terms</loc>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Yêu cầu xóa tài khoản & Dữ liệu cá nhân -->
+  <url>
+    <loc>https://trolytaichinh.vn/delete-account</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Cổng đăng nhập Web Portal -->
+  <url>
+    <loc>https://trolytaichinh.vn/login</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 
 </urlset>
