@@ -1,28 +1,39 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-function AccordionItem({ q, a }) {
-  const [open, setOpen] = useState(false);
+const Motion = motion;
+
+function AccordionItem({ q, a, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+
   return (
-    <div className="rounded-xl bg-white shadow-sm border border-gray-200 overflow-hidden">
+    <div className={`overflow-hidden rounded-2xl border bg-white transition ${open ? "border-sky-200 shadow-[0_18px_50px_-35px_rgba(14,165,233,0.45)]" : "border-slate-200"}`}>
       <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left hover:bg-gray-50 transition"
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full items-center justify-between gap-5 px-5 py-5 text-left sm:px-6"
+        aria-expanded={open}
       >
-        <div className="flex items-center gap-3">
-          <span className="h-7 w-7 inline-flex items-center justify-center rounded-full bg-gray-100 text-gray-700 text-base">
-            {open ? "−" : "+"}
-          </span>
-          <span className="font-medium text-gray-900">{q}</span>
-        </div>
-        <span className="h-6 w-6 inline-flex items-center justify-center rounded-full bg-gray-100 text-gray-600">•</span>
+        <span className="font-bold leading-6 text-slate-900 sm:text-lg">{q}</span>
+        <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition ${open ? "bg-sky-500 text-white" : "bg-slate-100 text-slate-600"}`}>
+          <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </span>
       </button>
-      {open && (
-        <div className="px-5 pb-5 -mt-2 text-gray-600 leading-relaxed">{a}</div>
-      )}
+      <AnimatePresence initial={false}>
+        {open && (
+          <Motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          >
+            <p className="px-5 pb-6 leading-7 text-slate-600 sm:px-6">{a}</p>
+          </Motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
 export default AccordionItem;
-
-

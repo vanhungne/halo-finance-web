@@ -64,17 +64,6 @@ export const updateAdminReportTypeApi = (id, payload, options) => adminApi.admin
 export const deleteAdminReportTypeApi = (id, options) => adminApi.adminReportTypesDeleteDELETE(id, commandOptions(options));
 export const getAdminSubscriptionListApi = (params, options) => adminApi.subscriptionGetSubscriptionsGET(params, options);
 
-// Receipt classification V2 pages now use the same generated contract facade.
-export const getAdminReceiptPoliciesApi = (options = {}) => adminApi.receiptClassificationAdminPoliciesGET(options);
-export const getAdminReceiptRulesApi = (policyId, options = {}) => adminApi.receiptClassificationAdminRulesGET(policyId, options);
-export const cloneAdminReceiptPolicyApi = (payload, options) => adminApi.adminReceiptClassificationCommandsClonePOST(payload, commandOptions(options));
-export const updateAdminReceiptPolicyDraftApi = (policyId, payload, options) => adminApi.adminReceiptClassificationCommandsUpdateDraftPATCH(policyId, payload, commandOptions(options));
-export const publishAdminReceiptPolicyApi = (policyId, payload, options) => adminApi.adminReceiptClassificationCommandsPublishPOST(policyId, payload, commandOptions(options));
-export const retireAdminReceiptPolicyApi = (policyId, payload, options) => adminApi.adminReceiptClassificationCommandsRetirePOST(policyId, payload, commandOptions(options));
-export const addAdminReceiptRuleApi = (policyId, payload, options) => adminApi.adminReceiptClassificationCommandsAddRulePOST(policyId, payload, commandOptions(options));
-export const deactivateAdminReceiptRuleApi = (policyId, ruleId, payload, options) => adminApi.adminReceiptClassificationCommandsDeactivateRuleDELETE(policyId, ruleId, payload, commandOptions(options));
-export const updateAdminReceiptRuleApi = (policyId, ruleId, payload, options) => adminApi.adminReceiptClassificationCommandsUpdateRulePATCH(policyId, ruleId, payload, commandOptions(options));
-
 // Statistics are read-only Admin projections and share the same generated
 // transport, cancellation and `/api` route contract as the command surfaces.
 export const getAdminAdvertiseStatisticApi = (options = {}) => adminApi.adminStatisticGetAdvertiseStatisticGET(options);

@@ -10,6 +10,7 @@ import question from "./question.png";
 import icon from "./icon.png";
 import avatar from "./avatar.png";
 import login_hero from "./login_hero.jpg";
+import mobileDashboard from "./mobile-dashboard.jpg";
 
 const images = {
     icon,
@@ -24,6 +25,7 @@ const images = {
     question,
     avatar,
     login_hero,
+    mobileDashboard,
 };
 
 export default images;

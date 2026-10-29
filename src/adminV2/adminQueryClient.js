@@ -38,8 +38,6 @@ export function invalidateAdminRecoveredCommand(client, actorId, action) {
     ["advertising", "advertising-statistics", "dashboard-statistics"].forEach((name) => resources.add(name));
   } else if (action.startsWith("BLOG_")) {
     ["content", "content-statistics", "dashboard-statistics"].forEach((name) => resources.add(name));
-  } else if (action.startsWith("RECEIPT_")) {
-    ["receipt-policies", "receipt-rules"].forEach((name) => resources.add(name));
   } else if (["SYSTEM_CONFIG_CREATE", "SYSTEM_CONFIG_UPDATE", "SYSTEM_CONFIG_DELETE"].includes(action)) {
     ["configuration", "maintenance"].forEach((name) => resources.add(name));
   } else if (action.startsWith("SUBSCRIPTION_")) {

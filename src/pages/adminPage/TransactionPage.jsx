@@ -23,6 +23,7 @@ import DateRangePickerCustom from "../../components/common/DateRangePicker";
 import FullPageLoader from "../../components/common/FullPageLoader";
 import { getMembershipStatisticApi } from "../../services/statistic"
 import { getSubscriptionApi } from "../../services/subscription"
+import { formatCleanDateTime } from "../../utils/dateFormat"
 
 function TransactionPage() {
   // Format tiền Việt
@@ -32,9 +33,7 @@ function TransactionPage() {
   };
 
   const formatDateTime = (dateTimeString) => {
-    if (!dateTimeString) return "";
-    // Remove timezone offset pattern (e.g., +00:00, +07:00, -05:00, etc.)
-    return dateTimeString.replace(/\s*[+-]\d{2}:\d{2}$/, "").trim();
+    return formatCleanDateTime(dateTimeString);
   };
 
   // Query/filter state
@@ -123,9 +122,9 @@ function TransactionPage() {
   };
 
   return (
-    <div className="lg:space-y-8 lg:p-6 space-y-4 p-3 sm:space-y-6 sm:p-4 bg-slate-50 min-h-screen">
+    <div className="space-y-6 w-full">
       {/* Toolbar */}
-      <Card className="border border-gray-100 bg-white">
+      <Card className="shadow-sm">
         <CardContent className="p-4 sm:p-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -135,8 +134,8 @@ function TransactionPage() {
                 <Search className="w-4 h-4 sm:w-5 sm:h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <Input
                   type="search"
-                  placeholder="Tìm kiếm quảng cáo..."
-                  className="w-full sm:w-70 pl-10 text-sm"
+                  placeholder="Tìm kiếm người dùng, email..."
+                  className="w-full sm:w-72 pl-10 text-sm"
                   value={query.Keyword ?? ""}
                   onChange={handleSearch}
                 />
@@ -144,16 +143,16 @@ function TransactionPage() {
 
               {/* Filter bằng IsAutoRenew */}
               <Select value={query.IsAutoRenew} onValueChange={handleIsAutoRenewChange}>
-                <span className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500">
+                <span className="absolute -top-2 left-2 bg-white dark:bg-slate-900 px-1 text-xs text-slate-500 dark:text-slate-400">
                   Tự động gia hạn
                 </span>
-                <SelectTrigger className="w-full sm:w-43 bg-white text-sm">
+                <SelectTrigger className="w-full sm:w-44 bg-white dark:bg-slate-800 text-sm border-slate-200 dark:border-slate-700">
                   <SelectValue className="flex" placeholder="Lọc theo trạng thái">
                     <Ellipsis size={14} className="mr-2" />
                     Toàn bộ
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent className="bg-white">
+                <SelectContent className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                   <SelectItem value="" onSelect={handleIsAutoRenewChange}>
                     <Ellipsis size={14} className="mr-2" />
                     Toàn bộ
@@ -171,10 +170,10 @@ function TransactionPage() {
 
               {/* Filter bằng subscriptionId */}
               <Select value={query.SubscriptionId} onValueChange={handleSelectChange}>
-                <span className="absolute -top-2 left-2 bg-white px-1 text-xs text-gray-500">
+                <span className="absolute -top-2 left-2 bg-white dark:bg-slate-900 px-1 text-xs text-slate-500 dark:text-slate-400">
                   Loại gói
                 </span>
-                <SelectTrigger className="w-full sm:w-40 bg-white text-sm">
+                <SelectTrigger className="w-full sm:w-40 bg-white dark:bg-slate-800 text-sm border-slate-200 dark:border-slate-700">
                   <SelectValue placeholder="Chọn thể loại">
                     Tất cả
                   </SelectValue>
@@ -242,7 +241,7 @@ function TransactionPage() {
                           <div className="w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl flex items-center justify-center mb-4 shadow-inner">
                             <Inbox className="w-10 h-10 text-slate-400" />
                           </div>
-                          <h3 className="text-lg font-bold text-slate-900 mb-2">
+                          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                             Không có giao dịch nào
                           </h3>
                           <p className="text-slate-500 max-w-sm text-sm leading-relaxed">

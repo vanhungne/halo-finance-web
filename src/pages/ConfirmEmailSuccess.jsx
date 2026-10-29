@@ -19,8 +19,7 @@ export default function ConfirmEmailSuccess() {
     }, [countdown]);
 
     const handleRedirect = () => {
-        // Replace this URL with your actual app URL
-        window.location.href = 'vinance://';
+        window.location.href = 'trolytaichinh://';
     };
 
     return (

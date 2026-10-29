@@ -6,8 +6,6 @@ const actions = new Set([
   "SET_ACCOUNT_LIFECYCLE", "ACCOUNT_SET_ROLE",
   "ADVERTISE_CREATE", "ADVERTISE_UPDATE", "ADVERTISE_DELETE", "ADVERTISE_SET_STATUS",
   "BLOG_CREATE", "BLOG_UPDATE", "BLOG_DELETE", "BLOG_SET_PUBLICATION",
-  "RECEIPT_POLICY_CLONE", "RECEIPT_POLICY_UPDATE_DRAFT", "RECEIPT_POLICY_PUBLISH", "RECEIPT_POLICY_RETIRE",
-  "RECEIPT_RULE_ADD", "RECEIPT_RULE_UPDATE", "RECEIPT_RULE_DEACTIVATE",
   "SYSTEM_CONFIG_CREATE", "SYSTEM_CONFIG_UPDATE", "SYSTEM_CONFIG_DELETE",
   "SUBSCRIPTION_CREATE", "SUBSCRIPTION_UPDATE", "SUBSCRIPTION_DELETE", "SUBSCRIPTION_SET_STATUS",
 ]);
@@ -45,7 +43,7 @@ export function validRecoveryLocator(value) {
 export function terminalRecoveryReceipt(locator, receipt) {
   return validRecoveryLocator(locator) && ["COMMITTED", "REJECTED"].includes(receipt?.status)
     && nonzeroId(receipt.operationId) && nonzeroId(receipt.auditId) && nonzeroId(receipt.targetId)
-    && (["ADVERTISE_CREATE", "SUBSCRIPTION_CREATE", "REPORT_TYPE_CREATE", "BLOG_CREATE", "RECEIPT_POLICY_CLONE", "RECEIPT_RULE_ADD", "RECEIPT_RULE_UPDATE", "RECEIPT_RULE_DEACTIVATE", "SYSTEM_CONFIG_CREATE"].includes(locator.action)
+    && (["ADVERTISE_CREATE", "SUBSCRIPTION_CREATE", "REPORT_TYPE_CREATE", "BLOG_CREATE", "SYSTEM_CONFIG_CREATE"].includes(locator.action)
       || locator.targetId === null || receipt.targetId.toLowerCase() === locator.targetId.toLowerCase());
 }
 

@@ -27,48 +27,6 @@ export interface ExpenseAssistantApplicationAdminAdminCapabilityProjection {
   roles?: string[] | null;
 }
 
-export interface ExpenseAssistantApplicationDTOsRequestsAdminAddAdminReceiptRuleRequest {
-  defaultCategoryId: string;
-  expectedPolicyVersion?: number;
-  /**
-     * @minLength 0
-     * @maxLength 12
-     * @nullable
-     */
-  language?: string | null;
-  /**
-     * @minLength 0
-     * @maxLength 16
-     */
-  matchMode: string;
-  /**
-     * @minLength 0
-     * @maxLength 255
-     */
-  pattern: string;
-  /**
-     * @minimum 0
-     * @maximum 2147483647
-     */
-  priority?: number;
-  /**
-     * @minLength 0
-     * @maxLength 500
-     * @nullable
-     */
-  reason?: string | null;
-  /**
-     * @minLength 0
-     * @maxLength 32
-     */
-  ruleType: string;
-  /**
-     * @minimum -10000
-     * @maximum 10000
-     */
-  scoreDelta?: number;
-}
-
 export interface ExpenseAssistantApplicationDTOsRequestsAdminAdminBlogMediaReference {
   /** @nullable */
   expectedVersion: string | null;
@@ -151,13 +109,6 @@ export interface ExpenseAssistantApplicationDTOsRequestsAdminCancelUnseenAdminCo
   expectedVersion: string;
   /** @nullable */
   targetId?: string | null;
-}
-
-export interface ExpenseAssistantApplicationDTOsRequestsAdminCloneAdminReceiptPolicyRequest {
-  expectedSourceVersion?: number;
-  /** @nullable */
-  reason?: string | null;
-  sourcePolicyId?: string;
 }
 
 export interface ExpenseAssistantApplicationDTOsRequestsAdminCreateAdminAdvertiseRequest {
@@ -257,16 +208,6 @@ export interface ExpenseAssistantApplicationDTOsRequestsAdminCreateAdminSubscrip
   price: number;
 }
 
-export interface ExpenseAssistantApplicationDTOsRequestsAdminDeactivateAdminReceiptRuleRequest {
-  expectedPolicyVersion?: number;
-  /**
-     * @minLength 0
-     * @maxLength 500
-     * @nullable
-     */
-  reason?: string | null;
-}
-
 export interface ExpenseAssistantApplicationDTOsRequestsAdminDeleteAdminAdvertiseRequest {
   /** @nullable */
   reason?: string | null;
@@ -289,26 +230,6 @@ export interface ExpenseAssistantApplicationDTOsRequestsAdminDeleteAdminConfigur
 
 export interface ExpenseAssistantApplicationDTOsRequestsAdminDeleteAdminSubscriptionRequest {
   /** @nullable */
-  reason?: string | null;
-}
-
-export interface ExpenseAssistantApplicationDTOsRequestsAdminPublishAdminReceiptPolicyRequest {
-  expectedPolicyVersion?: number;
-  /**
-     * @minLength 0
-     * @maxLength 500
-     * @nullable
-     */
-  reason?: string | null;
-}
-
-export interface ExpenseAssistantApplicationDTOsRequestsAdminRetireAdminReceiptPolicyRequest {
-  expectedPolicyVersion?: number;
-  /**
-     * @minLength 0
-     * @maxLength 500
-     * @nullable
-     */
   reason?: string | null;
 }
 
@@ -430,59 +351,6 @@ export interface ExpenseAssistantApplicationDTOsRequestsAdminUpdateAdminConfigur
      * @maxLength 16
      */
   valueType: string;
-}
-
-export interface ExpenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptPolicyRequest {
-  exactMerchantWeight?: number;
-  expectedVersion?: number;
-  minimumMargin?: number;
-  /** @nullable */
-  reason?: string | null;
-  similarityWeight?: number;
-  threshold?: number;
-  tokenWeight?: number;
-}
-
-export interface ExpenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptRuleRequest {
-  defaultCategoryId: string;
-  expectedPolicyVersion?: number;
-  /**
-     * @minLength 0
-     * @maxLength 12
-     * @nullable
-     */
-  language?: string | null;
-  /**
-     * @minLength 0
-     * @maxLength 16
-     */
-  matchMode: string;
-  /**
-     * @minLength 0
-     * @maxLength 255
-     */
-  pattern: string;
-  /**
-     * @minimum 0
-     * @maximum 2147483647
-     */
-  priority?: number;
-  /**
-     * @minLength 0
-     * @maxLength 500
-     * @nullable
-     */
-  reason?: string | null;
-  /**
-     * @minLength 0
-     * @maxLength 32
-     */
-  ruleType: string;
-  /**
-     * @minimum -10000
-     * @maximum 10000
-     */
-  scoreDelta?: number;
 }
 
 export interface ExpenseAssistantApplicationDTOsRequestsAdminUpdateAdminSubscriptionRequest {
@@ -874,42 +742,136 @@ export interface ExpenseAssistantApplicationDTOsResponsesBlogGetListBlogResponse
   version?: number;
 }
 
-export interface ExpenseAssistantApplicationDTOsResponsesReceiptReceiptPolicyResponse {
-  /** @nullable */
-  changeReason?: string | null;
-  createdAt?: string;
-  exactMerchantWeight?: number;
-  id?: string;
-  minimumMargin?: number;
-  /** @nullable */
-  normalizerVersion?: string | null;
-  /** @nullable */
-  publishedAt?: string | null;
-  ruleCount?: number;
-  similarityWeight?: number;
-  /** @nullable */
-  status?: string | null;
-  threshold?: number;
-  tokenWeight?: number;
-  version?: number;
-  versionToken?: number;
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseOcrFieldConfidence {
+  category?: number;
+  currency?: number;
+  lineItems?: number;
+  merchant?: number;
+  totalAmount?: number;
+  transactionDate?: number;
 }
 
-export interface ExpenseAssistantApplicationDTOsResponsesReceiptReceiptRuleResponse {
-  defaultCategoryId?: string;
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseOcrFraudReasonResponse {
+  /** @nullable */
+  code?: string | null;
+  /** @nullable */
+  detail?: string | null;
+  points?: number;
+}
+
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseOcrFraudRiskResponse {
+  /** @nullable */
+  decision?: string | null;
+  /** @nullable */
+  reasons?: ExpenseAssistantApplicationDTOsResponsesExpenseOcrFraudReasonResponse[] | null;
+  requiresManualReview?: boolean;
+  /** @nullable */
+  riskLevel?: string | null;
+  score?: number;
+}
+
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseOcrLineItemResponse {
+  /** @nullable */
+  description?: string | null;
+  discountAmount?: number;
+  /** @nullable */
+  lineTotal?: number | null;
+  quantity?: number;
+  /** @nullable */
+  taxRate?: number | null;
+  /** @nullable */
+  unit?: string | null;
+  /** @nullable */
+  unitPrice?: number | null;
+}
+
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseOcrReconciliationResponse {
+  /** @nullable */
+  computedSubtotal?: number | null;
+  /** @nullable */
+  computedTotal?: number | null;
+  /** @nullable */
+  difference?: number | null;
+  /** @nullable */
+  subtotalMatches?: boolean | null;
+  /** @nullable */
+  totalMatches?: boolean | null;
+}
+
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseExpenseOcrResponse {
+  amount?: number;
+  categoryInfo?: ExpenseAssistantApplicationDTOsResponsesExpenseCategoryInfo;
+  confidence?: number;
+  /** @nullable */
+  currency?: string | null;
+  dateDefaulted?: boolean;
+  discountAmount?: number;
+  /** @nullable */
+  documentFingerprint?: string | null;
+  /** @nullable */
+  documentNumber?: string | null;
+  /** @nullable */
+  documentType?: string | null;
+  fieldConfidence?: ExpenseAssistantApplicationDTOsResponsesExpenseOcrFieldConfidence;
+  fraudRisk?: ExpenseAssistantApplicationDTOsResponsesExpenseOcrFraudRiskResponse;
+  /** @nullable */
+  items?: ExpenseAssistantApplicationDTOsResponsesExpenseOcrLineItemResponse[] | null;
+  /** @nullable */
+  merchant?: string | null;
+  /** @nullable */
+  merchantTaxCode?: string | null;
+  /** @nullable */
+  note?: string | null;
+  reconciliation?: ExpenseAssistantApplicationDTOsResponsesExpenseOcrReconciliationResponse;
+  requiresReview?: boolean;
+  /** @nullable */
+  schemaVersion?: string | null;
+  serviceCharge?: number;
+  /** @nullable */
+  status?: string | null;
+  /** @nullable */
+  subtotal?: number | null;
+  taxAmount?: number;
+  tipAmount?: number;
+  transactionDate?: string;
+  /** @nullable */
+  readonly warningCode?: string | null;
+  /** @nullable */
+  warnings?: string[] | null;
+}
+
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseReceiptFraudAuditItemResponse {
+  attemptCount?: number;
+  /** @nullable */
+  contextType?: string | null;
+  createdAt?: string;
+  /** @nullable */
+  currencyCode?: string | null;
+  /** @nullable */
+  fraudRiskLevel?: string | null;
+  fraudRiskScore?: number;
+  /** @nullable */
+  groupReviewStatus?: string | null;
   id?: string;
-  isActive?: boolean;
   /** @nullable */
-  language?: string | null;
+  merchant?: string | null;
   /** @nullable */
-  matchMode?: string | null;
+  reviewNote?: string | null;
   /** @nullable */
-  pattern?: string | null;
-  policyId?: string;
-  priority?: number;
+  status?: string | null;
   /** @nullable */
-  ruleType?: string | null;
-  scoreDelta?: number;
+  totalAmount?: number | null;
+  /** @nullable */
+  warningCodes?: string[] | null;
+}
+
+export interface ExpenseAssistantApplicationDTOsResponsesExpenseReceiptFraudAuditPageResponse {
+  highRisk?: number;
+  /** @nullable */
+  items?: ExpenseAssistantApplicationDTOsResponsesExpenseReceiptFraudAuditItemResponse[] | null;
+  needsReview?: number;
+  possibleDuplicates?: number;
+  total?: number;
 }
 
 export interface ExpenseAssistantApplicationDTOsResponsesReportTypesReportTypeResponse {
@@ -1054,6 +1016,24 @@ export interface ExpenseAssistantApplicationServicesAdminStepUpResponse {
   expiresAt?: string;
   /** @nullable */
   proof?: string | null;
+}
+
+export interface ExpenseAssistantApplicationServicesAiGatewayConnectionTest {
+  /** @nullable */
+  apiKey?: string | null;
+  /** @nullable */
+  gatewayUrl?: string | null;
+}
+
+export interface ExpenseAssistantApplicationServicesAiGatewaySettingsUpdate {
+  /** @nullable */
+  apiKey?: string | null;
+  /** @nullable */
+  gatewayUrl?: string | null;
+  /** @nullable */
+  reasoningLevel?: string | null;
+  /** @nullable */
+  receiptModel?: string | null;
 }
 
 export interface ExpenseAssistantDomainBasesBasePaginatedList1472b09b9cb5bcf9eadd665960d7feb31d5fd829d0f05813732151900bd375e8 {
@@ -1317,6 +1297,18 @@ Offset?: number;
  */
 Limit?: number;
 ExpectedVersion: string;
+};
+
+export type ReceiptAiAdminModelsGETParams = {
+refresh?: boolean;
+};
+
+export type ReceiptFraudAuditGetGETParams = {
+/**
+ * @minimum 1
+ * @maximum 200
+ */
+limit?: number;
 };
 
 export type AdminReportTypesListGETParams = {
@@ -1806,105 +1798,71 @@ export const adminPlatformGetSecurityGET = (
       options);
     }
 
-export const receiptClassificationAdminPoliciesGET = (
+export const receiptAiAdminAnalyzePOST = (
 
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesReceiptReceiptPolicyResponse[]>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesReceiptReceiptPolicyResponse[]>(
-      {url: `/api/admin/receipt-classification/policies`, method: 'GET'
+ options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesExpenseExpenseOcrResponse>>,) => {
+      return adminTransport<ExpenseAssistantApplicationDTOsResponsesExpenseExpenseOcrResponse>(
+      {url: `/api/admin/receipt-ai/analyze`, method: 'POST'
     },
       options);
     }
 
-export const receiptClassificationAdminRulesGET = (
-    policyId: string,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesReceiptReceiptRuleResponse[]>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesReceiptReceiptRuleResponse[]>(
-      {url: `/api/admin/receipt-classification/policies/${policyId}/rules`, method: 'GET'
+export const receiptAiAdminHealthGET = (
+
+ options?: SecondParameter<typeof adminTransport<void>>,) => {
+      return adminTransport<void>(
+      {url: `/api/admin/receipt-ai/health`, method: 'GET'
     },
       options);
     }
 
-export const adminReceiptClassificationCommandsClonePOST = (
-    expenseAssistantApplicationDTOsRequestsAdminCloneAdminReceiptPolicyRequest?: BodyType<ExpenseAssistantApplicationDTOsRequestsAdminCloneAdminReceiptPolicyRequest>,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>(
-      {url: `/api/admin/receipt-classification/v2/policies/clone`, method: 'POST',
+export const receiptAiAdminModelsGET = (
+    params?: ReceiptAiAdminModelsGETParams,
+ options?: SecondParameter<typeof adminTransport<void>>,) => {
+      return adminTransport<void>(
+      {url: `/api/admin/receipt-ai/models`, method: 'GET',
+        params
+    },
+      options);
+    }
+
+export const receiptAiAdminGetSettingsGET = (
+
+ options?: SecondParameter<typeof adminTransport<void>>,) => {
+      return adminTransport<void>(
+      {url: `/api/admin/receipt-ai/settings`, method: 'GET'
+    },
+      options);
+    }
+
+export const receiptAiAdminUpdateSettingsPUT = (
+    expenseAssistantApplicationServicesAiGatewaySettingsUpdate?: BodyType<ExpenseAssistantApplicationServicesAiGatewaySettingsUpdate>,
+ options?: SecondParameter<typeof adminTransport<void>>,) => {
+      return adminTransport<void>(
+      {url: `/api/admin/receipt-ai/settings`, method: 'PUT',
       headers: {'Content-Type': 'application/*+json', },
-      data: expenseAssistantApplicationDTOsRequestsAdminCloneAdminReceiptPolicyRequest
+      data: expenseAssistantApplicationServicesAiGatewaySettingsUpdate
     },
       options);
     }
 
-export const adminReceiptClassificationCommandsUpdateDraftPATCH = (
-    policyId: string,
-    expenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptPolicyRequest?: BodyType<ExpenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptPolicyRequest>,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>(
-      {url: `/api/admin/receipt-classification/v2/policies/${policyId}/draft`, method: 'PATCH',
+export const receiptAiAdminTestSettingsPOST = (
+    expenseAssistantApplicationServicesAiGatewayConnectionTest?: BodyType<ExpenseAssistantApplicationServicesAiGatewayConnectionTest>,
+ options?: SecondParameter<typeof adminTransport<void>>,) => {
+      return adminTransport<void>(
+      {url: `/api/admin/receipt-ai/settings/test`, method: 'POST',
       headers: {'Content-Type': 'application/*+json', },
-      data: expenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptPolicyRequest
+      data: expenseAssistantApplicationServicesAiGatewayConnectionTest
     },
       options);
     }
 
-export const adminReceiptClassificationCommandsPublishPOST = (
-    policyId: string,
-    expenseAssistantApplicationDTOsRequestsAdminPublishAdminReceiptPolicyRequest?: BodyType<ExpenseAssistantApplicationDTOsRequestsAdminPublishAdminReceiptPolicyRequest>,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>(
-      {url: `/api/admin/receipt-classification/v2/policies/${policyId}/publish`, method: 'POST',
-      headers: {'Content-Type': 'application/*+json', },
-      data: expenseAssistantApplicationDTOsRequestsAdminPublishAdminReceiptPolicyRequest
-    },
-      options);
-    }
-
-export const adminReceiptClassificationCommandsRetirePOST = (
-    policyId: string,
-    expenseAssistantApplicationDTOsRequestsAdminRetireAdminReceiptPolicyRequest?: BodyType<ExpenseAssistantApplicationDTOsRequestsAdminRetireAdminReceiptPolicyRequest>,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>(
-      {url: `/api/admin/receipt-classification/v2/policies/${policyId}/retire`, method: 'POST',
-      headers: {'Content-Type': 'application/*+json', },
-      data: expenseAssistantApplicationDTOsRequestsAdminRetireAdminReceiptPolicyRequest
-    },
-      options);
-    }
-
-export const adminReceiptClassificationCommandsAddRulePOST = (
-    policyId: string,
-    expenseAssistantApplicationDTOsRequestsAdminAddAdminReceiptRuleRequest?: BodyType<ExpenseAssistantApplicationDTOsRequestsAdminAddAdminReceiptRuleRequest>,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>(
-      {url: `/api/admin/receipt-classification/v2/policies/${policyId}/rules`, method: 'POST',
-      headers: {'Content-Type': 'application/*+json', },
-      data: expenseAssistantApplicationDTOsRequestsAdminAddAdminReceiptRuleRequest
-    },
-      options);
-    }
-
-export const adminReceiptClassificationCommandsDeactivateRuleDELETE = (
-    policyId: string,
-    ruleId: string,
-    expenseAssistantApplicationDTOsRequestsAdminDeactivateAdminReceiptRuleRequest?: BodyType<ExpenseAssistantApplicationDTOsRequestsAdminDeactivateAdminReceiptRuleRequest>,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>(
-      {url: `/api/admin/receipt-classification/v2/policies/${policyId}/rules/${ruleId}`, method: 'DELETE',
-      headers: {'Content-Type': 'application/*+json', },
-      data: expenseAssistantApplicationDTOsRequestsAdminDeactivateAdminReceiptRuleRequest
-    },
-      options);
-    }
-
-export const adminReceiptClassificationCommandsUpdateRulePATCH = (
-    policyId: string,
-    ruleId: string,
-    expenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptRuleRequest?: BodyType<ExpenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptRuleRequest>,
- options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>>,) => {
-      return adminTransport<ExpenseAssistantApplicationDTOsResponsesAdminAdminOperationReceipt>(
-      {url: `/api/admin/receipt-classification/v2/policies/${policyId}/rules/${ruleId}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/*+json', },
-      data: expenseAssistantApplicationDTOsRequestsAdminUpdateAdminReceiptRuleRequest
+export const receiptFraudAuditGetGET = (
+    params?: ReceiptFraudAuditGetGETParams,
+ options?: SecondParameter<typeof adminTransport<ExpenseAssistantApplicationDTOsResponsesExpenseReceiptFraudAuditPageResponse>>,) => {
+      return adminTransport<ExpenseAssistantApplicationDTOsResponsesExpenseReceiptFraudAuditPageResponse>(
+      {url: `/api/admin/receipt-fraud-audit`, method: 'GET',
+        params
     },
       options);
     }
@@ -2163,15 +2121,13 @@ export type AdminOperationsGetMaintenanceGETResult = NonNullable<Awaited<ReturnT
 export type AdminOperationsSetMaintenancePATCHResult = NonNullable<Awaited<ReturnType<typeof adminOperationsSetMaintenancePATCH>>>
 export type AdminOperationsGetReadinessGETResult = NonNullable<Awaited<ReturnType<typeof adminOperationsGetReadinessGET>>>
 export type AdminPlatformGetSecurityGETResult = NonNullable<Awaited<ReturnType<typeof adminPlatformGetSecurityGET>>>
-export type ReceiptClassificationAdminPoliciesGETResult = NonNullable<Awaited<ReturnType<typeof receiptClassificationAdminPoliciesGET>>>
-export type ReceiptClassificationAdminRulesGETResult = NonNullable<Awaited<ReturnType<typeof receiptClassificationAdminRulesGET>>>
-export type AdminReceiptClassificationCommandsClonePOSTResult = NonNullable<Awaited<ReturnType<typeof adminReceiptClassificationCommandsClonePOST>>>
-export type AdminReceiptClassificationCommandsUpdateDraftPATCHResult = NonNullable<Awaited<ReturnType<typeof adminReceiptClassificationCommandsUpdateDraftPATCH>>>
-export type AdminReceiptClassificationCommandsPublishPOSTResult = NonNullable<Awaited<ReturnType<typeof adminReceiptClassificationCommandsPublishPOST>>>
-export type AdminReceiptClassificationCommandsRetirePOSTResult = NonNullable<Awaited<ReturnType<typeof adminReceiptClassificationCommandsRetirePOST>>>
-export type AdminReceiptClassificationCommandsAddRulePOSTResult = NonNullable<Awaited<ReturnType<typeof adminReceiptClassificationCommandsAddRulePOST>>>
-export type AdminReceiptClassificationCommandsDeactivateRuleDELETEResult = NonNullable<Awaited<ReturnType<typeof adminReceiptClassificationCommandsDeactivateRuleDELETE>>>
-export type AdminReceiptClassificationCommandsUpdateRulePATCHResult = NonNullable<Awaited<ReturnType<typeof adminReceiptClassificationCommandsUpdateRulePATCH>>>
+export type ReceiptAiAdminAnalyzePOSTResult = NonNullable<Awaited<ReturnType<typeof receiptAiAdminAnalyzePOST>>>
+export type ReceiptAiAdminHealthGETResult = NonNullable<Awaited<ReturnType<typeof receiptAiAdminHealthGET>>>
+export type ReceiptAiAdminModelsGETResult = NonNullable<Awaited<ReturnType<typeof receiptAiAdminModelsGET>>>
+export type ReceiptAiAdminGetSettingsGETResult = NonNullable<Awaited<ReturnType<typeof receiptAiAdminGetSettingsGET>>>
+export type ReceiptAiAdminUpdateSettingsPUTResult = NonNullable<Awaited<ReturnType<typeof receiptAiAdminUpdateSettingsPUT>>>
+export type ReceiptAiAdminTestSettingsPOSTResult = NonNullable<Awaited<ReturnType<typeof receiptAiAdminTestSettingsPOST>>>
+export type ReceiptFraudAuditGetGETResult = NonNullable<Awaited<ReturnType<typeof receiptFraudAuditGetGET>>>
 export type AdminReportTypesListGETResult = NonNullable<Awaited<ReturnType<typeof adminReportTypesListGET>>>
 export type AdminReportTypesCreatePOSTResult = NonNullable<Awaited<ReturnType<typeof adminReportTypesCreatePOST>>>
 export type AdminReportTypesDeleteDELETEResult = NonNullable<Awaited<ReturnType<typeof adminReportTypesDeleteDELETE>>>

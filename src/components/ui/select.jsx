@@ -27,7 +27,7 @@ export function Select({ defaultValue, children, className, ...props }) {
   if (props.value !== undefined && props.value !== selectedValue) {
     setSelectedValue(props.value);
   }
-}, [props.value]);
+}, [props.value, selectedValue]);
 
 
   const handleSelect = (value, label) => {
@@ -66,7 +66,7 @@ export function SelectTrigger({ children, onClick, isOpen, selectedLabel, classN
     <button
       type="button"
       onClick={onClick}
-      className={`flex h-10 w-full items-center justify-between rounded-md border border-gray-500 bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+      className={`flex h-10 w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-500/10 disabled:cursor-not-allowed disabled:opacity-50 transition-all ${className}`}
     >
       {React.Children.map(children, (child) => {
         if (child.type === SelectValue) {
@@ -86,7 +86,7 @@ export function SelectTrigger({ children, onClick, isOpen, selectedLabel, classN
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+        className={`h-4 w-4 text-slate-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
       >
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
@@ -103,7 +103,7 @@ export function SelectContent({ children, isOpen, onSelect, className }) {
 
   return (
     <div
-      className={`absolute z-50 min-w-[8rem] overflow-hidden rounded-md bg-popover text-popover-foreground shadow-md animate-in fade-in-80 mt-1 w-full ${className}`}
+      className={`absolute z-50 min-w-[8rem] overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-700 shadow-[0_18px_50px_-18px_rgba(15,23,42,0.35)] animate-in fade-in-80 mt-1 w-full ${className}`}
     >
       <div className="p-1">
         {React.Children.map(children, (child) => {
@@ -123,7 +123,7 @@ export function SelectItem({ children, value, onSelect, className }) {
   return (
     <div
       onClick={() => onSelect(value, children)}
-      className={`relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 px-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground hover:bg-gray-100 ${className}`}
+      className={`relative flex w-full cursor-pointer select-none items-center rounded-lg py-2 px-2.5 text-sm outline-none hover:bg-sky-50 hover:text-sky-700 transition-colors ${className}`}
     >
       {children}
     </div>

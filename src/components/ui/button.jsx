@@ -11,15 +11,15 @@ export function Button({
   ...props
 }) {
   const baseStyles =
-    "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background"
+    "inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-500/15 focus-visible:border-sky-500 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]"
 
   const variants = {
-    default: "bg-yellow-500 hover:bg-yellow-300",
-    destructive: "bg-red-500 hover:bg-red-300",
-    outline: "border border-input hover:bg-accent hover:text-accent-foreground",
-    secondary: "bg-blue-300 hover:bg-gray-200",
-    ghost: "hover:bg-yellow-200 hover:text-accent-foreground",
-    link: "underline-offset-4 hover:underline text-primary",
+    default: "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-sm shadow-sky-500/20 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-sky-500/20",
+    destructive: "bg-rose-500 text-white shadow-sm hover:bg-rose-600 hover:-translate-y-0.5",
+    outline: "border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700",
+    secondary: "bg-sky-50 text-sky-700 border border-sky-100 hover:bg-sky-100",
+    ghost: "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
+    link: "underline-offset-4 hover:underline text-sky-600",
   }
 
   const sizes = {

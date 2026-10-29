@@ -113,13 +113,6 @@ test("blog create recovery binds its actor scope while update/delete/publication
   assert.equal(validRecoveryLocator({ ...locator, action: "BLOG_DELETE", version: "0" }), false);
 });
 
-test("receipt policy and rule recovery binds the policy scope and keeps rule receipts target-private", () => {
-  for (const action of ["RECEIPT_POLICY_CLONE", "RECEIPT_POLICY_UPDATE_DRAFT", "RECEIPT_POLICY_PUBLISH", "RECEIPT_POLICY_RETIRE", "RECEIPT_RULE_ADD", "RECEIPT_RULE_UPDATE", "RECEIPT_RULE_DEACTIVATE"]) {
-    assert.equal(validRecoveryLocator({ ...locator, action, version: "4" }), true);
-  }
-  assert.equal(validRecoveryLocator({ ...locator, action: "RECEIPT_RULE_ADD", version: "0" }), false);
-});
-
 test("maintenance recovery keeps a timestamp version while withholding the configuration target", () => {
   const maintenance = { ...locator, action: "SYSTEM_CONFIG_UPDATE", targetId: null, version: "2026-10-13T12:34:56.1234567+00:00" };
   assert.equal(validRecoveryLocator(maintenance), true);

@@ -11,7 +11,7 @@ const ROUTES = {
     ADVERTISE_PAGE: "ads",
     PACKAGE_PAGE: "packages",
     CONFIGURATION_PAGE: "config",
-    RECEIPT_CLASSIFICATION_PAGE: "receipt-classification",
+    AI_MANAGEMENT_PAGE: "ai-management",
     CONFIRM_EMAIL_SUCCESS_PAGE: "/confirm-email-success",
     CONFIRM_EMAIL_FAIL_PAGE: "/confirm-email-fail",
 }

@@ -54,65 +54,6 @@
         },
         "type": "object"
       },
-      "ExpenseAssistant.Application.DTOs.Requests.Admin.AddAdminReceiptRuleRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "defaultCategoryId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "expectedPolicyVersion": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "language": {
-            "maxLength": 12,
-            "minLength": 0,
-            "nullable": true,
-            "type": "string"
-          },
-          "matchMode": {
-            "maxLength": 16,
-            "minLength": 0,
-            "type": "string"
-          },
-          "pattern": {
-            "maxLength": 255,
-            "minLength": 0,
-            "type": "string"
-          },
-          "priority": {
-            "format": "int32",
-            "maximum": 2147483647,
-            "minimum": 0,
-            "type": "integer"
-          },
-          "reason": {
-            "maxLength": 500,
-            "minLength": 0,
-            "nullable": true,
-            "type": "string"
-          },
-          "ruleType": {
-            "maxLength": 32,
-            "minLength": 0,
-            "type": "string"
-          },
-          "scoreDelta": {
-            "format": "int32",
-            "maximum": 10000,
-            "minimum": -10000,
-            "type": "integer"
-          }
-        },
-        "required": [
-          "defaultCategoryId",
-          "matchMode",
-          "pattern",
-          "ruleType"
-        ],
-        "type": "object"
-      },
       "ExpenseAssistant.Application.DTOs.Requests.Admin.AdminBlogManagedMediaManifest": {
         "additionalProperties": false,
         "properties": {
@@ -246,24 +187,6 @@
           "action",
           "expectedVersion"
         ],
-        "type": "object"
-      },
-      "ExpenseAssistant.Application.DTOs.Requests.Admin.CloneAdminReceiptPolicyRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "expectedSourceVersion": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "reason": {
-            "nullable": true,
-            "type": "string"
-          },
-          "sourcePolicyId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        },
         "type": "object"
       },
       "ExpenseAssistant.Application.DTOs.Requests.Admin.CreateAdminAdvertiseRequest": {
@@ -428,22 +351,6 @@
         ],
         "type": "object"
       },
-      "ExpenseAssistant.Application.DTOs.Requests.Admin.DeactivateAdminReceiptRuleRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "expectedPolicyVersion": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "reason": {
-            "maxLength": 500,
-            "minLength": 0,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
       "ExpenseAssistant.Application.DTOs.Requests.Admin.DeleteAdminAdvertiseRequest": {
         "additionalProperties": false,
         "properties": {
@@ -487,38 +394,6 @@
         "additionalProperties": false,
         "properties": {
           "reason": {
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "ExpenseAssistant.Application.DTOs.Requests.Admin.PublishAdminReceiptPolicyRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "expectedPolicyVersion": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "reason": {
-            "maxLength": 500,
-            "minLength": 0,
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "ExpenseAssistant.Application.DTOs.Requests.Admin.RetireAdminReceiptPolicyRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "expectedPolicyVersion": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "reason": {
-            "maxLength": 500,
-            "minLength": 0,
             "nullable": true,
             "type": "string"
           }
@@ -766,99 +641,6 @@
           "expectedLastUpdatedAt",
           "value",
           "valueType"
-        ],
-        "type": "object"
-      },
-      "ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptPolicyRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "exactMerchantWeight": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "expectedVersion": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "minimumMargin": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "reason": {
-            "nullable": true,
-            "type": "string"
-          },
-          "similarityWeight": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "threshold": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "tokenWeight": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptRuleRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "defaultCategoryId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "expectedPolicyVersion": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "language": {
-            "maxLength": 12,
-            "minLength": 0,
-            "nullable": true,
-            "type": "string"
-          },
-          "matchMode": {
-            "maxLength": 16,
-            "minLength": 0,
-            "type": "string"
-          },
-          "pattern": {
-            "maxLength": 255,
-            "minLength": 0,
-            "type": "string"
-          },
-          "priority": {
-            "format": "int32",
-            "maximum": 2147483647,
-            "minimum": 0,
-            "type": "integer"
-          },
-          "reason": {
-            "maxLength": 500,
-            "minLength": 0,
-            "nullable": true,
-            "type": "string"
-          },
-          "ruleType": {
-            "maxLength": 32,
-            "minLength": 0,
-            "type": "string"
-          },
-          "scoreDelta": {
-            "format": "int32",
-            "maximum": 10000,
-            "minimum": -10000,
-            "type": "integer"
-          }
-        },
-        "required": [
-          "defaultCategoryId",
-          "matchMode",
-          "pattern",
-          "ruleType"
         ],
         "type": "object"
       },
@@ -1840,10 +1622,268 @@
         },
         "type": "object"
       },
-      "ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptPolicyResponse": {
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.ExpenseOcrResponse": {
         "additionalProperties": false,
         "properties": {
-          "changeReason": {
+          "amount": {
+            "format": "double",
+            "type": "number"
+          },
+          "categoryInfo": {
+            "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.CategoryInfo"
+          },
+          "confidence": {
+            "format": "double",
+            "type": "number"
+          },
+          "currency": {
+            "nullable": true,
+            "type": "string"
+          },
+          "dateDefaulted": {
+            "type": "boolean"
+          },
+          "discountAmount": {
+            "format": "double",
+            "type": "number"
+          },
+          "documentFingerprint": {
+            "nullable": true,
+            "type": "string"
+          },
+          "documentNumber": {
+            "nullable": true,
+            "type": "string"
+          },
+          "documentType": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fieldConfidence": {
+            "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.OcrFieldConfidence"
+          },
+          "fraudRisk": {
+            "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.OcrFraudRiskResponse"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.OcrLineItemResponse"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "merchant": {
+            "nullable": true,
+            "type": "string"
+          },
+          "merchantTaxCode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "note": {
+            "nullable": true,
+            "type": "string"
+          },
+          "reconciliation": {
+            "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.OcrReconciliationResponse"
+          },
+          "requiresReview": {
+            "type": "boolean"
+          },
+          "schemaVersion": {
+            "nullable": true,
+            "type": "string"
+          },
+          "serviceCharge": {
+            "format": "double",
+            "type": "number"
+          },
+          "status": {
+            "nullable": true,
+            "type": "string"
+          },
+          "subtotal": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "taxAmount": {
+            "format": "double",
+            "type": "number"
+          },
+          "tipAmount": {
+            "format": "double",
+            "type": "number"
+          },
+          "transactionDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "warningCode": {
+            "nullable": true,
+            "readOnly": true,
+            "type": "string"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.OcrFieldConfidence": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "format": "double",
+            "type": "number"
+          },
+          "currency": {
+            "format": "double",
+            "type": "number"
+          },
+          "lineItems": {
+            "format": "double",
+            "type": "number"
+          },
+          "merchant": {
+            "format": "double",
+            "type": "number"
+          },
+          "totalAmount": {
+            "format": "double",
+            "type": "number"
+          },
+          "transactionDate": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.OcrFraudReasonResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "detail": {
+            "nullable": true,
+            "type": "string"
+          },
+          "points": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.OcrFraudRiskResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "decision": {
+            "nullable": true,
+            "type": "string"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.OcrFraudReasonResponse"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "requiresManualReview": {
+            "type": "boolean"
+          },
+          "riskLevel": {
+            "nullable": true,
+            "type": "string"
+          },
+          "score": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.OcrLineItemResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "discountAmount": {
+            "format": "double",
+            "type": "number"
+          },
+          "lineTotal": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "quantity": {
+            "format": "double",
+            "type": "number"
+          },
+          "taxRate": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "unit": {
+            "nullable": true,
+            "type": "string"
+          },
+          "unitPrice": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.OcrReconciliationResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "computedSubtotal": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "computedTotal": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "difference": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "subtotalMatches": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "totalMatches": {
+            "nullable": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.ReceiptFraudAuditItemResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attemptCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "contextType": {
             "nullable": true,
             "type": "string"
           },
@@ -1851,97 +1891,76 @@
             "format": "date-time",
             "type": "string"
           },
-          "exactMerchantWeight": {
+          "currencyCode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fraudRiskLevel": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fraudRiskScore": {
             "format": "int32",
             "type": "integer"
+          },
+          "groupReviewStatus": {
+            "nullable": true,
+            "type": "string"
           },
           "id": {
             "format": "uuid",
             "type": "string"
           },
-          "minimumMargin": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "normalizerVersion": {
+          "merchant": {
             "nullable": true,
             "type": "string"
           },
-          "publishedAt": {
-            "format": "date-time",
+          "reviewNote": {
             "nullable": true,
             "type": "string"
-          },
-          "ruleCount": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "similarityWeight": {
-            "format": "int32",
-            "type": "integer"
           },
           "status": {
             "nullable": true,
             "type": "string"
           },
-          "threshold": {
-            "format": "int32",
-            "type": "integer"
+          "totalAmount": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
           },
-          "tokenWeight": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "version": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "versionToken": {
-            "format": "int64",
-            "type": "integer"
+          "warningCodes": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
           }
         },
         "type": "object"
       },
-      "ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptRuleResponse": {
+      "ExpenseAssistant.Application.DTOs.Responses.Expense.ReceiptFraudAuditPageResponse": {
         "additionalProperties": false,
         "properties": {
-          "defaultCategoryId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "language": {
-            "nullable": true,
-            "type": "string"
-          },
-          "matchMode": {
-            "nullable": true,
-            "type": "string"
-          },
-          "pattern": {
-            "nullable": true,
-            "type": "string"
-          },
-          "policyId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "priority": {
+          "highRisk": {
             "format": "int32",
             "type": "integer"
           },
-          "ruleType": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.ReceiptFraudAuditItemResponse"
+            },
             "nullable": true,
-            "type": "string"
+            "type": "array"
           },
-          "scoreDelta": {
+          "needsReview": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "possibleDuplicates": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "total": {
             "format": "int32",
             "type": "integer"
           }
@@ -2289,6 +2308,42 @@
             "type": "string"
           },
           "proof": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.Services.AiGatewayConnectionTest": {
+        "additionalProperties": false,
+        "properties": {
+          "apiKey": {
+            "nullable": true,
+            "type": "string"
+          },
+          "gatewayUrl": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ExpenseAssistant.Application.Services.AiGatewaySettingsUpdate": {
+        "additionalProperties": false,
+        "properties": {
+          "apiKey": {
+            "nullable": true,
+            "type": "string"
+          },
+          "gatewayUrl": {
+            "nullable": true,
+            "type": "string"
+          },
+          "reasoningLevel": {
+            "nullable": true,
+            "type": "string"
+          },
+          "receiptModel": {
             "nullable": true,
             "type": "string"
           }
@@ -6093,34 +6148,60 @@
         ]
       }
     },
-    "/api/admin/receipt-classification/policies": {
-      "get": {
-        "operationId": "ReceiptClassificationAdmin_Policies_GET",
+    "/api/admin/receipt-ai/analyze": {
+      "post": {
+        "operationId": "ReceiptAiAdmin_Analyze_POST",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {
+                "Invoice": {
+                  "style": "form"
+                },
+                "model": {
+                  "style": "form"
+                },
+                "reasoningLevel": {
+                  "style": "form"
+                }
+              },
+              "schema": {
+                "properties": {
+                  "Invoice": {
+                    "format": "binary",
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "reasoningLevel": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "Invoice"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptPolicyResponse"
-                  },
-                  "type": "array"
+                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.ExpenseOcrResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptPolicyResponse"
-                  },
-                  "type": "array"
+                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.ExpenseOcrResponse"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptPolicyResponse"
-                  },
-                  "type": "array"
+                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.ExpenseOcrResponse"
                 }
               }
             },
@@ -6128,841 +6209,160 @@
           }
         },
         "tags": [
-          "ReceiptClassificationAdmin"
+          "ReceiptAiAdmin"
         ]
       }
     },
-    "/api/admin/receipt-classification/policies/{policyId}/rules": {
+    "/api/admin/receipt-ai/health": {
       "get": {
-        "operationId": "ReceiptClassificationAdmin_Rules_GET",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          }
-        ],
+        "operationId": "ReceiptAiAdmin_Health_GET",
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptRuleResponse"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptRuleResponse"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Receipt.ReceiptRuleResponse"
-                  },
-                  "type": "array"
-                }
-              }
-            },
             "description": "Success"
           }
         },
         "tags": [
-          "ReceiptClassificationAdmin"
+          "ReceiptAiAdmin"
         ]
       }
     },
-    "/api/admin/receipt-classification/v2/policies/clone": {
-      "post": {
-        "operationId": "AdminReceiptClassificationCommands_Clone_POST",
+    "/api/admin/receipt-ai/models": {
+      "get": {
+        "operationId": "ReceiptAiAdmin_Models_GET",
         "parameters": [
           {
-            "in": "header",
-            "name": "Idempotency-Key",
+            "in": "query",
+            "name": "refresh",
             "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Opaque proof from POST /api/admin/step-up for this exact command. Protected replay does not require new proof.",
-            "in": "header",
-            "name": "Admin-Step-Up",
-            "schema": {
-              "maxLength": 8192,
-              "type": "string"
+              "type": "boolean"
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/*\u002Bjson": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.CloneAdminReceiptPolicyRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.CloneAdminReceiptPolicyRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.CloneAdminReceiptPolicyRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              }
-            },
-            "description": "Success",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Current authority or command-bound confirmation required; structured challenge is private.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Confirmation attempts or pending grants are limited.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "description": "Success"
           }
         },
         "tags": [
-          "AdminReceiptClassificationCommands"
+          "ReceiptAiAdmin"
         ]
       }
     },
-    "/api/admin/receipt-classification/v2/policies/{policyId}/draft": {
-      "patch": {
-        "operationId": "AdminReceiptClassificationCommands_UpdateDraft_PATCH",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Idempotency-Key",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Opaque proof from POST /api/admin/step-up for this exact command. Protected replay does not require new proof.",
-            "in": "header",
-            "name": "Admin-Step-Up",
-            "schema": {
-              "maxLength": 8192,
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*\u002Bjson": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptPolicyRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptPolicyRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptPolicyRequest"
-              }
-            }
-          }
-        },
+    "/api/admin/receipt-ai/settings": {
+      "get": {
+        "operationId": "ReceiptAiAdmin_GetSettings_GET",
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              }
-            },
-            "description": "Success",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Current authority or command-bound confirmation required; structured challenge is private.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Confirmation attempts or pending grants are limited.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "description": "Success"
           }
         },
         "tags": [
-          "AdminReceiptClassificationCommands"
-        ]
-      }
-    },
-    "/api/admin/receipt-classification/v2/policies/{policyId}/publish": {
-      "post": {
-        "operationId": "AdminReceiptClassificationCommands_Publish_POST",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Idempotency-Key",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Opaque proof from POST /api/admin/step-up for this exact command. Protected replay does not require new proof.",
-            "in": "header",
-            "name": "Admin-Step-Up",
-            "schema": {
-              "maxLength": 8192,
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*\u002Bjson": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.PublishAdminReceiptPolicyRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.PublishAdminReceiptPolicyRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.PublishAdminReceiptPolicyRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              }
-            },
-            "description": "Success",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Current authority or command-bound confirmation required; structured challenge is private.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Confirmation attempts or pending grants are limited.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AdminReceiptClassificationCommands"
-        ]
-      }
-    },
-    "/api/admin/receipt-classification/v2/policies/{policyId}/retire": {
-      "post": {
-        "operationId": "AdminReceiptClassificationCommands_Retire_POST",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Idempotency-Key",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Opaque proof from POST /api/admin/step-up for this exact command. Protected replay does not require new proof.",
-            "in": "header",
-            "name": "Admin-Step-Up",
-            "schema": {
-              "maxLength": 8192,
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*\u002Bjson": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.RetireAdminReceiptPolicyRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.RetireAdminReceiptPolicyRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.RetireAdminReceiptPolicyRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              }
-            },
-            "description": "Success",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Current authority or command-bound confirmation required; structured challenge is private.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Confirmation attempts or pending grants are limited.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AdminReceiptClassificationCommands"
-        ]
-      }
-    },
-    "/api/admin/receipt-classification/v2/policies/{policyId}/rules": {
-      "post": {
-        "operationId": "AdminReceiptClassificationCommands_AddRule_POST",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Idempotency-Key",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Opaque proof from POST /api/admin/step-up for this exact command. Protected replay does not require new proof.",
-            "in": "header",
-            "name": "Admin-Step-Up",
-            "schema": {
-              "maxLength": 8192,
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*\u002Bjson": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.AddAdminReceiptRuleRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.AddAdminReceiptRuleRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.AddAdminReceiptRuleRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              }
-            },
-            "description": "Success",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Current authority or command-bound confirmation required; structured challenge is private.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Confirmation attempts or pending grants are limited.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AdminReceiptClassificationCommands"
-        ]
-      }
-    },
-    "/api/admin/receipt-classification/v2/policies/{policyId}/rules/{ruleId}": {
-      "delete": {
-        "operationId": "AdminReceiptClassificationCommands_DeactivateRule_DELETE",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "ruleId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Idempotency-Key",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Opaque proof from POST /api/admin/step-up for this exact command. Protected replay does not require new proof.",
-            "in": "header",
-            "name": "Admin-Step-Up",
-            "schema": {
-              "maxLength": 8192,
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*\u002Bjson": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.DeactivateAdminReceiptRuleRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.DeactivateAdminReceiptRuleRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.DeactivateAdminReceiptRuleRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              }
-            },
-            "description": "Success",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Current authority or command-bound confirmation required; structured challenge is private.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Confirmation attempts or pending grants are limited.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "AdminReceiptClassificationCommands"
+          "ReceiptAiAdmin"
         ]
       },
-      "patch": {
-        "operationId": "AdminReceiptClassificationCommands_UpdateRule_PATCH",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "policyId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "ruleId",
-            "required": true,
-            "schema": {
-              "format": "uuid",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Idempotency-Key",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Opaque proof from POST /api/admin/step-up for this exact command. Protected replay does not require new proof.",
-            "in": "header",
-            "name": "Admin-Step-Up",
-            "schema": {
-              "maxLength": 8192,
-              "type": "string"
-            }
-          }
-        ],
+      "put": {
+        "operationId": "ReceiptAiAdmin_UpdateSettings_PUT",
         "requestBody": {
           "content": {
             "application/*\u002Bjson": {
               "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptRuleRequest"
+                "$ref": "#/components/schemas/ExpenseAssistant.Application.Services.AiGatewaySettingsUpdate"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptRuleRequest"
+                "$ref": "#/components/schemas/ExpenseAssistant.Application.Services.AiGatewaySettingsUpdate"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Requests.Admin.UpdateAdminReceiptRuleRequest"
+                "$ref": "#/components/schemas/ExpenseAssistant.Application.Services.AiGatewaySettingsUpdate"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Admin.AdminOperationReceipt"
-                }
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "ReceiptAiAdmin"
+        ]
+      }
+    },
+    "/api/admin/receipt-ai/settings/test": {
+      "post": {
+        "operationId": "ReceiptAiAdmin_TestSettings_POST",
+        "requestBody": {
+          "content": {
+            "application/*\u002Bjson": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpenseAssistant.Application.Services.AiGatewayConnectionTest"
               }
             },
-            "description": "Success",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpenseAssistant.Application.Services.AiGatewayConnectionTest"
               }
-            }
-          },
-          "403": {
-            "description": "Current authority or command-bound confirmation required; structured challenge is private.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Confirmation attempts or pending grants are limited.",
-            "headers": {
-              "Cache-Control": {
-                "description": "private, no-store",
-                "schema": {
-                  "type": "string"
-                }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpenseAssistant.Application.Services.AiGatewayConnectionTest"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
         "tags": [
-          "AdminReceiptClassificationCommands"
+          "ReceiptAiAdmin"
+        ]
+      }
+    },
+    "/api/admin/receipt-fraud-audit": {
+      "get": {
+        "operationId": "ReceiptFraudAudit_Get_GET",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "default": 100,
+              "format": "int32",
+              "maximum": 200,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.ReceiptFraudAuditPageResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.ReceiptFraudAuditPageResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseAssistant.Application.DTOs.Responses.Expense.ReceiptFraudAuditPageResponse"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "ReceiptFraudAudit"
         ]
       }
     },

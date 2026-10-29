@@ -69,16 +69,6 @@ export const adminNavigation = Object.freeze([
     legacyRoute: "/admin/blogs",
   }),
   route({
-    id: "receipt-classification",
-    label: "Receipt classification",
-    group: "Trust & content",
-    icon: ShieldCheck,
-    path: `${ADMIN_V2_BASE}/receipt-classification`,
-    capability: "admin.receipt-classification.read",
-    risk: "R2",
-    aliases: ["receipt policy", "invoice rules", "phân loại hóa đơn"],
-  }),
-  route({
     id: "audit",
     label: "Audit trail",
     group: "Trust & content",

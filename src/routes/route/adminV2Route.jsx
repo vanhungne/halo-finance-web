@@ -8,7 +8,6 @@ const AdminV2ReportsPage = lazy(() => import("../../adminV2/AdminV2ReportsPage")
 const AdminV2ContentPage = lazy(() => import("../../adminV2/AdminV2ContentPage"));
 const AdminV2AdvertisingPage = lazy(() => import("../../adminV2/AdminV2AdvertisingPage"));
 const AdminV2SubscriptionsPage = lazy(() => import("../../adminV2/AdminV2SubscriptionsPage"));
-const AdminV2ReceiptClassificationPage = lazy(() => import("../../adminV2/AdminV2ReceiptClassificationPage"));
 const AdminV2AuditPage = lazy(() => import("../../adminV2/AdminV2AuditPage"));
 const AdminV2ConfigurationPage = lazy(() => import("../../adminV2/AdminV2ConfigurationPage"));
 const AdminV2OperationsPage = lazy(() => import("../../adminV2/AdminV2OperationsPage"));
@@ -21,7 +20,6 @@ const adminV2Route = [
   { path: adminRouteSegment("content"), element: <AdminV2RouteView routeId="content" page={AdminV2ContentPage} /> },
   { path: adminRouteSegment("advertising"), element: <AdminV2RouteView routeId="advertising" page={AdminV2AdvertisingPage} /> },
   { path: adminRouteSegment("subscriptions"), element: <AdminV2RouteView routeId="subscriptions" page={AdminV2SubscriptionsPage} /> },
-  { path: adminRouteSegment("receipt-classification"), element: <AdminV2RouteView routeId="receipt-classification" page={AdminV2ReceiptClassificationPage} /> },
   { path: adminRouteSegment("audit"), element: <AdminV2RouteView routeId="audit" page={AdminV2AuditPage} /> },
   { path: adminRouteSegment("operations"), element: <AdminV2RouteView routeId="operations" page={AdminV2OperationsPage} /> },
   { path: adminRouteSegment("platform"), element: <AdminV2RouteView routeId="platform" page={AdminV2PlatformPage} /> },

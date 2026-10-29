@@ -8,7 +8,7 @@ import AdvertisePage from "../../pages/adminPage/AdvertisePage";
 import ReportPage from "../../pages/adminPage/ReportPage";
 import PackagePage from "../../pages/adminPage/PackagePage";
 import ConfigurationPage from "../../pages/adminPage/ConfigurationPage";
-import ReceiptClassificationPage from "../../pages/adminPage/ReceiptClassificationPage";
+import AiManagementPage from "../../pages/adminPage/AiManagementPage";
 
 const adminRoute = [
     { path: ROUTES.HOME_PAGE, element: <DashboardPage /> },
@@ -22,7 +22,7 @@ const adminRoute = [
     { path: ROUTES.ADVERTISE_PAGE, element: <AdvertisePage /> },
     { path: ROUTES.PACKAGE_PAGE, element: <PackagePage /> },
     { path: ROUTES.CONFIGURATION_PAGE, element: <ConfigurationPage /> },
-    { path: ROUTES.RECEIPT_CLASSIFICATION_PAGE, element: <ReceiptClassificationPage /> },
+    { path: ROUTES.AI_MANAGEMENT_PAGE, element: <AiManagementPage /> },
 ]
 
 export default adminRoute

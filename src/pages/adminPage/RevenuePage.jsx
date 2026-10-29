@@ -184,8 +184,8 @@ function RevenuePage() {
 
   const getColorBg = (color) => {
     const colors = {
-      blue: "bg-blue-100/75 border-blue-200",
-      violet: "bg-violet-100/75 border-violet-200",
+      blue: "bg-blue-500/10 border border-blue-500/20 shadow-sm shadow-blue-500/10",
+      violet: "bg-violet-500/10 border border-violet-500/20 shadow-sm shadow-violet-500/10",
     };
     return colors[color] || colors.blue;
   };
@@ -218,14 +218,17 @@ function RevenuePage() {
   ] : [];
 
   return (
-    <div className="space-y-4 sm:space-y-6 lg:space-y-8 p-3 sm:p-4 lg:p-6 bg-slate-50 min-h-screen">
+    <div className="space-y-6 w-full">
       {/* Toolbar */}
-      <div className="border border-gray-100">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            {/* Filter date rage */}
-            <Select value={filterType} onValueChange={handleFilterTypeChange}>
-              <SelectTrigger className="sm:w-30 text-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-sm">
+        <div>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Báo Cáo & Thống Kê Doanh Thu</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Phân tích hiệu quả kinh doanh và cơ cấu nguồn thu gói dịch vụ</p>
+        </div>
+        <div className="flex items-center gap-3">
+          {/* Filter date rage */}
+          <Select value={filterType} onValueChange={handleFilterTypeChange}>
+            <SelectTrigger className="sm:w-36 text-xs bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <SelectValue>
                   {filterType === "Daily"
                     ? "Theo ngày"
@@ -245,7 +248,6 @@ function RevenuePage() {
             </Select>
           </div>
         </div>
-      </div>
       {loading ? <FullPageLoader /> : (
         <>
           {/*Statistic card*/}
@@ -274,10 +276,10 @@ function RevenuePage() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-mono mb-1">
                         <CountUp end={stat.value} duration={1.2} separator="." />
                       </h3>
-                      <p className="text-slate-600 text-xs sm:text-sm font-medium mb-1">
+                      <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm font-medium mb-1">
                         {stat.title}
                       </p>
                       <p className="text-xs text-slate-500">{stat.description}</p>
@@ -291,7 +293,7 @@ function RevenuePage() {
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
 
             {/* Revenue Chart */}
-            <Card className="xl:col-span-2 border border-gray-200 bg-white">
+            <Card className="xl:col-span-2">
               <CardHeader className="pb-3 sm:pb-4">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>
@@ -405,7 +407,7 @@ function RevenuePage() {
               </CardContent>
             </Card>
             {/* Package Reports */}
-            <Card className="border border-gray-200 bg-white">
+            <Card className="flex flex-col">
               <CardHeader className="pb-3 sm:pb-4">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>

@@ -1,5 +1,15 @@
 # Admin browser session coordination — 2026-10-16
 
+Merge compatibility, 2026-10-20: the new login appearance still calls the existing
+coordinator's `login`/`verifyTwoFactor` methods and uses its session-error catalog.
+The provider and shared Axios instance retain one refresh owner. Admin role
+validation, MFA challenges, stale-context fencing and legacy blog redirects are
+preserved. No member-role or OAuth session policy is broadened in this merge.
+Google sign-in is shown unavailable; legacy callback token parameters are cleared
+without persistence. The public `/app` sample-data demo has no financial API
+authority; its exit returns home and does not claim server logout. Current
+verification and environment limits are in the [merge record](../README.md#merge-integration--2026-10-20).
+
 Source implemented; selected qualification passes within the scope below. Full Admin and
 production release remain ACTIVE/NO-GO. This extends the existing shared Axios
 instance and AuthProvider; it does not create a second authentication authority,
