@@ -40,7 +40,10 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
 
-      - run: npm install --no-audit --no-fund
+      - name: Install dependencies
+        run: |
+          npm install --no-audit --no-fund
+          npm install --no-save @rollup/rollup-linux-x64-gnu @tailwindcss/oxide-linux-x64-gnu lightningcss-linux-x64-gnu
       # - run: npm run lint # Bỏ comment nếu dự án có cấu hình lint
       # - run: npm run test # Bỏ comment nếu dự án có cấu hình test
 
