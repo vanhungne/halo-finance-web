@@ -40,6 +40,19 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Chia tiền nhóm & Quyết toán công nợ VietQR (Split Bills) -->
+  <url>
+    <loc>https://trolytaichinh.vn/split-bills</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://trolytaichinh.vn/og-preview.jpg</image:loc>
+      <image:title>Chia Tiền Nhóm &amp; Quyết Toán Công Nợ VietQR - Trợ Lý Tài Chính</image:title>
+      <image:caption>Công cụ chia tiền nhóm, chia hóa đơn du lịch, tối giản công nợ và quét mã VietQR 1 chạm</image:caption>
+    </image:image>
+  </url>
+
   <!-- Cổng đăng nhập Web Portal -->
   <url>
     <loc>https://trolytaichinh.vn/login</loc>

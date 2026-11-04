@@ -18,7 +18,7 @@ const RECENT_ACTIVITIES = [
     id: 1,
     name: "Anh Hoàng Nam",
     location: "Cầu Giấy, Hà Nội",
-    action: "vừa mở tài khoản số đẹp đuôi •8888 (0đ phí)",
+    action: "vừa mở tài khoản số đẹp đuôi •8888 miễn phí",
     icon: Sparkles,
     iconBg: "bg-blue-600 text-white",
     time: "2 phút trước",

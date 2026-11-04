@@ -15,10 +15,8 @@ import {
   Receipt,
   Download,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 export default function WebPortalShowcase() {
-  const navigate = useNavigate();
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white py-24 sm:py-32 border-t border-slate-200/80">
@@ -78,7 +76,7 @@ export default function WebPortalShowcase() {
         </div>
 
         {/* Grand Desktop Portal Mockup Chassis */}
-        <div className="mt-14 overflow-hidden rounded-[2.5rem] border border-slate-200/90 bg-white shadow-2xl shadow-slate-300/60 p-4 sm:p-8">
+        <div data-landing-preview className="mt-14 overflow-hidden rounded-[2.5rem] border border-slate-200/90 bg-white shadow-2xl shadow-slate-300/60 p-4 sm:p-8">
           
           {/* Browser Window Chrome Topbar */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">

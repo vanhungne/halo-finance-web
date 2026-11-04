@@ -11,6 +11,11 @@ import icon from "./icon.png";
 import avatar from "./avatar.png";
 import login_hero from "./login_hero.jpg";
 import mobileDashboard from "./mobile-dashboard.jpg";
+import readyMockup from "./ready-mockup.png";
+import heroMockupDual from "./hero-mockup-dual.png";
+import mockupPersonal from "./mockup-personal.png";
+import mockupGroup from "./mockup-group.png";
+import mockupBusiness from "./mockup-business.png";
 
 const images = {
     icon,
@@ -22,6 +27,11 @@ const images = {
     whychoose,
     logo,
     ready,
+    readyMockup,
+    heroMockupDual,
+    mockupPersonal,
+    mockupGroup,
+    mockupBusiness,
     question,
     avatar,
     login_hero,

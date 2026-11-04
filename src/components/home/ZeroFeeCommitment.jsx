@@ -1,22 +1,17 @@
 import { useState } from "react";
 import {
   Sparkles,
-  ShieldCheck,
-  CheckCircle2,
-  Gift,
-  Lock,
   Zap,
-  ArrowRight,
-  QrCode,
-  DollarSign,
+  Users2,
   Clock,
-  HeartHandshake,
+  QrCode,
 } from "lucide-react";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function ZeroFeeCommitment({ onOpenQr }) {
   const { lang, strings } = useLanguage();
   const isEn = lang === "en";
+  const copy = strings?.commitment || {};
 
   // Calculator State
   const [monthlyTx, setMonthlyTx] = useState(80);
@@ -25,113 +20,107 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
   const annualSavings = Math.round((monthlyTx > 50 ? 89000 : 49000) * 12);
   const hoursSavedAnnual = Math.round((monthlyTx * 2 * 12) / 60);
 
-  const COMMITMENT_POINTS = [
-    {
-      icon: Gift,
-      title: isEn ? "100% Free Lifetime" : "100% Miễn Phí Trọn Đời",
-      desc: isEn
-        ? "All features including AI OCR Receipt Scanning and Group Funds are completely free with zero hidden paywalls."
-        : "Toàn bộ tính năng cao cấp từ Bóc tách hóa đơn AI, Quỹ nhóm VietQR đến Báo cáo tài chính đều mở khóa sẵn 0đ trọn đời.",
-      badge: isEn ? "Zero Cost" : "0đ Bản Quyền",
-      color: "bg-emerald-50 text-emerald-600 border-emerald-200",
-    },
+  const VALUE_PILLARS = [
     {
       icon: Zap,
-      title: isEn ? "Zero Distracting Ads" : "Tuyệt Đối Không Quảng Cáo",
+      iconColor: "text-blue-600",
+      title: isEn ? "Zero Setup Barrier" : "Khởi Đầu Không Rào Cản",
       desc: isEn
-        ? "Clean, elegant and distraction-free user experience. No popups, no banners, and no video interruptions."
-        : "Giao diện sạch sẽ, tinh tế. Nói KHÔNG với banner quảng cáo che khuất màn hình hay video bắt xem phiền phức.",
-      badge: isEn ? "Ad-Free" : "0đ Quảng Cáo",
-      color: "bg-blue-50 text-blue-600 border-blue-200",
+        ? "Install and start tracking instantly. No credit card required or initial deposit needed to start managing your cash flow."
+        : "Cài đặt và bắt đầu quản lý tài chính ngay tức thì. Không cần khai báo thẻ tín dụng hay nạp tiền trước để kích hoạt.",
     },
     {
-      icon: Lock,
-      title: isEn ? "Zero Data Selling" : "Cam Kết Không Bán Dữ Liệu",
+      icon: Sparkles,
+      iconColor: "text-amber-500",
+      title: isEn ? "Smart AI & Receipt Scanner" : "Trợ Lý AI & Quét Hóa Đơn",
       desc: isEn
-        ? "Your financial data is encrypted end-to-end with AES-256. We never sell or share data with insurance or marketing brokers."
-        : "Dữ liệu thu chi được mã hóa đầu cuối với chuẩn AES-256. Cam kết không chia sẻ hay bán thông tin cho đơn vị quảng cáo hay bảo hiểm.",
-      badge: isEn ? "100% Privacy" : "Bảo Mật Tuyệt Đối",
-      color: "bg-purple-50 text-purple-600 border-purple-200",
+        ? "Experience intelligent receipt extraction in under 3 seconds with auto-categorization for dining, shopping and bills."
+        : "Tự do nhận diện, bóc tách hóa đơn ăn uống, mua sắm và tự động phân loại danh mục trong 3 giây với độ chính xác cao.",
+    },
+    {
+      icon: Users2,
+      iconColor: "text-emerald-600",
+      title: isEn ? "Group Funds & VietQR" : "Quỹ Nhóm & VietQR 1 Chạm",
+      desc: isEn
+        ? "Create shared funds for family, trips and events with 1-tap VietQR payment and automated settlement."
+        : "Quản lý quỹ gia đình, hội nhóm minh bạch. Tự động tính toán bù trừ và tạo mã QR thanh toán 1 chạm tiện lợi.",
     },
   ];
 
   return (
-    <section id="free-commitment" className="relative overflow-hidden bg-white py-20 sm:py-28 text-slate-900 border-t border-slate-200/80">
-      {/* Background soft ambient glow */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 right-1/4 h-[400px] w-[600px] rounded-full bg-emerald-100/35 blur-[120px]" />
-      </div>
-
+    <section
+      id="free-commitment"
+      className="relative overflow-hidden bg-white py-16 sm:py-24 text-slate-900 border-t border-slate-200/80"
+      aria-labelledby="free-section-title"
+    >
       <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        
-        {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300 bg-emerald-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 shadow-2xs">
-            <HeartHandshake className="h-4 w-4 text-emerald-600" />
-            <span>{isEn ? "Community Commitment" : "Cam Kết Minh Bạch Vì Cộng Đồng"}</span>
-          </div>
 
-          <h2 className="mt-4 text-2xl font-black tracking-tight sm:text-4xl text-slate-900">
-            {isEn ? "100% Free For Life. " : "100% Miễn Phí Trọn Đời. "}
-            <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 bg-clip-text text-transparent">
-              {isEn ? "No Paywalls, No Hidden Fees." : "Không Bán Gói, Không Phí Ẩn."}
-            </span>
+        {/* Section Header - Clean, No Badge, High Typography */}
+        <div className="mx-auto max-w-3xl text-center">
+          <h2
+            id="free-section-title"
+            className="text-3xl sm:text-4xl lg:text-[2.65rem] font-black tracking-tight text-slate-950 title-3d"
+          >
+            {copy.title || (isEn ? "Experience Full Features, Completely Free" : "Trải Nghiệm Toàn Diện, Hoàn Toàn Miễn Phí")}
           </h2>
 
-          <p className="mt-3 text-sm text-slate-600 sm:text-base leading-relaxed">
-            {isEn
-              ? "Democratizing personal finance for everyone in Vietnam. All power tools unlocked at 0₫."
-              : "Sứ mệnh của Trợ Lý Tài Chính là bình dân hóa công nghệ tài chính, giúp mọi người Việt làm chủ dòng tiền thông minh mà không phải lo trả phí duy trì hàng tháng."}
+          <p className="mt-3.5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            {copy.subtitle ||
+              (isEn
+                ? "Start managing personal and group finances today with zero upfront cost. Everything from expense tracking, AI receipt scanning to VietQR group funds is ready for you."
+                : "Bắt đầu quản lý tài chính cá nhân và nhóm ngay hôm nay mà không có rào cản chi phí ban đầu. Đầy đủ công cụ từ ghi chép, bóc tách hóa đơn AI đến chia tiền VietQR sẵn sàng phục vụ bạn.")}
           </p>
         </div>
 
-        {/* 3 Pillars Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {COMMITMENT_POINTS.map((point) => {
-            const Icon = point.icon;
+        {/* 3 Value Pillars - Sharp Corners (rounded-none), Natural Icons, Lift on Hover */}
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+          {VALUE_PILLARS.map((pillar) => {
+            const Icon = pillar.icon;
             return (
               <div
-                key={point.title}
-                className="relative rounded-3xl border border-slate-200/90 bg-slate-50/60 p-7 hover:bg-white hover:shadow-xl transition-all duration-300 group"
+                key={pillar.title}
+                className="group relative rounded-none border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200"
               >
-                <div className="flex items-center justify-between mb-5">
-                  <div className={`grid h-12 w-12 place-items-center rounded-2xl ${point.color} shadow-2xs transition-transform group-hover:scale-110`}>
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700 border border-slate-200/80 shadow-2xs">
-                    {point.badge}
-                  </span>
+                <div className="flex items-center gap-3 mb-3">
+                  <Icon className={`w-5 h-5 shrink-0 ${pillar.iconColor}`} strokeWidth={2.2} />
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                    {pillar.title}
+                  </h3>
                 </div>
-
-                <h3 className="text-lg font-black text-slate-900 mb-2">
-                  {point.title}
-                </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  {point.desc}
+                  {pillar.desc}
                 </p>
               </div>
             );
           })}
         </div>
 
-        {/* Interactive Annual Savings Calculator */}
-        <div className="mt-12 rounded-[2.5rem] border border-emerald-200 bg-gradient-to-br from-emerald-50/70 via-teal-50/40 to-blue-50/60 p-6 sm:p-10 shadow-lg">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+        {/* Value Estimator Panel - Sharp, Minimalist & Cohesive */}
+        <div className="mt-8 sm:mt-10 rounded-none border border-slate-200/90 bg-slate-50/70 p-6 sm:p-8 shadow-xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+
             {/* Slider Column */}
-            <div className="lg:col-span-7 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 block">
-                {isEn ? "Cost Savings Estimator" : "Ước tính số tiền bạn tiết kiệm được"}
+            <div className="lg:col-span-7 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+                {isEn ? "Value Estimator" : "Ước tính giá trị bạn nhận được"}
               </span>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900">
-                {isEn ? "How many transactions & receipts do you log per month?" : "Bạn có khoảng bao nhiêu khoản chi tiêu & hóa đơn mỗi tháng?"}
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                {copy.calcTitle ||
+                  (isEn
+                    ? "How many transactions & receipts do you log per month?"
+                    : "Bạn có khoảng bao nhiêu khoản chi tiêu & hóa đơn mỗi tháng?")}
               </h3>
 
-              <div className="pt-4 space-y-2">
-                <div className="flex justify-between items-center text-sm font-bold">
-                  <span className="text-slate-600">{isEn ? "Transactions/month:" : "Giao dịch / tháng:"}</span>
-                  <span className="text-xl font-black text-blue-600">{monthlyTx} giao dịch</span>
+              <div className="pt-2 space-y-2">
+                <div className="flex justify-between items-center text-sm font-semibold">
+                  <span className="text-slate-600">
+                    {isEn ? "Transactions / month:" : "Số lượng giao dịch / tháng:"}
+                  </span>
+                  <span className="text-lg font-bold text-blue-600">
+                    {monthlyTx} {isEn ? "items" : "khoản"}
+                  </span>
                 </div>
+
                 <input
                   type="range"
                   min="20"
@@ -139,45 +128,48 @@ export default function ZeroFeeCommitment({ onOpenQr }) {
                   step="10"
                   value={monthlyTx}
                   onChange={(e) => setMonthlyTx(Number(e.target.value))}
-                  className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
+
                 <div className="flex justify-between text-xs text-slate-400 font-medium">
-                  <span>20 giao dịch</span>
-                  <span>150 giao dịch</span>
-                  <span>300+ giao dịch</span>
+                  <span>20 {isEn ? "transactions" : "giao dịch"}</span>
+                  <span>150 {isEn ? "transactions" : "giao dịch"}</span>
+                  <span>300+ {isEn ? "transactions" : "giao dịch"}</span>
                 </div>
               </div>
             </div>
 
-            {/* Savings Result Card */}
-            <div className="lg:col-span-5 rounded-2xl bg-white p-6 shadow-md border border-emerald-200/80 space-y-4 text-center lg:text-left">
+            {/* Result Box */}
+            <div className="lg:col-span-5 rounded-none bg-white p-5 sm:p-6 border border-slate-200/90 shadow-xs space-y-3.5 text-left">
               <div>
                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
-                  {isEn ? "Estimated Annual Savings" : "Tiết kiệm ước tính mỗi năm"}
+                  {copy.savingsTitle || (isEn ? "Estimated Annual Savings" : "Tiết kiệm ước tính mỗi năm")}
                 </span>
-                <p className="text-3xl sm:text-4xl font-black text-emerald-600 mt-1 font-sans">
+                <p className="text-3xl sm:text-4xl lg:text-[2.5rem] font-black tracking-tight text-emerald-600 my-1 font-sans leading-tight">
                   {annualSavings.toLocaleString("vi-VN")} đ
                 </p>
-                <p className="text-xs text-slate-500 mt-1">
-                  {isEn ? `Compared to paid subscriptions (~${annualSavings.toLocaleString()}₫/yr)` : `So với việc phải mua gói VIP ở các app thu phí (~${annualSavings.toLocaleString("vi-VN")} đ/năm)`}
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {isEn
+                    ? `Compared to paid budgeting subscriptions (~${annualSavings.toLocaleString()}₫/yr)`
+                    : `So với chi phí dùng các app thu phí khác trên thị trường (~${annualSavings.toLocaleString("vi-VN")} đ/năm)`}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-600">
+              <div className="pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-medium text-slate-600">
                 <span className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-blue-500" />
-                  <span>Tiết kiệm thời gian ghi chép:</span>
+                  <Clock className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                  <span>{isEn ? "Time saved annually:" : "Tiết kiệm thời gian ghi chép:"}</span>
                 </span>
-                <strong className="text-slate-900">{hoursSavedAnnual} giờ / năm</strong>
+                <strong className="text-slate-900 font-bold">~{hoursSavedAnnual} {isEn ? "hours" : "giờ"} / {isEn ? "yr" : "năm"}</strong>
               </div>
 
               <button
                 type="button"
                 onClick={onOpenQr}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 text-sm shadow-md transition hover:-translate-y-0.5 cursor-pointer"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-none bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
               >
                 <QrCode className="w-4 h-4" />
-                <span>{isEn ? "Get Free App Now" : "Tải Ứng Dụng Miễn Phí (0đ)"}</span>
+                <span>{copy.getAccountBtn || (isEn ? "Get Free App Now" : "Tải Ứng Dụng Miễn Phí")}</span>
               </button>
             </div>
 

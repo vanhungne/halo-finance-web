@@ -1,0 +1,84 @@
+.tool-stat-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; padding: 22px 0; border-top: 1px solid #dfe5ef; border-bottom: 1px solid #dfe5ef; }
+.tool-stat-strip > div { min-width: 0; padding: 0 22px; }
+.tool-stat-strip > div + div { border-left: 1px solid #dfe5ef; }
+.tool-stat-strip dt { color: #536078; font-size: 13px; line-height: 1.6; }
+.tool-stat-strip dd { margin: 6px 0 0; color: #0f172a; font-size: 25px; line-height: 1.4; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.tool-stat-strip small { display: block; margin-top: 5px; color: #536078; font-size: 12px; line-height: 1.6; }
+.tool-sentiment-overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.tool-sentiment-overview > .tool-result-panel { display: flex; flex-direction: column; align-items: center; padding-top: 32px; background: #f7f9fc; }
+.tool-sentiment-context { padding: 32px; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+.tools-surface main.tools-main .tool-sentiment-context > h2, .tools-surface main.tools-main .tool-insight-heading { color: #0f172a; font-size: 20px; font-weight: 600; line-height: 1.5; letter-spacing: normal; margin: 0 0 16px; }
+.tool-sentiment-context .tool-stat-strip { display: block; padding: 0; border-top: 0; border-bottom: 0; }
+.tool-sentiment-context .tool-stat-strip > div { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 5px 16px; padding: 15px 0; border: 0; border-bottom: 1px solid #dfe5ef; }
+.tool-sentiment-context .tool-stat-strip dd { margin: 0; font-size: 23px; }
+.tool-sentiment-context .tool-stat-strip small { grid-column: 1/-1; margin: 0; }
+.tools-surface main.tools-main .tool-sentiment-context > p { margin: 18px 0 0; color: #536078; font-size: 13px; line-height: 1.8; }
+.tool-sentiment-gauge { position: relative; width: min(100%, 360px); margin: 12px auto 0; }
+.tool-sentiment-gauge > svg { display: block; width: 100%; height: auto; }
+.tool-sentiment-gauge__reading { position: absolute; inset: 40% 0 auto; text-align: center; }
+.tool-sentiment-gauge__reading output { display: block; color: #0f172a; font-size: clamp(38px, 5vw, 52px); line-height: 1.15; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tool-sentiment-gauge__reading output > span { color: #536078; font-size: 16px; font-weight: 400; }
+.tool-sentiment-gauge__reading strong { display: block; color: var(--sentiment-tone); font-size: 16px; line-height: 1.6; margin-top: 6px; }
+.tool-sentiment-gauge__scale { display: flex; justify-content: space-between; padding-inline: 10%; color: #536078; font-size: 12px; }
+.tools-surface main.tools-main .tool-sentiment-credit { font-size: 12px; line-height: 1.8; color: #536078; text-align: center; margin: 22px 0 0; }
+.tool-sentiment-history { padding: 28px; border-top: 1px solid #dfe5ef; }
+.tool-sentiment-history .tool-chart { padding: 12px 0; background: #f7f9fc; border-radius: 10px; }
+.tool-sentiment-history .tool-table-scroll { margin-bottom: 0; }
+.tool-metal-units { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0 28px; }
+.tool-metal-units button { min-height: 46px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #334155; font: inherit; font-size: 14px; cursor: pointer; }
+.tool-metal-units button[aria-pressed=true] { background: #eef2ff; border-color: #2845ed; color: #2037c3; font-weight: 500; }
+.tool-asset-identity { display: flex; align-items: center; gap: 12px; margin: 0 0 22px; }
+.tool-asset-identity > span { display: flex; flex-direction: column; gap: 4px; }
+.tool-asset-identity strong { color: #0f172a; font-size: 18px; line-height: 1.5; font-weight: 600; }
+.tool-asset-identity small { font-size: 12px; color: #536078; }
+.tool-asset-symbol { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #fff0d7; color: #a75e00; flex: 0 0 auto; }
+.tool-asset-symbol--eth { background: #eef0ff; color: #5562c0; }
+.tool-metal-summary { padding: 22px 28px; background: #fff; }
+.tool-metal-summary .tool-stat-strip { border-bottom: 0; }
+.tool-metal-summary .tool-stat-strip dd { font-size: 20px; }
+.tool-crypto-tabs { display: flex; gap: 8px; padding: 20px 28px; border-bottom: 1px solid #dfe5ef; }
+.tool-crypto-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 8px 18px; background: #fff; border: 1px solid #cbd5e1; border-radius: 9px; color: #334155; font: inherit; font-size: 15px; cursor: pointer; }
+.tool-crypto-tabs button[aria-pressed=true] { background: #eef2ff; color: #2037c3; border-color: #2845ed; }
+.tool-crypto-tabs .tool-asset-symbol { width: 28px; height: 28px; }
+.tool-bank-list article > div { width: 100%; }
+.tool-bank-identity { display: flex; align-items: flex-start; gap: 14px; }
+.tool-bank-mark { display: grid !important; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; border-radius: 10px; background: #eef3fb; color: #2845ed !important; }
+.tool-bank-transfer { display: inline-flex !important; align-items: center; gap: 6px; color: #187348 !important; font-size: 12px !important; margin-top: 6px; }
+.tool-purchasing-workbench { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 22px; }
+.tool-purchasing-result { padding: 24px; min-width: 0; background: #f5f7fc; border-radius: 10px; }
+.tool-purchasing-result .tool-label { margin-top: 0; }
+.tool-money-comparison { margin: 24px 0 0; }
+.tool-money-comparison > div { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin-top: 18px; }
+.tool-money-comparison dt { color: #536078; font-size: 12px; line-height: 1.7; }
+.tool-money-comparison dd { margin: 0; color: #0f172a; font-size: 13px; font-weight: 500; line-height: 1.7; overflow-wrap: anywhere; }
+.tool-money-comparison__track { grid-column: 1 / -1; height: 10px; border-radius: 5px; background: #e2e8f0; overflow: hidden; }
+.tool-money-comparison__track > span { display: block; height: 100%; border-radius: inherit; background: #9caecb; }
+.tool-money-comparison > div + div .tool-money-comparison__track > span { background: #2845ed; }
+.tool-inflation-summary { padding-inline: 28px; }
+.tool-table-scroll th:last-child { text-align: right; }
+@media (max-width: 760px) {
+  .tool-sentiment-overview, .tool-purchasing-workbench { grid-template-columns: 1fr; }
+  .tool-sentiment-context { padding: 24px; }
+  .tool-purchasing-workbench { gap: 12px; }
+}
+@media (max-width: 560px) {
+  .tool-stat-strip > div { padding-inline: 12px; }
+  .tool-stat-strip dd { font-size: 20px; }
+  .tool-stat-strip dt { font-size: 12px; }
+  .tool-sentiment-gauge__reading strong { font-size: 14px; }
+  .tool-sentiment-history, .tool-metal-summary { padding: 24px 18px; }
+  .tool-metal-summary .tool-stat-strip { grid-template-columns: 1fr; gap: 0; padding-bottom: 0; }
+  .tool-metal-summary .tool-stat-strip > div { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; padding: 14px 0; border: 0; }
+  .tool-metal-summary .tool-stat-strip > div + div { border-top: 1px solid #dfe5ef; }
+  .tool-metal-summary .tool-stat-strip dd { text-align: right; margin: 0; font-size: 18px; }
+  .tool-metal-summary .tool-stat-strip small { grid-column: 1 / -1; margin: 0; }
+  .tool-crypto-tabs { padding: 18px; }
+  .tool-crypto-tabs button { flex: 1; padding-inline: 10px; }
+  .tool-purchasing-result { padding: 20px 16px; }
+  .tool-money-comparison > div { grid-template-columns: 1fr; gap: 3px; }
+  .tool-inflation-summary { padding-inline: 6px; }
+  .tool-inflation-summary .tool-stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: 12px; }
+  .tool-inflation-summary .tool-stat-strip > div:last-child { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 4px 12px; border-left: 0; border-top: 1px solid #dfe5ef; margin-top: 18px; padding-top: 14px; }
+  .tool-inflation-summary .tool-stat-strip > div:last-child dd { margin-top: 0; font-size: 18px; }
+  .tool-inflation-summary .tool-stat-strip > div:last-child small { grid-column: 1 / -1; margin-top: 0; }
+}

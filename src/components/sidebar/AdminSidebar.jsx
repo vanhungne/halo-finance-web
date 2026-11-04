@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
   Sidebar,
   SidebarHeader,
@@ -23,10 +23,11 @@ import {
   Megaphone,
   Settings2,
   LogOut,
+  PanelTop,
   Bot,
   ShieldCheck,
 } from "lucide-react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthSessionContext.js";
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "../modal/ConfirmModal";
 
@@ -68,6 +69,7 @@ export default function AdminSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarItem icon={<ChartPie size={18} />} label="Tổng quan" path="/admin" />
+              <SidebarItem icon={<PanelTop size={18} />} label="Admin V2 console" path="/admin-v2" />
               <SidebarItem
                 icon={<Bot size={18} />}
                 label="Quản trị & Train AI"

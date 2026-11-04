@@ -17,6 +17,8 @@ const ROUTES = {
     PRIVACY_PAGE: "/privacy",
     TERMS_PAGE: "/terms",
     DELETE_ACCOUNT_PAGE: "/delete-account",
+    GROUP_SPLIT_PAGE: "/split-bills",
+    GROUP_SPLIT_DETAIL_PAGE: "/split-bills/:groupId",
 }
 
 export default ROUTES

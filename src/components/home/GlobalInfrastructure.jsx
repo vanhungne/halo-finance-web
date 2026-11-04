@@ -56,7 +56,6 @@ const ARCH_PILLARS = [
 ];
 
 export default function GlobalInfrastructure() {
-  const [activeTab, setActiveTab] = useState("nodes");
   const [livePings, setLivePings] = useState(GLOBAL_NODES);
 
   useEffect(() => {

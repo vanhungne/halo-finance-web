@@ -18,7 +18,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useSidebar } from "../ui/sidebar";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthSessionContext.js";
 import { aiManagementService } from "../../services/aiManagementService";
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "../modal/ConfirmModal";

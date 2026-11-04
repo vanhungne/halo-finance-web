@@ -1,0 +1,9 @@
+Flags: lipis/flag-icons, MIT. Copyright (c) 2013 Panayiotis Lipiridis.
+https://github.com/lipis/flag-icons/tree/ac7e0eb3259eb62aa6100c435607e2fe03896a97
+See flag-icons-LICENSE.txt. Original SVGs, unchanged.
+
+Gold and silver bar icons: Gold bar by Willdabeast, available on https://game-icons.net/1x1/willdabeast/gold-bar.html
+https://github.com/game-icons/icons/blob/master/willdabeast/gold-bar.svg
+Creative Commons Attribution 3.0 Unported: https://creativecommons.org/licenses/by/3.0/
+Modified: background removed; foreground recolored for gold and silver.
+See game-icons-license.txt.

@@ -40,7 +40,7 @@ export const DEFAULT_AI_CONFIG = {
   gatewayUrl: "https://gemini.amzpro.space",
   model: "gemini-3.5-flash-lite",
   reasoningLevel: "low",
-  apiKey: "gemi-FZO6Ty4KjEJAL0N2vHJmHnJtZLvohkMo-SX28snwc5U",
+  apiKey: import.meta.env.VITE_AI_GATEWAY_API_KEY || "",
   temperature: 0.1,
   systemPrompt: buildReceiptSystemPrompt(),
 };
@@ -145,7 +145,7 @@ export const aiManagementService = {
       const stored = JSON.parse(raw);
       const isDeprecatedUrl = !stored.gatewayUrl || stored.gatewayUrl.includes("gemini.amz.io.vn");
       const gatewayUrl = isDeprecatedUrl ? DEFAULT_AI_CONFIG.gatewayUrl : stored.gatewayUrl;
-      const apiKey = (!stored.apiKey || stored.apiKey === "gemi-z4YSxyrXsPZGA7FAwVkjohuRgetLjG73-cFYsGvL5o0")
+      const apiKey = (!stored.apiKey || stored.apiKey.startsWith("gemi-z4YS"))
         ? DEFAULT_AI_CONFIG.apiKey
         : stored.apiKey;
       return {

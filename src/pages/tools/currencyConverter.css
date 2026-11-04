@@ -1,0 +1,41 @@
+.tool-converter { max-width: 760px; margin-inline: auto; padding: 32px; }
+.tool-converter-rate { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 0 0 30px; color: #334155; text-align: center; }
+.tool-converter-rate > span { font-size: 14px; font-weight: 500; }
+.tool-converter-rate strong { color: #0f172a; font-size: 19px; font-weight: 600; overflow-wrap: anywhere; }
+.tool-converter-rate small { color: #536078; font-size: 12px; }
+.tool-converter-field { margin-bottom: 0; }
+.tool-converter-row { display: flex; gap: 12px; align-items: center; min-width: 0; padding: 12px 16px; border: 1px solid #aab7ca; border-radius: 10px; background: #fff; }
+.tool-converter-row:focus-within { border-color: #2845ed; box-shadow: 0 0 0 2px #e1e7ff; }
+.tool-converter .tool-converter-row > input { flex: 1; width: 0; min-width: 0; min-height: 48px; padding: 0; border: 0; border-radius: 0; background: transparent; font-size: clamp(23px, 3vw, 30px); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.tool-converter .tool-converter-row > input:focus-visible { outline: none; }
+.tool-converter-row:has(input[aria-invalid=true]) { border-color: #b42318; }
+.tool-converter .tool-currency-field--compact { flex: 0 0 auto; margin: 0; gap: 0; }
+.tool-currency-field--compact > label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.tool-converter .tool-currency-field--compact .tool-currency-trigger { width: auto; min-height: 48px; gap: 10px; padding: 6px 0 6px 8px; border: 0; border-radius: 6px; background: transparent; color: #0f172a; font-size: 19px; font-weight: 600; }
+.tool-currency-trigger .tool-currency-flag, .tool-currency-dialog .tool-currency-flag { width: 28px; height: 28px; border-radius: 50%; }
+.tool-converter-output { display: block; flex: 1; min-width: 0; color: #0f172a; font-size: clamp(23px, 3vw, 30px); line-height: 1.4; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.tool-converter-swap { display: grid; place-items: center; width: 48px; height: 48px; margin: 24px auto; border: 0; border-radius: 50%; background: #e5eaff; color: #2845ed; cursor: pointer; transition: background-color 150ms ease-out; }
+.tool-converter-swap:hover { background: #d7dfff; }
+.tool-converter-swap svg { transform: rotate(90deg); }
+.tool-converter .tool-presets { justify-content: center; margin-top: 8px; }
+.tool-converter > .tool-note { text-align: center; }
+.tool-converter-trend { padding: 28px; border-top: 1px solid #dfe5ef; }
+.tools-surface main.tools-main .tool-converter-trend > h2 { font-size: 21px; line-height: 1.5; font-weight: 600; letter-spacing: normal; color: #0f172a; margin: 0; }
+.tool-converter-trend-controls .tool-presets { margin: 18px 0; }
+.tool-converter-trend .tool-chart { padding: 10px 0; border-radius: 10px; background: #f4f6fc; }
+.tool-converter-trend-rate { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; margin: 18px 0 12px; font-size: 16px; color: #334155; }
+.tool-converter-trend-rate small { font-size: 12px; color: #536078; margin-left: auto; }
+.tool-history-table { margin-top: 18px; }
+.tool-history-table > summary { padding: 10px 0; color: #2845ed; font-size: 14px; font-weight: 500; cursor: pointer; }
+@media (max-width: 560px) {
+  .tool-converter { padding: 24px 16px; }
+  .tool-converter-row { padding: 10px 12px; gap: 8px; }
+  .tool-converter .tool-converter-row > input, .tool-converter-output { font-size: 23px; }
+  .tool-converter .tool-currency-field--compact .tool-currency-trigger { font-size: 17px; gap: 8px; padding-left: 2px; }
+  .tool-converter .tool-currency-trigger .tool-currency-flag { width: 26px; height: 26px; }
+  .tool-converter-trend { padding: 24px 16px; }
+  .tools-surface main.tools-main .tool-converter-trend > h2 { font-size: 19px; }
+  .tool-converter-trend .tool-presets { gap: 6px; }
+  .tool-converter-trend .tool-presets button { padding-inline: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .tool-converter-swap { transition: none; } }

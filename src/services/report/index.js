@@ -5,12 +5,12 @@ export const relyReportApi = async (data) => {
   return response.data;
 };
 
-export const getReportTypeApi = async (id) => {
+export const getReportTypeApi = async () => {
   const response = await instance.get(`/report/type`);
   return response.data;
 };
 
-export const getListReportApi = async (query) => {
-  const response = await instance.get("/report", { params: query });
+export const getListReportApi = async (query, { signal } = {}) => {
+  const response = await instance.get("/report", { signal, timeout: 20_000, params: query });
   return response.data;
 };

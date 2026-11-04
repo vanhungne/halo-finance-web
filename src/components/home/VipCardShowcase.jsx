@@ -18,12 +18,12 @@ const CARDS_DATA = [
     id: "virtual",
     name: "Thẻ Smart Virtual",
     category: "Thẻ Phi Vật Lý Số",
-    tier: "Miễn Phí Trọn Đời",
+    tier: "Miễn Phí",
     color: "from-blue-600 via-sky-600 to-indigo-700",
     border: "border-blue-400/30",
     chipColor: "from-blue-200 via-sky-300 to-blue-400",
     cashback: "Hoàn 0.5% không giới hạn",
-    annualFee: "0đ Phí thường niên",
+    annualFee: "Miễn phí thường niên",
     delivery: "Phát hành tức thì 60 giây",
     features: [
       "Kích hoạt & dùng ngay sau khi eKYC",
@@ -83,7 +83,7 @@ export default function VipCardShowcase({ onOpenQr }) {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[950px] bg-gradient-to-tr from-blue-500/5 via-amber-500/5 to-transparent blur-[140px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-amber-800 mb-4 shadow-2xs">
@@ -109,13 +109,12 @@ export default function VipCardShowcase({ onOpenQr }) {
               <div
                 key={card.id}
                 onClick={() => setActiveCardId(card.id)}
-                className={`group relative rounded-[2.25rem] border p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 cursor-pointer ${
-                  card.isLuxury
+                className={`group relative rounded-[2.25rem] border p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 cursor-pointer ${card.isLuxury
                     ? "bg-gradient-to-b from-slate-950 to-neutral-900 border-amber-400/40 text-white shadow-2xl shadow-amber-950/20"
                     : card.recommended
-                    ? "bg-slate-900 border-sky-400/40 text-white shadow-2xl shadow-blue-950/20"
-                    : "bg-white border-slate-200/90 text-slate-900 shadow-md hover:shadow-xl"
-                } ${isSelected ? "ring-2 ring-blue-500 scale-[1.01]" : ""}`}
+                      ? "bg-slate-900 border-sky-400/40 text-white shadow-2xl shadow-blue-950/20"
+                      : "bg-white border-slate-200/90 text-slate-900 shadow-md hover:shadow-xl"
+                  } ${isSelected ? "ring-2 ring-blue-500 scale-[1.01]" : ""}`}
               >
                 {/* Recommended / VIP Badge */}
                 {card.recommended && (
@@ -171,9 +170,8 @@ export default function VipCardShowcase({ onOpenQr }) {
                   </div>
 
                   {/* Highlights Grid */}
-                  <div className={`mt-5 p-3 rounded-2xl grid grid-cols-2 gap-2 text-xs font-bold ${
-                    card.isLuxury || card.recommended ? "bg-white/5 border border-white/10" : "bg-slate-50 border border-slate-200"
-                  }`}>
+                  <div className={`mt-5 p-3 rounded-2xl grid grid-cols-2 gap-2 text-xs font-bold ${card.isLuxury || card.recommended ? "bg-white/5 border border-white/10" : "bg-slate-50 border border-slate-200"
+                    }`}>
                     <div>
                       <span className="text-[10px] text-slate-400 block font-normal">Ưu đãi hoàn tiền:</span>
                       <span className={card.isLuxury ? "text-amber-400 font-black" : "text-emerald-500 font-black"}>
@@ -190,9 +188,8 @@ export default function VipCardShowcase({ onOpenQr }) {
                   <div className="mt-6 space-y-2.5 text-xs">
                     {card.features.map((feat, idx) => (
                       <div key={idx} className="flex items-start gap-2">
-                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${
-                          card.isLuxury ? "text-amber-400" : card.recommended ? "text-sky-400" : "text-blue-600"
-                        }`} />
+                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${card.isLuxury ? "text-amber-400" : card.recommended ? "text-sky-400" : "text-blue-600"
+                          }`} />
                         <span className={card.isLuxury || card.recommended ? "text-slate-300" : "text-slate-700"}>
                           {feat}
                         </span>
@@ -206,13 +203,12 @@ export default function VipCardShowcase({ onOpenQr }) {
                   <button
                     type="button"
                     onClick={onOpenQr}
-                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl font-black text-xs transition shadow-md ${
-                      card.isLuxury
+                    className={`w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl font-black text-xs transition shadow-md ${card.isLuxury
                         ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 hover:opacity-95"
                         : card.recommended
-                        ? "bg-blue-600 text-white hover:bg-blue-500 shadow-blue-500/25"
-                        : "bg-slate-900 text-white hover:bg-slate-800"
-                    }`}
+                          ? "bg-blue-600 text-white hover:bg-blue-500 shadow-blue-500/25"
+                          : "bg-slate-900 text-white hover:bg-slate-800"
+                      }`}
                   >
                     <span>Mở {card.name} Ngay</span>
                     <ArrowRight className="w-3.5 h-3.5" />

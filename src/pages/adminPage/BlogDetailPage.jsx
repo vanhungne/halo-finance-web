@@ -158,7 +158,7 @@ const BlogDetailPage = () => {
     const handleConfirm = async () => {
         setLoading(true);
         setAwaitResponse(true);
-        return new Promise(async (resolve) => {
+        
             try {
                 if (modalType === "EDIT") {
                     const formData = new FormData();
@@ -223,9 +223,7 @@ const BlogDetailPage = () => {
                 console.log(error);
             } finally {
                 setLoading(false);
-                resolve();
             }
-        });
     };
 
     const content = MODAL_CONTENT[modalType] || {};

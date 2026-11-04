@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import {
@@ -21,7 +21,6 @@ import {
   Receipt,
   Users2,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 const CURRENCY_RATES = {
   USD: { name: "Đô la Mỹ", buy: 25150, sell: 25480, symbol: "$" },
@@ -90,11 +89,9 @@ const SAMPLE_BILLS = {
 
 export default function BankingQuickActionBar({ onOpenQr }) {
   const [activeTab, setActiveTab] = useState("ekyc"); // "ekyc" | "rates" | "savings" | "loan" | "scanner"
-  const navigate = useNavigate();
-
+  
   // 1. Tab eKYC state
   const [luckyNumber, setLuckyNumber] = useState("8888");
-  const [searchSuccess, setSearchSuccess] = useState(true);
 
   // 2. Tab Rates state
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
@@ -153,7 +150,7 @@ export default function BankingQuickActionBar({ onOpenQr }) {
         {/* Navigation Tabs Bar */}
         <div className="flex items-center gap-2 overflow-x-auto pb-3 sm:pb-4 border-b border-slate-100 no-scrollbar snap-x">
           {[
-            { id: "ekyc", label: "Mở Tài Khoản eKYC", icon: CreditCard, badge: "0đ Phí" },
+            { id: "ekyc", label: "Mở Tài Khoản eKYC", icon: CreditCard, badge: "Miễn Phí" },
             { id: "rates", label: "Tỷ Giá & Vàng SJC", icon: Coins, badge: "Quy đổi trực tiếp" },
             { id: "savings", label: "Tính Lãi Tiền Gửi", icon: PiggyBank, badge: "đến 6.2%/năm" },
             { id: "loan", label: "Ước Tính Vay Vốn", icon: Landmark, badge: "Dư nợ giảm dần" },
@@ -217,7 +214,7 @@ export default function BankingQuickActionBar({ onOpenQr }) {
                   {/* Interactive Lucky Number Picker */}
                   <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-2.5">
                     <span className="text-[11px] font-extrabold text-slate-600 uppercase tracking-wider block">
-                      Tra cứu kho số tài khoản đẹp phong thủy (0đ Phí)
+                      Tra cứu kho số tài khoản đẹp phong thủy Miễn Phí
                     </span>
                     <div className="flex flex-wrap items-center gap-2">
                       <div className="relative flex-1 min-w-[180px]">
@@ -266,7 +263,7 @@ export default function BankingQuickActionBar({ onOpenQr }) {
                           origin: { y: 0.65 },
                           colors: ["#2563eb", "#38bdf8", "#fbbf24", "#10b981"],
                         });
-                      } catch (err) {}
+                      } catch { /* ignore */ }
                       onOpenQr();
                     }}
                     className="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white font-black text-sm shadow-xl shadow-blue-500/25 hover:opacity-95 transition"
@@ -279,7 +276,7 @@ export default function BankingQuickActionBar({ onOpenQr }) {
                     onClick={onOpenQr}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 font-bold text-sm hover:bg-slate-100 transition cursor-pointer"
                   >
-                    <span>Tải App Trải Nghiệm 0đ (iOS & Android)</span>
+                    <span>Tải App Trải Nghiệm Miễn Phí (iOS & Android)</span>
                     <ArrowRight className="w-4 h-4 text-slate-500" />
                   </button>
                 </div>
@@ -539,7 +536,7 @@ export default function BankingQuickActionBar({ onOpenQr }) {
                     onClick={onOpenQr}
                     className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-rose-600 text-white font-black text-xs shadow-md shadow-rose-500/25 hover:bg-rose-700 transition"
                   >
-                    <span>Đăng Ký Tư Vấn Hồ Sơ Vay 0đ</span>
+                    <span>Đăng Ký Tư Vấn Hồ Sơ Vay Miễn Phí</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>

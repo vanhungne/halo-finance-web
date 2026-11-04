@@ -1,6 +1,5 @@
-import { lazy, Suspense, useCallback, useContext, useEffect, useState } from "react";
+import { lazy, Suspense, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   AlertCircle,
@@ -15,32 +14,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import images from "../../assets/image";
-import { loginApi } from "../../services/auth";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthSessionContext.js";
+import { authSessionMessage } from "../../services/auth/sessionMessages";
+import { readAdminLocale } from "../../adminV2/adminMessages";
 
 const AdminLoginScene = lazy(() => import("../../components/auth/AdminLoginScene.jsx"));
 const Motion = motion;
-
-const roleClaimKey = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
-const idClaimKey = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
-const emailClaimKey = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress";
-const nameClaimKey = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
-
-function isAdminToken(decoded) {
-  const roleClaim = decoded[roleClaimKey];
-  return Array.isArray(roleClaim) ? roleClaim.includes("Admin") : roleClaim === "Admin";
-}
-
-function authFromToken(decoded) {
-  return {
-    isLoggedIn: true,
-    userId: decoded[idClaimKey],
-    roleName: "Admin",
-    email: decoded[emailClaimKey],
-    avatar: decoded.avatar,
-    fullName: decoded[nameClaimKey],
-  };
-}
 
 function GoogleIcon() {
   return (
@@ -57,8 +36,11 @@ function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "", rememberMe: true });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [twoFactor, setTwoFactor] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth, login, verifyTwoFactor, sessionError } = useContext(AuthContext);
+  const locale = readAdminLocale(() => window.localStorage);
+  const visibleError = error || (sessionError ? authSessionMessage(sessionError, locale) : "");
   const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
 
@@ -67,97 +49,34 @@ function LoginPage() {
     setForm((current) => ({ ...current, [name]: type === "checkbox" ? checked : value }));
   };
 
-  const saveAdminSession = useCallback((accessToken, refreshToken, decoded) => {
-    localStorage.setItem("access_token", accessToken);
-    if (refreshToken) localStorage.setItem("refresh_token", refreshToken);
-    setAuth(authFromToken(decoded));
-  }, [setAuth]);
-
-  const clearSession = useCallback(() => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-  }, []);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      const data = await loginApi(form);
-      const decoded = jwtDecode(data.accessToken);
-
-      if (!isAdminToken(decoded)) {
-        localStorage.setItem("access_token", data.accessToken);
-        if (data.refreshToken) localStorage.setItem("refresh_token", data.refreshToken);
-        setAuth({
-          isLoggedIn: true,
-          userId: decoded[idClaimKey],
-          roleName: "User",
-          email: decoded[emailClaimKey],
-          avatar: decoded.avatar,
-          fullName: decoded[nameClaimKey],
-        });
-        navigate("/app", { replace: true });
-        return;
-      }
-
-      saveAdminSession(data.accessToken, data.refreshToken, decoded);
-      navigate("/admin", { replace: true });
+      if (twoFactor) await verifyTwoFactor({ challenge: twoFactor.challenge, otpCode: form.otpCode });
+      else await login(form);
     } catch (err) {
-      clearSession();
-      setError(err.response?.data?.message || "Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
+      if (err.code === "AUTH_TWO_FACTOR_REQUIRED" && err.details?.challenge) {
+        setTwoFactor(err.details);
+        setForm((current) => ({ ...current, otpCode: "" }));
+      }
+      setError(authSessionMessage(err.code, locale));
     } finally {
+      setForm((current) => ({ ...current, password: "" }));
       setLoading(false);
     }
   };
 
-  const handleGoogleLogin = () => {
-    setError("");
-    const apiUrl = (import.meta.env.VITE_APP_URL_API || "https://trolytaichinh.vn/api/").replace(/\/+$/, "");
-    const returnUrl = encodeURIComponent(`${window.location.origin}/login`);
-    window.location.href = `${apiUrl}/auth/oauth-login?provider=Google&returnUrl=${returnUrl}`;
-  };
-
   useEffect(() => {
+    // The legacy OAuth redirect carries bearer credentials in the URL. Do not
+    // import that second token store into the coordinated Admin session.
     const params = new URLSearchParams(window.location.search);
-    const accessToken = params.get("accessToken");
-    const refreshToken = params.get("refreshToken");
-    const errorParam = params.get("error");
-
-    if (errorParam) {
-      setError(decodeURIComponent(errorParam));
-      window.history.replaceState({}, document.title, window.location.pathname);
-      return;
-    }
-
-    if (accessToken) {
-      try {
-        const decoded = jwtDecode(accessToken);
-
-        if (!isAdminToken(decoded)) {
-          localStorage.setItem("access_token", accessToken);
-          if (refreshToken) localStorage.setItem("refresh_token", refreshToken);
-          setAuth({
-            isLoggedIn: true,
-            userId: decoded[idClaimKey],
-            roleName: "User",
-            email: decoded[emailClaimKey],
-            avatar: decoded.avatar,
-            fullName: decoded[nameClaimKey],
-          });
-          navigate("/app", { replace: true });
-        } else {
-          saveAdminSession(accessToken, refreshToken, decoded);
-          navigate("/admin", { replace: true });
-        }
-      } catch {
-        clearSession();
-        setError("Đăng nhập Google thất bại. Token không hợp lệ.");
-      }
+    if (["accessToken", "refreshToken", "error"].some((key) => params.has(key))) {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, [clearSession, navigate, saveAdminSession]);
+  }, []);
 
   useEffect(() => {
     if (auth?.roleName === "Admin") navigate("/admin", { replace: true });
@@ -242,7 +161,18 @@ function LoginPage() {
               </p>
             </div>
 
-            <form className="relative space-y-4" onSubmit={handleSubmit} noValidate>
+            <form className="relative space-y-4" onSubmit={handleSubmit}>
+              {twoFactor ? <label className="block">
+                <span className="mb-2 block text-sm font-bold text-slate-300">
+                  Mã xác thực {twoFactor.method === "authenticator" ? "trong ứng dụng" : "qua SMS"}
+                </span>
+                <input
+                  name="otpCode" type="text" inputMode="numeric" pattern="[0-9]{6}" maxLength={6}
+                  placeholder="Nhập mã xác thực 6 số" autoComplete="one-time-code"
+                  value={form.otpCode ?? ""} onChange={handleChange} required autoFocus
+                  className="h-14 w-full rounded-2xl border border-white/10 bg-white/[0.065] px-4 text-white outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-400/10"
+                />
+              </label> : <>
               <label className="block">
                 <span className="mb-2 block text-sm font-bold text-slate-300">Email quản trị</span>
                 <span className="group flex items-center rounded-2xl border border-white/10 bg-white/[0.065] px-4 transition focus-within:border-sky-400/80 focus-within:bg-white/[0.1] focus-within:ring-4 focus-within:ring-sky-400/10">
@@ -300,9 +230,10 @@ function LoginPage() {
                   <ShieldCheck className="h-4 w-4" /> Bảo mật
                 </span>
               </div>
+              </>}
 
               <AnimatePresence initial={false}>
-                {error && (
+                {visibleError && (
                   <Motion.div
                     initial={{ opacity: 0, height: 0, y: -6 }}
                     animate={{ opacity: 1, height: "auto", y: 0 }}
@@ -312,7 +243,7 @@ function LoginPage() {
                   >
                     <div className="flex items-start gap-3 rounded-2xl border border-rose-400/20 bg-rose-500/10 p-3.5 text-sm leading-6 text-rose-300">
                       <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
-                      <span>{error}</span>
+                      <span>{visibleError}</span>
                     </div>
                   </Motion.div>
                 )}
@@ -328,11 +259,16 @@ function LoginPage() {
                   {loading ? (
                     <><LoaderCircle className="h-5 w-5 animate-spin" /> Đang xác thực...</>
                   ) : (
-                    <>Đăng nhập hệ thống <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" /></>
+                    <>{twoFactor ? "Xác nhận mã" : "Đăng nhập hệ thống"} <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" /></>
                   )}
                 </span>
               </button>
             </form>
+            {twoFactor && <button type="button" disabled={loading}
+              onClick={() => { setTwoFactor(null); setError(""); setForm((current) => ({ ...current, otpCode: "" })); }}
+              className="mt-4 text-sm font-bold text-sky-300 disabled:opacity-60">
+              Dùng tài khoản khác
+            </button>}
 
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/10" /></div>
@@ -341,23 +277,13 @@ function LoginPage() {
 
             <button
               type="button"
-              onClick={handleGoogleLogin}
-              className="flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.065] font-bold text-white transition hover:-translate-y-0.5 hover:border-sky-400/35 hover:bg-white/[0.1]"
+              disabled
+              aria-describedby="google-login-status"
+              className="flex h-14 w-full cursor-not-allowed items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.065] font-bold text-white opacity-50"
             >
               <GoogleIcon /> Đăng nhập bằng Google
             </button>
-
-            {/* Quick Demo Access */}
-            <div className="mt-4 pt-4 border-t border-white/10 text-center">
-              <button
-                type="button"
-                onClick={() => navigate("/app")}
-                className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 text-emerald-300 font-extrabold text-xs transition hover:bg-emerald-500/30 flex items-center justify-center gap-2 shadow-inner"
-              >
-                <span>🚀 Trải Nghiệm Bản Demo Internet Banking (Khách Hàng)</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <p id="google-login-status" className="mt-2 text-center text-xs text-slate-400">Đăng nhập Google chưa khả dụng trên cổng quản trị.</p>
 
             <button
               type="button"

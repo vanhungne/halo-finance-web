@@ -1,16 +1,5 @@
-import { instance } from "../instance";
+import { authSession } from "./session.js";
 
-export const loginApi = async (data) => {
-  const response = await instance.post("/auth/login", data);
-  return response.data;
-};
-
-export const refreshTokenApi = async (data) => {
-  const response = await instance.post("/auth/refresh-token", data);
-  return response.data;
-};
-
-export const logoutApi = async () => {
-  const response = await instance.post("/auth/logout");
-  return response.data;
-};
+export const loginApi = (credentials) => authSession.login(credentials);
+export const refreshTokenApi = () => authSession.refresh();
+export const logoutApi = () => authSession.logout();

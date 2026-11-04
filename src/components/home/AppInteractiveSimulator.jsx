@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import {
   ScanLine,
   Users2,
@@ -55,6 +55,14 @@ const SIMULATOR_SCREENS = [
       "Quản lý quỹ nhóm và quỹ gia đình minh bạch",
     ],
     screenType: "group",
+  },
+  {
+    id: "business-project", tabTitle: "Kinh doanh", tabSubtitle: "Công ty và dự án",
+    icon: Building2, badge: "Thu chi dự án",
+    tagline: "Từ công ty đến dự án, rõ khoản ghi nhận và tiền thực thu chi",
+    description: "Theo dõi nhiều dự án trong từng công ty. Mỗi khoản có lịch sử thu chi riêng để biết đã thanh toán bao nhiêu, còn lại bao nhiêu và xem báo cáo tổng hợp.",
+    highlights: ["Công ty → dự án → khoản thu chi → từng lần thanh toán", "Theo dõi đã thu, đã chi, còn lại hoặc vượt", "Ba bảng báo cáo ở cấp dự án và công ty"],
+    screenType: "business",
   },
   {
     id: "debt-interest",
@@ -140,6 +148,7 @@ const SIMULATOR_SCREENS = [
 
 export default function AppInteractiveSimulator({ onOpenQr }) {
   const [activeTab, setActiveTab] = useState(0);
+  const [businessStep, setBusinessStep] = useState("overview");
   const activeFeature = SIMULATOR_SCREENS[activeTab];
 
   return (
@@ -158,10 +167,10 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-bold text-blue-700">
             <Smartphone className="h-4 w-4 text-blue-600" />
-            <span>Trải nghiệm tính năng thực tế</span>
+            <span>Mô phỏng cách sử dụng</span>
           </div>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[2.75rem]">
-            Trực quan. Thông minh. <span className="text-blue-600">Được đo ni đóng giày</span> cho người Việt.
+          <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-[2.75rem] title-3d">
+            Trực quan. Thông minh. Được đo ni đóng giày cho người Việt.
           </h2>
           <p className="mt-4 text-base text-slate-600 sm:text-lg">
             Nhấp chuột vào từng tính năng bên dưới để xem trực tiếp cách Trợ Lý Tài Chính xử lý bài toán dòng tiền của bạn:
@@ -178,6 +187,7 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                 key={screen.id}
                 type="button"
                 onClick={() => setActiveTab(idx)}
+                aria-pressed={isActive}
                 className={`relative flex flex-1 min-w-[125px] sm:min-w-[140px] max-w-[190px] shrink-0 sm:shrink snap-center flex-col items-center justify-center rounded-2xl p-3 sm:p-4 text-center transition-all duration-200 border cursor-pointer ${
                   isActive
                     ? "border-blue-600 bg-white text-blue-700 shadow-lg shadow-blue-500/15 -translate-y-0.5 sm:-translate-y-1 ring-2 ring-blue-600/10"
@@ -198,7 +208,7 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                 </span>
 
                 {isActive && (
-                  <motion.div
+                  <Motion.div
                     layoutId="activeTabIndicator"
                     className="absolute -bottom-1 h-1 w-8 rounded-full bg-blue-600"
                   />
@@ -261,7 +271,7 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
           {/* ================================================================= */}
           {/* RIGHT COLUMN: Realistic iPhone 16 Pro Device Mockup               */}
           {/* ================================================================= */}
-          <div className="lg:col-span-6 flex justify-center">
+          <div data-landing-preview className="lg:col-span-6 flex justify-center">
             <div className="relative w-[310px] sm:w-[350px] rounded-[3.25rem] border-[10px] border-slate-900 bg-slate-950 p-2 shadow-[0_30px_90px_-15px_rgba(15,23,42,0.4)]">
               {/* Dynamic Island */}
               <div className="absolute left-1/2 top-4 z-30 h-6 w-28 -translate-x-1/2 rounded-full bg-slate-950 flex items-center justify-between px-2.5">
@@ -288,7 +298,7 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                   <AnimatePresence mode="wait">
                     {/* Screen 1: AI Scanner */}
                     {activeFeature.screenType === "scanner" && (
-                      <motion.div
+                      <Motion.div
                         key="scanner"
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -307,7 +317,7 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                         {/* Simulated Viewfinder & Laser Scan */}
                         <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-blue-400 bg-slate-900 p-3 text-white">
                           <div className="absolute inset-0 bg-blue-900/10" />
-                          <motion.div
+                          <Motion.div
                             animate={{ y: [0, 90, 0] }}
                             transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
                             className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#38bdf8]"
@@ -352,12 +362,12 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                             </span>
                           </div>
                         </div>
-                      </motion.div>
+                      </Motion.div>
                     )}
 
                     {/* Screen 2: Group Expense with VietQR */}
                     {activeFeature.screenType === "group" && (
-                      <motion.div
+                      <Motion.div
                         key="group"
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -409,12 +419,12 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                             <p className="text-[10px] text-emerald-700">Quét app ngân hàng trả ngay</p>
                           </div>
                         </div>
-                      </motion.div>
+                      </Motion.div>
                     )}
 
                     {/* Screen 3: Debt & Loan Tracker */}
                     {activeFeature.screenType === "debt" && (
-                      <motion.div
+                      <Motion.div
                         key="debt"
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -468,12 +478,12 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                           <Bell className="h-3.5 w-3.5" />
                           <span>Gửi tin nhắn nhắc nợ lịch sự</span>
                         </button>
-                      </motion.div>
+                      </Motion.div>
                     )}
 
                     {/* Screen 4: Banking Sync */}
                     {activeFeature.screenType === "bank" && (
-                      <motion.div
+                      <Motion.div
                         key="bank"
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -525,12 +535,12 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                             </span>
                           </div>
                         </div>
-                      </motion.div>
+                      </Motion.div>
                     )}
 
                     {/* Screen 5: Asset & Gold Portfolio */}
                     {activeFeature.screenType === "asset" && (
-                      <motion.div
+                      <Motion.div
                         key="asset"
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -577,12 +587,12 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                             <span className="font-extrabold text-purple-600">415.000.000 đ</span>
                           </div>
                         </div>
-                      </motion.div>
+                      </Motion.div>
                     )}
 
                     {/* Screen 6: Voice AI & Emotion AI */}
                     {activeFeature.screenType === "voice" && (
-                      <motion.div
+                      <Motion.div
                         key="voice"
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -601,7 +611,7 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                         <div className="rounded-2xl bg-gradient-to-br from-indigo-900 to-slate-900 p-3.5 text-white shadow-sm space-y-2">
                           <div className="flex items-center justify-center gap-1 py-1">
                             {[12, 28, 18, 36, 24, 40, 16, 32, 20, 10].map((h, i) => (
-                              <motion.div
+                              <Motion.div
                                 key={i}
                                 animate={{ height: [h * 0.4, h, h * 0.4] }}
                                 transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.08 }}
@@ -634,12 +644,12 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                             💡 <em>Cố vấn AI:</em> Bạn đang kiểm soát ngân sách tuần rất tốt (còn 62% ngân sách ăn uống an toàn).
                           </p>
                         </div>
-                      </motion.div>
+                      </Motion.div>
                     )}
 
                     {/* Screen 7: Group Fund & Supervisor Approval */}
                     {activeFeature.screenType === "fund" && (
-                      <motion.div
+                      <Motion.div
                         key="fund"
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -677,7 +687,59 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
                             </span>
                           </div>
                         </div>
-                      </motion.div>
+                      </Motion.div>
+                    )}
+                    {activeFeature.screenType === "business" && (
+                      <Motion.div key="business" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
+                        <div className="text-[10px] text-slate-500 leading-relaxed">
+                          <span className="block">Công ty minh họa / Dự án</span>
+                          <span className="block text-sm font-semibold text-slate-900">Cải tạo sân cỏ</span>
+                          <span className="block mt-1">Số liệu minh họa · Đơn vị: triệu đồng</span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-1 rounded-lg bg-slate-100 p-1" aria-label="Mô phỏng thu chi dự án">
+                          {[["overview", "Dự án"], ["entry", "Thu chi"], ["reports", "Báo cáo"]].map(([step, label]) => (
+                            <button key={step} type="button" aria-pressed={businessStep === step} onClick={() => setBusinessStep(step)}
+                              className={`rounded-md px-1 py-2 text-[10px] font-semibold ${businessStep === step ? "bg-white text-blue-700 shadow-sm" : "text-slate-600"}`}>{label}</button>
+                          ))}
+                        </div>
+                        {businessStep === "overview" && <>
+                          <div className="rounded-xl bg-blue-50 p-3 text-slate-900">
+                            <p className="text-[10px] text-slate-600">Kết quả dự án</p>
+                            <p className="mt-1 text-xs">Lợi nhuận <strong className="float-right text-emerald-700">+220</strong></p>
+                            <p className="mt-2 text-xs">Doanh thu <strong className="float-right">720</strong></p>
+                            <p className="mt-2 text-xs">Chi phí <strong className="float-right">500</strong></p>
+                          </div>
+                          <div className="rounded-xl border border-slate-200 p-3 text-xs space-y-2">
+                            <p className="font-semibold text-slate-900">Cần theo dõi</p>
+                            <p>Còn cần thu <strong className="float-right text-blue-700">120</strong></p>
+                            <p>Còn cần chi <strong className="float-right text-amber-700">100</strong></p>
+                          </div>
+                        </>}
+                        {businessStep === "entry" && <>
+                          <div className="rounded-xl border border-slate-200 p-3 text-xs space-y-2">
+                            <p className="font-semibold text-slate-900">Doanh thu thi công</p>
+                            <p>Ghi nhận <strong className="float-right">720</strong></p>
+                            <p>Đã thu <strong className="float-right text-emerald-700">600</strong></p>
+                            <p>Cần thu <strong className="float-right text-blue-700">120</strong></p>
+                          </div>
+                          <div className="rounded-xl bg-white border border-slate-200 p-3 text-xs space-y-2">
+                            <p className="font-semibold">Lịch sử thu · 2 lần</p>
+                            <p>01/10 · 09:00 <strong className="float-right">400</strong></p>
+                            <p>15/10 · 14:30 <strong className="float-right">200</strong></p>
+                          </div>
+                        </>}
+                        {businessStep === "reports" && <div className="space-y-2">
+                          {[
+                            ["Kết quả kinh doanh", "Doanh thu 720 · Chi phí 500", "Lợi nhuận: 220"],
+                            ["Dòng tiền", "Thực thu 600 · Thực chi 400", "Dòng tiền thuần: 200"],
+                            ["Công nợ", "Phải thu 120 · Phải trả 100", "Chênh lệch ròng: 20"],
+                          ].map(([title, detail, total]) => <div key={title} className="rounded-lg border border-slate-200 bg-white p-3">
+                            <p className="text-xs font-semibold text-slate-900">{title}</p>
+                            <p className="mt-1 text-[10px] text-slate-500">{detail}</p>
+                            <p className="mt-1 text-[11px] font-semibold text-blue-700">{total}</p>
+                          </div>)}
+                        </div>}
+                      </Motion.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -693,3 +755,5 @@ export default function AppInteractiveSimulator({ onOpenQr }) {
     </section>
   );
 }
+
+

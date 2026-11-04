@@ -60,9 +60,11 @@ npm run build
 npm audit --omit=dev
 ```
 
-Current audited baseline on 2026-07-22: production build succeeds; lint does not
-pass; there is no automated test script; the production bundle is large. These
-are known gaps, not permission to add more lint errors or skip verification.
+Current audited baseline on 2026-09-01: production build succeeds; lint fails
+with 25 errors and 16 warnings; there is no automated test script; the production
+bundle is about 1.44 MB minified and `npm audit --omit=dev` reports 13
+vulnerabilities (1 critical, 10 high, 2 moderate). These are known gaps, not
+permission to add more lint errors or skip verification.
 
 ## Definition of done
 

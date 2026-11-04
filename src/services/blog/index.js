@@ -20,8 +20,8 @@ export const getBlogDetailApi = async (id) => {
   return response.data;
 };
 
-export const getListBlogApi = async (query) => {
-  const response = await instance.get("/blog", { params: query });
+export const getListBlogApi = async (query, { signal } = {}) => {
+  const response = await instance.get("/blog", { signal, timeout: 20_000, params: query });
   return response.data;
 };
 

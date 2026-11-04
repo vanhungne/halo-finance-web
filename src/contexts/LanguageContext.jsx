@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 
 const LanguageContext = createContext();
 
@@ -7,13 +7,13 @@ export const TRANSLATIONS = {
     nav: {
       features: "Tính năng",
       solutions: "Giải pháp",
-      tools: "Công cụ tính",
+      tools: "Công cụ",
       comparison: "So sánh",
-      commitment: "Cam kết 0đ",
+      commitment: "Miễn Phí",
       resources: "Tài nguyên",
       openEkyc: "Tải App Miễn Phí",
       appQr: "Mã QR App",
-      downloadApp: "Tải App Miễn Phí",
+      downloadApp: "Tải ứng dụng",
       zeroFee: "Free 100%",
       institutionalBadge: "Sổ Thu Chi & Hóa Đơn AI",
       simLink: "Mở màn hình mô phỏng",
@@ -28,17 +28,25 @@ export const TRANSLATIONS = {
       priority: "Tính năng nổi bật",
       hotline: "Hotline 24/7",
       branches: "Điểm giao dịch",
-      freeBadge: "Cam kết 100% Miễn Phí (0đ)",
+      freeBadge: "Cam kết 100% Miễn Phí",
       goldSjc: "Vàng SJC",
       savingsRate: "Lãi suất gửi",
     },
     hero: {
-      badge: "Cam Kết 100% Miễn Phí Trọn Đời • 0đ Phí Ẩn",
-      title1: "Làm Chủ Dòng Tiền.",
-      title2: "Quản Trị Chi Tiêu Cùng AI.",
-      desc: "Ứng dụng quản trị tài chính cá nhân & quỹ nhóm 100% miễn phí trọn đời. Tự động bóc tách hóa đơn trong 3 giây bằng Trí Tuệ Nhân Tạo AI, quản trị ngân sách thông minh và chia tiền nhóm VietQR 1 chạm. Cam kết không quảng cáo, không bán gói.",
-      ctaEkyc: "Tải Ứng Dụng Ngay (0đ)",
-      ctaDownload: "Tải App 0đ Trọn Đời",
+      badge: "Cam Kết Hoàn Toàn Miễn Phí • Không Phí Ẩn",
+      titleBold1: "Quản lý",
+      titleMuted1: "tài chính",
+      titleMuted2: "nhẹ nhàng hơn,",
+      titleMuted3: "cùng",
+      titleBold2: "Trợ Lý Tài Chính.",
+      title1: "Quản lý tài chính",
+      title2: "nhẹ nhàng hơn,",
+      title3Prefix: "cùng",
+      title3: "Trợ Lý Tài Chính.",
+      desc: "Ghi chép thu chi, chia tiền nhóm và theo dõi dòng tiền kinh doanh trong một ứng dụng, với AI hỗ trợ nhập liệu.",
+      webPortal: "Dùng bản Web Portal",
+      ctaEkyc: "Tải Ứng Dụng Ngay",
+      ctaDownload: "Tải App Miễn Phí",
       scanQrHint: "Quét camera để cài đặt ngay",
       activeUsers: "Người dùng tin cậy",
       napasBanks: "Ngân hàng hỗ trợ VietQR",
@@ -48,14 +56,12 @@ export const TRANSLATIONS = {
       guarantee3: "Tuân thủ Nghị định 13/2023/NĐ-CP",
     },
     commitment: {
-      badge: "Cam Kết Minh Bạch — 100% Miễn Phí Trọn Đời",
-      title: "Không Bán Gói. Không Phí Ẩn.",
-      titleHighlight: "Mở Khóa Toàn Bộ Sức Mạnh Quản Trị Chi Tiêu 0đ.",
-      subtitle: "Trợ Lý Tài Chính hướng tới sứ mệnh bình dân hóa công nghệ tài chính cho người Việt. Mọi tính năng cao cấp từ Trí Tuệ Nhân Tạo AI, Voice AI đến chia tiền VietQR đều mở sẵn 100% miễn phí, không giới hạn.",
-      calcTitle: "Bạn thực hiện khoảng bao nhiêu giao dịch & quét hóa đơn/tháng?",
-      calcDesc: "Kéo thanh trượt bên dưới để ước tính số tiền bạn tiết kiệm được so với việc phải mua các gói app quản lý chi tiêu khác:",
-      savingsTitle: "Số Tiền Bạn Tiết Kiệm Được Mỗi Năm",
-      getAccountBtn: "Tải App 0đ Ngay",
+      title: "Trải Nghiệm Toàn Diện, Hoàn Toàn Miễn Phí",
+      subtitle: "Bắt đầu quản lý tài chính cá nhân và nhóm ngay hôm nay mà không có rào cản chi phí ban đầu. Đầy đủ công cụ từ ghi chép, bóc tách hóa đơn AI đến chia tiền VietQR sẵn sàng phục vụ bạn.",
+      calcTitle: "Bạn có khoảng bao nhiêu khoản chi tiêu & hóa đơn mỗi tháng?",
+      calcDesc: "Kéo thanh trượt bên dưới để ước tính chi phí bạn tiết kiệm được so với việc mua các ứng dụng thu phí khác:",
+      savingsTitle: "Tiết Kiệm Ước Tính Mỗi Năm",
+      getAccountBtn: "Tải Ứng Dụng Miễn Phí",
     },
     simulator: {
       badge: "Mô Phỏng Trực Tiếp",
@@ -79,16 +85,16 @@ export const TRANSLATIONS = {
       toolsTitle: "Công Cụ Trực Tuyến",
       legalTitle: "Pháp Lý & Hỗ Trợ",
       rights: "Bản quyền © 2026 Trợ Lý Tài Chính. Tất cả các quyền được bảo lưu.",
-      freeTag: "100% Miễn Phí Trọn Đời",
+      freeTag: "Hoàn Toàn Miễn Phí",
     },
   },
   en: {
     nav: {
       features: "Features",
       solutions: "Solutions",
-      tools: "Calculators",
+      tools: "Tools",
       comparison: "Compare",
-      commitment: "Zero Fee Policy",
+      commitment: "Free",
       resources: "Resources",
       openEkyc: "Download App Free",
       appQr: "App QR Code",
@@ -107,15 +113,23 @@ export const TRANSLATIONS = {
       priority: "Key Features",
       hotline: "24/7 Hotline",
       branches: "Support Centers",
-      freeBadge: "100% Lifetime Free (0₫)",
+      freeBadge: "100% Free",
       goldSjc: "SJC Gold",
       savingsRate: "Savings Rate",
     },
     hero: {
-      badge: "100% Lifetime Free Guarantee • 0₫ Hidden Fees",
-      title1: "Master Your Cash Flow.",
-      title2: "AI-Powered Expense Management.",
-      desc: "Smart personal and group finance app, 100% free for life. Automatically extract receipts in 3 seconds with AI Vision, manage budgets effortlessly, and split bills with 1-tap VietQR. Zero ads, zero paywalls.",
+      badge: "100% Free Guarantee • No Hidden Fees",
+      titleBold1: "Manage",
+      titleMuted1: "your finances",
+      titleMuted2: "with less effort,",
+      titleMuted3: "with",
+      titleBold2: "Trợ Lý Tài Chính.",
+      title1: "Manage your finances",
+      title2: "with less effort,",
+      title3Prefix: "with",
+      title3: "Trợ Lý Tài Chính.",
+      desc: "Track expenses, split group costs, and follow your business cash flow in one app, with AI to help you record transactions.",
+      webPortal: "Use Web Portal",
       ctaEkyc: "Get Free App Now",
       ctaDownload: "Download App Free",
       scanQrHint: "Scan with camera to install immediately",
@@ -127,13 +141,11 @@ export const TRANSLATIONS = {
       guarantee3: "Compliant with Privacy Decree 13/2023",
     },
     commitment: {
-      badge: "Transparent Policy — 100% Free For Life",
-      title: "No Subscriptions. No Hidden Fees.",
-      titleHighlight: "Unlock Full Financial Power at 0₫.",
-      subtitle: "Empowering everyday users to master their finances. All premium features including AI OCR Receipt Extraction, Voice AI, and VietQR Bill Splitting are unlocked free forever.",
+      title: "Experience Full Features, Completely Free",
+      subtitle: "Start managing personal and group finances today with zero upfront cost. Everything from expense tracking, AI receipt scanning to VietQR group funds is ready for you.",
       calcTitle: "How many transactions and receipts do you process each month?",
-      calcDesc: "Slide below to calculate your estimated annual savings compared to paid budgeting apps:",
-      savingsTitle: "Your Estimated Annual Savings",
+      calcDesc: "Slide below to estimate your annual savings compared to paid budgeting applications:",
+      savingsTitle: "Estimated Annual Savings",
       getAccountBtn: "Get Free App Now",
     },
     simulator: {
@@ -158,13 +170,15 @@ export const TRANSLATIONS = {
       toolsTitle: "Online Tools",
       legalTitle: "Legal & Support",
       rights: "Copyright © 2026 TroLyTaiChinh. All rights reserved.",
-      freeTag: "100% Lifetime Free",
+      freeTag: "Completely Free",
     },
   },
 };
 
-export function LanguageProvider({ children }) {
+export function LanguageProvider({ children, deferStoredLanguage = false }) {
+  const restored = useRef(!deferStoredLanguage);
   const [lang, setLang] = useState(() => {
+    if (deferStoredLanguage) return 'vi';
     try {
       const saved = localStorage.getItem("preferred_lang");
       return saved === "en" ? "en" : "vi";
@@ -175,6 +189,13 @@ export function LanguageProvider({ children }) {
 
   useEffect(() => {
     try {
+      // Tools hydrate the Vietnamese build HTML before applying a saved shell language.
+      if (!restored.current) {
+        restored.current = true;
+        const saved = localStorage.getItem('preferred_lang');
+        if (saved === 'en') setLang('en');
+        return;
+      }
       localStorage.setItem("preferred_lang", lang);
       document.documentElement.lang = lang;
     } catch {
@@ -201,6 +222,7 @@ export function LanguageProvider({ children }) {
         strings,
         toggleLanguage,
         setLanguage,
+        setLang: setLanguage,
         isVietnamese: lang === "vi",
         isEnglish: lang === "en",
       }}

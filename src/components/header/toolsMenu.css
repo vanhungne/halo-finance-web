@@ -1,0 +1,37 @@
+.financial-tools-menu {
+  width: min(1120px, calc(100vw - 32px));
+  max-height: calc(100dvh - var(--menu-top, 68px) - 16px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #dfe5ef;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 16px 40px -16px rgb(15 23 42 / 24%);
+}
+.financial-tools-navigation { color: #0f172a; font-family: "Be Vietnam Pro", system-ui, sans-serif; }
+.financial-tools-navigation__groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.financial-tools-group { --tool-tone: #2845ed; --tool-tint: #eef2ff; min-width: 0; border-bottom: 1px solid #e5e9f0; }
+.financial-tools-group:nth-child(odd) { border-right: 1px solid #e5e9f0; }
+.financial-tools-group:nth-last-child(-n+2) { border-bottom: 0; }
+.financial-tools-group--amber { --tool-tone: #996000; --tool-tint: #fff5db; }
+.financial-tools-group--teal { --tool-tone: #007b80; --tool-tint: #e6f5f5; }
+.financial-tools-group--violet { --tool-tone: #7142be; --tool-tint: #f2edfc; }
+.financial-tools-group--green { --tool-tone: #188046; --tool-tint: #eaf7ef; }
+.financial-tools-group h3 { margin: 0; padding: 13px 22px; background: #f6f8fb; color: var(--tool-tone); font-size: 14px; font-weight: 600; line-height: 1.6; }
+.financial-tools-group__items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 12px; }
+.financial-tools-navigation .financial-tools-item { display: flex; align-items: flex-start; gap: 10px; min-width: 0; padding: 10px; border-radius: 8px; color: #0f172a; text-decoration: none; transition: background-color 150ms ease-out; }
+.financial-tools-navigation .financial-tools-item:hover { background: #f6f8fb; }
+.financial-tools-item__icon { display: grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; margin-top: 2px; border-radius: 50%; background: var(--tool-tint); color: var(--tool-tone); }
+.financial-tools-navigation .financial-tools-item > span:last-child { min-width: 0; }
+.financial-tools-navigation .financial-tools-item strong { display: block; font-size: 14px; font-weight: 500; line-height: 1.6; }
+.financial-tools-navigation .financial-tools-item small { display: block; margin-top: 3px; color: #475467; font-size: 12px; line-height: 1.65; }
+.financial-tools-navigation a:focus-visible { outline: 2px solid #2845ed; outline-offset: 2px; }
+@media (max-width: 1279px) {
+  .financial-tools-navigation__groups { grid-template-columns: minmax(0, 1fr); }
+  .financial-tools-group:nth-child(odd) { border-right: 0; }
+  .financial-tools-group:nth-last-child(2) { border-bottom: 1px solid #e5e9f0; }
+  .financial-tools-group h3 { padding: 10px 12px; font-size: 13px; }
+  .financial-tools-group__items { grid-template-columns: minmax(0, 1fr); padding: 6px 0; }
+  .financial-tools-navigation .financial-tools-item { padding: 12px 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .financial-tools-navigation .financial-tools-item { transition: none; } }

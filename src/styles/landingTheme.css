@@ -1,0 +1,483 @@
+@import "./landingFonts.css";
+
+/* Landing-only system, measured against congcunhanh.com on 2026-10-30.
+   Public/admin routes outside .landing-page retain their existing styles. */
+@font-face {
+  font-family: "Be Vietnam Pro Fallback";
+  src: local("Arial");
+  size-adjust: 110.36%;
+  ascent-override: 95.14%;
+  descent-override: 19.93%;
+  line-gap-override: 0%;
+}
+
+.landing-page {
+  --font-sans: "Be Vietnam Pro", "Be Vietnam Pro Fallback", system-ui, sans-serif;
+  --landing-ink: #0f172a;
+  --landing-muted: #475467;
+  --landing-accent: #2845ed;
+  --landing-border: #dfe5ef;
+  --landing-surface: #f2f5fa;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--landing-ink);
+  font-synthesis: none;
+}
+
+.landing-page :where(button, input, select, textarea) {
+  font-family: inherit;
+}
+
+.landing-page :where(.font-black) {
+  font-weight: 900;
+}
+
+.landing-page :where(.font-extrabold) {
+  font-weight: 800;
+}
+
+.landing-page :where(.tracking-widest, .tracking-wider) {
+  letter-spacing: .025em;
+}
+
+.landing-page :where(.text-slate-950, .text-slate-900) {
+  color: var(--landing-ink);
+}
+
+.landing-page :where(.text-slate-600, .text-slate-500) {
+  color: var(--landing-muted);
+}
+
+.landing-page ::selection {
+  background: #dce4ff;
+  color: #122469;
+}
+
+.landing-page :where(input, textarea) {
+  caret-color: var(--landing-accent);
+}
+
+.landing-page :where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--landing-accent);
+  outline-offset: 3px;
+}
+
+.landing-page :where(a) {
+  text-underline-offset: 4px;
+}
+
+/* Editorial Section Heading System */
+.landing-page main>section:not(#home) {
+  padding-block: 64px;
+}
+
+.landing-page main>section h2 {
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  color: var(--landing-ink);
+  text-wrap: balance;
+}
+
+.landing-page main>section :is(h3, h4):not([data-landing-preview] *) {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -.015em;
+}
+
+.landing-page main>section p:not([data-landing-preview] *) {
+  font-size: 15.5px;
+  line-height: 1.65;
+  font-weight: 400;
+  text-wrap: pretty;
+}
+
+.landing-page main>section :is(h2, h3) .bg-clip-text {
+  color: var(--landing-accent);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.landing-page main :where(.shadow-xl, .shadow-2xl):not([data-landing-preview], [data-landing-preview] *) {
+  box-shadow: none;
+}
+
+.landing-page main :where(.rounded-3xl, [class*="rounded-[2."]):not([data-landing-preview], [data-landing-preview] *) {
+  border-radius: 16px;
+}
+
+.landing-page :where(button, a)[class*="bg-gradient"]:not([data-landing-preview] *) {
+  background: var(--landing-accent);
+  color: white;
+  box-shadow: 0 2px 4px #1c33851a, 0 5px 12px #1c33851a;
+}
+
+/* Preserve original section backgrounds; only refine header typography. */
+.landing-page>header {
+  box-shadow: none;
+}
+
+.landing-page>header nav {
+  gap: 2px;
+}
+
+.landing-page>header nav> :is(a, button) {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.landing-page>header [aria-expanded="true"] {
+  color: var(--landing-accent);
+}
+
+.landing-page>header [class*="shadow-"] {
+  box-shadow: 0 8px 32px -16px #13245333;
+}
+
+.landing-page>header .loading-gradient {
+  background-image: linear-gradient(90deg,
+      #199bdf,
+      #7f22fe,
+      #199bdf,
+      #7f22fe,
+      #199bdf);
+  background-size: 200% 100%;
+  animation: loadingShine 3s linear infinite;
+  border-radius: 10px;
+}
+
+.landing-page #app-simulator .grid>div {
+  min-width: 0;
+}
+
+.landing-page #solutions a.bg-emerald-600 {
+  background: var(--landing-accent);
+  box-shadow: none;
+}
+
+.landing-page #solutions .solution-feature-title {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  color: #0f172a !important;
+}
+
+.landing-page #solutions .solution-feature-desc {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  color: #64748b !important;
+}
+
+/* The responsive full-viewport hero occupies 100% of the visible fold on initial load */
+.landing-page #home {
+  background-color: #EBF4FE !important;
+  background-image: none !important;
+  min-height: calc(100vh - 104px);
+  min-height: calc(100svh - 100px);
+  min-height: calc(100dvh - 104px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(16px, 3vh, 40px);
+  box-sizing: border-box;
+}
+
+.landing-page #home .hero-editorial-title {
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  color: #090d16;
+  display: flex;
+  flex-direction: column;
+  gap: 0.08em;
+}
+
+.landing-page #home .hero-editorial-line {
+  white-space: normal;
+  display: block;
+}
+
+.landing-page #home .hero-title-bold {
+  font-weight: 850;
+  color: #090d16;
+  letter-spacing: -0.04em;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8),
+    0 2px 2px rgba(15, 23, 42, 0.28),
+    0 5px 10px rgba(15, 23, 42, 0.18),
+    0 10px 22px rgba(15, 23, 42, 0.1);
+}
+
+.landing-page #home .hero-title-muted {
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: -0.025em;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 3px rgba(148, 163, 184, 0.45),
+    0 6px 14px rgba(148, 163, 184, 0.25);
+}
+
+.title-3d {
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85),
+    0 2px 2px rgba(15, 23, 42, 0.26),
+    0 5px 10px rgba(15, 23, 42, 0.16),
+    0 12px 24px rgba(15, 23, 42, 0.1);
+}
+
+.landing-page #home .hero-editorial-highlight {
+  padding: 0;
+  margin-inline: 0;
+  background: transparent !important;
+}
+
+.landing-page #home .hero-editorial-highlight::before {
+  display: none !important;
+}
+
+.landing-page #home .hero-editorial-brand {
+  margin-inline-start: 0;
+}
+
+.landing-page #home .hero-editorial-brand::before {
+  display: none !important;
+}
+
+.landing-page #home .hero-editorial-description {
+  max-width: 58ch;
+  margin-block: clamp(12px, 2vh, 20px);
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.6;
+  color: var(--landing-muted);
+}
+
+.landing-page #home .landing-hero__trust {
+  color: var(--landing-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: clamp(8px, 1.5vh, 16px);
+}
+
+.landing-page #home .hero-editorial-stores> :is(a, button) {
+  box-shadow: none;
+  border-radius: 12px;
+  transform: none;
+}
+
+.landing-page #home .hero-editorial-actions {
+  gap: 12px;
+}
+
+.landing-page #home .landing-hero__trust>span>span:first-child {
+  color: #184e77;
+}
+
+/* The directory uses the same text density as the reference tool lists. */
+.landing-page .feature-directory {
+  background: white;
+}
+
+.landing-page .feature-directory__heading h2,
+.landing-page .feature-directory__heading h3 {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.landing-page .feature-directory__title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.landing-page .feature-directory__description {
+  color: var(--landing-muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.landing-page .feature-directory__count {
+  color: var(--landing-muted);
+}
+
+.landing-page .feature-directory__item:hover {
+  background: #f4f6fb;
+}
+
+.landing-page #health-check h3 {
+  font-size: 20px;
+}
+
+.landing-page #faq button>span {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Keep the original dark footer and apply the new type scale. */
+.landing-page>footer h3 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.landing-page>footer h3>span {
+  font-weight: inherit;
+}
+
+.landing-page>footer :is(p, li a) {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.landing-page>footer li a:hover {
+  color: #93c5fd;
+}
+
+.landing-page>footer a[class*="shadow-"] {
+  box-shadow: none;
+}
+
+@media (min-width: 640px) {
+  .landing-page main>section:not(#home) {
+    padding-block: 80px;
+  }
+
+  .landing-page main>section#download {
+    padding-block: 0 !important;
+  }
+}
+
+.landing-page main>section#download {
+  padding-block: 0 !important;
+}
+
+@media (max-width: 639px) {
+  .landing-page aside[aria-label="Thông báo nền tảng hoàn toàn miễn phí"],
+  .landing-page .marquee-track a {
+    min-height: 44px;
+  }
+
+  .landing-page :is(button, summary) {
+    min-height: 44px;
+  }
+
+  .landing-page :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea) {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .landing-page input[type="range"] {
+    height: 44px;
+    min-height: 44px;
+    background: transparent;
+  }
+
+  .landing-page input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 999px;
+    background: #e2e8f0;
+  }
+
+  .landing-page input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -7px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+
+  .landing-page input[type="range"]::-moz-range-track {
+    height: 8px;
+    border-radius: 999px;
+    background: #e2e8f0;
+  }
+
+  .landing-page input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #2563eb;
+  }
+
+  .landing-page > header a[aria-label] {
+    min-height: 44px;
+  }
+
+  .landing-page > footer :is(li a, a[href^="tel:"], a[href^="mailto:"], a[href="/privacy"], a[href="/terms"], a[href="/delete-account"], a[href="/sitemap.xml"]) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    overflow-wrap: anywhere;
+  }
+
+  .landing-page > footer p {
+    overflow-wrap: anywhere;
+  }
+
+  .landing-page > footer a[aria-label] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .landing-page:has(> .landing-download-dock) > footer {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  html:has(.landing-download-dock) {
+    scroll-padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .landing-page > footer a {
+    scroll-margin-bottom: 92px;
+  }
+
+  .landing-page #home {
+    min-height: calc(100svh - 96px);
+    padding-block: clamp(20px, 3.5vh, 32px);
+  }
+
+  .landing-page #home .hero-editorial-description {
+    font-size: 15px;
+    margin-block: 12px;
+  }
+
+  .landing-page #home .hero-editorial-title {
+    font-size: clamp(1.65rem, 7.4cqi, 2.125rem);
+  }
+
+  .landing-page #home .hero-editorial-stores {
+    gap: 8px;
+  }
+
+  .landing-page main>section h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .landing-page>footer>div {
+    padding-inline: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .landing-page *,
+  .landing-page *::before,
+  .landing-page *::after {
+    scroll-behavior: auto;
+    animation-duration: .01ms;
+    animation-iteration-count: 1;
+    transition-duration: .01ms;
+  }
+}

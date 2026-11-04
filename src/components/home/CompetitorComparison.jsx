@@ -2,60 +2,60 @@ import { Check, X, Minus, Sparkles, Shield, Zap, FileSpreadsheet, Smartphone, Bo
 
 const COMPARISON_ROWS = [
   {
-    feature: "Bóc tách hóa đơn bằng Trí Tuệ Nhân Tạo AI",
-    subtitle: "Chụp ảnh bill trong 3s, tự bóc tách từng món ăn, chiết khấu và thuế VAT",
-    tltc: { status: "full", text: "AI OCR tự động 3 giây, chính xác 99.4%" },
-    otherApps: { status: "partial", text: "Bắt mua gói VIP mới dùng được, hay lỗi font" },
-    manual: { status: "none", text: "Không có, phải gõ tay từng dòng mất thời gian" },
+    feature: "Quét & bóc tách hóa đơn bằng AI",
+    subtitle: "Chụp ảnh bill ăn uống, mua sắm; AI tự điền tên món, số tiền và ngày giờ",
+    tltc: { status: "full", text: "Tự động nhận diện trong 3 giây, không cần gõ tay" },
+    otherApps: { status: "partial", text: "Thường giới hạn lượt quét hoặc chỉ có ở bản trả phí" },
+    manual: { status: "none", text: "Phải tự nhìn hóa đơn và gõ tay từng khoản chi" },
   },
   {
-    feature: "Chia tiền quỹ nhóm & VietQR 1 chạm",
-    subtitle: "Tự tính ai nợ ai với số lần chuyển khoản ít nhất, quét mã trả tiền ngay",
-    tltc: { status: "full", text: "Tối ưu hóa số lệnh nợ + tạo mã VietQR 1 chạm" },
-    otherApps: { status: "partial", text: "Chỉ tính số tiền, không sinh mã VietQR cá nhân" },
-    manual: { status: "none", text: "Tính nhẩm dễ nhầm lẫn, tranh cãi mất lòng nhau" },
+    feature: "Chia tiền nhóm & Tạo mã VietQR trả nợ",
+    subtitle: "Tính toán số tiền từng người, chia đều hoặc theo tỷ lệ linh hoạt",
+    tltc: { status: "full", text: "Tự tính bù trừ ít lần chuyển nhất + có mã VietQR quét trả ngay" },
+    otherApps: { status: "partial", text: "Chỉ tính số tiền, phải tự hỏi số tài khoản và tự nhập tiền chuyển" },
+    manual: { status: "none", text: "Dễ tính nhầm, phải nhắn tin qua lại nhiều lần để chốt tiền" },
   },
   {
-    feature: "Quản lý ngân sách theo quy tắc 50/30/20",
-    subtitle: "Đặt hạn mức danh mục, cảnh báo thông minh khi chi tiêu vượt trần",
-    tltc: { status: "full", text: "Tự động phân bổ & nhắc nhở đúng lúc" },
-    otherApps: { status: "partial", text: "Bị giới hạn số lượng ví và danh mục ngân sách" },
-    manual: { status: "partial", text: "Phải tự viết công thức Excel phức tạp" },
+    feature: "Quản lý ngân sách & Hạn mức chi tiêu",
+    subtitle: "Đặt giới hạn chi tiêu theo danh mục (như 50/30/20) để tránh 'cháy túi'",
+    tltc: { status: "full", text: "Cảnh báo trực quan khi chi tiêu chạm ngưỡng ngân sách" },
+    otherApps: { status: "partial", text: "Bị giới hạn số ví hoặc số danh mục ở bản miễn phí" },
+    manual: { status: "partial", text: "Phải tự nhớ hoặc tự lập công thức tính toán thủ công" },
   },
   {
-    feature: "Chi phí sử dụng trọn đời",
-    subtitle: "Mở khóa toàn bộ tính năng cao cấp không phát sinh chi phí ẩn",
-    tltc: { status: "full", text: "100% Miễn phí trọn đời (0đ)" },
-    otherApps: { status: "none", text: "Thu phí theo tháng/năm (39k - 199k/tháng)" },
-    manual: { status: "full", text: "Miễn phí nhưng tốn rất nhiều thời gian" },
+    feature: "Chi phí sử dụng",
+    subtitle: "Mở đầy đủ mọi tính năng, không có gói tính phí hay chi phí ẩn",
+    tltc: { status: "full", text: "100% Hoàn toàn miễn phí cho mọi người dùng" },
+    otherApps: { status: "none", text: "Thu phí theo gói tháng/năm (39.000đ – 199.000đ/tháng)" },
+    manual: { status: "full", text: "Không tốn tiền mua ứng dụng nhưng mất nhiều thời gian" },
   },
   {
-    feature: "Trải nghiệm không quảng cáo rác",
-    subtitle: "Giao diện thanh lịch, sạch sẽ, không có banner quảng cáo che màn hình",
-    tltc: { status: "full", text: "Tuyệt đối không chèn quảng cáo" },
-    otherApps: { status: "none", text: "Quảng cáo pop-up và video xuất hiện dày đặc" },
+    feature: "Trải nghiệm không quảng cáo",
+    subtitle: "Giao diện gọn gàng, tập trung hoàn toàn vào việc quản lý tài chính",
+    tltc: { status: "full", text: "Cam kết không chèn banner hay video quảng cáo làm phiền" },
+    otherApps: { status: "none", text: "Thường xuyên hiện banner hoặc video quảng cáo ngắt quãng" },
     manual: { status: "full", text: "Không có quảng cáo" },
   },
   {
-    feature: "Báo cáo trực quan & Xuất file Excel/PDF",
-    subtitle: "Biểu đồ thu chi tuần/tháng/năm và xuất sao kê chỉ với 1 click",
-    tltc: { status: "full", text: "Xuất file Excel (XLSX) và PDF hoàn toàn 0đ" },
-    otherApps: { status: "partial", text: "Tính năng xuất Excel nằm trong gói trả phí" },
-    manual: { status: "full", text: "Tự lập báo cáo thủ công" },
+    feature: "Báo cáo trực quan & Xuất file Excel, PDF",
+    subtitle: "Biểu đồ thu chi theo thời gian, danh mục và sao kê chi tiết",
+    tltc: { status: "full", text: "Xem biểu đồ trực quan, xuất file Excel và PDF không giới hạn" },
+    otherApps: { status: "partial", text: "Tính năng xuất file Excel thường yêu cầu trả phí" },
+    manual: { status: "full", text: "Mất nhiều công sức tự tổng hợp số liệu và vẽ biểu đồ" },
   },
   {
-    feature: "Đồng bộ đa nền tảng (Mobile App + Web)",
-    subtitle: "Quản lý tiện lợi trên điện thoại iOS/Android và máy tính văn phòng",
-    tltc: { status: "full", text: "Đồng bộ tức thì trên Mobile & Web Portal" },
-    otherApps: { status: "partial", text: "Đa số chỉ có app mobile, không có web tiện lợi" },
-    manual: { status: "none", text: "File Excel mở trên điện thoại rất khó thao tác" },
+    feature: "Đồng bộ đa nền tảng (Điện thoại & Máy tính)",
+    subtitle: "Ghi chép nhanh trên app di động, đối soát thoải mái trên web máy tính",
+    tltc: { status: "full", text: "Đồng bộ tức thì giữa Mobile App (iOS/Android) và Web Portal" },
+    otherApps: { status: "partial", text: "Chủ yếu chỉ có trên điện thoại, thiếu giao diện web khi ngồi làm việc" },
+    manual: { status: "none", text: "File Excel mở trên điện thoại rất bất tiện và dễ lỗi hiển thị" },
   },
   {
     feature: "Bảo mật & Quyền riêng tư dữ liệu",
-    subtitle: "Mã hóa AES-256, sinh trắc học Face ID và cam kết không bán dữ liệu",
-    tltc: { status: "full", text: "Mã hóa AES-256 • Cam kết 3 KHÔNG" },
-    otherApps: { status: "partial", text: "Chính sách dữ liệu không rõ ràng, có quảng cáo" },
-    manual: { status: "none", text: "Dễ thất lạc sổ sách hoặc mất file Excel" },
+    subtitle: "Dữ liệu tài chính thuộc về riêng bạn, có bảo mật vân tay và Face ID",
+    tltc: { status: "full", text: "Mã hóa tiêu chuẩn cao, cam kết không bán dữ liệu người dùng" },
+    otherApps: { status: "partial", text: "Chính sách dữ liệu chưa rõ ràng, có thể chia sẻ cho bên thứ ba" },
+    manual: { status: "none", text: "Nguy cơ mất trắng nếu hỏng ổ cứng, xóa nhầm file hoặc mất sổ" },
   },
 ];
 
@@ -70,19 +70,11 @@ export default function CompetitorComparison() {
       <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-700 shadow-2xs">
-            <Zap className="h-4 w-4 text-blue-600" />
-            <span>So Sánh Minh Bạch</span>
-          </div>
-          <h2 className="mt-4 text-2xl font-black tracking-tight sm:text-4xl text-slate-900">
-            Tại Sao Nên Chọn{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Trợ Lý Tài Chính
-            </span>
-            ?
+          <h2 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-950 title-3d">
+            Tại Sao Nên Chọn Trợ Lý Tài Chính?
           </h2>
           <p className="mt-3 text-sm text-slate-600 sm:text-base leading-relaxed">
-            Xem ngay bảng so sánh chi tiết giữa Trợ Lý Tài Chính với phương pháp ghi chép thủ công và các ứng dụng thu phí trên thị trường.
+            Bảng so sánh chi tiết giữa Trợ Lý Tài Chính với phương pháp ghi chép truyền thống và các ứng dụng có phí trên thị trường — giúp bạn dễ dàng chọn giải pháp phù hợp nhất.
           </p>
         </div>
 
@@ -91,23 +83,24 @@ export default function CompetitorComparison() {
           <span>Vuốt ngang để so sánh các tiêu chí</span>
         </div>
 
-        {/* Responsive Comparison Table Container */}
-        <div className="mt-6 sm:mt-12 overflow-x-auto rounded-[2rem] border border-slate-200/90 bg-white p-3 shadow-xl sm:p-6">
+        {/* Responsive Comparison Table Container - Sharp Square Corners (rounded-none) */}
+        <p className="mt-5 text-sm text-slate-600 sm:hidden">Lướt ngang để xem đầy đủ bảng so sánh.</p>
+        <div role="region" aria-label="Bảng so sánh tính năng" tabIndex={0} className="mt-3 sm:mt-12 overflow-x-auto overscroll-x-contain rounded-none border border-slate-200/90 bg-white p-3 shadow-lg sm:p-6">
           <table className="w-full min-w-[760px] border-collapse text-left">
             <thead>
               <tr className="border-b border-slate-200 text-xs sm:text-sm uppercase tracking-wider">
                 <th className="py-4 px-4 font-bold text-slate-500 w-[34%]">Tiêu chí tính năng</th>
 
                 {/* Trợ Lý Tài Chính Column Header - Highlighted */}
-                <th className="py-4 px-4 bg-gradient-to-b from-blue-50/90 to-blue-100/50 rounded-t-2xl border-t-2 border-x border-blue-600 w-[26%] text-blue-900 font-black">
+                <th className="py-4 px-4 bg-gradient-to-b from-blue-50/90 to-blue-100/40 border-x border-blue-200/60 w-[26%] text-blue-900 font-black">
                   <div className="flex items-center gap-2">
-                    <span className="grid h-6 w-6 place-items-center rounded-lg bg-blue-600 text-white font-extrabold text-xs shadow-xs">
+                    <span className="grid h-6 w-6 place-items-center rounded-md bg-blue-600 text-white font-extrabold text-xs shadow-xs">
                       TL
                     </span>
                     <span className="text-sm">Trợ Lý Tài Chính</span>
                   </div>
                   <div className="text-[11px] font-bold text-emerald-600 mt-1 uppercase tracking-wider">
-                    ★ 100% Miễn Phí Trọn Đời
+                    ★ 100% Hoàn Toàn Miễn Phí
                   </div>
                 </th>
 

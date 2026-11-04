@@ -62,7 +62,7 @@ import {
 export default function AiManagementPage() {
   const [activeTab, setActiveTab] = useState("annotation"); // annotation | dataset | playground | config
   const [config, setConfig] = useState(DEFAULT_AI_CONFIG);
-  const [serverSettings, setServerSettings] = useState(null);
+  const [, setServerSettings] = useState(null);
   const [isSavingServer, setIsSavingServer] = useState(false);
   const [isTestingServer, setIsTestingServer] = useState(false);
   const [samples, setSamples] = useState([]);
@@ -80,7 +80,7 @@ export default function AiManagementPage() {
     setConfig(updated);
     aiManagementService.saveConfig(updated);
   };
-  
+
   // Selected sample for Review / Annotation Modal
   const [selectedSample, setSelectedSample] = useState(null);
   const [isReviewOpen, setIsReviewOpen] = useState(false);

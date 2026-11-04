@@ -19,7 +19,7 @@ const ONBOARDING_STEPS = [
     step: "01",
     tag: "Định danh tức thì",
     title: "eKYC 100% Online trong 60 giây",
-    desc: "Chụp CCCD gắn chip và quét khuôn mặt sinh trắc học Face Liveness (tuân thủ Quyết định 2345/QĐ-NHNN). Hệ thống đối chiếu dữ liệu C06 và cấp ngay số tài khoản VIP phong thủy 0đ phí.",
+    desc: "Chụp CCCD gắn chip và quét khuôn mặt sinh trắc học Face Liveness (tuân thủ Quyết định 2345/QĐ-NHNN). Hệ thống đối chiếu dữ liệu C06 và cấp ngay số tài khoản VIP phong thủy hoàn toàn miễn phí.",
     features: [
       "Quét chip NFC & OCR tự động",
       "Xác thực khuôn mặt FIDO2 chống giả mạo",
@@ -62,7 +62,7 @@ export default function InstitutionalOnboarding({ onOpenQr }) {
   return (
     <section id="how-it-works" className="relative overflow-hidden bg-white py-24 sm:py-32 text-slate-900 border-t border-slate-200/80">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10">
-        
+
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-blue-700 shadow-2xs">
@@ -95,11 +95,10 @@ export default function InstitutionalOnboarding({ onOpenQr }) {
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: index * 0.15 }}
               onClick={() => setActiveStep(index)}
-              className={`relative flex flex-col justify-between rounded-[2.25rem] border p-8 transition-all cursor-pointer ${
-                activeStep === index
+              className={`relative flex flex-col justify-between rounded-[2.25rem] border p-8 transition-all cursor-pointer ${activeStep === index
                   ? "border-blue-500 bg-gradient-to-b from-blue-50/50 to-white shadow-xl shadow-blue-500/10 ring-2 ring-blue-500/20"
                   : "border-slate-200/90 bg-white hover:border-slate-300 hover:shadow-md"
-              }`}
+                }`}
             >
               <div>
                 <div className="flex items-center justify-between">
@@ -146,7 +145,7 @@ export default function InstitutionalOnboarding({ onOpenQr }) {
             </span>
             <div>
               <h4 className="text-base sm:text-lg font-black text-white">Sẵn Sàng Mở Tài Khoản Số Đẹp Ngay Bây Giờ?</h4>
-              <p className="text-xs text-slate-300 mt-0.5">Không cần chứng minh thu nhập • Miễn phí trọn đời • Cấp thẻ ảo tức thì</p>
+              <p className="text-xs text-slate-300 mt-0.5">Không cần chứng minh thu nhập • Miễn phí • Cấp thẻ ảo tức thì</p>
             </div>
           </div>
 
@@ -156,7 +155,7 @@ export default function InstitutionalOnboarding({ onOpenQr }) {
               onClick={onOpenQr}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-sky-400 px-6 py-3.5 text-xs font-black text-slate-950 shadow-md transition hover:opacity-95"
             >
-              <span>Mở Tài Khoản eKYC (0đ)</span>
+              <span>Mở Tài Khoản eKYC Miễn Phí</span>
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>

@@ -10,8 +10,8 @@ export const updateAdvertiseApi = async (id, data) => {
   return response.data;
 };
 
-export const getListAdvertiseApi = async (query) => {
-  const response = await instance.get("/advertise", { params: query });
+export const getListAdvertiseApi = async (query, { signal } = {}) => {
+  const response = await instance.get("/advertise", { signal, timeout: 20_000, params: query });
   return response.data;
 };
 

@@ -20,7 +20,7 @@ export default function BankingEcosystemMarquee() {
       {/* 4 Core Metrics Card */}
       <div className="overflow-hidden rounded-[2rem] border border-slate-200/90 bg-white shadow-xl shadow-slate-200/50">
         <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 p-6 sm:p-8 bg-gradient-to-b from-white to-slate-50/50">
-          
+
           {/* Metric 1 */}
           <div className="p-3 sm:p-4 text-center">
             <span className="text-xs uppercase font-extrabold tracking-wider text-slate-500">Cộng đồng tin cậy</span>
@@ -53,9 +53,9 @@ export default function BankingEcosystemMarquee() {
           <div className="p-3 sm:p-4 text-center">
             <span className="text-xs uppercase font-extrabold tracking-wider text-slate-500">Chi phí sử dụng</span>
             <div className="mt-1 flex items-baseline justify-center gap-1">
-              <span className="text-3xl sm:text-4xl font-black text-emerald-600">0 VNĐ</span>
+              <span className="text-3xl sm:text-4xl font-black text-emerald-600">Miễn Phí</span>
             </div>
-            <p className="mt-1 text-xs text-slate-600 font-medium">100% Miễn phí trọn đời • Không quảng cáo</p>
+            <p className="mt-1 text-xs text-slate-600 font-medium">100% Không phí ẩn • Không quảng cáo</p>
           </div>
 
         </div>

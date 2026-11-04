@@ -1,0 +1,10 @@
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { LanguageProvider } from '../../contexts/LanguageContext';
+import ToolsPage from './ToolsPage';
+const root = document.getElementById('root');
+const prerendered = document.documentElement.hasAttribute('data-tools-prerender');
+const app = <LanguageProvider deferStoredLanguage={prerendered}><BrowserRouter><ToolsPage /></BrowserRouter></LanguageProvider>;
+if (['/tools', '/tools/', '/tools/index.html'].includes(location.pathname)) location.replace('/');
+else if (prerendered) hydrateRoot(root, app);
+else createRoot(root).render(app);

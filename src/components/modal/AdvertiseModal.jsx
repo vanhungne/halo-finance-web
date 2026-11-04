@@ -64,26 +64,18 @@ const AdvertiseModal = ({ open, onOpenChange, mode = "create", initialData = nul
         return new Date(year, month - 1, day);
     };
 
-    const convertToDateString = (dateObj) => {
-        if (!dateObj) return "";
-        const day = String(dateObj.getDate()).padStart(2, "0");
-        const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-        const year = dateObj.getFullYear();
-        return `${day}/${month}/${year}`;
-    };
-
     // Validate URL format
     const validateUrl = (url) => {
         if (!url || url.trim() === "") {
             return "Vui lòng nhập liên kết";
         }
         try {
-            const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
             if (!urlPattern.test(url)) {
                 return "Liên kết không hợp lệ. Ví dụ: https://example.com";
             }
             return "";
-        } catch (e) {
+        } catch {
             return "Liên kết không hợp lệ";
         }
     };
