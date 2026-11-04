@@ -1,7 +1,7 @@
 # ──────────────────────────────────────────────────────────────
 # Halo Finance Website — Deploy to Production (Tham khảo từ Halosport)
-# Trigger: Push to main
-# Flow: Lint → Test → Build → rsync to VPS Nginx
+# Trigger: Push to main/master
+# Flow: Build → SCP to VPS Nginx → Verify & Reload Nginx
 # ──────────────────────────────────────────────────────────────
 
 name: "Deploy Website"
@@ -44,31 +44,33 @@ jobs:
         run: |
           npm install --no-audit --no-fund
           npm install --no-save @rollup/rollup-linux-x64-gnu @tailwindcss/oxide-linux-x64-gnu lightningcss-linux-x64-gnu
-      # - run: npm run lint # Bỏ comment nếu dự án có cấu hình lint
-      # - run: npm run test # Bỏ comment nếu dự án có cấu hình test
 
       - name: Build production bundle
         env:
           VITE_APP_URL_API: ${{ secrets.VITE_APP_URL_API || 'https://trolytaichinh.vn/api/' }}
         run: npm run build
 
-      - name: Deploy via rsync over SSH
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: -avz --delete --checksum
-          path: dist/
-          remote_path: /var/www/halo-finance-web/dist/
-          remote_host: ${{ secrets.VPS_HOST || '161.248.179.171' }}
-          remote_user: ${{ secrets.VPS_USERNAME || 'root' }}
-          remote_key: ${{ secrets.VPS_SSH_KEY }}
-          remote_port: ${{ secrets.VPS_SSH_PORT || 22 }}
-
-      - name: Verify deployment
-        uses: appleboy/ssh-action@v1
+      - name: Deploy to VPS via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST || '161.248.179.171' }}
           username: ${{ secrets.VPS_USERNAME || 'root' }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          source: "dist/*"
+          target: "/var/www/halo-finance-web/dist"
+          strip_components: 1
+          overwrite: true
+          rm: true
+
+      - name: Verify deployment
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST || '161.248.179.171' }}
+          username: ${{ secrets.VPS_USERNAME || 'root' }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT || 22 }}
           script: |
             echo "── Checking deployment ──"
@@ -82,4 +84,3 @@ jobs:
               echo "❌ index.html not found!"
               exit 1
             fi
-
