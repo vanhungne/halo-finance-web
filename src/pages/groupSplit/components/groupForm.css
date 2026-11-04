@@ -1,0 +1,43 @@
+.group-form-header { display: flex; align-items: center; justify-content: space-between; flex: 0 0 auto; gap: 16px; padding: 14px 20px 14px 24px; border-bottom: 1px solid #e2e8f0; }
+.landing-page .group-form-header h2 { margin: 0; font-size: 20px; line-height: 1.5; font-weight: 600; letter-spacing: normal; }
+.group-form-remove { display: inline-grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: #64748b; cursor: pointer; }
+.group-form-body { display: flex; flex: 1 1 auto; flex-direction: column; gap: 20px; min-height: 0; padding: 22px 24px; overflow-y: auto; overscroll-behavior: contain; }
+.group-form-fields { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 16px; }
+.group-form-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.group-form-field > label { color: #334155; font-size: 13px; font-weight: 500; line-height: 1.6; }
+.group-form-field > label > span { color: #b42318; }
+.group-form-inline :is(input, select, textarea) { box-sizing: border-box; width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid #bfcadb; border-radius: 8px; background: #fff; color: #0f172a; font: inherit; font-size: 14px; line-height: 1.6; }
+.group-form-inline textarea { resize: vertical; min-height: 80px; }
+.group-form-inline :is(input, textarea)::placeholder { color: #64748b; opacity: 1; }
+.group-form-inline :is(button, input, select, textarea):focus-visible { outline: 2px solid #2845ed; outline-offset: 2px; }
+.group-form-inline :is(input, select, textarea):focus { border-color: #2845ed; }
+.group-form-dialog .group-form-field { gap: 2px; }
+.group-form-dialog .group-form-field > label { font-weight: 600; }
+.group-form-dialog .group-form-member-list { gap: 4px; }
+.group-form-dialog .group-form-member-index { flex-basis: 16px; width: 16px; }
+.group-form-notes { display: flex; flex-direction: column; align-items: stretch; gap: 9px; }
+.group-form-note-toggle { display: inline-flex; align-items: center; align-self: flex-start; min-height: 36px; padding: 0; border: 0; background: transparent; color: #536078; font: inherit; font-size: 13px; cursor: pointer; }
+.group-form-members { padding-top: 16px; border-top: 1px solid #e2e8f0; }
+.group-form-member-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+:is(.group-form-dialog, .group-form-inline) .group-form-member-header h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.6; letter-spacing: normal; }
+.group-form-member-header h3 > span { margin-left: 5px; color: #64748b; font-size: 12px; font-weight: 400; }
+.group-form-add { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; padding: 6px 0 6px 6px; border: 0; border-radius: 6px; background: transparent; color: #2845ed; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.group-form-member-list { display: flex; flex-direction: column; gap: 8px; }
+.group-form-member { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.group-form-member-index { display: inline-grid; place-items: center; flex: 0 0 24px; width: 24px; color: #64748b; font-size: 12px; font-variant-numeric: tabular-nums; }
+.group-form-error { display: flex; align-items: flex-start; gap: 8px; margin: 0; padding: 10px 12px; border-radius: 8px; background: #fff0ee; color: #b42318; font-size: 13px; line-height: 1.7; }
+.group-form-error > svg { flex: 0 0 auto; margin-top: 3px; }
+.group-form-footer { display: flex; justify-content: flex-end; flex: 0 0 auto; align-items: center; gap: 10px; padding: 14px 24px; border-top: 1px solid #e2e8f0; background: #fff; }
+.group-form-footer > div { display: flex; gap: 10px; }
+.group-form-footer button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 18px; border: 0; border-radius: 8px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.group-form-cancel { background: #f1f5f9; color: #334155; }
+.group-form-submit { background: #2845ed; color: #fff; }
+.group-form-remove:disabled { opacity: .35; cursor: default; }
+@media (hover: hover) { .group-form-remove:not(:disabled):hover { color: #b42318; background: #fff0ee; } .group-form-submit:hover { background: #2037c3; } }
+@media (max-width: 639px) {
+  .group-form-header { padding: 10px 12px 10px 18px; }
+  .group-form-body { padding: 18px; gap: 16px; }
+  .group-form-fields { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .group-form-inline :is(input, select, textarea) { font-size: 16px; }
+  .group-form-footer { padding: 12px 18px; }
+}

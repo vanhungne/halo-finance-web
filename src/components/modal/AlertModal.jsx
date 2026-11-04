@@ -31,9 +31,6 @@ const AlertModal = ({
         return () => (document.body.style.overflow = "auto");
     }, [isOpen]);
 
-    if (typeof document === "undefined") return null;
-    const modalRoot = document.getElementById("modal-root");
-    if (!modalRoot) return null;
     const [countdown, setCountdown] = useState(duration / 1000);
     const [progress, setProgress] = useState(100);
 
@@ -53,20 +50,20 @@ const AlertModal = ({
                 }
                 return newCountdown;
             });
-        }, 1000);
 
-        const progressInterval = setInterval(() => {
             setProgress(prev => {
-                const next = prev - 100 / (duration / 100);
-                return next <= 0 ? 0 : next;
+                const step = 100 / (duration / 100);
+                const newProgress = prev - step;
+                return newProgress <= 0 ? 0 : newProgress;
             });
         }, 100);
 
-        return () => {
-            clearInterval(interval);
-            clearInterval(progressInterval);
-        };
+        return () => clearInterval(interval);
     }, [isOpen, autoClose, duration, onClose]);
+
+    if (typeof document === "undefined") return null;
+    const modalRoot = document.getElementById("modal-root");
+    if (!modalRoot) return null;
 
     if (!isOpen) return null;
 

@@ -1,0 +1,32 @@
+.tool-currency-flag { display: inline-block; width: 28px; height: 21px; flex: 0 0 auto; object-fit: cover; border-radius: 3px; box-shadow: 0 0 0 1px rgb(15 23 42 / 10%); vertical-align: middle; }
+.tool-currency-flag--generic { box-shadow: none; color: #536078; object-fit: contain; }
+.tool-presets button.tool-currency-preset { display: inline-flex; gap: 8px; align-items: center; }
+.tool-currency-preset .tool-currency-flag { width: 22px; height: 16.5px; }
+.tool-currency-pair-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 14px; font-weight: 500; color: #334155; }
+.tool-currency-pair-label > span { display: inline-flex; align-items: center; gap: 8px; }
+.tool-metal-image { display: block; flex-shrink: 0; object-fit: contain; }
+.tools-card > .tool-metal-image { width: 38px; height: 38px; }
+.tool-currency-emblem { position: relative; display: inline-block; width: 36px; height: 32px; flex: 0 0 36px; }
+.tool-currency-emblem .tool-currency-flag { position: absolute; width: 24px; height: 18px; top: 0; left: 0; }
+.tool-currency-emblem .tool-currency-flag + .tool-currency-flag { top: 13px; left: 12px; }
+.tools-card > .tool-currency-emblem { margin-top: 3px; }
+.financial-tools-item__icon:has(.tool-metal-image), .financial-tools-item__icon:has(.tool-currency-emblem) { background: transparent; }
+.financial-tools-item__icon .tool-currency-emblem { transform: scale(.8); transform-origin: center; }
+.tools-intro--illustrated { display: flex; align-items: center; gap: 26px; }
+.tools-intro__visual { flex: 0 0 96px; width: 96px; height: 96px; display: grid; place-items: center; }
+.tools-intro__visual .tool-metal-image { width: 96px; height: 96px; }
+.tools-intro__visual .tool-currency-emblem { transform: scale(2); }
+.tool-label.tool-metal-label { display: inline-flex; align-items: center; gap: 8px; }
+.tool-metal-label .tool-metal-image { width: 24px; height: 24px; }
+@media (max-width: 560px) {
+  .tools-intro--illustrated { align-items: flex-start; gap: 16px; }
+  .tools-intro__visual { width: 52px; height: 60px; flex-basis: 52px; }
+  .tools-intro__visual .tool-metal-image { width: 52px; height: 52px; }
+  .tools-intro__visual .tool-currency-emblem { transform: scale(1.25); }
+  .tools-intro--illustrated > div:last-child { min-width: 0; }
+  .tools-intro--illustrated h1 { font-size: clamp(24px, 6.5vw, 32px); }
+  .tool-pair:has(.tool-currency-trigger) { display: grid; grid-template-columns: minmax(0, 1fr) 44px; align-items: end; gap: 0 10px; }
+  .tool-pair:has(.tool-currency-trigger) .tool-field { min-width: 0; }
+  .tool-pair:has(.tool-currency-trigger) .tool-field:last-child { grid-column: 1 / -1; }
+  .tool-pair:has(.tool-currency-trigger) .swap { padding: 10px; }
+}

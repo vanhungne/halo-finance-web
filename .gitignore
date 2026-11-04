@@ -26,3 +26,9 @@ dist-ssr
 *.sln
 *.sw?
 *.zip
+screenshot*.png
+shot.png
+scroll-*.png
+desktop-*.png
+mobile-*.png
+

@@ -285,18 +285,6 @@ function LoginPage() {
             </button>
             <p id="google-login-status" className="mt-2 text-center text-xs text-slate-400">Đăng nhập Google chưa khả dụng trên cổng quản trị.</p>
 
-            {/* Quick Demo Access */}
-            <div className="mt-4 pt-4 border-t border-white/10 text-center">
-              <button
-                type="button"
-                onClick={() => navigate("/app")}
-                className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 text-emerald-300 font-extrabold text-xs transition hover:bg-emerald-500/30 flex items-center justify-center gap-2 shadow-inner"
-              >
-                <span>🚀 Trải Nghiệm Bản Demo Internet Banking (Khách Hàng)</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-
             <button
               type="button"
               onClick={() => navigate("/")}

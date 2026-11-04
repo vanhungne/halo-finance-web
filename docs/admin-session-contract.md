@@ -1,5 +1,12 @@
 # Admin browser session coordination — 2026-10-16
 
+01/11 local verification follow-up: `adminRealSession.browser.mjs` targets the
+submit button inside the email login form, preserving the real login journey
+after its caption became “Đăng nhập hệ thống”. No product UI or CI/CD change.
+The existing actual Program/PostgreSQL/Chrome test passes1/1 with rotation,
+revocation, logout and restart; scoped driver ESLint0/0. Runtime Playwright was
+installed only in an owned external QA directory. [Current evidence and limits](../../docs/CI_VALIDATION_2026-11-01.md).
+
 Merge compatibility, 2026-10-20: the new login appearance still calls the existing
 coordinator's `login`/`verifyTwoFactor` methods and uses its session-error catalog.
 The provider and shared Axios instance retain one refresh owner. Admin role

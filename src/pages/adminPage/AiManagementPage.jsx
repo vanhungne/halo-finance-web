@@ -62,7 +62,7 @@ import {
 export default function AiManagementPage() {
   const [activeTab, setActiveTab] = useState("annotation"); // annotation | dataset | playground | config
   const [config, setConfig] = useState(DEFAULT_AI_CONFIG);
-  const [serverSettings, setServerSettings] = useState(null);
+  const [, setServerSettings] = useState(null);
   const [isSavingServer, setIsSavingServer] = useState(false);
   const [isTestingServer, setIsTestingServer] = useState(false);
   const [samples, setSamples] = useState([]);
@@ -946,7 +946,7 @@ export default function AiManagementPage() {
                   <Input
                     value={config.gatewayUrl}
                     onChange={(e) => setConfig({ ...config, gatewayUrl: e.target.value })}
-                    placeholder="https://gemini.amz.io.vn"
+                    placeholder="https://gemini.amzpro.space"
                     className="text-xs font-mono"
                   />
                   <Button

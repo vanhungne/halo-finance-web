@@ -1,203 +1,240 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Activity, CheckCircle, RotateCcw, ArrowRight, ShieldCheck, AlertCircle } from "lucide-react";
+import { useRef, useState } from 'react';
+import { ArrowLeft, ArrowRight, Check, RotateCcw } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
+import {
+  ADVICE, BANDS, MAINTENANCE, OPTIONS, QUESTIONS, STRENGTHS, evaluateSurvey,
+} from './financialWellbeing.mjs';
+import './financialHealthCheck.css';
 
-const QUESTIONS = [
-  {
-    id: 1,
-    question: "Bạn thường tiết kiệm được bao nhiêu % thu nhập hàng tháng?",
-    options: [
-      { text: "Không tiết kiệm được đồng nào, thường hết sạch", score: 5 },
-      { text: "Dưới 10% thu nhập", score: 15 },
-      { text: "Từ 15% đến 30% thu nhập (Khuyên dùng)", score: 25 },
-      { text: "Trên 35% thu nhập mỗi tháng", score: 30 },
-    ],
+const COPY = {
+  vi: {
+    title: 'Hiểu sức khỏe tài chính của bạn',
+    intro: 'Không chỉ là thu nhập. Cùng nhìn lại mức độ an tâm, khả năng xoay xở và cảm giác kiểm soát tiền bạc của bạn qua 10 câu hỏi.',
+    instruction: 'Chọn câu trả lời sát với hoàn cảnh hiện tại của bạn. Không có câu trả lời đúng hay sai.',
+    steps: ['Cảm nhận về tài chính', 'Thói quen & trải nghiệm'],
+    partTitles: ['Phần 1: Những nhận định này mô tả bạn đến mức nào?', 'Phần 2: Những điều này xảy ra với bạn thường xuyên thế nào?'],
+    answered: 'Đã trả lời', question: 'Câu', completed: 'câu',
+    next: 'Tiếp tục phần 2', back: 'Quay lại phần 1', submit: 'Xem kết quả',
+    missing: 'Bạn còn câu chưa trả lời. Hãy hoàn tất các mục được đánh dấu bên dưới.',
+    required: 'Vui lòng chọn một câu trả lời.',
+    about: 'Một chút thông tin để quy đổi điểm',
+    aboutHint: 'Độ tuổi và cách hoàn thành khảo sát quyết định cột quy đổi điểm. Hai mục này không cộng thêm điểm.',
+    age: 'Bạn thuộc nhóm tuổi nào?', ages: ['18–61 tuổi', 'Từ 62 tuổi'],
+    mode: 'Bạn đã hoàn thành khảo sát như thế nào?',
+    modes: ['Tôi tự đọc và trả lời', 'Có người đọc câu hỏi cho tôi trả lời'],
+    caveat: 'Kết quả chỉ mang tính tự đánh giá, không phải điểm tín dụng hay tư vấn tài chính cá nhân.',
+    resultTitle: 'Kết quả tự đánh giá của bạn', score: 'Điểm tham khảo',
+    band: 'Mức đánh giá', pointUnit: 'điểm',
+    resultIntro: 'Đây là ảnh chụp cảm nhận hiện tại, không phải kết luận về năng lực hay giá trị của bạn. Hãy ưu tiên bước phù hợp với hoàn cảnh thực tế.',
+    strengths: 'Điều đang hỗ trợ bạn', nextSteps: 'Bước tiếp theo dành cho bạn',
+    answerReason: 'Dựa trên câu', maintenance: 'Gợi ý duy trì',
+    noStrength: 'Bạn đã dành thời gian nhìn lại tiền bạc. Bắt đầu từ một việc nhỏ dưới đây là đủ; không cần thay đổi tất cả cùng lúc.',
+    noPriority: 'Các câu trả lời cho thấy bạn ít gặp khó khăn ở những khía cạnh được hỏi. Bạn có thể tập trung duy trì và rà soát định kỳ.',
+    editorial: 'Các bước gợi ý được tổng hợp từ câu trả lời của bạn và chỉ mang tính tham khảo.',
+    edit: 'Xem lại câu trả lời', reset: 'Làm lại', app: 'Ghi chép thu chi cùng ứng dụng',
   },
-  {
-    id: 2,
-    question: "Nếu bất ngờ mất nguồn thu, quỹ dự phòng của bạn duy trì sinh hoạt được bao lâu?",
-    options: [
-      { text: "Chưa có quỹ dự phòng, chỉ sống qua ngày", score: 5 },
-      { text: "Duy trì được từ 1 đến 2 tháng", score: 15 },
-      { text: "Duy trì từ 3 đến 6 tháng sinh hoạt cơ bản", score: 25 },
-      { text: "Duy trì trên 6 tháng đến 1 năm", score: 30 },
-    ],
+  en: {
+    title: 'Understand your financial well-being',
+    intro: 'It is about more than income. Reflect on your sense of security, ability to cope and control over money with 10 questions.',
+    instruction: 'Choose the answer closest to your current situation. There are no right or wrong answers.',
+    steps: ['How things feel', 'Habits & experiences'],
+    partTitles: ['Part 1: How well does this statement describe you or your situation?', 'Part 2: How often does this statement apply to you?'],
+    answered: 'Answered', question: 'Question', completed: 'questions',
+    next: 'Continue to part 2', back: 'Back to part 1', submit: 'See my results',
+    missing: 'Some answers are missing. Please complete the marked items below.',
+    required: 'Please select an answer.',
+    about: 'A little information for scoring',
+    aboutHint: 'Age and administration method determine the score conversion column. These two items do not add points.',
+    age: 'How old are you?', ages: ['18–61', '62+'],
+    mode: 'How did you take the questionnaire?',
+    modes: ['I read the questions myself', 'Someone read the questions to me'],
+    caveat: 'This is a self-assessment for reference, not a credit score or personal financial advice.',
+    resultTitle: 'Your self-assessment results', score: 'Reference score', band: 'Assessment level', pointUnit: 'points',
+    resultIntro: 'This is a snapshot of how things feel now, not a judgment of your ability or worth. Choose the steps that fit your actual circumstances.',
+    strengths: 'What is supporting you', nextSteps: 'Next steps for you', answerReason: 'Based on question', maintenance: 'To keep things on track',
+    noStrength: 'You have taken time to reflect on money. One small step below is enough to start; you do not need to change everything at once.',
+    noPriority: 'Your answers suggest fewer difficulties in the areas covered. You can focus on maintaining progress and reviewing regularly.',
+    editorial: 'These suggestions are based on your answers and are for reference only.',
+    edit: 'Review my answers', reset: 'Start again', app: 'Track money with the app',
   },
-  {
-    id: 3,
-    question: "Các khoản nợ phải trả hàng tháng (trả góp, vay mượn) chiếm bao nhiêu thu nhập?",
-    options: [
-      { text: "Chiếm trên 50% thu nhập hàng tháng (Báo động)", score: 5 },
-      { text: "Chiếm từ 30% đến 50% thu nhập", score: 15 },
-      { text: "Dưới 30% thu nhập (Mức an toàn)", score: 20 },
-      { text: "Hoàn toàn không có khoản nợ nào", score: 25 },
-    ],
-  },
-  {
-    id: 4,
-    question: "Bạn ghi chép và kiểm soát các khoản chi tiêu hàng ngày như thế nào?",
-    options: [
-      { text: "Không bao giờ ghi chép, nhớ đâu tiêu đó", score: 0 },
-      { text: "Thỉnh thoảng ghi chép khi thấy hết tiền", score: 5 },
-      { text: "Ghi chép bằng sổ tay hoặc file Excel rời rạc", score: 10 },
-      { text: "Ghi chép đều đặn và có ngân sách rõ ràng", score: 15 },
-    ],
-  },
-];
+};
 
 export default function FinancialHealthCheck() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const { isEnglish } = useLanguage();
+  const lang = isEnglish ? 'en' : 'vi';
+  const copy = COPY[lang];
+  const [part, setPart] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [age, setAge] = useState('');
+  const [mode, setMode] = useState('');
+  const [attempted, setAttempted] = useState(false);
+  const [complete, setComplete] = useState(false);
+  const panelRef = useRef(null);
+  const headingRef = useRef(null);
+  const visibleQuestions = part === 0 ? QUESTIONS.slice(0, 6) : QUESTIONS.slice(6);
+  const answered = QUESTIONS.filter((question) => Number.isInteger(answers[question.id])).length;
+  const missingIds = visibleQuestions.filter((question) => !Number.isInteger(answers[question.id])).map((question) => String(question.id));
+  if (part === 1) {
+    if (!age) missingIds.push('age');
+    if (!mode) missingIds.push('mode');
+  }
+  const result = complete ? evaluateSurvey(answers, age, mode) : null;
 
-  const handleSelectOption = (questionId, score) => {
-    const updated = { ...answers, [questionId]: score };
-    setAnswers(updated);
+  function focusHeading() {
+    requestAnimationFrame(() => {
+      headingRef.current?.focus({ preventScroll: true });
+      panelRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    });
+  }
 
-    if (currentStep < QUESTIONS.length - 1) {
-      setCurrentStep((prev) => prev + 1);
-    } else {
-      setIsCompleted(true);
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (missingIds.length) {
+      setAttempted(true);
+      requestAnimationFrame(() => {
+        const field = panelRef.current?.querySelector(`[data-question="${missingIds[0]}"]`);
+        field?.scrollIntoView({ block: 'center', behavior: 'instant' });
+        field?.querySelector('input')?.focus({ preventScroll: true });
+      });
+      return;
     }
-  };
+    setAttempted(false);
+    if (part === 0) setPart(1);
+    else setComplete(true);
+    focusHeading();
+  }
 
-  const handleReset = () => {
+  function navigateBack() {
+    setPart(0);
+    setComplete(false);
+    setAttempted(false);
+    focusHeading();
+  }
+
+  function reset() {
     setAnswers({});
-    setCurrentStep(0);
-    setIsCompleted(false);
-  };
+    setAge('');
+    setMode('');
+    navigateBack();
+  }
 
-  // Calculate total score (max 100)
-  const totalScore = Object.values(answers).reduce((sum, val) => sum + val, 0);
-
-  const getEvaluation = (score) => {
-    if (score >= 80) {
-      return {
-        level: "Rất Vững Vàng",
-        tone: "text-emerald-500",
-        badgeBg: "bg-emerald-100 text-emerald-800",
-        advice:
-          "Chúc mừng bạn! Kỷ luật tài chính của bạn rất xuất sắc. Bước tiếp theo là tối ưu danh mục tài sản đầu tư và gia tăng tỷ suất sinh lời cùng Halo Finance.",
-      };
-    } else if (score >= 50) {
-      return {
-        level: "Khá Ổn Định",
-        tone: "text-sky-500",
-        badgeBg: "bg-sky-100 text-sky-800",
-        advice:
-          "Bạn đã có ý thức tích lũy nhưng cần gia cố quỹ khẩn cấp lên mốc 6 tháng và theo dõi sát các khoản chi lặt vặt để không bị rò rỉ dòng tiền.",
-      };
-    } else {
-      return {
-        level: "Cần Cải Thiện Ngay",
-        tone: "text-amber-500",
-        badgeBg: "bg-amber-100 text-amber-800",
-        advice:
-          "Dòng tiền của bạn đang có rủi ro cao khi gặp biến cố. Hãy cài đặt ngay Halo Finance để bóc tách thu chi, lập hạn mức ngân sách và cắt giảm chi tiêu không cần thiết.",
-      };
-    }
-  };
-
-  const evaluation = getEvaluation(totalScore);
+  function aboutField(field, title, values, labels, selected, setSelected) {
+    const invalid = attempted && missingIds.includes(field);
+    return (
+      <fieldset className="financial-survey__about-field" data-question={field} aria-describedby={invalid ? `survey-error-${field}` : undefined}>
+        <legend>{title}</legend>
+        <div className="financial-survey__about-options">
+          {values.map((value, index) => (
+            <label key={value} className={selected === value ? 'is-selected' : ''}>
+              <input type="radio" name={`wellbeing-${field}`} value={value} checked={selected === value} onChange={() => setSelected(value)} required />
+              <span>{labels[index]}</span>
+            </label>
+          ))}
+        </div>
+        {invalid && <span id={`survey-error-${field}`} className="financial-survey__error">{copy.required}</span>}
+      </fieldset>
+    );
+  }
 
   return (
-    <section id="health-check" className="py-24 sm:py-32 bg-[#f4f7f6]">
-      <div className="mx-auto max-w-[1180px] px-5 sm:px-8 lg:px-12">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-widest text-teal-700 mb-4">
-            <Activity className="w-3.5 h-3.5 text-teal-600" />
-            Trắc Nghiệm Tài Chính Nhanh Trong 1 Phút
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-            Chấm Điểm Sức Khỏe Tài Chính Của Bạn
+    <section id="health-check" className="py-20 sm:py-28 bg-slate-50/70 border-t border-slate-200/80" aria-labelledby="health-check-title">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 lg:px-12">
+        <div className="financial-survey__intro">
+          <h2 id="health-check-title" className="text-3xl sm:text-4xl lg:text-[2.65rem] font-black tracking-tight text-slate-950 title-3d">
+            {copy.title}
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600">
-            Khám phá xem kế hoạch chi tiêu và tích lũy của bạn đang ở mức độ nào để có lộ trình cải thiện rõ ràng.
-          </p>
+          <p>{copy.intro}</p>
         </div>
-
-        {/* Quiz Box Container */}
-        <div className="mt-12 rounded-[2.5rem] border border-slate-200 bg-white p-6 sm:p-10 shadow-xl max-w-2xl mx-auto relative overflow-hidden">
-          {!isCompleted ? (
-            <div>
-              {/* Progress Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Câu hỏi {currentStep + 1} / {QUESTIONS.length}
-                </span>
-                <span className="text-xs font-black text-sky-600">
-                  {Math.round(((currentStep + 1) / QUESTIONS.length) * 100)}%
-                </span>
+        <div className="financial-survey" ref={panelRef}>
+          {!result ? (
+            <form noValidate onSubmit={handleSubmit}>
+              <ol className="financial-survey__steps" aria-label={isEnglish ? 'Survey progress' : 'Tiến trình khảo sát'}>
+                {copy.steps.map((label, index) => (
+                  <li key={index} aria-current={part === index ? 'step' : undefined} className={part === index ? 'is-current' : part > index ? 'is-done' : ''}>
+                    <span>{part > index ? <Check size={16} aria-hidden="true" /> : index + 1}</span>{label}
+                  </li>
+                ))}
+              </ol>
+              <div className="financial-survey__progress-label" role="status">{copy.answered} <strong>{answered}/10</strong> {copy.completed}</div>
+              <progress className="financial-survey__progress" value={answered} max="10" aria-label={`${copy.answered} ${answered}/10`} />
+              <div className="financial-survey__part-heading">
+                <h3 ref={headingRef} tabIndex={-1}>{copy.partTitles[part]}</h3>
+                <p>{copy.instruction}</p>
               </div>
-              <div className="h-1.5 w-full bg-slate-100 rounded-full mt-2 overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-sky-500 to-teal-500 transition-all duration-300 rounded-full"
-                  style={{ width: `${((currentStep + 1) / QUESTIONS.length) * 100}%` }}
-                />
+              {attempted && missingIds.length > 0 && <p className="financial-survey__error-summary" role="alert">{copy.missing}</p>}
+              <div className="financial-survey__questions">
+                {visibleQuestions.map((question) => {
+                  const invalid = attempted && missingIds.includes(String(question.id));
+                  return (
+                    <fieldset key={question.id} data-question={question.id} className="financial-survey__question" aria-describedby={invalid ? `survey-error-${question.id}` : undefined}>
+                      <legend><span className="financial-survey__number">{String(question.id).padStart(2, '0')}.</span>{question[lang]}</legend>
+                      <div className="financial-survey__scale">
+                        {OPTIONS[lang][part].map((label, index) => (
+                          <label key={index} className={answers[question.id] === index ? 'is-selected' : ''}>
+                            <input type="radio" name={`wellbeing-${question.id}`} value={index} checked={answers[question.id] === index} onChange={() => setAnswers((previous) => ({ ...previous, [question.id]: index }))} required />
+                            <span>{label}</span>
+                          </label>
+                        ))}
+                      </div>
+                      {invalid && <span id={`survey-error-${question.id}`} className="financial-survey__error">{copy.required}</span>}
+                    </fieldset>
+                  );
+                })}
               </div>
-
-              {/* Question */}
-              <div className="mt-6">
-                <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-snug">
-                  {QUESTIONS[currentStep].question}
-                </h3>
-
-                {/* Options List */}
-                <div className="mt-6 space-y-3">
-                  {QUESTIONS[currentStep].options.map((opt, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => handleSelectOption(QUESTIONS[currentStep].id, opt.score)}
-                      className="w-full text-left p-4 rounded-2xl border border-slate-200 hover:border-sky-400 hover:bg-sky-50/50 hover:shadow-sm transition-all duration-200 flex items-center justify-between group"
-                    >
-                      <span className="text-sm font-semibold text-slate-700 group-hover:text-slate-950">
-                        {opt.text}
-                      </span>
-                      <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-sky-600 group-hover:translate-x-1 transition" />
-                    </button>
-                  ))}
+              {part === 1 && (
+                <div className="financial-survey__about">
+                  <h4>{copy.about}</h4>
+                  <p>{copy.aboutHint}</p>
+                  {aboutField('age', copy.age, ['18-61', '62+'], copy.ages, age, setAge)}
+                  {aboutField('mode', copy.mode, ['self', 'assisted'], copy.modes, mode, setMode)}
+                </div>
+              )}
+              <div className="financial-survey__actions">
+                {part === 1 && <button className="financial-survey__button financial-survey__button--secondary" type="button" onClick={navigateBack}><ArrowLeft size={17} aria-hidden="true" />{copy.back}</button>}
+                <button className="financial-survey__button financial-survey__button--primary" type="submit">{part === 0 ? copy.next : copy.submit}<ArrowRight size={17} aria-hidden="true" /></button>
+              </div>
+            </form>
+          ) : (
+            <div className="financial-survey__result" data-score-band={result.band.min}>
+              <div className="financial-survey__result-summary">
+                <h3 ref={headingRef} tabIndex={-1}>{copy.resultTitle}</h3>
+                <div className="financial-survey__score-row">
+                  <div><span className="financial-survey__small-label">{copy.score}</span><div className="financial-survey__score"><strong className="financial-survey__status-value">{result.score}</strong><span>/ 100</span></div></div>
+                  <div className="financial-survey__band"><span className="financial-survey__small-label">{copy.band}</span><strong className="financial-survey__status-value">{result.band[lang]}</strong><span>{result.band.min}–{result.band.max} {copy.pointUnit}</span></div>
+                </div>
+                <div className="financial-survey__score-scale" role="img" aria-label={`${copy.score}: ${result.score}/100. ${copy.band}: ${result.band[lang]}.`}>
+                  <div className="financial-survey__score-track" aria-hidden="true">
+                    {BANDS.map((band) => <span key={band.min} className={band.min === result.band.min ? 'is-current' : ''} style={{ width: `${(band.max === 100 ? 100 : band.max + 1) - band.min}%` }} />)}
+                    <i className="financial-survey__score-marker" style={{ left: `${result.score}%` }} />
+                  </div>
+                  <div className="financial-survey__score-endpoints" aria-hidden="true"><span>0 {copy.pointUnit}</span><span>100 {copy.pointUnit}</span></div>
                 </div>
               </div>
-            </div>
-          ) : (
-            /* Result Screen */
-            <div className="text-center py-4 space-y-6">
-              <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-teal-50 border-4 border-teal-100 text-teal-600 mb-2">
-                <Activity className="w-10 h-10" />
+              <p>{copy.resultIntro}</p>
+              <p className="financial-survey__caveat">{copy.caveat}</p>
+              <div className="financial-survey__strengths">
+                <h4>{copy.strengths}</h4>
+                {result.strengths.length ? <ul>{result.strengths.map((key) => <li key={key}><Check size={17} aria-hidden="true" /><span>{STRENGTHS[key][lang]}</span></li>)}</ul> : <p>{copy.noStrength}</p>}
               </div>
-
-              <div>
-                <span className={`inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-2 ${evaluation.badgeBg}`}>
-                  Cấp Độ: {evaluation.level}
-                </span>
-                <h3 className="text-4xl sm:text-5xl font-black text-slate-950">
-                  {totalScore} <span className="text-xl font-bold text-slate-400">/ 100 Điểm</span>
-                </h3>
+              <div className="financial-survey__recommendations">
+                <h4>{copy.nextSteps}</h4>
+                {result.priorities.length === 0 && <p>{copy.noPriority}</p>}
+                <ol>
+                  {result.priorities.map((priority) => (
+                    <li key={priority.key}>
+                      <strong>{ADVICE[priority.key][lang][0]}</strong>
+                      <p>{ADVICE[priority.key][lang][1]}</p>
+                      <small>{copy.answerReason} {priority.questionId}: “{QUESTIONS[priority.questionId - 1][lang]}” — {OPTIONS[lang][priority.questionId <= 6 ? 0 : 1][answers[priority.questionId]]}.</small>
+                    </li>
+                  ))}
+                  {MAINTENANCE[lang].slice(0, 3 - result.priorities.length).map(([title, description]) => <li key={title}><strong>{title}</strong><p>{description}</p><small>{copy.maintenance}</small></li>)}
+                </ol>
+                <p className="financial-survey__editorial">{copy.editorial}</p>
               </div>
-
-              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-left text-sm text-slate-700 leading-relaxed">
-                <p className="font-bold text-slate-900 mb-1">Lời khuyên dành riêng cho bạn:</p>
-                <p>{evaluation.advice}</p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                <a
-                  href="#download"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-950 text-white font-black text-sm hover:bg-sky-600 shadow-md transition"
-                >
-                  Bắt đầu Cải Thiện Tài Chính Ngay
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold text-sm hover:bg-slate-100 transition"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  Làm lại bài trắc nghiệm
-                </button>
+              <div className="financial-survey__actions financial-survey__actions--result">
+                <button type="button" className="financial-survey__button financial-survey__button--secondary" onClick={navigateBack}>{copy.edit}</button>
+                <button type="button" className="financial-survey__button financial-survey__button--text" onClick={reset}><RotateCcw size={16} aria-hidden="true" />{copy.reset}</button>
+                <a href="#download" className="financial-survey__button financial-survey__button--primary financial-survey__app-link">{copy.app}<ArrowRight size={17} aria-hidden="true" /></a>
               </div>
             </div>
           )}

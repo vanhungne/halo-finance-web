@@ -98,7 +98,7 @@ export const SHOWCASE_FEATURES = [
     id: "investments",
     title: "Quản Lý Tài Sản Đầu Tư",
     subtitle: "Vàng, Cổ phiếu & BĐS",
-    description: "Theo dõi toàn bộ danh mục tài sản sinh lời: Vàng SJC, danh mục cổ phiếu, sổ tiết kiệm và bất động sản.",
+    description: "Theo dõi toàn bộ danh mục tài sản sinh lời: Vàng SJC, danh mục cổ phiếu, chứng chỉ quỹ và bất động sản.",
     icon: TrendingUp,
     badge: "Chuyên sâu",
     color: "from-amber-500 to-orange-600",
@@ -111,7 +111,7 @@ export const SHOWCASE_FEATURES = [
       assets: [
         { name: "Vàng SJC (3 lượng)", value: "258.000.000 đ", change: "+12.4%" },
         { name: "Cổ phiếu FPT, HPG", value: "342.000.000 đ", change: "+18.6%" },
-        { name: "Tiết kiệm BIDV 12T", value: "320.000.000 đ", change: "+5.6%" },
+        { name: "Chứng chỉ quỹ đầu tư", value: "320.000.000 đ", change: "+7.2%" },
         { name: "BĐS Căn hộ cho thuê", value: "500.000.000 đ", change: "+8.0%" },
       ],
     },
@@ -139,26 +139,24 @@ export const SHOWCASE_FEATURES = [
     },
   },
   {
-    id: "savings-goals",
-    title: "Sổ Tiết Kiệm & Mục Tiêu Tài Chính",
-    subtitle: "Lộ trình rõ ràng",
-    description: "Thiết lập mục tiêu mua nhà, mua xe hay quỹ khẩn cấp. Theo dõi tiến độ tích lũy tự động từng ngày.",
-    icon: PiggyBank,
-    badge: "Thói quen tốt",
-    color: "from-violet-500 to-purple-600",
-    textColor: "text-violet-500",
-    bgLight: "bg-violet-50 text-violet-700 border-violet-200",
+    id: "accounting-reports",
+    title: "Báo Cáo Tài Chính & Đối Soát",
+    subtitle: "Chuẩn mực tài chính",
+    description: "Phân tích dòng tiền trực quan, đối soát số dư đa ví và xuất file Excel/PDF chi tiết chuẩn mực kế toán.",
+    icon: FileSpreadsheet,
+    badge: "Chuẩn xác 100%",
+    color: "from-blue-500 to-indigo-600",
+    textColor: "text-blue-500",
+    bgLight: "bg-blue-50 text-blue-700 border-blue-200",
     phoneScreen: {
-      headerTitle: "Mục Tiêu Tích Lũy",
-      status: "Đạt 68% kế hoạch",
-      goalTitle: "Quỹ Khẩn Cấp 6 Tháng",
-      current: "81.600.000 đ",
-      target: "120.000.000 đ",
-      progress: 68,
-      milestones: [
-        { label: "Mỗi tháng trích tự động", val: "5.000.000 đ" },
-        { label: "Dự kiến về đích", val: "Tháng 04/2027" },
-        { label: "Lãi suất tiền gửi", val: "5.8% / năm" },
+      headerTitle: "Báo Cáo Kế Toán",
+      status: "Thặng dư: +26.550.000 đ",
+      reportTitle: "Báo Cáo Dòng Tiền Tháng 10",
+      surplus: "+26.550.000 đ",
+      breakdown: [
+        { label: "Thu nhập lương & thưởng", val: "38.500.000 đ" },
+        { label: "Thu nhập quỹ kinh doanh", val: "6.700.000 đ" },
+        { label: "Chi tiêu sinh hoạt thiết yếu", val: "18.650.000 đ" },
       ],
     },
   },
@@ -477,22 +475,18 @@ export default function InteractiveShowcase() {
                         </div>
                       )}
 
-                      {/* 6. SAVINGS GOALS VIEW */}
-                      {activeFeature.id === "savings-goals" && (
+                      {/* 6. ACCOUNTING REPORTS VIEW */}
+                      {activeFeature.id === "accounting-reports" && (
                         <div className="space-y-3">
-                          <div className="p-3 rounded-xl bg-violet-950/30 border border-violet-500/30">
-                            <p className="text-[0.65rem] text-violet-300 font-bold">{activeFeature.phoneScreen.goalTitle}</p>
-                            <p className="text-base font-black text-white mt-1">{activeFeature.phoneScreen.current}</p>
-                            <div className="mt-2 h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                              <div className="h-full bg-violet-500 rounded-full" style={{ width: `${activeFeature.phoneScreen.progress}%` }} />
-                            </div>
-                            <div className="flex justify-between text-[0.65rem] text-slate-400 mt-1">
-                              <span>Mục tiêu: {activeFeature.phoneScreen.target}</span>
-                              <span className="text-violet-400 font-bold">{activeFeature.phoneScreen.progress}%</span>
+                          <div className="p-3 rounded-xl bg-blue-950/30 border border-blue-500/30">
+                            <p className="text-[0.65rem] text-blue-300 font-bold">{activeFeature.phoneScreen.reportTitle}</p>
+                            <div className="flex justify-between items-baseline mt-1">
+                              <span className="text-xs text-slate-400">Thặng dư ròng:</span>
+                              <span className="text-base font-black text-emerald-400">{activeFeature.phoneScreen.surplus}</span>
                             </div>
                           </div>
                           <div className="space-y-1.5">
-                            {activeFeature.phoneScreen.milestones.map((m, i) => (
+                            {activeFeature.phoneScreen.breakdown.map((m, i) => (
                               <div key={i} className="flex justify-between text-[0.68rem] p-2 rounded-lg bg-white/5">
                                 <span className="text-slate-400">{m.label}</span>
                                 <span className="font-bold text-white">{m.val}</span>

@@ -5,6 +5,7 @@ import typography from '@tailwindcss/typography'
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: { manifest: true },
   plugins: [
     react(),
     tailwindcss({

@@ -1,115 +1,198 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../contexts/LanguageContext";
 import {
   Users,
   Briefcase,
-  TrendingUp,
-  CheckCircle2,
-  ArrowRight,
   Wallet,
-  Building,
+  ArrowRight,
   Receipt,
   PiggyBank,
+  CheckCircle2,
+  TrendingUp,
   FileSpreadsheet,
   Coins,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 
-const solutions = [
+const getSolutions = (en) => [
   {
     id: "personal",
-    title: "Cá Nhân & Gia Đình",
-    badge: "Phổ Biến Nhất",
-    target: "Dành cho người đi làm, các bạn trẻ và gia đình muốn chi tiêu có kế hoạch",
-    description:
-      "Chấm dứt hoàn toàn tình trạng 'chưa hết tháng đã hết tiền'. Gom tất cả tài khoản ngân hàng, ví điện tử vào một nơi duy nhất và xây dựng quỹ tiết kiệm vững chắc.",
-    icon: Users,
-    color: "from-sky-500 to-blue-600",
+    title: en ? "Personal" : "Cá nhân",
+    headline: en ? "Quản lý tài chính cá nhân" : "Quản lý tài chính cá nhân",
+    target: en
+      ? "Dành cho người muốn chủ động kiểm soát chi tiêu và tích lũy"
+      : "Dành cho người muốn chủ động kiểm soát chi tiêu và tích lũy",
+    description: en
+      ? "Keep income, expenses and savings goals together in one clean space. Review cash flow patterns to optimize daily spending and achieve financial milestones."
+      : "Ghi chép thu nhập, chi tiêu và mục tiêu tiết kiệm tập trung. Nắm rõ dòng tiền vào ra mỗi ngày để tối ưu chi tiêu và đạt các mục tiêu tài chính dài hạn.",
+    icon: Wallet,
     features: [
-      { title: "Quản lý Đa Ví Thông Minh", desc: "Tập trung tiền mặt, tài khoản Vietcombank, Techcombank, MB, ví MoMo." },
-      { title: "Quỹ Gia Đình Chung", desc: "Vợ chồng cùng ghi nhận chi phí sinh hoạt, đối soát thu chi minh bạch." },
-      { title: "Sổ Tiết Kiệm & Mục Tiêu 52 Tuần", desc: "Đặt mục tiêu mua nhà, mua xe hay quỹ khẩn cấp 6 tháng có lộ trình." },
-      { title: "AI Quét Hóa Đơn Tức Thì", desc: "Chụp ảnh hóa đơn siêu thị, ăn uống — AI tự bóc tách và phân loại." },
+      {
+        icon: Wallet,
+        title: en ? "Income, expenses & wallets" : "Thu chi và đa ví",
+        desc: en
+          ? "Organize transactions by flexible wallets and custom categories."
+          : "Phân loại chi tiết giao dịch theo từng ví và danh mục thu chi sinh hoạt.",
+      },
+      {
+        icon: PiggyBank,
+        title: en ? "Budgets & 6-Jars rule" : "Ngân sách & Quy tắc 6 lọ",
+        desc: en
+          ? "Set spending limits and monitor automated savings progress."
+          : "Thiết lập hạn mức chi tiêu, theo dõi tiến độ tích lũy tự động theo tháng.",
+      },
+      {
+        icon: Sparkles,
+        title: en ? "AI Receipt & Voice entry" : "Quét hóa đơn AI & Giọng nói",
+        desc: en
+          ? "Extract receipts or log expenses via Vietnamese voice in 3 seconds."
+          : "Bóc tách hóa đơn ăn uống, siêu thị và nhập liệu bằng giọng nói tiếng Việt.",
+      },
+      {
+        icon: TrendingUp,
+        title: en ? "Debts & Visual analytics" : "Sổ nợ & Báo cáo trực quan",
+        desc: en
+          ? "Track loans, repayments and comprehensive cash flow charts."
+          : "Quản lý các khoản vay nợ, lịch hoàn trả và biểu đồ biến động dòng tiền.",
+      },
     ],
-    highlightQuote: "Giúp hơn 1.8 triệu gia đình Việt Nam tiết kiệm thêm 20-30% thu nhập mỗi tháng.",
+    highlightQuote: en
+      ? "Clear visibility into every transaction, from daily coffee to long-term goals."
+      : "Minh bạch mọi dòng tiền, từ khoản chi nhỏ hằng ngày đến những mục tiêu lớn.",
+  },
+  {
+    id: "group",
+    title: en ? "Groups" : "Nhóm & Bạn bè",
+    headline: en ? "Chia tiền nhóm & Quỹ chung" : "Chia tiền nhóm & Quỹ chung",
+    target: en
+      ? "Dành cho nhóm bạn đi du lịch, người ở chung phòng và gia đình"
+      : "Dành cho nhóm bạn đi du lịch, người ở chung phòng và gia đình",
+    description: en
+      ? "Record who paid and let the system calculate optimal repayments. Instant 1-tap VietQR settlement without digging through messy chat messages."
+      : "Ghi nhận rõ ràng ai đã trả tiền và tự động tính toán phần chia công bằng. Tạo mã thanh toán VietQR 1 chạm để hoàn tiền ngay mà không cần tính tay hay lục lại tin nhắn.",
+    icon: Users,
+    features: [
+      {
+        icon: Users,
+        title: en ? "Flexible member groups" : "Tạo nhóm & Mời linh hoạt",
+        desc: en
+          ? "Create dedicated funds for trips, flatmates or office lunches."
+          : "Tạo nhóm riêng cho chuyến du lịch, tiền phòng trọ hoặc ăn trưa văn phòng.",
+      },
+      {
+        icon: Receipt,
+        title: en ? "Smart splitting methods" : "Nhiều phương thức chia tiền",
+        desc: en
+          ? "Split equally, by exact amount, percentages or custom shares."
+          : "Chia đều, chia theo số tiền chính xác, theo tỷ lệ % hoặc số phần.",
+      },
+      {
+        icon: Coins,
+        title: en ? "Automated net balance" : "Tự động cân bằng 'Ai nợ ai'",
+        desc: en
+          ? "Smart algorithm minimizes transfers, showing exact net balances."
+          : "Thuật toán tối ưu rút gọn số giao dịch cần chuyển, biết chính xác ai nợ ai.",
+      },
+      {
+        icon: ShieldCheck,
+        title: en ? "VietQR 1-Tap settlement" : "Thanh toán 1 chạm VietQR",
+        desc: en
+          ? "Generate dynamic QR with exact amount and note for instant transfer."
+          : "Tạo sẵn mã QR có sẵn số tiền và nội dung để thanh toán ngân hàng tức thì.",
+      },
+    ],
+    highlightQuote: en
+      ? "Every shared expense is transparent, accountable and settled in seconds."
+      : "Mọi khoản chi chung đều minh bạch, công bằng và thanh toán nhanh chóng.",
   },
   {
     id: "business",
-    title: "Hộ Kinh Doanh & Bán Hàng",
-    badge: "Tối Ưu Vận Hành",
-    target: "Dành cho chủ shop online, hộ kinh doanh cá thể, freelancer nhận nhiều dự án",
-    description:
-      "Tách bạch rạch ròi giữa tiền cá nhân và tiền kinh doanh. Quản lý công nợ khách hàng, kiểm soát chi phí nhập hàng và xuất báo cáo kế toán chỉ trong 1 nốt nhạc.",
+    title: en ? "Business" : "Hộ kinh doanh & Dự án",
+    headline: en ? "Quản lý dòng tiền kinh doanh" : "Quản lý dòng tiền kinh doanh & Dự án",
+    target: en
+      ? "Dành cho chủ cửa hàng, người làm tự do, hộ kinh doanh và quản lý dự án"
+      : "Dành cho chủ cửa hàng, người làm tự do, hộ kinh doanh và quản lý dự án",
+    description: en
+      ? "Separate multiple companies and projects. Distinguish recorded accruals from actual cash flow, review employee claims and export reports."
+      : "Quản lý độc lập nhiều công ty và dự án. Tách bạch doanh thu ghi nhận với dòng tiền thực thu/chi, phê duyệt tạm ứng nhân viên và xuất báo cáo tài chính chuẩn xác.",
     icon: Briefcase,
-    color: "from-emerald-500 to-teal-600",
     features: [
-      { title: "Tách Bạch 100% Dòng Tiền", desc: "Phân loại ví kinh doanh và ví sinh hoạt cá nhân, không lo thất thoát." },
-      { title: "Sổ Quản Lý Công Nợ Khách Hàng", desc: "Ghi nhận công nợ nhà cung cấp, lịch nhắc thu tiền tự động qua Zalo." },
-      { title: "Lưu Trữ Hóa Đơn Nhập Hàng VAT", desc: "Số hóa toàn bộ hóa đơn chứng từ đầu vào bằng camera AI, tìm kiếm dễ dàng." },
-      { title: "Xuất Báo Cáo Doanh Thu Kế Toán", desc: "Xuất file Excel chuẩn chỉnh để đối soát lãi/lỗ và nộp báo cáo thuế định kỳ." },
+      {
+        icon: Briefcase,
+        title: en ? "Multi-Company & Projects" : "Đa công ty & Đa dự án",
+        desc: en
+          ? "Isolate financial databases per business entity and project."
+          : "Dữ liệu thu chi được tách riêng theo từng công ty và từng dự án cụ thể.",
+      },
+      {
+        icon: Coins,
+        title: en ? "Cash flow & Accruals" : "Thực thu chi vs Ghi nhận",
+        desc: en
+          ? "Track collected, paid, outstanding and excess amounts per entry."
+          : "Theo dõi sát sao số tiền đã thu, đã chi, còn thiếu hoặc vượt mức ngân sách.",
+      },
+      {
+        icon: ShieldCheck,
+        title: en ? "Advances & Approvals" : "Tạm ứng & Phê duyệt chi tiêu",
+        desc: en
+          ? "Review staff expense requests and manage reimbursement flows."
+          : "Chủ doanh nghiệp duyệt yêu cầu của nhân viên, kiểm soát tạm ứng và hoàn ứng.",
+      },
+      {
+        icon: FileSpreadsheet,
+        title: en ? "Reports & Excel/PDF export" : "Báo cáo P&L & Xuất Excel/PDF",
+        desc: en
+          ? "Automated profit/loss, cash flow statements and professional exports."
+          : "Tự động tổng hợp báo cáo lãi lỗ, dòng tiền và công nợ; hỗ trợ xuất file Excel/PDF.",
+      },
     ],
-    highlightQuote: "Hơn 250.000 chủ hộ kinh doanh tin cậy sử dụng để kiểm soát dòng tiền hàng ngày.",
-  },
-  {
-    id: "investor",
-    title: "Nhà Đầu Tư Cá Nhân",
-    badge: "Quản Lý Tài Sản",
-    target: "Dành cho người có dòng vốn nhàn rỗi, đầu tư chứng khoán, vàng và bất động sản",
-    description:
-      "Theo dõi sức khỏe tài chính toàn diện với chỉ số Net Worth. Quản lý tỷ trọng phân bổ danh mục tài sản sinh lời và lợi nhuận ròng thời gian thực.",
-    icon: TrendingUp,
-    color: "from-amber-500 to-orange-600",
-    features: [
-      { title: "Định Giá Danh Mục Tài Sản Ròng", desc: "Tổng hợp Vàng miếng SJC, Cổ phiếu, BĐS cho thuê, Sổ tiết kiệm kỳ hạn." },
-      { title: "Tính Toán Tỷ Suất Sinh Lời (PnL)", desc: "Theo dõi giá vốn, giá thị trường hiện tại và tỷ lệ lãi/lỗ tức thời." },
-      { title: "Cảnh Báo Tỷ Lệ An Toàn Dòng Tiền", desc: "Đảm bảo luôn duy trì tỷ lệ tiền mặt dự phòng khẩn cấp trước biến động." },
-      { title: "Biểu Đồ Tăng Trưởng Tài Sản Đa Niên", desc: "Phân tích tốc độ gia tăng tài sản theo từng quý và năm dài hạn." },
-    ],
-    highlightQuote: "Mang chuẩn mực báo cáo tài sản gia đình chuyên nghiệp của các Family Office quốc tế.",
+    highlightQuote: en
+      ? "Complete command over real cash flow, team expenses and project profitability."
+      : "Kiểm soát toàn diện dòng tiền thực tế, công nợ và hiệu quả kinh doanh của dự án.",
   },
 ];
 
-export default function SolutionsSegment() {
-  const [activeSegment, setActiveSegment] = useState("personal");
+export default function SolutionsSegment({ activeSegment = "personal", onSelectSegment, onOpenQr }) {
+  const { isEnglish } = useLanguage();
+  const solutions = getSolutions(isEnglish);
 
   const current = solutions.find((s) => s.id === activeSegment) || solutions[0];
-  const Icon = current.icon;
 
   return (
-    <section id="solutions" className="py-24 sm:py-32 bg-white">
-      <div className="mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
-        {/* Header */}
+    <section id="solutions" className="py-20 sm:py-24 bg-white border-t border-slate-100">
+      <div className="mx-auto max-w-[1380px] px-4 sm:px-8 lg:px-12">
+        {/* Header: Clean & authoritative without distracting tags */}
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-widest text-sky-700 mb-4">
-            <Building className="w-3.5 h-3.5 text-sky-600" />
-            Giải Pháp Tài Chính May Đo Cho Bạn
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-            Đáp Ứng Mọi Nhu Cầu Quản Lý Tài Chính
+          <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-black text-slate-950 tracking-tight title-3d">
+            {isEnglish ? "Your finances, your way" : "Chọn cách quản lý phù hợp với bạn"}
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600">
-            Dù bạn muốn tối ưu chi tiêu gia đình, quản lý công nợ kinh doanh hay theo dõi danh mục đầu tư — Halo Finance luôn có giải pháp hoàn hảo cho bạn.
+          <p className="mt-3 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            {isEnglish
+              ? "Personal spending, shared group bills, or business cash flow — choose what matters most to your workflow."
+              : "Chi tiêu cá nhân, khoản chung của nhóm hay dòng tiền kinh doanh — bắt đầu từ đúng nhu cầu thực tế của bạn."}
           </p>
         </div>
 
-        {/* 3 Audience Tab Buttons */}
-        <div className="mt-12 flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-1.5 rounded-2xl bg-slate-100 border border-slate-200 max-w-3xl w-full">
+        {/* Minimalist Segmented Tabs: Crisp 8px border radius, no heavy rounded pills */}
+        <div className="mt-8 flex justify-center">
+          <div className="inline-flex items-center gap-1 p-1 rounded-lg bg-slate-100 border border-slate-200/80 shadow-2xs">
             {solutions.map((s) => {
               const TabIcon = s.icon;
               const isActive = activeSegment === s.id;
               return (
                 <button
                   key={s.id}
-                  onClick={() => setActiveSegment(s.id)}
+                  onClick={() => onSelectSegment?.(s.id)}
+                  aria-pressed={isActive}
                   type="button"
-                  className={`flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-xl text-sm font-extrabold transition-all duration-300 ${
+                  className={`flex items-center gap-2 py-2 px-4 sm:px-5 rounded-md text-xs sm:text-sm font-semibold transition-all duration-150 cursor-pointer ${
                     isActive
-                      ? "bg-slate-950 text-white shadow-md scale-[1.02]"
-                      : "text-slate-600 hover:text-slate-950 hover:bg-white/60"
+                      ? "bg-white text-slate-900 shadow-xs border border-slate-200/60 font-bold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                   }`}
                 >
-                  <TabIcon className="w-4 h-4" />
+                  <TabIcon className={`w-4 h-4 ${isActive ? "text-blue-600" : "text-slate-400"}`} />
                   <span>{s.title}</span>
                 </button>
               );
@@ -117,75 +200,80 @@ export default function SolutionsSegment() {
           </div>
         </div>
 
-        {/* Active Content Showcase Card */}
-        <div className="mt-10 rounded-[2.5rem] border border-slate-200/90 bg-[#fbfbfa] p-8 sm:p-12 shadow-[0_25px_60px_-25px_rgba(15,23,42,0.12)]">
+        {/* Active Content Showcase: Crisp 12px border radius, no heavy bubbly shadows */}
+        <div className="mt-8 rounded-xl border border-slate-200 bg-white p-6 sm:p-8 lg:p-10 shadow-2xs">
           <AnimatePresence mode="wait">
-            <motion.div
+            <Motion.div
               key={current.id}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35 }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start"
             >
-              {/* Left Column: Solution Detail & Audience description */}
-              <div className="lg:col-span-5 space-y-6">
+              {/* Left Column: Context, description & direct action */}
+              <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-5">
                 <div>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-black uppercase tracking-wider mb-3">
-                    {current.badge}
-                  </span>
-                  <h3 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight leading-tight">
-                    {current.title}
+                  <h3 className="text-2xl sm:text-[1.75rem] font-extrabold text-slate-900 tracking-tight leading-snug">
+                    {current.headline}
                   </h3>
-                  <p className="text-xs font-bold text-sky-700 mt-2 uppercase tracking-wide">
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1.5">
                     {current.target}
+                  </p>
+                  <p className="text-sm text-slate-600 leading-relaxed mt-4">
+                    {current.description}
                   </p>
                 </div>
 
-                <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-                  {current.description}
-                </p>
-
-                <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-semibold text-slate-700 flex items-center gap-3">
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-100 text-emerald-600 font-bold">
-                    ✓
-                  </div>
+                {/* Editorial quote block with clean accent left border */}
+                <div className="border-l-2 border-blue-600 bg-slate-50/70 py-2.5 px-3.5 rounded-r-md text-xs sm:text-sm text-slate-700 italic flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                   <span>{current.highlightQuote}</span>
                 </div>
 
                 <div>
-                  <a
-                    href="#download"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-950 text-white font-extrabold text-sm shadow-lg hover:bg-sky-600 transition"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onOpenQr) onOpenQr();
+                      else {
+                        const el = document.getElementById("home");
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm transition-colors shadow-2xs cursor-pointer"
                   >
-                    Bắt đầu với gói {current.title}
+                    <span>{isEnglish ? "Get the app" : "Tải ứng dụng ngay"}</span>
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </button>
                 </div>
               </div>
 
-              {/* Right Column: 4 Key Features Grid */}
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {current.features.map((feat, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-sky-300 hover:shadow-md transition"
-                  >
-                    <div className="flex items-center gap-2.5 mb-3">
-                      <div className="grid h-8 w-8 place-items-center rounded-lg bg-sky-50 text-sky-600">
-                        <CheckCircle2 className="w-4 h-4" />
+              {/* Right Column: 4 Clean Capability Cards */}
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {current.features.map((feat, idx) => {
+                  const FeatIcon = feat.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="rounded-lg border border-slate-200/90 bg-slate-50/40 p-4.5 hover:bg-white hover:border-slate-300 hover:shadow-2xs transition-all duration-150"
+                    >
+                      <div className="flex items-center gap-2.5 mb-2">
+                        <div className="grid h-7 w-7 place-items-center rounded-md bg-blue-50 text-blue-600 shrink-0">
+                          <FeatIcon className="w-3.5 h-3.5" />
+                        </div>
+                        <h4 className="font-bold text-slate-900 text-xs sm:text-sm leading-snug">
+                          {feat.title}
+                        </h4>
                       </div>
-                      <h4 className="font-extrabold text-slate-900 text-sm leading-snug">
-                        {feat.title}
-                      </h4>
+                      <p className="text-[12px] sm:text-xs text-slate-500 leading-relaxed font-normal">
+                        {feat.desc}
+                      </p>
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                      {feat.desc}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
-            </motion.div>
+            </Motion.div>
           </AnimatePresence>
         </div>
       </div>

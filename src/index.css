@@ -5,6 +5,11 @@
 @tailwind utilities;
 @tailwind typography;
 
+@theme {
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
@@ -13,7 +18,11 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 
 ::selection {
   background: #38bdf8;
@@ -22,6 +31,134 @@ body {
 
 .landing-page {
   color-scheme: light;
+}
+
+.hero-editorial-copy {
+  container-type: inline-size;
+}
+
+.hero-editorial-title {
+  margin: 0;
+  font-size: clamp(1.85rem, 5cqi, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: #090d16;
+  display: flex;
+  flex-direction: column;
+  gap: 0.08em;
+}
+
+.hero-editorial-line {
+  display: block;
+  white-space: normal;
+  line-height: inherit;
+}
+
+.hero-title-bold,
+.hero-title-solid,
+.title-bold {
+  font-weight: 850;
+  color: #090d16;
+  letter-spacing: -0.04em;
+  display: inline;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.8),
+    0 2px 2px rgba(15, 23, 42, 0.28),
+    0 5px 10px rgba(15, 23, 42, 0.18),
+    0 10px 22px rgba(15, 23, 42, 0.1);
+}
+
+.hero-title-muted,
+.title-muted {
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: -0.025em;
+  display: inline;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 3px rgba(148, 163, 184, 0.45),
+    0 6px 14px rgba(148, 163, 184, 0.25);
+}
+
+.title-3d {
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.85),
+    0 2px 2px rgba(15, 23, 42, 0.26),
+    0 5px 10px rgba(15, 23, 42, 0.16),
+    0 12px 24px rgba(15, 23, 42, 0.1);
+}
+
+.hero-editorial-highlight {
+  position: relative;
+  background: transparent !important;
+  padding: 0;
+}
+
+.hero-editorial-highlight::before {
+  display: none !important;
+}
+
+.hero-editorial-brand {
+  margin-inline-start: 0;
+}
+
+.hero-editorial-brand::before {
+  display: none !important;
+}
+
+.hero-editorial-description {
+  max-width: 44rem;
+  font-size: clamp(0.9rem, 2.2cqi, 1.05rem);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.hero-editorial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.15rem;
+}
+
+.hero-editorial-stores {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.hero-editorial-stores > :is(a, button) {
+  min-height: 3.35rem;
+  border-radius: 0.75rem;
+}
+
+.hero-editorial-actions :is(a, button):focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 4px;
+}
+
+@container (max-width: 420px) {
+  .hero-editorial-stores {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.625rem;
+  }
+
+  .hero-editorial-stores > :is(a, button) {
+    gap: 0.5rem;
+    padding-inline: 0.75rem;
+  }
+
+  .hero-editorial-stores svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .hero-editorial-stores > :is(a, button) > span > span:last-child {
+    font-size: clamp(0.875rem, 4.2cqi, 1.125rem);
+  }
+
 }
 
 .landing-grid {
@@ -92,13 +229,64 @@ body {
 }
 
 .marquee-track {
-  animation: landing-marquee 30s linear infinite;
+  display: flex;
+  flex-shrink: 0;
+  animation: continuous-marquee 40s linear infinite;
+  will-change: transform;
 }
 
-@keyframes landing-marquee {
-  to {
-    transform: translateX(-50%);
+aside:hover .marquee-track,
+.marquee-mask:hover .marquee-track,
+.marquee-track:hover {
+  animation-play-state: paused !important;
+}
+
+@keyframes continuous-marquee {
+  0% {
+    transform: translateX(0%);
   }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Dean Studio Signature Button Animation & Gradient */
+@keyframes loadingShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.loading-gradient {
+  background-image: linear-gradient(
+    90deg,
+    #199bdf,
+    #7f22fe,
+    #199bdf,
+    #7f22fe,
+    #199bdf
+  );
+  background-size: 200% 100%;
+  animation: loadingShine 3s linear infinite;
+}
+
+.loading-gradient-text {
+  background-image: linear-gradient(
+    90deg,
+    #199bdf,
+    #7f22fe,
+    #199bdf,
+    #7f22fe,
+    #199bdf
+  );
+  background-size: 200% 100%;
+  animation: loadingShine 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -113,7 +301,13 @@ body {
   .auth-grid {
     animation-play-state: paused;
   }
+
+  .loading-gradient,
+  .loading-gradient-text {
+    animation-play-state: paused;
+  }
 }
+
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -620,4 +814,104 @@ body {
   background-image:
     linear-gradient(to right, rgba(51, 65, 85, 0.2) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(51, 65, 85, 0.2) 1px, transparent 1px);
+}
+
+/* WOW FinTech Micro-Animations & Glow Utilities */
+@keyframes sound-wave-bar {
+
+  0%,
+  100% {
+    height: 6px;
+  }
+
+  50% {
+    height: 32px;
+  }
+}
+
+@keyframes shimmer-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes float-gentle {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-radar {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+@keyframes border-beam {
+  0% {
+    offset-distance: 0%;
+  }
+
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.animate-pulse-radar {
+  animation: pulse-radar 2.5s ease-in-out infinite;
+}
+
+.soundbar {
+  animation: sound-wave-bar 1.2s ease-in-out infinite;
+}
+
+.card-wow {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.card-wow:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -15px rgba(2, 132, 199, 0.18), 0 0 0 1px rgba(2, 132, 199, 0.25);
+}
+
+.shimmer-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-badge::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: shimmer-slide 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

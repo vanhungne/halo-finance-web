@@ -4,7 +4,7 @@ import * as React from "react"
 import { Tooltip as RechartsTooltip } from "recharts"
 import { cn } from "../../utils/cn"
 
-export function ChartContainer({ children, className, config }) {
+export function ChartContainer({ children, className }) {
   return <div className={cn("w-full", className)}>{children}</div>
 }
 

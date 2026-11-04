@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Trang chủ chính thức -->
+  <url>
+    <loc>https://trolytaichinh.vn/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://trolytaichinh.vn/og-preview.jpg</image:loc>
+      <image:title>Trợ Lý Tài Chính - Sổ Thu Chi Thông Minh &amp; Bóc Tách Hóa Đơn AI</image:title>
+      <image:caption>Giao diện ứng dụng quản lý thu chi cá nhân và chia tiền nhóm VietQR</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Chính sách bảo mật (Apple & Google Play Store Compliance) -->
+  <url>
+    <loc>https://trolytaichinh.vn/privacy</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Điều khoản sử dụng -->
+  <url>
+    <loc>https://trolytaichinh.vn/terms</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Yêu cầu xóa tài khoản & Dữ liệu cá nhân -->
+  <url>
+    <loc>https://trolytaichinh.vn/delete-account</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Chia tiền nhóm & Quyết toán công nợ VietQR (Split Bills) -->
+  <url>
+    <loc>https://trolytaichinh.vn/split-bills</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://trolytaichinh.vn/og-preview.jpg</image:loc>
+      <image:title>Chia Tiền Nhóm &amp; Quyết Toán Công Nợ VietQR - Trợ Lý Tài Chính</image:title>
+      <image:caption>Công cụ chia tiền nhóm, chia hóa đơn du lịch, tối giản công nợ và quét mã VietQR 1 chạm</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Cổng đăng nhập Web Portal -->
+  <url>
+    <loc>https://trolytaichinh.vn/login</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

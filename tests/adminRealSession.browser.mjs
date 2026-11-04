@@ -52,7 +52,8 @@ try {
   const login = async (page) => {
     await page.locator('input[name="email"]').fill(process.env.ADMIN_BROWSER_EMAIL);
     await page.locator('input[name="password"]').fill(process.env.ADMIN_BROWSER_PASSWORD);
-    await page.getByRole("button", { name: "Đăng nhập", exact: true }).click();
+    await page.locator("form").filter({ has: page.locator('input[name="email"]') })
+      .locator('button[type="submit"]').click();
     await page.getByTestId("actor").filter({ hasText: actor }).waitFor();
   };
   await a.goto(fixture); await login(a); await b.goto(fixture); await b.getByTestId("actor").filter({ hasText: actor }).waitFor();

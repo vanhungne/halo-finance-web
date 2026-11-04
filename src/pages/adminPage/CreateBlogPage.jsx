@@ -114,7 +114,7 @@ const CreateBlogPage = () => {
   };
 
 
-  const handleSave = async (e) => {
+  const handleSave = async () => {
     setLoading(true);
     setAwaitResponse(true);
     try {

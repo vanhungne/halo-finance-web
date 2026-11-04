@@ -1,24 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import iconUrl from './assets/icon.png'
-import { AuthProvider } from './contexts/AuthContext.jsx'
+import './index.css';
+import iconUrl from './assets/icon.png';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </StrictMode>,
-)
-
-// Ensure favicon works in dev and build
-const ensureFavicon = () => {
-  const link = document.querySelector('link[rel="icon"]') || document.createElement('link')
-  link.rel = 'icon'
-  link.type = 'image/png'
-  link.href = iconUrl
-  if (!link.parentNode) document.head.appendChild(link)
+// Public tools avoid loading the admin/customer application and authenticated transport.
+if (location.pathname === '/tools' || location.pathname.startsWith('/tools/')) {
+  void import('./pages/tools/toolsEntry.jsx');
+} else {
+  void import('./appEntry.jsx');
 }
-ensureFavicon()
+const link = document.querySelector('link[rel="icon"]') || document.createElement('link');
+link.rel = 'icon'; link.type = 'image/png'; link.href = iconUrl;
+if (!link.parentNode) document.head.appendChild(link);

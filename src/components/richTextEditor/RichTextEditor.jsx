@@ -74,6 +74,14 @@ const RichTextEditor = ({ value, onChange }) => {
     const [openHeading, setOpenHeading] = useState(false);
     const [openList, setOpenList] = useState(false);
 
+    useEffect(() => {
+        if (!editor || !value) return;
+        const content = value.json || value;
+        if (editor.isEmpty) {
+            editor.commands.setContent(content);
+        }
+    }, [editor, value]);
+
     if (!editor) return null;
 
     const headings = [
@@ -93,13 +101,6 @@ const RichTextEditor = ({ value, onChange }) => {
         { label: 'Numbered List', icon: <ListOrdered className="w-4 h-4" />, action: () => editor.chain().focus().toggleOrderedList().run(), isActive: editor.isActive('orderedList') },
         { label: 'Task List', icon: <ListTodo className="w-4 h-4" />, action: () => editor.chain().focus().toggleTaskList().run(), isActive: editor.isActive('taskList') },
     ];
-    useEffect(() => {
-        if (!editor || !value) return;
-        const content = value.json || value;
-        if (editor.isEmpty) {
-            editor.commands.setContent(content);
-        }
-    }, [editor]);
     return (
         <div className="w-full max-w-4xl mx-auto p-4">
             {/* Toolbar */}

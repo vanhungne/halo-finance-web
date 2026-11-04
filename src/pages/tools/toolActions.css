@@ -1,0 +1,26 @@
+.tools-surface .tool-icon-button { display: inline-grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: #2845ed; cursor: pointer; }
+.tools-surface .tool-icon-button:hover { background: #eaf0ff; color: #2037c3; }
+.tools-surface .tool-icon-button:disabled { opacity: .45; cursor: default; background: transparent; }
+.tools-surface .tool-icon-button.is-copied { color: #188046; }
+.tools-surface .tool-copy { position: relative; display: inline-flex; flex: 0 0 auto; flex-wrap: nowrap; align-items: center; gap: 0; margin: 0; }
+.tool-copy-error { position: absolute; right: 0; top: 100%; z-index: 2; width: min(230px, 65vw); padding: 8px 10px; background: #fff; color: #b42318; border: 1px solid #f1c8c3; border-radius: 6px; font-size: 12px; line-height: 1.6; }
+.tool-widget, .tool-input-panel, .tool-result-panel, .tool-converter, .tool-converter-trend { position: relative; }
+.tool-source-actions { position: absolute; top: 12px; right: 12px; display: flex; align-items: center; gap: 2px; }
+.tool-input-panel:has(> .tool-source--with-actions), .tool-result-panel:has(> .tool-source--with-actions) { padding-top: 62px; }
+.tool-input-panel:has(> .tool-source--with-actions) > h2:first-child { margin-top: 0; }
+.tool-widget:has(> .tool-source--with-actions) > .tool-hint { padding-right: 116px; min-height: 68px; }
+.tool-value-line { display: flex; align-items: center; gap: 12px; }
+.tool-value-line > output { flex: 1; min-width: 0; }
+.tool-converter { padding-top: 48px; }
+.tool-converter-result-actions { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; margin-left: auto; }
+.tool-converter-row--result { flex-wrap: wrap; }
+.tool-converter-row--result > output { flex: 1 1 140px; }
+.tool-converter > .tool-source { margin: 18px 0; }
+.tools-surface main.tools-main .tool-converter-trend > h2 { padding-right: 96px; min-height: 44px; }
+.tool-bank-codes { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; }
+.tool-bank-code { display: inline-flex !important; align-items: center; gap: 6px; }
+@media (max-width: 560px) {
+  .tool-converter { padding-top: 52px; }
+  .tool-source-actions { top: 10px; right: 10px; }
+  .tool-converter-row--result { gap: 4px 8px; }
+}
